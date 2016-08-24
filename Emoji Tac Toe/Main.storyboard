@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A304a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Main-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="GameBoard" title="Main" id="BYZ-38-t0r" customClass="ViewController" customModule="Emoji_Tac_Toe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RSO-c3-xkp">
+                                <rect key="frame" x="0.0" y="27" width="320" height="426"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🐝vs 🐌" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cL-dE-XJ1">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="N1A-Hy-I82"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="120" translatesAutoresizingMaskIntoConstraints="NO" id="YWu-db-Mr4">
+                                        <rect key="frame" x="0.0" y="36" width="320" height="34"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hf5-Cg-1I6">
+                                                <rect key="frame" x="0.0" y="0.0" width="106" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="106" id="IRc-3L-Dwr"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                                <state key="normal" title="New Game"/>
+                                                <connections>
+                                                    <segue destination="2J5-AT-VT3" kind="show" id="m1P-Ki-uvV"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XU5-1w-Bzv">
+                                                <rect key="frame" x="250" y="0.0" width="70" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="34" id="Dz9-hB-AWv"/>
+                                                    <constraint firstAttribute="width" constant="70" id="hOk-tc-d0x"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                                <state key="normal" title="Share"/>
+                                                <connections>
+                                                    <action selector="share:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Kj-7V-I0P"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="5PL-Gx-9dy">
+                                        <rect key="frame" x="0.0" y="70" width="320" height="320"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="XaG-Xt-gfs">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                                <subviews>
+                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A52-NJ-T6q">
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <gestureRecognizers/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="100" id="WQQ-Ct-Bq7"/>
+                                                            <constraint firstAttribute="height" constant="100" id="eh0-wF-2VU"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                                        <state key="normal">
+                                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YnI-Gf-0DN"/>
+                                                            <outletCollection property="gestureRecognizers" destination="GPP-EG-qEq" appends="YES" id="f74-b6-vN5"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUF-ZW-2y2">
+                                                        <rect key="frame" x="110" y="0.0" width="100" height="100"/>
+                                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <gestureRecognizers/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="100" id="Tug-tc-mt5"/>
+                                                            <constraint firstAttribute="width" constant="100" id="eH4-5S-kLs"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                                        <state key="normal" title="🐝">
+                                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OFn-2v-cJu"/>
+                                                            <outletCollection property="gestureRecognizers" destination="85C-au-jMG" appends="YES" id="gpn-gd-FCO"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lsu-Fa-PWf">
+                                                        <rect key="frame" x="220" y="0.0" width="100" height="100"/>
+                                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <gestureRecognizers/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="100" id="0Js-DO-Qux"/>
+                                                            <constraint firstAttribute="width" constant="100" id="ZJv-PW-3gG"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                                        <state key="normal" title="🐝">
+                                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cxy-Uz-Q70"/>
+                                                            <outletCollection property="gestureRecognizers" destination="8TY-zp-3TI" appends="YES" id="Gt4-j8-LNv"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="oQZ-Aq-hF8">
+                                                <rect key="frame" x="0.0" y="110" width="320" height="100"/>
+                                                <subviews>
+                                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o6H-1T-hkg">
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <gestureRecognizers/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="100" id="Qta-RH-wL5"/>
+                                                            <constraint firstAttribute="width" constant="100" id="hrH-ml-a7X"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                                        <state key="normal" title="🐝">
+                                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nn8-nm-yqU"/>
+                                                            <outletCollection property="gestureRecognizers" destination="QEF-9u-DJ8" appends="YES" id="eWQ-GH-Es2"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ze-t6-dK2">
+                                                        <rect key="frame" x="110" y="0.0" width="100" height="100"/>
+                                                        <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <gestureRecognizers/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="100" id="QbQ-qA-d9B"/>
+                                                            <constraint firstAttribute="height" constant="100" id="TnP-jO-roZ"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                                        <state key="normal" title="🐌">
+                                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="978-rq-rRX"/>
+                                                            <outletCollection property="gestureRecognizers" destination="K0Z-Y5-fQr" appends="YES" id="9tz-gf-LKF"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gVX-7o-lV0">
+                                                        <rect key="frame" x="220" y="0.0" width="100" height="100"/>
+                                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <gestureRecognizers/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="100" id="j2d-Nn-X2W"/>
+                                                            <constraint firstAttribute="width" constant="100" id="jjW-Dd-ZFE"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                                        <state key="normal">
+                                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9V5-sL-6oe"/>
+                                                            <outletCollection property="gestureRecognizers" destination="Sxy-VX-0tb" appends="YES" id="9R1-Tr-177"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vpN-q5-qom">
+                                                <rect key="frame" x="0.0" y="220" width="320" height="100"/>
+                                                <subviews>
+                                                    <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X97-SF-w0L">
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <gestureRecognizers/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="100" id="2RE-ta-MMw"/>
+                                                            <constraint firstAttribute="width" constant="100" id="2o0-Co-jnG"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                                        <state key="normal" title="🐝">
+                                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qvh-xI-iCe"/>
+                                                            <outletCollection property="gestureRecognizers" destination="HOp-yb-WF3" appends="YES" id="Ggu-6Q-F9T"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sd-gU-qzz">
+                                                        <rect key="frame" x="110" y="0.0" width="100" height="100"/>
+                                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <gestureRecognizers/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="100" id="KlE-2P-kKb"/>
+                                                            <constraint firstAttribute="width" constant="100" id="WHq-cN-Rsw"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                                        <state key="normal">
+                                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yxi-dm-7tB"/>
+                                                            <outletCollection property="gestureRecognizers" destination="iEM-sg-aFr" appends="YES" id="fV1-Wr-TiB"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6XM-W9-fPm">
+                                                        <rect key="frame" x="220" y="0.0" width="100" height="100"/>
+                                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <gestureRecognizers/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="100" id="lwW-3n-Vdt"/>
+                                                            <constraint firstAttribute="width" constant="100" id="tnN-JU-w6T"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                                        <state key="normal" title="🐝">
+                                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wNx-Gf-XJ5"/>
+                                                            <outletCollection property="gestureRecognizers" destination="w83-RT-S3K" appends="YES" id="iIF-aE-Mje"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="320" id="b92-Qb-MXk"/>
+                                        </constraints>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="move 3 🐝 got unlucky 🐌's turn" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJX-cK-mVK">
+                                        <rect key="frame" x="0.0" y="390" width="320" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="Jwn-TA-jGg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="XjN-7J-k9p"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RSO-c3-xkp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="IeM-pS-jVu"/>
+                            <constraint firstItem="RSO-c3-xkp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sRc-e7-edR"/>
+                        </constraints>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="statusLabel" destination="YJX-cK-mVK" id="ghL-ZC-sbn"/>
+                        <outlet property="titleLabel" destination="0cL-dE-XJ1" id="2dv-Su-I07"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="GPP-EG-qEq">
+                    <connections>
+                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="kcV-0b-Tvy"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="85C-au-jMG">
+                    <connections>
+                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="uYr-TZ-Dkk"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="8TY-zp-3TI">
+                    <connections>
+                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="NJw-7d-lhB"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="QEF-9u-DJ8">
+                    <connections>
+                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="iCh-be-wex"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="K0Z-Y5-fQr">
+                    <connections>
+                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="fXO-HB-Z6u"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Sxy-VX-0tb">
+                    <connections>
+                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="BgY-kI-UJh"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="HOp-yb-WF3">
+                    <connections>
+                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="aIf-wB-E96"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="iEM-sg-aFr">
+                    <connections>
+                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="QPX-iN-Q0n"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="w83-RT-S3K">
+                    <connections>
+                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="92w-kv-0nu"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="356" y="295"/>
+        </scene>
+        <!--New Game-->
+        <scene sceneID="8hD-2v-lZI">
+            <objects>
+                <viewController storyboardIdentifier="NewGame" title="New Game" id="2J5-AT-VT3" customClass="NewGameViewController" customModule="Emoji_Tac_Toe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gRi-Yh-los"/>
+                        <viewControllerLayoutGuide type="bottom" id="6ys-Y9-6gZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="r74-61-rGl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Y0v-zt-Oew">
+                                <rect key="frame" x="0.0" y="50" width="320" height="380"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="OT5-XN-yGU">
+                                        <rect key="frame" x="49" y="0.0" width="222" height="24"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player ⭕️" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b0c-GE-IDl">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="24" id="SBh-DF-ick"/>
+                                                    <constraint firstAttribute="width" constant="100" id="bMk-UU-haf"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player ❌" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O3U-S2-yFR">
+                                                <rect key="frame" x="122" y="0.0" width="100" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="KRv-V1-ryC"/>
+                                                    <constraint firstAttribute="height" constant="24" id="TQo-Xp-IPH"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="g6B-m7-XOh"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="g6B-m7-XOh"/>
+                                                    </mask>
+                                                </variation>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="CTp-4W-bht"/>
+                                            <constraint firstAttribute="trailing" secondItem="O3U-S2-yFR" secondAttribute="trailing" id="WKe-g2-05L"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="WKe-g2-05L"/>
+                                            </mask>
+                                        </variation>
+                                    </stackView>
+                                    <pickerView tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mqK-E7-bfP">
+                                        <rect key="frame" x="0.0" y="32" width="320" height="220"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="320" id="3VC-dy-DKt"/>
+                                            <constraint firstAttribute="height" constant="220" id="Isf-fK-IJC"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dataSource" destination="2J5-AT-VT3" id="QX8-iM-i45"/>
+                                            <outlet property="delegate" destination="2J5-AT-VT3" id="cef-Or-gUH"/>
+                                        </connections>
+                                    </pickerView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xah-6u-xf8">
+                                        <rect key="frame" x="53.5" y="260" width="213" height="72"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="0vT-bc-Qs6">
+                                                <rect key="frame" x="0.0" y="0.0" width="213" height="31"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Battle Mode" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbO-rw-Av7">
+                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="31"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="31" id="Xry-cG-rWl"/>
+                                                            <constraint firstAttribute="width" constant="150" id="hxO-Z0-m05"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LAN-8L-LpX">
+                                                        <rect key="frame" x="164" y="0.0" width="51" height="31"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="31" id="0s7-oT-19J"/>
+                                                            <constraint firstAttribute="width" constant="49" id="IwM-GH-G5V"/>
+                                                        </constraints>
+                                                        <connections>
+                                                            <action selector="mysteryModeAction:" destination="2J5-AT-VT3" eventType="valueChanged" id="8TN-5C-Wl0"/>
+                                                        </connections>
+                                                    </switch>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="KRf-hC-YjU">
+                                                <rect key="frame" x="0.0" y="41" width="213" height="31"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play against AI" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PrE-Q0-mVr">
+                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="31"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="31" id="4tv-lP-8Om"/>
+                                                            <constraint firstAttribute="width" constant="150" id="DEd-Ng-2Il"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zfR-PK-QGl">
+                                                        <rect key="frame" x="164" y="0.0" width="51" height="31"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="49" id="593-RQ-Wva"/>
+                                                            <constraint firstAttribute="height" constant="31" id="V37-Hy-3Qm"/>
+                                                        </constraints>
+                                                        <connections>
+                                                            <action selector="aiAction:" destination="2J5-AT-VT3" eventType="valueChanged" id="L8H-vE-rxe"/>
+                                                        </connections>
+                                                    </switch>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hg3-da-iMJ">
+                                        <rect key="frame" x="138.5" y="340" width="43" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="T5z-rL-55C"/>
+                                            <constraint firstAttribute="width" constant="43" id="b1f-9q-Xek"/>
+                                            <constraint firstAttribute="height" constant="36" id="bQ9-B7-7Uq"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="43" id="uYl-ke-Dmc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
+                                        <state key="normal" title="Start"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="b1f-9q-Xek"/>
+                                                <exclude reference="bQ9-B7-7Uq"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="p15-9u-4vt"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="380" id="DW7-Ym-mtF"/>
+                                    <constraint firstAttribute="width" constant="320" id="MYS-iA-YWW"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Y0v-zt-Oew" firstAttribute="centerX" secondItem="r74-61-rGl" secondAttribute="centerX" id="Hwq-DG-TFz"/>
+                            <constraint firstItem="Y0v-zt-Oew" firstAttribute="centerY" secondItem="r74-61-rGl" secondAttribute="centerY" id="w8P-9W-Ebo"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="aiSwitch" destination="zfR-PK-QGl" id="2Os-vJ-jai"/>
+                        <outlet property="mysteryModeSwitch" destination="LAN-8L-LpX" id="I5O-eA-Duj"/>
+                        <outlet property="player1Label" destination="b0c-GE-IDl" id="uts-gd-jdD"/>
+                        <outlet property="player1Picker" destination="mqK-E7-bfP" id="j45-uK-5uV"/>
+                        <outlet property="player2Label" destination="O3U-S2-yFR" id="IpY-JH-tBu"/>
+                        <outlet property="startButton" destination="hg3-da-iMJ" id="AKN-3z-hgy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Brv-LT-o4y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="769" y="295"/>
+        </scene>
+    </scenes>
+</document>

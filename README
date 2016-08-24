@@ -1,0 +1,22 @@
+# Emoji Tac Toe
+
+Copyright (c) 2016 Epic Loot. All rights reserved.
+
+Designed and coded by John Pavley.
+
+## Features
+- Current SDKs
+  - iOS Universal App
+  - Apple Color Emojis
+  - AI Mode
+  - Battle Mode
+  - Sharing
+  - WatchOS 2
+  - tvOS App
+  - 3D Touch
+  - Mac OS X
+- Post WWDC SDKs
+  - iOS 10
+  - Watch OS 3.0
+  - New tvOS
+  - macOS

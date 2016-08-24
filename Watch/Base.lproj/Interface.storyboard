@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Watch" customModuleProvider="target">
+                    <items>
+                        <label width="1" alignment="center" text="⭕️ vs ❌" textAlignment="center" id="n6T-xM-qPa"/>
+                        <group width="1" height="1" alignment="center" verticalAlignment="center" layout="vertical" id="7Pf-1U-OZd">
+                            <items>
+                                <group width="1" alignment="center" id="OKD-h2-H3t">
+                                    <items>
+                                        <button width="40" height="40" alignment="center" title="🤖" id="aGE-fg-Wwu">
+                                            <fontDescription key="font" type="system" pointSize="26"/>
+                                            <connections>
+                                                <action selector="button1Action" destination="AgC-eL-Hgc" id="7sx-oR-TFg"/>
+                                            </connections>
+                                        </button>
+                                        <button width="40" height="40" alignment="center" title="👻" id="JbJ-mM-6SB">
+                                            <fontDescription key="font" type="system" pointSize="26"/>
+                                            <connections>
+                                                <action selector="button2Action" destination="AgC-eL-Hgc" id="Ou3-yV-3bI"/>
+                                            </connections>
+                                        </button>
+                                        <button width="40" height="40" alignment="center" title="🤖" id="Ila-Ak-EXI">
+                                            <fontDescription key="font" type="system" pointSize="26"/>
+                                            <connections>
+                                                <action selector="button3Action" destination="AgC-eL-Hgc" id="6ev-2J-vNQ"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="center" id="mlN-bw-TWN">
+                                    <items>
+                                        <button width="40" height="40" alignment="center" title="👻" id="88S-Ze-oje">
+                                            <fontDescription key="font" type="system" pointSize="26"/>
+                                            <connections>
+                                                <action selector="button4Action" destination="AgC-eL-Hgc" id="Fe4-Tp-OqR"/>
+                                            </connections>
+                                        </button>
+                                        <button width="40" height="40" alignment="center" title="🤖" id="dyu-Mv-mE7">
+                                            <fontDescription key="font" type="system" pointSize="26"/>
+                                            <connections>
+                                                <action selector="button5Action" destination="AgC-eL-Hgc" id="XZb-Wn-YdR"/>
+                                            </connections>
+                                        </button>
+                                        <button width="40" height="40" alignment="center" title="👻" id="4NA-ti-jaf">
+                                            <fontDescription key="font" type="system" pointSize="26"/>
+                                            <connections>
+                                                <action selector="button6Action" destination="AgC-eL-Hgc" id="Kvk-aj-jn4"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="center" id="0Eh-Tg-Ruz">
+                                    <items>
+                                        <button width="40" height="40" alignment="center" title="🤖" id="BuR-4n-d87">
+                                            <fontDescription key="font" type="system" pointSize="26"/>
+                                            <connections>
+                                                <action selector="button7Action" destination="AgC-eL-Hgc" id="CTe-c0-V7g"/>
+                                            </connections>
+                                        </button>
+                                        <button width="40" height="40" alignment="center" title="👻" id="b7i-q3-Zbk">
+                                            <fontDescription key="font" type="system" pointSize="26"/>
+                                            <connections>
+                                                <action selector="button8Action" destination="AgC-eL-Hgc" id="emu-Xx-2k8"/>
+                                            </connections>
+                                        </button>
+                                        <button width="40" height="40" alignment="center" title="🤖" id="qGf-Xx-3x9">
+                                            <fontDescription key="font" type="system" pointSize="26"/>
+                                            <connections>
+                                                <action selector="button9Action" destination="AgC-eL-Hgc" id="4GV-Ql-0pu"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                </group>
+                                <label width="1" alignment="center" text="no winner 😔" textAlignment="center" id="PDR-ra-ziI">
+                                    <variation key="device=watch42mm" text="no winner 👹"/>
+                                </label>
+                            </items>
+                            <variation key="default">
+                                <mask key="items">
+                                    <exclude reference="PDR-ra-ziI"/>
+                                </mask>
+                            </variation>
+                            <variation key="device=watch42mm">
+                                <mask key="items">
+                                    <include reference="PDR-ra-ziI"/>
+                                </mask>
+                            </variation>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="button1" destination="aGE-fg-Wwu" id="5VD-sa-UTO"/>
+                        <outlet property="button2" destination="JbJ-mM-6SB" id="hfu-oZ-Fkv"/>
+                        <outlet property="button3" destination="Ila-Ak-EXI" id="2dV-UE-yHG"/>
+                        <outlet property="button4" destination="88S-Ze-oje" id="Woc-v5-rAh"/>
+                        <outlet property="button5" destination="dyu-Mv-mE7" id="4Xc-qK-f0D"/>
+                        <outlet property="button6" destination="4NA-ti-jaf" id="ha4-bc-olp"/>
+                        <outlet property="button7" destination="BuR-4n-d87" id="fVU-2C-01F"/>
+                        <outlet property="button8" destination="b7i-q3-Zbk" id="iDq-8f-Xi9"/>
+                        <outlet property="button9" destination="qGf-Xx-3x9" id="h5I-5a-EJR"/>
+                        <outlet property="statusLabel" destination="PDR-ra-ziI" id="Z3G-0D-ikE"/>
+                        <outlet property="titleLabel" destination="n6T-xM-qPa" id="Sce-XZ-kbY"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="220" y="345"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="220" y="643"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="ZPc-GJ-vnh">
+            <objects>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="Watch" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="468" y="643"/>
+        </scene>
+    </scenes>
+</document>

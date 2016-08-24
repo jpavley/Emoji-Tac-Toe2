@@ -1,0 +1,747 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5A4AB2331D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */; };
+		5A4AB2341D6CCDC800DEAAEB /* Emoji Tac Toe Theme3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */; };
+		5A68408F1D6DF25C00FA995F /* bongweirdness.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5A68408C1D6DF25C00FA995F /* bongweirdness.wav */; };
+		5A6840901D6DF25C00FA995F /* bongweirdness.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5A68408C1D6DF25C00FA995F /* bongweirdness.wav */; };
+		5A6840911D6DF25C00FA995F /* glossy_click_02.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5A68408D1D6DF25C00FA995F /* glossy_click_02.wav */; };
+		5A6840921D6DF25C00FA995F /* glossy_click_02.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5A68408D1D6DF25C00FA995F /* glossy_click_02.wav */; };
+		5A6840931D6DF25C00FA995F /* glossy_click_03.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5A68408E1D6DF25C00FA995F /* glossy_click_03.wav */; };
+		5A6840941D6DF25C00FA995F /* glossy_click_03.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5A68408E1D6DF25C00FA995F /* glossy_click_03.wav */; };
+		5ACC58DD1D6156D70078AFBC /* EmojiTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACC58DC1D6156D70078AFBC /* EmojiTacToeViewController.swift */; };
+		5AD4078A1D4ED69B00FBBA62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AD407891D4ED69B00FBBA62 /* Assets.xcassets */; };
+		5AD407951D4ED8E800FBBA62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AD407941D4ED8E800FBBA62 /* LaunchScreen.storyboard */; };
+		5AD407971D4ED91600FBBA62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AD407961D4ED91600FBBA62 /* Main.storyboard */; };
+		5AD407991D4ED93700FBBA62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD407981D4ED93700FBBA62 /* ViewController.swift */; };
+		5AD4079B1D4ED94500FBBA62 /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD4079A1D4ED94500FBBA62 /* NewGameViewController.swift */; };
+		5AD4079D1D4ED94F00FBBA62 /* EmojiTicTacToe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD4079C1D4ED94F00FBBA62 /* EmojiTicTacToe.swift */; };
+		5AD4079F1D4ED9EA00FBBA62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD4079E1D4ED9EA00FBBA62 /* AppDelegate.swift */; };
+		5AD407A11D4EDDC500FBBA62 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 5AD407A01D4EDDC500FBBA62 /* README */; };
+		B904F3B01D4F715200CA2D75 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B904F3AE1D4F715200CA2D75 /* Interface.storyboard */; };
+		B904F3B21D4F715200CA2D75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B904F3B11D4F715200CA2D75 /* Assets.xcassets */; };
+		B904F3B91D4F715200CA2D75 /* Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B904F3B81D4F715200CA2D75 /* Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B904F3C01D4F715200CA2D75 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B904F3BF1D4F715200CA2D75 /* InterfaceController.swift */; };
+		B904F3C21D4F715200CA2D75 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B904F3C11D4F715200CA2D75 /* ExtensionDelegate.swift */; };
+		B904F3C41D4F715200CA2D75 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B904F3C31D4F715200CA2D75 /* NotificationController.swift */; };
+		B904F3C61D4F715200CA2D75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B904F3C51D4F715200CA2D75 /* Assets.xcassets */; };
+		B904F3CA1D4F715200CA2D75 /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B904F3AC1D4F715200CA2D75 /* Watch.app */; };
+		B904F3D41D4F7B2F00CA2D75 /* EmojiTicTacToe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD4079C1D4ED94F00FBBA62 /* EmojiTicTacToe.swift */; };
+		B92B07401D60BC1700E20A6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92B073F1D60BC1700E20A6D /* AppDelegate.swift */; };
+		B92B07451D60BC1700E20A6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B92B07431D60BC1700E20A6D /* Main.storyboard */; };
+		B92B07471D60BC1700E20A6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B92B07461D60BC1700E20A6D /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B904F3BA1D4F715200CA2D75 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AD407771D4ED69B00FBBA62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B904F3B71D4F715200CA2D75;
+			remoteInfo = "Watch Extension";
+		};
+		B904F3C81D4F715200CA2D75 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AD407771D4ED69B00FBBA62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B904F3AB1D4F715200CA2D75;
+			remoteInfo = Watch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B904F3D01D4F715200CA2D75 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B904F3B91D4F715200CA2D75 /* Watch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B904F3D21D4F715200CA2D75 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				B904F3CA1D4F715200CA2D75 /* Watch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Emoji Tac Toe Theme3.mp3"; sourceTree = "<group>"; };
+		5A68408C1D6DF25C00FA995F /* bongweirdness.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bongweirdness.wav; sourceTree = "<group>"; };
+		5A68408D1D6DF25C00FA995F /* glossy_click_02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = glossy_click_02.wav; sourceTree = "<group>"; };
+		5A68408E1D6DF25C00FA995F /* glossy_click_03.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = glossy_click_03.wav; sourceTree = "<group>"; };
+		5ACC58DC1D6156D70078AFBC /* EmojiTacToeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiTacToeViewController.swift; sourceTree = "<group>"; };
+		5AD4077F1D4ED69B00FBBA62 /* Emoji Tac Toe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Emoji Tac Toe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AD407891D4ED69B00FBBA62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5AD4078E1D4ED69B00FBBA62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5AD407941D4ED8E800FBBA62 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5AD407961D4ED91600FBBA62 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		5AD407981D4ED93700FBBA62 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5AD4079A1D4ED94500FBBA62 /* NewGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
+		5AD4079C1D4ED94F00FBBA62 /* EmojiTicTacToe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmojiTicTacToe.swift; path = "Emoji Tac Toe/EmojiTicTacToe.swift"; sourceTree = "<group>"; };
+		5AD4079E1D4ED9EA00FBBA62 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5AD407A01D4EDDC500FBBA62 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		B904F3AC1D4F715200CA2D75 /* Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Watch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B904F3AF1D4F715200CA2D75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		B904F3B11D4F715200CA2D75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B904F3B31D4F715200CA2D75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B904F3B81D4F715200CA2D75 /* Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B904F3BE1D4F715200CA2D75 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		B904F3BF1D4F715200CA2D75 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		B904F3C11D4F715200CA2D75 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		B904F3C31D4F715200CA2D75 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		B904F3C51D4F715200CA2D75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B904F3C71D4F715200CA2D75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B92B073D1D60BC1600E20A6D /* television.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = television.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B92B073F1D60BC1700E20A6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B92B07441D60BC1700E20A6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B92B07461D60BC1700E20A6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B92B07481D60BC1700E20A6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5AD4077C1D4ED69B00FBBA62 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B904F3B51D4F715200CA2D75 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B92B073A1D60BC1600E20A6D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5A6840951D6DF27500FA995F /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */,
+				5A68408C1D6DF25C00FA995F /* bongweirdness.wav */,
+				5A68408D1D6DF25C00FA995F /* glossy_click_02.wav */,
+				5A68408E1D6DF25C00FA995F /* glossy_click_03.wav */,
+			);
+			name = Audio;
+			path = "Emoji Tac Toe";
+			sourceTree = "<group>";
+		};
+		5AD407761D4ED69B00FBBA62 = {
+			isa = PBXGroup;
+			children = (
+				5AD407A01D4EDDC500FBBA62 /* README */,
+				B904F3D31D4F7B1D00CA2D75 /* Shared */,
+				5A6840951D6DF27500FA995F /* Audio */,
+				5AD407811D4ED69B00FBBA62 /* iOS */,
+				B904F3AD1D4F715200CA2D75 /* watchOS */,
+				B904F3BC1D4F715200CA2D75 /* Watch Extension */,
+				B92B073E1D60BC1700E20A6D /* tvOS */,
+				5AD407801D4ED69B00FBBA62 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5AD407801D4ED69B00FBBA62 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5AD4077F1D4ED69B00FBBA62 /* Emoji Tac Toe.app */,
+				B904F3AC1D4F715200CA2D75 /* Watch.app */,
+				B904F3B81D4F715200CA2D75 /* Watch Extension.appex */,
+				B92B073D1D60BC1600E20A6D /* television.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5AD407811D4ED69B00FBBA62 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				5AD4079E1D4ED9EA00FBBA62 /* AppDelegate.swift */,
+				5AD407961D4ED91600FBBA62 /* Main.storyboard */,
+				5AD407981D4ED93700FBBA62 /* ViewController.swift */,
+				5AD4079A1D4ED94500FBBA62 /* NewGameViewController.swift */,
+				5AD407891D4ED69B00FBBA62 /* Assets.xcassets */,
+				5AD407941D4ED8E800FBBA62 /* LaunchScreen.storyboard */,
+				5AD4078E1D4ED69B00FBBA62 /* Info.plist */,
+			);
+			name = iOS;
+			path = "Emoji Tac Toe";
+			sourceTree = "<group>";
+		};
+		B904F3AD1D4F715200CA2D75 /* watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				B904F3AE1D4F715200CA2D75 /* Interface.storyboard */,
+				B904F3B11D4F715200CA2D75 /* Assets.xcassets */,
+				B904F3B31D4F715200CA2D75 /* Info.plist */,
+			);
+			name = watchOS;
+			path = Watch;
+			sourceTree = "<group>";
+		};
+		B904F3BC1D4F715200CA2D75 /* Watch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B904F3BF1D4F715200CA2D75 /* InterfaceController.swift */,
+				B904F3C11D4F715200CA2D75 /* ExtensionDelegate.swift */,
+				B904F3C31D4F715200CA2D75 /* NotificationController.swift */,
+				B904F3C51D4F715200CA2D75 /* Assets.xcassets */,
+				B904F3C71D4F715200CA2D75 /* Info.plist */,
+				B904F3BD1D4F715200CA2D75 /* Supporting Files */,
+			);
+			path = "Watch Extension";
+			sourceTree = "<group>";
+		};
+		B904F3BD1D4F715200CA2D75 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B904F3BE1D4F715200CA2D75 /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B904F3D31D4F7B1D00CA2D75 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				5AD4079C1D4ED94F00FBBA62 /* EmojiTicTacToe.swift */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
+		B92B073E1D60BC1700E20A6D /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				B92B073F1D60BC1700E20A6D /* AppDelegate.swift */,
+				B92B07431D60BC1700E20A6D /* Main.storyboard */,
+				B92B07461D60BC1700E20A6D /* Assets.xcassets */,
+				B92B07481D60BC1700E20A6D /* Info.plist */,
+				5ACC58DC1D6156D70078AFBC /* EmojiTacToeViewController.swift */,
+			);
+			name = tvOS;
+			path = television;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5AD4077E1D4ED69B00FBBA62 /* Emoji Tac Toe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5AD407911D4ED69B00FBBA62 /* Build configuration list for PBXNativeTarget "Emoji Tac Toe" */;
+			buildPhases = (
+				5AD4077B1D4ED69B00FBBA62 /* Sources */,
+				5AD4077C1D4ED69B00FBBA62 /* Frameworks */,
+				5AD4077D1D4ED69B00FBBA62 /* Resources */,
+				B904F3D21D4F715200CA2D75 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B904F3C91D4F715200CA2D75 /* PBXTargetDependency */,
+			);
+			name = "Emoji Tac Toe";
+			productName = "Emoji Tac Toe";
+			productReference = 5AD4077F1D4ED69B00FBBA62 /* Emoji Tac Toe.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B904F3AB1D4F715200CA2D75 /* Watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B904F3D11D4F715200CA2D75 /* Build configuration list for PBXNativeTarget "Watch" */;
+			buildPhases = (
+				B904F3AA1D4F715200CA2D75 /* Resources */,
+				B904F3D01D4F715200CA2D75 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B904F3BB1D4F715200CA2D75 /* PBXTargetDependency */,
+			);
+			name = Watch;
+			productName = Watch;
+			productReference = B904F3AC1D4F715200CA2D75 /* Watch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		B904F3B71D4F715200CA2D75 /* Watch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B904F3CF1D4F715200CA2D75 /* Build configuration list for PBXNativeTarget "Watch Extension" */;
+			buildPhases = (
+				B904F3B41D4F715200CA2D75 /* Sources */,
+				B904F3B51D4F715200CA2D75 /* Frameworks */,
+				B904F3B61D4F715200CA2D75 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Watch Extension";
+			productName = "Watch Extension";
+			productReference = B904F3B81D4F715200CA2D75 /* Watch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+		B92B073C1D60BC1600E20A6D /* television */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B92B074B1D60BC1700E20A6D /* Build configuration list for PBXNativeTarget "television" */;
+			buildPhases = (
+				B92B07391D60BC1600E20A6D /* Sources */,
+				B92B073A1D60BC1600E20A6D /* Frameworks */,
+				B92B073B1D60BC1600E20A6D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = television;
+			productName = television;
+			productReference = B92B073D1D60BC1600E20A6D /* television.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5AD407771D4ED69B00FBBA62 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Epic Loot";
+				TargetAttributes = {
+					5AD4077E1D4ED69B00FBBA62 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = QZ7SMYA7GB;
+					};
+					B904F3AB1D4F715200CA2D75 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = QZ7SMYA7GB;
+					};
+					B904F3B71D4F715200CA2D75 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = QZ7SMYA7GB;
+					};
+					B92B073C1D60BC1600E20A6D = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = QZ7SMYA7GB;
+					};
+				};
+			};
+			buildConfigurationList = 5AD4077A1D4ED69B00FBBA62 /* Build configuration list for PBXProject "Emoji Tac Toe" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5AD407761D4ED69B00FBBA62;
+			productRefGroup = 5AD407801D4ED69B00FBBA62 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5AD4077E1D4ED69B00FBBA62 /* Emoji Tac Toe */,
+				B904F3AB1D4F715200CA2D75 /* Watch */,
+				B904F3B71D4F715200CA2D75 /* Watch Extension */,
+				B92B073C1D60BC1600E20A6D /* television */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5AD4077D1D4ED69B00FBBA62 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AD407A11D4EDDC500FBBA62 /* README in Resources */,
+				5AD407971D4ED91600FBBA62 /* Main.storyboard in Resources */,
+				5A4AB2331D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 in Resources */,
+				5AD407951D4ED8E800FBBA62 /* LaunchScreen.storyboard in Resources */,
+				5A6840911D6DF25C00FA995F /* glossy_click_02.wav in Resources */,
+				5AD4078A1D4ED69B00FBBA62 /* Assets.xcassets in Resources */,
+				5A68408F1D6DF25C00FA995F /* bongweirdness.wav in Resources */,
+				5A6840931D6DF25C00FA995F /* glossy_click_03.wav in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B904F3AA1D4F715200CA2D75 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B904F3B21D4F715200CA2D75 /* Assets.xcassets in Resources */,
+				B904F3B01D4F715200CA2D75 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B904F3B61D4F715200CA2D75 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B904F3C61D4F715200CA2D75 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B92B073B1D60BC1600E20A6D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A4AB2341D6CCDC800DEAAEB /* Emoji Tac Toe Theme3.mp3 in Resources */,
+				5A6840941D6DF25C00FA995F /* glossy_click_03.wav in Resources */,
+				B92B07471D60BC1700E20A6D /* Assets.xcassets in Resources */,
+				B92B07451D60BC1700E20A6D /* Main.storyboard in Resources */,
+				5A6840921D6DF25C00FA995F /* glossy_click_02.wav in Resources */,
+				5A6840901D6DF25C00FA995F /* bongweirdness.wav in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5AD4077B1D4ED69B00FBBA62 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AD4079F1D4ED9EA00FBBA62 /* AppDelegate.swift in Sources */,
+				5AD4079D1D4ED94F00FBBA62 /* EmojiTicTacToe.swift in Sources */,
+				5AD407991D4ED93700FBBA62 /* ViewController.swift in Sources */,
+				5AD4079B1D4ED94500FBBA62 /* NewGameViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B904F3B41D4F715200CA2D75 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B904F3C41D4F715200CA2D75 /* NotificationController.swift in Sources */,
+				B904F3C21D4F715200CA2D75 /* ExtensionDelegate.swift in Sources */,
+				B904F3C01D4F715200CA2D75 /* InterfaceController.swift in Sources */,
+				B904F3D41D4F7B2F00CA2D75 /* EmojiTicTacToe.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B92B07391D60BC1600E20A6D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5ACC58DD1D6156D70078AFBC /* EmojiTacToeViewController.swift in Sources */,
+				B92B07401D60BC1700E20A6D /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B904F3BB1D4F715200CA2D75 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B904F3B71D4F715200CA2D75 /* Watch Extension */;
+			targetProxy = B904F3BA1D4F715200CA2D75 /* PBXContainerItemProxy */;
+		};
+		B904F3C91D4F715200CA2D75 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B904F3AB1D4F715200CA2D75 /* Watch */;
+			targetProxy = B904F3C81D4F715200CA2D75 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B904F3AE1D4F715200CA2D75 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B904F3AF1D4F715200CA2D75 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+		B92B07431D60BC1700E20A6D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B92B07441D60BC1700E20A6D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5AD4078F1D4ED69B00FBBA62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5AD407901D4ED69B00FBBA62 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5AD407921D4ED69B00FBBA62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "Emoji Tac Toe/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pavley.Emoji-Tac-Toe";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5AD407931D4ED69B00FBBA62 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "Emoji Tac Toe/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pavley.Emoji-Tac-Toe";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B904F3CB1D4F715200CA2D75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = Watch_Extension;
+				INFOPLIST_FILE = Watch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pavley.Emoji-Tac-Toe.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		B904F3CC1D4F715200CA2D75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = Watch_Extension;
+				INFOPLIST_FILE = Watch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pavley.Emoji-Tac-Toe.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+		B904F3CD1D4F715200CA2D75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pavley.Emoji-Tac-Toe.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		B904F3CE1D4F715200CA2D75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pavley.Emoji-Tac-Toe.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+		B92B07491D60BC1700E20A6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = television/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pavley.television;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Debug;
+		};
+		B92B074A1D60BC1700E20A6D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = television/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pavley.television;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5AD4077A1D4ED69B00FBBA62 /* Build configuration list for PBXProject "Emoji Tac Toe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5AD4078F1D4ED69B00FBBA62 /* Debug */,
+				5AD407901D4ED69B00FBBA62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5AD407911D4ED69B00FBBA62 /* Build configuration list for PBXNativeTarget "Emoji Tac Toe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5AD407921D4ED69B00FBBA62 /* Debug */,
+				5AD407931D4ED69B00FBBA62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B904F3CF1D4F715200CA2D75 /* Build configuration list for PBXNativeTarget "Watch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B904F3CD1D4F715200CA2D75 /* Debug */,
+				B904F3CE1D4F715200CA2D75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B904F3D11D4F715200CA2D75 /* Build configuration list for PBXNativeTarget "Watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B904F3CB1D4F715200CA2D75 /* Debug */,
+				B904F3CC1D4F715200CA2D75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B92B074B1D60BC1700E20A6D /* Build configuration list for PBXNativeTarget "television" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B92B07491D60BC1700E20A6D /* Debug */,
+				B92B074A1D60BC1700E20A6D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5AD407771D4ED69B00FBBA62 /* Project object */;
+}
