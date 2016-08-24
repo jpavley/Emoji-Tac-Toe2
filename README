@@ -4,17 +4,21 @@ Copyright (c) 2016 Epic Loot. All rights reserved.
 
 Designed and coded by John Pavley.
 
+Version 1
+
 ## Features
 - Current SDKs
   - iOS Universal App
   - Apple Color Emojis
-  - AI Mode
+  - Two player
+  - AI Mode (single player)
   - Battle Mode
   - Sharing
   - WatchOS 2
-  - tvOS App
   - 3D Touch
-  - Mac OS X
+  - Sounds
+
+Version 2 (Planned)
 - Post WWDC SDKs
   - iOS 10
   - Watch OS 3.0
