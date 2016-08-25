@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
             self.window?.rootViewController = vc
             self.window?.makeKeyAndVisible()
-            useAI = false
+            useAI = true
         }
         
         if shortcutValue == "Two Player" {
@@ -72,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
             self.window?.rootViewController = vc
             self.window?.makeKeyAndVisible()
-            useAI = true
+            useAI = false
         }
         
         return true
