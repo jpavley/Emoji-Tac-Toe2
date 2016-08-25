@@ -109,7 +109,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         }
 
         
-        let battleEmojis = ["🤖", "👻","😱", "😡","🚶", "🏃","🐿", "🐉","👸", "👰"]
+        let battleEmojis = ["🤖", "👻","😱", "😡","🚶", "🏃","🐿", "🐉","👸", "👰", "🦄", "🐝"]
         if !battleEmojis.contains(playerMark) {
             return
         }
@@ -134,6 +134,8 @@ class ViewController: UIViewController, WCSessionDelegate {
             jumpToCenter(buttonID)
         case "👸", "👰":
             takeAllMiddles(buttonID)
+        case "🦄", "🐝":
+            jumpToRandom(buttonID)
         default:
             nop()
         }
@@ -232,6 +234,23 @@ class ViewController: UIViewController, WCSessionDelegate {
         let targetButton = view.viewWithTag(centerID) as! UIButton
         targetButton.setTitle(playerMark, forState: .Normal)
         let targetLocation = centerID - 1
+        gameBoard[targetLocation] = activePlayer
+    }
+    
+    func jumpToRandom(buttonID: Int) {
+        // HINT: erase mark at current colition
+        let sourceButton = view.viewWithTag(buttonID) as! UIButton
+        sourceButton.setTitle("", forState: .Normal)
+        let sourceLocation = buttonID - 1
+        gameBoard[sourceLocation] = .untouched
+        
+        // HINT: replace mark at the center
+        let potentialButtonIDs = [1,2,3,4,5,6,7,8,9].filter {$0 != buttonID}
+        let randomIndex = diceRoll(potentialButtonIDs.count)
+        let randomButtonID = potentialButtonIDs[randomIndex]
+        let targetButton = view.viewWithTag(randomButtonID) as! UIButton
+        targetButton.setTitle(playerMark, forState: .Normal)
+        let targetLocation = randomButtonID - 1
         gameBoard[targetLocation] = activePlayer
     }
     
