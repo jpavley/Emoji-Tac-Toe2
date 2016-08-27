@@ -323,7 +323,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Y0v-zt-Oew">
-                                <rect key="frame" x="0.0" y="50" width="320" height="380"/>
+                                <rect key="frame" x="0.0" y="29.5" width="320" height="421"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="OT5-XN-yGU">
                                         <rect key="frame" x="49" y="0.0" width="222" height="24"/>
@@ -377,7 +377,7 @@
                                         </connections>
                                     </pickerView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xah-6u-xf8">
-                                        <rect key="frame" x="53.5" y="260" width="213" height="72"/>
+                                        <rect key="frame" x="53.5" y="260" width="213" height="113"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="0vT-bc-Qs6">
                                                 <rect key="frame" x="0.0" y="0.0" width="213" height="31"/>
@@ -429,10 +429,35 @@
                                                     </switch>
                                                 </subviews>
                                             </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="PaL-N4-pDX">
+                                                <rect key="frame" x="0.0" y="82" width="213" height="31"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sound" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QS2-TN-O2w" userLabel="Sound">
+                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="31"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="31" id="21d-UZ-iEt"/>
+                                                            <constraint firstAttribute="width" constant="150" id="flD-sM-kU8"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hvw-wN-2re">
+                                                        <rect key="frame" x="164" y="0.0" width="51" height="31"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="31" id="Lgc-JV-C1C"/>
+                                                            <constraint firstAttribute="width" constant="49" id="aUc-3w-J1P"/>
+                                                        </constraints>
+                                                        <connections>
+                                                            <action selector="soundAction:" destination="2J5-AT-VT3" eventType="valueChanged" id="2IM-AD-egs"/>
+                                                        </connections>
+                                                    </switch>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hg3-da-iMJ">
-                                        <rect key="frame" x="138.5" y="340" width="43" height="40"/>
+                                        <rect key="frame" x="138.5" y="381" width="43" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="T5z-rL-55C"/>
                                             <constraint firstAttribute="width" constant="43" id="b1f-9q-Xek"/>
@@ -453,7 +478,6 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="380" id="DW7-Ym-mtF"/>
                                     <constraint firstAttribute="width" constant="320" id="MYS-iA-YWW"/>
                                 </constraints>
                             </stackView>
@@ -471,6 +495,7 @@
                         <outlet property="player1Label" destination="b0c-GE-IDl" id="uts-gd-jdD"/>
                         <outlet property="player1Picker" destination="mqK-E7-bfP" id="j45-uK-5uV"/>
                         <outlet property="player2Label" destination="O3U-S2-yFR" id="IpY-JH-tBu"/>
+                        <outlet property="soundSwitch" destination="hvw-wN-2re" id="EVh-fR-E8c"/>
                         <outlet property="startButton" destination="hg3-da-iMJ" id="AKN-3z-hgy"/>
                     </connections>
                 </viewController>

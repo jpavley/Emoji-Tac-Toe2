@@ -20,6 +20,7 @@ var crossMark = "❌"
 var player1Row = 0 // Picker Index number
 var player2Row = 0 // Picker Index number
 var useAI = true
+var useSound = true
 var mysteryMode = false
 var playing = true
 
@@ -516,6 +517,7 @@ class ViewController: UIViewController, WCSessionDelegate {
     /// - player1Row:Int
     /// - player2Row:Int
     /// - useAI:Bool
+    /// - useSound:Bool
     /// - mysteryMode:Bool
     /// - noughtWins:Int
     /// - crossWins:Int
@@ -540,6 +542,10 @@ class ViewController: UIViewController, WCSessionDelegate {
 
         if let savedUseAI = NSUserDefaults.standardUserDefaults().objectForKey("savedUseAI") {
             useAI = savedUseAI as! Bool
+        }
+        
+        if let savedUseSound = NSUserDefaults.standardUserDefaults().objectForKey("savedUseSound") {
+            useSound = savedUseSound as! Bool
         }
         
         if let savedMysteryMode = NSUserDefaults.standardUserDefaults().objectForKey("savedMysteryMode") {

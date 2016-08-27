@@ -19,6 +19,7 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var player2Label: UILabel!
     @IBOutlet weak var aiSwitch: UISwitch!
     @IBOutlet weak var mysteryModeSwitch: UISwitch!
+    @IBOutlet weak var soundSwitch: UISwitch!
     
     let player1Data = ["⭕️","🍎","⚾️","😀","😺","🤖",
                        "💤","👍","👁","👶","👩","👳",
@@ -53,6 +54,12 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         resetScorePrefs()
     }
     
+    @IBAction func soundAction(sender: AnyObject) {
+        useSound = !useSound
+        NSUserDefaults.standardUserDefaults().setObject(useSound, forKey: "savedUseSound")
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -65,6 +72,7 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         mysteryModeSwitch.setOn(mysteryMode, animated: true)
         aiSwitch.setOn(useAI, animated: true)
+        soundSwitch.setOn(useSound, animated: true)
         
         if WCSession.isSupported() {
             watchSession = WCSession.defaultSession()
