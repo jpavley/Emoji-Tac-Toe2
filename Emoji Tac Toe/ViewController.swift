@@ -115,8 +115,10 @@ class ViewController: UIViewController, WCSessionDelegate {
             return
         }
         
-        battleAVPlayer.currentTime = 0
-        battleAVPlayer.play()
+        if useSound {
+            battleAVPlayer.currentTime = 0
+            battleAVPlayer.play()
+        }
 
         
         // set up this turn
@@ -292,16 +294,20 @@ class ViewController: UIViewController, WCSessionDelegate {
             playerMark = noughtMark
             currentButton.setTitle(playerMark, forState: .Normal)
             
-            noughtAVPlayer.currentTime = 0
-            noughtAVPlayer.play()
+            if useSound {
+                noughtAVPlayer.currentTime = 0
+                noughtAVPlayer.play()
+            }
             
             activePlayer = .cross
         } else {
             playerMark = crossMark
             currentButton.setTitle(playerMark, forState: .Normal)
             
-            crossAVPlayer.currentTime = 0
-            crossAVPlayer.play()
+            if useSound {
+                crossAVPlayer.currentTime = 0
+                crossAVPlayer.play()
+            }
 
             activePlayer = .nought
         }
@@ -338,8 +344,10 @@ class ViewController: UIViewController, WCSessionDelegate {
             activePlayer = .nought
             gameBoard[aiCell] = .cross
             
-            crossAVPlayer.currentTime = 0
-            crossAVPlayer.play()
+            if useSound {
+                crossAVPlayer.currentTime = 0
+                crossAVPlayer.play()
+            }
             
             checkForWinner()
             checkForDraw()
@@ -394,8 +402,10 @@ class ViewController: UIViewController, WCSessionDelegate {
                 alertTitle = "Sorry!"
             }
             
-            winLooseAVPlayer.currentTime = 0
-            winLooseAVPlayer.play()
+            if useSound {
+                winLooseAVPlayer.currentTime = 0
+                winLooseAVPlayer.play()
+            }
             
             presentGameOverAlert(alertTitle)
             
