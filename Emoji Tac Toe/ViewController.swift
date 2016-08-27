@@ -100,7 +100,12 @@ class ViewController: UIViewController, WCSessionDelegate {
         if let pgr = sender as? UIPanGestureRecognizer {
             if pgr.state == .Began {
                 if playing {
-                    useSound = !useSound
+                    let velocity = pgr.velocityInView(view)
+                    if velocity.y > 0 {
+                        useSound = false
+                    } else {
+                        useSound = true
+                    }
                     NSUserDefaults.standardUserDefaults().setObject(useSound, forKey: "savedUseSound")
                 }
             }
