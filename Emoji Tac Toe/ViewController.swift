@@ -96,6 +96,18 @@ class ViewController: UIViewController, WCSessionDelegate {
         }
     }
     
+    @IBAction func panAction(sender: AnyObject) {
+        if let pgr = sender as? UIPanGestureRecognizer {
+            if pgr.state == .Began {
+                if playing {
+                    useSound = !useSound
+                    NSUserDefaults.standardUserDefaults().setObject(useSound, forKey: "savedUseSound")
+                }
+            }
+        }
+    }
+    
+    
     func battleModeAttack(buttonID: Int) {
         
         if gameBoard[buttonID - 1] != activePlayer {

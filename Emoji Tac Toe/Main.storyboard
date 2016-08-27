@@ -249,10 +249,14 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="RSO-c3-xkp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="IeM-pS-jVu"/>
                             <constraint firstItem="RSO-c3-xkp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sRc-e7-edR"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="YLw-rB-Tj9" appends="YES" id="ChJ-gI-Etk"/>
+                        </connections>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
@@ -307,6 +311,11 @@
                         <action selector="longPressAction:" destination="BYZ-38-t0r" id="92w-kv-0nu"/>
                     </connections>
                 </pongPressGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="YLw-rB-Tj9">
+                    <connections>
+                        <action selector="panAction:" destination="BYZ-38-t0r" id="vIm-x7-Nsh"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="356" y="295"/>
         </scene>
