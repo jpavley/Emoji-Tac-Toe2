@@ -611,7 +611,16 @@ class ViewController: UIViewController, WCSessionDelegate {
         battleAVPlayer.prepareToPlay()
 
     }
-            
+    
+    
+    func randomEmojiMarks() -> (String, String){
+        // start with random emojis
+        let randomNoughtMark = emojis[diceRoll(emojis.count/2)]
+        let randomCrossMark = emojis[diceRoll(emojis.count/2 + emojis.count/2)]
+        
+        return (randomNoughtMark, randomCrossMark)
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()

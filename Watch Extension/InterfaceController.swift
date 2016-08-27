@@ -148,6 +148,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     func newGame() {
         
+        // start with random emojis
         emojiGame.noughtMark = emojis[diceRoll(emojis.count/2)]
         emojiGame.crossMark = emojis[diceRoll(emojis.count/2 + emojis.count/2)]
         
