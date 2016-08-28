@@ -637,11 +637,18 @@ class ViewController: UIViewController, WCSessionDelegate {
     override func motionBegan(motion: UIEventSubtype, withEvent event: UIEvent?) {
         
         // HINT: Pick a random pair of emojis
-        player1Row = diceRoll(emojis.count/2)
-        player2Row = diceRoll(emojis.count/2 + emojis.count/2)
-        noughtMark = emojis[player1Row]
-        crossMark = emojis[player2Row]
+        let e1 = diceRoll(emojis.count/2)
+        let e2 = diceRoll(emojis.count/2) + emojis.count/2
+        noughtMark = emojis[e1]
+        crossMark = emojis[e2]
+        player1Row = e1
+        player2Row = e2 - emojis.count/2
         
+        NSUserDefaults.standardUserDefaults().setObject(player1Row, forKey: "savedPlayer1Row")
+        NSUserDefaults.standardUserDefaults().setObject(noughtMark, forKey: "savedNoughtMark")
+        NSUserDefaults.standardUserDefaults().setObject(player2Row, forKey: "savedPlayer1Row")
+        NSUserDefaults.standardUserDefaults().setObject(crossMark, forKey: "savedNoughtMark")
+
         resetGame()
     }
     
