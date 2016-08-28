@@ -630,12 +630,19 @@ class ViewController: UIViewController, WCSessionDelegate {
     }
     
     
-    func randomEmojiMarks() -> (String, String){
-        // start with random emojis
-        let randomNoughtMark = emojis[diceRoll(emojis.count/2)]
-        let randomCrossMark = emojis[diceRoll(emojis.count/2 + emojis.count/2)]
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func motionBegan(motion: UIEventSubtype, withEvent event: UIEvent?) {
         
-        return (randomNoughtMark, randomCrossMark)
+        // HINT: Pick a random pair of emojis
+        player1Row = diceRoll(emojis.count/2)
+        player2Row = diceRoll(emojis.count/2 + emojis.count/2)
+        noughtMark = emojis[player1Row]
+        crossMark = emojis[player2Row]
+        
+        resetGame()
     }
     
     override func viewDidLoad() {
