@@ -134,6 +134,15 @@ func aiChoose(gameBoard:[Player]) -> Int? {
     
     if openCells.count > 0 {
         
+        // x% of the time be unpredictible
+        if result == nil {
+            let chanceToBeRandom = diceRoll(10)
+            if chanceToBeRandom <= 2 {
+                result = openCells.count > 0 ? openCells[diceRoll(openCells.count)] : nil
+                print("chanceToBeRandom \(chanceToBeRandom), result \(result)")
+            }
+        }
+        
         // Search for blocking move
         if result == nil {
             for cell in openCells {
