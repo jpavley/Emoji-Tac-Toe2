@@ -150,8 +150,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         
         // start with random emojis
         emojiGame.noughtMark = emojis[diceRoll(emojis.count/2)]
-        emojiGame.crossMark = emojis[diceRoll(emojis.count/2 + emojis.count/2)]
-        
+        emojiGame.crossMark = emojis[diceRoll(emojis.count/2) + emojis.count/2]
         
         emojiGame.gameBoard = freshGameBoard
         activePlayer = .nought
