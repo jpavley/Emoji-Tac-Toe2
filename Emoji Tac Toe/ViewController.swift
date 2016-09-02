@@ -643,11 +643,11 @@ class ViewController: UIViewController, WCSessionDelegate {
         crossMark = emojis[e2]
         player1Row = e1
         player2Row = e2 - emojis.count/2
-        
+                
         NSUserDefaults.standardUserDefaults().setObject(player1Row, forKey: "savedPlayer1Row")
         NSUserDefaults.standardUserDefaults().setObject(noughtMark, forKey: "savedNoughtMark")
-        NSUserDefaults.standardUserDefaults().setObject(player2Row, forKey: "savedPlayer1Row")
-        NSUserDefaults.standardUserDefaults().setObject(crossMark, forKey: "savedNoughtMark")
+        NSUserDefaults.standardUserDefaults().setObject(player2Row, forKey: "savedPlayer2Row")
+        NSUserDefaults.standardUserDefaults().setObject(crossMark, forKey: "savedCrossMark")
 
         resetGame()
     }
