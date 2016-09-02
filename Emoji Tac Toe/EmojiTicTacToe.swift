@@ -139,7 +139,7 @@ func aiChoose(gameBoard:[Player]) -> Int? {
             let chanceToBeRandom = diceRoll(10)
             if chanceToBeRandom <= 2 {
                 result = openCells.count > 0 ? openCells[diceRoll(openCells.count)] : nil
-                print("chanceToBeRandom \(chanceToBeRandom), result \(result)")
+                //print("chanceToBeRandom \(chanceToBeRandom), result \(result)")
             }
         }
         
