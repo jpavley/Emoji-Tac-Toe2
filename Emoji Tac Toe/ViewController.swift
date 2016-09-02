@@ -648,6 +648,16 @@ class ViewController: UIViewController, WCSessionDelegate {
         NSUserDefaults.standardUserDefaults().setObject(noughtMark, forKey: "savedNoughtMark")
         NSUserDefaults.standardUserDefaults().setObject(player2Row, forKey: "savedPlayer2Row")
         NSUserDefaults.standardUserDefaults().setObject(crossMark, forKey: "savedCrossMark")
+        
+        // reset score
+        noughtWins = 0
+        crossWins = 0
+        draws = 0
+        
+        NSUserDefaults.standardUserDefaults().setObject(noughtWins, forKey: "savedNoughtWins")
+        NSUserDefaults.standardUserDefaults().setObject(crossWins, forKey: "savedCrossWins")
+        NSUserDefaults.standardUserDefaults().setObject(draws, forKey: "savedDraws")
+
 
         resetGame()
     }
