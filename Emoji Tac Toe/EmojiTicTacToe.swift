@@ -146,6 +146,18 @@ func aiChoose(gameBoard:[Player]) -> Int? {
             }
         }
         
+        // If player has middle and corner and AI has oposite corner take another corner
+        if result == nil {
+            let results1 = [0,2,6,8].filter {occupiedCells.contains($0)}
+            let flag1 = occupiedCells.contains(4)
+            let results2 = [0,2,6,8].filter {ownedCells.contains($0)}
+            
+            if results1.count > 0 && flag1 && results2.count > 0 {
+                let results3 = [0,2,6,8].filter {openCells.contains($0)}
+                result = results3.count > 0 ? results3[diceRoll(results3.count)] : nil
+            }
+        }
+        
         // AI has a corner grab a middle
         if result == nil {
             let results1 = [0,2,6,8].filter {ownedCells.contains($0)}
