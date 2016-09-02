@@ -136,8 +136,8 @@ func aiChoose(gameBoard:[Player]) -> Int? {
         
         // x% of the time be unpredictible
         if result == nil {
-            let chanceToBeRandom = diceRoll(10)
-            if chanceToBeRandom <= 2 {
+            let chanceToBeRandom = diceRoll(20)
+            if chanceToBeRandom <= 3 {
                 result = openCells.count > 0 ? openCells[diceRoll(openCells.count)] : nil
                 //print("chanceToBeRandom \(chanceToBeRandom), result \(result)")
             }
