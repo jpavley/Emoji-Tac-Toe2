@@ -67,7 +67,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         handleButtonPress(8)
     }
     
-    func handleButtonPress(tag: Int) {
+    func handleButtonPress(_ tag: Int) {
         
         if aiIsPlaying {
             return
@@ -92,7 +92,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             
             if !emojiGame.gameOver {
                 aiIsPlaying = true
-                performSelector(#selector(self.aiTakeTurn), withObject: nil, afterDelay: 1)
+                perform(#selector(self.aiTakeTurn), with: nil, afterDelay: 1)
             }
         }
     }
@@ -138,7 +138,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             for cell in winningVector {
                 
                 if let button = buttonForIndex(cell) {
-                    button.setBackgroundColor(UIColor.grayColor())
+                    button.setBackgroundColor(UIColor.gray)
                 }
             }
             return true
@@ -162,7 +162,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         for i in 0..<emojiGame.gameBoard.count {
             if let button = buttonForIndex(i) {
                 button.setTitle(calcTitleForButton(i))
-                button.setBackgroundColor(UIColor.darkGrayColor())
+                button.setBackgroundColor(UIColor.darkGray)
             }
         }
         
@@ -170,14 +170,14 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         aiIsPlaying = false
     }
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         // Configure interface objects here.
         newGame()
     }
     
-    func calcTitleForButton(tag: Int) -> String {
+    func calcTitleForButton(_ tag: Int) -> String {
         switch emojiGame.gameBoard[tag] {
         case .untouched:
             return ""
@@ -188,7 +188,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         }
     }
     
-    func buttonForIndex(index: Int) -> WKInterfaceButton? {
+    func buttonForIndex(_ index: Int) -> WKInterfaceButton? {
         switch index {
         case 0:
             return button1
@@ -230,9 +230,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         super.willActivate()
         
         if WCSession.isSupported() {
-            watchSession = WCSession.defaultSession()
+            watchSession = WCSession.default()
             watchSession.delegate = self
-            watchSession.activateSession()
+            watchSession.activate()
         }
 
     }
@@ -242,7 +242,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         super.didDeactivate()
     }
     
-    func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         emojiGame.noughtMark = message["noughtMark"] as! String
         emojiGame.crossMark = message["crossMark"] as! String
         

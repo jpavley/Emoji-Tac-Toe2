@@ -52,10 +52,10 @@ struct TicTacToeGame {
     var gameOver:Bool
 }
 
-func transformGameIntoText(game: TicTacToeGame) -> String {
+func transformGameIntoText(_ game: TicTacToeGame) -> String {
     var result = ""
     
-    for (index, cell) in game.gameBoard.enumerate() {
+    for (index, cell) in game.gameBoard.enumerated() {
         
         switch cell {
         case .untouched:
@@ -74,7 +74,7 @@ func transformGameIntoText(game: TicTacToeGame) -> String {
     return result
 }
 
-func seachForWin(gameBoard:[Player]) -> [Int]? {
+func seachForWin(_ gameBoard:[Player]) -> [Int]? {
     
     for vector in winningVectors {
         if gameBoard[vector[0]] != .untouched && gameBoard[vector[0]] == gameBoard[vector[1]] && gameBoard[vector[0]] == gameBoard[vector[2]] {
@@ -84,7 +84,7 @@ func seachForWin(gameBoard:[Player]) -> [Int]? {
     return nil
 }
 
-func seachForWinForPlayer(board:[Player], player:Player) -> Bool {
+func seachForWinForPlayer(_ board:[Player], player:Player) -> Bool {
     
     for vector in winningVectors {
         if board[vector[0]] == player && board[vector[0]] != .untouched && board[vector[0]] == board[vector[1]] && board[vector[0]] == board[vector[2]] {
@@ -94,7 +94,7 @@ func seachForWinForPlayer(board:[Player], player:Player) -> Bool {
     return false
 }
 
-func checkForUntouchedCells(gameBoard:[Player]) -> Bool {
+func checkForUntouchedCells(_ gameBoard:[Player]) -> Bool {
     
     var result = false
     for cell in gameBoard {
@@ -107,26 +107,26 @@ func checkForUntouchedCells(gameBoard:[Player]) -> Bool {
 }
 
 /// Returns a move that the AI wants to make
-func aiChoose(gameBoard:[Player]) -> Int? {
+func aiChoose(_ gameBoard:[Player]) -> Int? {
     
     var result:Int?
     
     var openCells = [Int]()
-    for (index, cell) in gameBoard.enumerate() {
+    for (index, cell) in gameBoard.enumerated() {
         if cell == .untouched {
             openCells.append(index)
         }
     }
     
     var occupiedCells = [Int]()
-    for (index, cell) in gameBoard.enumerate() {
+    for (index, cell) in gameBoard.enumerated() {
         if cell == .nought {
             occupiedCells.append(index)
         }
     }
     
     var ownedCells = [Int]()
-    for (index, cell) in gameBoard.enumerate() {
+    for (index, cell) in gameBoard.enumerated() {
         if cell == .cross {
             ownedCells.append(index)
         }
@@ -249,7 +249,7 @@ func aiChoose(gameBoard:[Player]) -> Int? {
     return result
 }
 
-func diceRoll(chances: Int) -> Int {
+func diceRoll(_ chances: Int) -> Int {
     return Int(arc4random_uniform(UInt32(chances)))
 }
 

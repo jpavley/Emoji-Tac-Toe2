@@ -53,7 +53,7 @@ class ViewController: UIViewController, WCSessionDelegate {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     
-    @IBAction func share(sender: AnyObject) {
+    @IBAction func share(_ sender: AnyObject) {
         
         let game = TicTacToeGame(gameBoard: gameBoard,
                                  noughtMark: noughtMark,
@@ -67,28 +67,28 @@ class ViewController: UIViewController, WCSessionDelegate {
         //       On iPad the activity view controller will be displayed as a popover using the popoverPresentationController
         //       Need to set the sourceView to the calling view
         
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             
-            if activityViewController.respondsToSelector(Selector("popoverPresentationController")) {
+            if activityViewController.responds(to: Selector("popoverPresentationController")) {
                 activityViewController.popoverPresentationController?.sourceView = self.view
             }
         }
 
-        presentViewController(activityViewController, animated: true, completion: {})
+        present(activityViewController, animated: true, completion: {})
 
     }
     
     
     
-    @IBAction func gameButtonAction(sender: AnyObject) {
+    @IBAction func gameButtonAction(_ sender: AnyObject) {
         
         classicTTTButtonTouch(sender as! UIButton)
     }
     
     
-    @IBAction func longPressAction(sender: AnyObject) {
+    @IBAction func longPressAction(_ sender: AnyObject) {
         if let lpgr = sender as? UILongPressGestureRecognizer {
-            if lpgr.state == .Began {
+            if lpgr.state == .began {
                 if mysteryMode {
                     battleModeAttack((lpgr.view?.tag)!)
                 }
@@ -96,24 +96,24 @@ class ViewController: UIViewController, WCSessionDelegate {
         }
     }
     
-    @IBAction func panAction(sender: AnyObject) {
+    @IBAction func panAction(_ sender: AnyObject) {
         if let pgr = sender as? UIPanGestureRecognizer {
-            if pgr.state == .Began {
+            if pgr.state == .began {
                 if playing {
-                    let velocity = pgr.velocityInView(view)
+                    let velocity = pgr.velocity(in: view)
                     if velocity.y > 0 {
                         useSound = false
                     } else {
                         useSound = true
                     }
-                    NSUserDefaults.standardUserDefaults().setObject(useSound, forKey: "savedUseSound")
+                    UserDefaults.standard.set(useSound, forKey: "savedUseSound")
                 }
             }
         }
     }
     
     
-    func battleModeAttack(buttonID: Int) {
+    func battleModeAttack(_ buttonID: Int) {
         
         if gameBoard[buttonID - 1] != activePlayer {
             // HINT: ignore if activePlayer is pressing on other player's button!
@@ -174,7 +174,7 @@ class ViewController: UIViewController, WCSessionDelegate {
                 return
             }
             aiIsPlaying = true
-            performSelector(#selector(self.aiClassicTakeTurn), withObject: nil, afterDelay: 1)
+            perform(#selector(self.aiClassicTakeTurn), with: nil, afterDelay: 1)
         }
 
     }
@@ -183,35 +183,35 @@ class ViewController: UIViewController, WCSessionDelegate {
         
     }
     
-    func replicateAllOpenCells(buttonID: Int) {
+    func replicateAllOpenCells(_ buttonID: Int) {
         for i in 0..<gameBoard.count {
             if gameBoard[i] == .untouched {
                 gameBoard[i] = activePlayer
                 let targetButton = view.viewWithTag(i + 1) as! UIButton
-                targetButton.setTitle(playerMark, forState: .Normal)
+                targetButton.setTitle(playerMark, for: UIControlState())
             }
         }
     }
     
-    func switchLocations(buttonID: Int) {
+    func switchLocations(_ buttonID: Int) {
         for i in 0..<gameBoard.count {
             if gameBoard[i] == .nought {
                 gameBoard[i] = .cross
                 let targetButton = view.viewWithTag(i + 1) as! UIButton
-                targetButton.setTitle(crossMark, forState: .Normal)
+                targetButton.setTitle(crossMark, for: UIControlState())
             } else if (gameBoard[i] != .untouched) {
                 gameBoard[i] = .nought
                 let targetButton = view.viewWithTag(i + 1) as! UIButton
-                targetButton.setTitle(noughtMark, forState: .Normal)
+                targetButton.setTitle(noughtMark, for: UIControlState())
             }
         }
 
     }
     
-    func takeAllCorners(buttonID: Int) {
+    func takeAllCorners(_ buttonID: Int) {
         // HINT: erase mark at current colition
         let sourceButton = view.viewWithTag(buttonID) as! UIButton
-        sourceButton.setTitle("", forState: .Normal)
+        sourceButton.setTitle("", for: UIControlState())
         let sourceLocation = buttonID - 1
         gameBoard[sourceLocation] = .untouched
         
@@ -219,16 +219,16 @@ class ViewController: UIViewController, WCSessionDelegate {
         let cornerIDs = [1,3,7,9]
         for i in 0..<cornerIDs.count {
             let targetButton = view.viewWithTag(cornerIDs[i]) as! UIButton
-            targetButton.setTitle(playerMark, forState: .Normal)
+            targetButton.setTitle(playerMark, for: UIControlState())
             let targetLocation = cornerIDs[i] - 1
             gameBoard[targetLocation] = activePlayer
         }
     }
     
-    func takeAllMiddles(buttonID: Int) {
+    func takeAllMiddles(_ buttonID: Int) {
         // HINT: erase mark at current colition
         let sourceButton = view.viewWithTag(buttonID) as! UIButton
-        sourceButton.setTitle("", forState: .Normal)
+        sourceButton.setTitle("", for: UIControlState())
         let sourceLocation = buttonID - 1
         gameBoard[sourceLocation] = .untouched
         
@@ -236,31 +236,31 @@ class ViewController: UIViewController, WCSessionDelegate {
         let cornerIDs = [2,4,6,8]
         for i in 0..<cornerIDs.count {
             let targetButton = view.viewWithTag(cornerIDs[i]) as! UIButton
-            targetButton.setTitle(playerMark, forState: .Normal)
+            targetButton.setTitle(playerMark, for: UIControlState())
             let targetLocation = cornerIDs[i] - 1
             gameBoard[targetLocation] = activePlayer
         }
     }
 
-    func jumpToCenter(buttonID: Int) {
+    func jumpToCenter(_ buttonID: Int) {
         // HINT: erase mark at current colition
         let sourceButton = view.viewWithTag(buttonID) as! UIButton
-        sourceButton.setTitle("", forState: .Normal)
+        sourceButton.setTitle("", for: UIControlState())
         let sourceLocation = buttonID - 1
         gameBoard[sourceLocation] = .untouched
         
         // HINT: replace mark at the center
         let centerID = 5
         let targetButton = view.viewWithTag(centerID) as! UIButton
-        targetButton.setTitle(playerMark, forState: .Normal)
+        targetButton.setTitle(playerMark, for: UIControlState())
         let targetLocation = centerID - 1
         gameBoard[targetLocation] = activePlayer
     }
     
-    func jumpToRandom(buttonID: Int) {
+    func jumpToRandom(_ buttonID: Int) {
         // HINT: erase mark at current colition
         let sourceButton = view.viewWithTag(buttonID) as! UIButton
-        sourceButton.setTitle("", forState: .Normal)
+        sourceButton.setTitle("", for: UIControlState())
         let sourceLocation = buttonID - 1
         gameBoard[sourceLocation] = .untouched
         
@@ -269,16 +269,16 @@ class ViewController: UIViewController, WCSessionDelegate {
         let randomIndex = diceRoll(potentialButtonIDs.count)
         let randomButtonID = potentialButtonIDs[randomIndex]
         let targetButton = view.viewWithTag(randomButtonID) as! UIButton
-        targetButton.setTitle(playerMark, forState: .Normal)
+        targetButton.setTitle(playerMark, for: UIControlState())
         let targetLocation = randomButtonID - 1
         gameBoard[targetLocation] = activePlayer
     }
     
-    func stealVictory(buttonID: Int) {
+    func stealVictory(_ buttonID: Int) {
         // if the user loses it turns the loss into a win
     }
     
-    func dontRespond(location: Int) -> Bool {
+    func dontRespond(_ location: Int) -> Bool {
         var result = false
         
         if !playing {
@@ -296,7 +296,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         return result
     }
     
-    func classicTTTButtonTouch(currentButton: UIButton) {
+    func classicTTTButtonTouch(_ currentButton: UIButton) {
         
         if dontRespond(currentButton.tag - 1) {
             return
@@ -309,7 +309,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         // HINT: Update the screen
         if activePlayer == .nought {
             playerMark = noughtMark
-            currentButton.setTitle(playerMark, forState: .Normal)
+            currentButton.setTitle(playerMark, for: UIControlState())
             
             if useSound {
                 noughtAVPlayer.currentTime = 0
@@ -319,7 +319,7 @@ class ViewController: UIViewController, WCSessionDelegate {
             activePlayer = .cross
         } else {
             playerMark = crossMark
-            currentButton.setTitle(playerMark, forState: .Normal)
+            currentButton.setTitle(playerMark, for: UIControlState())
             
             if useSound {
                 crossAVPlayer.currentTime = 0
@@ -345,7 +345,7 @@ class ViewController: UIViewController, WCSessionDelegate {
                 return
             }
             aiIsPlaying = true
-            performSelector(#selector(self.aiClassicTakeTurn), withObject: nil, afterDelay: 1)
+            perform(#selector(self.aiClassicTakeTurn), with: nil, afterDelay: 1)
         }
 
     }
@@ -357,7 +357,7 @@ class ViewController: UIViewController, WCSessionDelegate {
             playerMark = crossMark
             let tag = aiCell + 1
             let aiButton = view.viewWithTag(tag) as! UIButton
-            aiButton.setTitle(playerMark, forState: .Normal)
+            aiButton.setTitle(playerMark, for: UIControlState())
             activePlayer = .nought
             gameBoard[aiCell] = .cross
             
@@ -379,7 +379,7 @@ class ViewController: UIViewController, WCSessionDelegate {
             button.backgroundColor = getNormalButtonColor()
             let location = tag - 1
             if gameBoard[location] == .untouched {
-                button.setTitle("", forState: .Normal)
+                button.setTitle("", for: UIControlState())
             }
         }
     }
@@ -403,15 +403,15 @@ class ViewController: UIViewController, WCSessionDelegate {
             updateTitle()
             updateStatus(.win)
             
-            NSUserDefaults.standardUserDefaults().setObject(noughtWins, forKey: "savedNoughtWins")
-            NSUserDefaults.standardUserDefaults().setObject(crossWins, forKey: "savedCrossWins")
+            UserDefaults.standard.set(noughtWins, forKey: "savedNoughtWins")
+            UserDefaults.standard.set(crossWins, forKey: "savedCrossWins")
             
             var winningButton:UIButton
             var tag:Int
             for i in winningVector {
                 tag = i + 1
                 winningButton = view.viewWithTag(tag) as! UIButton
-                winningButton.backgroundColor = UIColor.yellowColor()
+                winningButton.backgroundColor = UIColor.yellow
             }
             
             var alertTitle = "Congrats!"
@@ -429,13 +429,13 @@ class ViewController: UIViewController, WCSessionDelegate {
         }
     }
     
-    func presentGameOverAlert(title: String) {
-        let alert = UIAlertController(title: title, message: statusLabel.text, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: {
+    func presentGameOverAlert(_ title: String) {
+        let alert = UIAlertController(title: title, message: statusLabel.text, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: {
             (alert: UIAlertAction) in
             winLooseAVPlayer.stop()
         }))
-        alert.addAction(UIAlertAction(title: "Play Again", style: .Default, handler: {
+        alert.addAction(UIAlertAction(title: "Play Again", style: .default, handler: {
             (alert: UIAlertAction!) in
             winLooseAVPlayer.stop()
             self.resetGame()
@@ -444,9 +444,9 @@ class ViewController: UIViewController, WCSessionDelegate {
         // HINT: Yes all this awful code just a moment to wait a bit before showing the alert
         let seconds = 1.0
         let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per seconds
-        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-            self.presentViewController(alert, animated: true, completion: nil)
+        let dispatchTime = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+            self.present(alert, animated: true, completion: nil)
         })
 
     }
@@ -460,7 +460,7 @@ class ViewController: UIViewController, WCSessionDelegate {
                 draws += 1
                 updateTitle()
                 updateStatus(.tie)
-                NSUserDefaults.standardUserDefaults().setObject(draws, forKey: "savedDraws")
+                UserDefaults.standard.set(draws, forKey: "savedDraws")
                 presentGameOverAlert("Oops!")
             }
         }
@@ -483,7 +483,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         for tag in 1...9 {
             button = view.viewWithTag(tag) as! UIButton
             button.backgroundColor = getNormalButtonColor()
-            button.setTitle("", forState: .Normal)
+            button.setTitle("", for: UIControlState())
         }
         
         emojiGame = TicTacToeGame(gameBoard: gameBoard,
@@ -496,7 +496,7 @@ class ViewController: UIViewController, WCSessionDelegate {
         titleLabel.text =  "\(noughtMark) vs \(crossMark)" + "  \(noughtWins):\(crossWins):\(draws)"
     }
     
-    func updateStatus(mode:GameStatus) {
+    func updateStatus(_ mode:GameStatus) {
         var result = ""
         switch mode {
         case .starting:
@@ -551,43 +551,43 @@ class ViewController: UIViewController, WCSessionDelegate {
     /// - draws:Int
     func restoreUserPrefs() {
         
-        if let savedNoughtMark = NSUserDefaults.standardUserDefaults().objectForKey("savedNoughtMark") {
+        if let savedNoughtMark = UserDefaults.standard.object(forKey: "savedNoughtMark") {
             noughtMark = savedNoughtMark as! String
         }
         
-        if let savedCrossMark = NSUserDefaults.standardUserDefaults().objectForKey("savedCrossMark") {
+        if let savedCrossMark = UserDefaults.standard.object(forKey: "savedCrossMark") {
             crossMark = savedCrossMark as! String
         }
         
-        if let savedPlayer1Row = NSUserDefaults.standardUserDefaults().objectForKey("savedPlayer1Row") {
+        if let savedPlayer1Row = UserDefaults.standard.object(forKey: "savedPlayer1Row") {
             player1Row = savedPlayer1Row as! Int
         }
 
-        if let savedPlayer2Row = NSUserDefaults.standardUserDefaults().objectForKey("savedPlayer2Row") {
+        if let savedPlayer2Row = UserDefaults.standard.object(forKey: "savedPlayer2Row") {
             player2Row = savedPlayer2Row as! Int
         }
 
-        if let savedUseAI = NSUserDefaults.standardUserDefaults().objectForKey("savedUseAI") {
+        if let savedUseAI = UserDefaults.standard.object(forKey: "savedUseAI") {
             useAI = savedUseAI as! Bool
         }
         
-        if let savedUseSound = NSUserDefaults.standardUserDefaults().objectForKey("savedUseSound") {
+        if let savedUseSound = UserDefaults.standard.object(forKey: "savedUseSound") {
             useSound = savedUseSound as! Bool
         }
         
-        if let savedMysteryMode = NSUserDefaults.standardUserDefaults().objectForKey("savedMysteryMode") {
+        if let savedMysteryMode = UserDefaults.standard.object(forKey: "savedMysteryMode") {
             mysteryMode = savedMysteryMode as! Bool
         }
         
-        if let savedNoughtWins = NSUserDefaults.standardUserDefaults().objectForKey("savedNoughtWins") {
+        if let savedNoughtWins = UserDefaults.standard.object(forKey: "savedNoughtWins") {
             noughtWins = savedNoughtWins as! Int
         }
         
-        if let savedCrossWins = NSUserDefaults.standardUserDefaults().objectForKey("savedCrossWins") {
+        if let savedCrossWins = UserDefaults.standard.object(forKey: "savedCrossWins") {
             crossWins = savedCrossWins as! Int
         }
         
-        if let savedDraws = NSUserDefaults.standardUserDefaults().objectForKey("savedDraws") {
+        if let savedDraws = UserDefaults.standard.object(forKey: "savedDraws") {
             draws = savedDraws as! Int
         }
         
@@ -596,15 +596,15 @@ class ViewController: UIViewController, WCSessionDelegate {
     }
     
     /// Returns an empty AVAudioPlayer if one can't be created from a file
-    func createPlayer(name name: String, extention: String) -> AVAudioPlayer {
+    func createPlayer(name: String, extention: String) -> AVAudioPlayer {
         
-        guard let path = NSBundle.mainBundle().pathForResource(name, ofType: extention) else {
+        guard let path = Bundle.main.path(forResource: name, ofType: extention) else {
             print("can't find sound files \(name).\(extention) in bundle")
             return AVAudioPlayer()
         }
         
         do {
-            return try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: path))
+            return try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
             
         }
         catch {
@@ -630,11 +630,11 @@ class ViewController: UIViewController, WCSessionDelegate {
     }
     
     
-    override func canBecomeFirstResponder() -> Bool {
+    override var canBecomeFirstResponder : Bool {
         return true
     }
     
-    override func motionBegan(motion: UIEventSubtype, withEvent event: UIEvent?) {
+    override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
         
         // HINT: Pick a random pair of emojis
         let e1 = diceRoll(emojis.count/2)
@@ -644,19 +644,19 @@ class ViewController: UIViewController, WCSessionDelegate {
         player1Row = e1
         player2Row = e2 - emojis.count/2
                 
-        NSUserDefaults.standardUserDefaults().setObject(player1Row, forKey: "savedPlayer1Row")
-        NSUserDefaults.standardUserDefaults().setObject(noughtMark, forKey: "savedNoughtMark")
-        NSUserDefaults.standardUserDefaults().setObject(player2Row, forKey: "savedPlayer2Row")
-        NSUserDefaults.standardUserDefaults().setObject(crossMark, forKey: "savedCrossMark")
+        UserDefaults.standard.set(player1Row, forKey: "savedPlayer1Row")
+        UserDefaults.standard.set(noughtMark, forKey: "savedNoughtMark")
+        UserDefaults.standard.set(player2Row, forKey: "savedPlayer2Row")
+        UserDefaults.standard.set(crossMark, forKey: "savedCrossMark")
         
         // reset score
         noughtWins = 0
         crossWins = 0
         draws = 0
         
-        NSUserDefaults.standardUserDefaults().setObject(noughtWins, forKey: "savedNoughtWins")
-        NSUserDefaults.standardUserDefaults().setObject(crossWins, forKey: "savedCrossWins")
-        NSUserDefaults.standardUserDefaults().setObject(draws, forKey: "savedDraws")
+        UserDefaults.standard.set(noughtWins, forKey: "savedNoughtWins")
+        UserDefaults.standard.set(crossWins, forKey: "savedCrossWins")
+        UserDefaults.standard.set(draws, forKey: "savedDraws")
 
 
         resetGame()
@@ -672,9 +672,9 @@ class ViewController: UIViewController, WCSessionDelegate {
         resetGame()
         
         if WCSession.isSupported() {
-            watchSession = WCSession.defaultSession()
+            watchSession = WCSession.default()
             watchSession.delegate = self
-            watchSession.activateSession()
+            watchSession.activate()
             watchSession.sendMessage(["noughtMark":noughtMark, "crossMark":crossMark], replyHandler: nil, errorHandler: nil)
         }
         

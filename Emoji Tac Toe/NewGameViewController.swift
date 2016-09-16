@@ -40,23 +40,23 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     var watchSession: WCSession!
 
-    @IBAction func mysteryModeAction(sender: AnyObject) {
+    @IBAction func mysteryModeAction(_ sender: AnyObject) {
         mysteryMode = !mysteryMode
-        NSUserDefaults.standardUserDefaults().setObject(mysteryMode, forKey: "savedMysteryMode")
+        UserDefaults.standard.set(mysteryMode, forKey: "savedMysteryMode")
     }
     
-    @IBAction func aiAction(sender: AnyObject) {
+    @IBAction func aiAction(_ sender: AnyObject) {
         useAI = !useAI
-        NSUserDefaults.standardUserDefaults().setObject(useAI, forKey: "savedUseAI")
+        UserDefaults.standard.set(useAI, forKey: "savedUseAI")
         player1Label.text = useAI ? "Player \(noughtMark)" : "Player 1 \(noughtMark)"
         player2Label.text = useAI ? "AI \(crossMark)" : "Player 2 \(crossMark)"
         
         resetScorePrefs()
     }
     
-    @IBAction func soundAction(sender: AnyObject) {
+    @IBAction func soundAction(_ sender: AnyObject) {
         useSound = !useSound
-        NSUserDefaults.standardUserDefaults().setObject(useSound, forKey: "savedUseSound")
+        UserDefaults.standard.set(useSound, forKey: "savedUseSound")
     }
     
     
@@ -75,9 +75,9 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         soundSwitch.setOn(useSound, animated: true)
         
         if WCSession.isSupported() {
-            watchSession = WCSession.defaultSession()
+            watchSession = WCSession.default()
             watchSession.delegate = self
-            watchSession.activateSession()
+            watchSession.activate()
             watchSession.sendMessage(["noughtMark":noughtMark, "crossMark":crossMark], replyHandler: nil, errorHandler: nil)
         }
     }
@@ -87,11 +87,11 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         // Dispose of any resources that can be recreated.
     }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if component == 0 {
             return player1Data.count
         } else {
@@ -99,7 +99,7 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         }
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
             return player1Data[row]
         } else {
@@ -107,19 +107,19 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         }
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
             noughtMark = player1Data[row]
             player1Row = row
-            NSUserDefaults.standardUserDefaults().setObject(player1Row, forKey: "savedPlayer1Row")
-            NSUserDefaults.standardUserDefaults().setObject(noughtMark, forKey: "savedNoughtMark")
+            UserDefaults.standard.set(player1Row, forKey: "savedPlayer1Row")
+            UserDefaults.standard.set(noughtMark, forKey: "savedNoughtMark")
             player1Label.text = useAI ? "Player \(noughtMark)" : "Player 1 \(noughtMark)"
             emojiGame.noughtMark = noughtMark
         } else {
             crossMark = player2Data[row]
             player2Row = row
-            NSUserDefaults.standardUserDefaults().setObject(player2Row, forKey: "savedPlayer2Row")
-            NSUserDefaults.standardUserDefaults().setObject(crossMark, forKey: "savedCrossMark")
+            UserDefaults.standard.set(player2Row, forKey: "savedPlayer2Row")
+            UserDefaults.standard.set(crossMark, forKey: "savedCrossMark")
             player2Label.text = useAI ? "AI \(crossMark)" : "Player 2 \(crossMark)"
             emojiGame.crossMark = crossMark
         }
@@ -134,12 +134,12 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         crossWins = 0
         draws = 0
         
-        NSUserDefaults.standardUserDefaults().setObject(noughtWins, forKey: "savedNoughtWins")
-        NSUserDefaults.standardUserDefaults().setObject(crossWins, forKey: "savedCrossWins")
-        NSUserDefaults.standardUserDefaults().setObject(draws, forKey: "savedDraws")
+        UserDefaults.standard.set(noughtWins, forKey: "savedNoughtWins")
+        UserDefaults.standard.set(crossWins, forKey: "savedCrossWins")
+        UserDefaults.standard.set(draws, forKey: "savedDraws")
     }
     
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         var label = view as! UILabel!
         if label == nil {
             label = UILabel()
@@ -152,14 +152,14 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             data = player2Data[row]
         }
 
-        let title = NSAttributedString(string: data!, attributes: [NSFontAttributeName: UIFont.systemFontOfSize(36.0, weight: UIFontWeightRegular)])
-        label.attributedText = title
-        label.textAlignment = .Center
-        return label
+        let title = NSAttributedString(string: data!, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 36.0, weight: UIFontWeightRegular)])
+        label?.attributedText = title
+        label?.textAlignment = .center
+        return label!
 
     }
     
-    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 36.0
     }
 

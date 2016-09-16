@@ -334,14 +334,17 @@
 					5AD4077E1D4ED69B00FBBA62 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = QZ7SMYA7GB;
+						LastSwiftMigration = 0800;
 					};
 					B904F3AB1D4F715200CA2D75 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = QZ7SMYA7GB;
+						LastSwiftMigration = 0800;
 					};
 					B904F3B71D4F715200CA2D75 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = QZ7SMYA7GB;
+						LastSwiftMigration = 0800;
 					};
 					B92B073C1D60BC1600E20A6D = {
 						CreatedOnToolsVersion = 7.3;
@@ -590,6 +593,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -606,6 +610,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pavley.Emoji-Tac-Toe";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -622,6 +627,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -640,6 +646,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -655,6 +662,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
@@ -671,6 +679,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
