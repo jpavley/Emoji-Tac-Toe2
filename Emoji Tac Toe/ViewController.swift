@@ -96,7 +96,7 @@ class ViewController: UIViewController {
     
     @IBAction func panAction(_ sender: AnyObject) {
         if let pgr = sender as? UIPanGestureRecognizer {
-            if pgr.state == .began {
+            if pgr.state == .ended {
                 if playing {
                     let velocity = pgr.velocity(in: view)
                     if velocity.y > 0 {
