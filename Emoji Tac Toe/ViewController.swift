@@ -38,7 +38,7 @@ var crossAVPlayer = AVAudioPlayer()
 var battleAVPlayer = AVAudioPlayer()
 
 
-class ViewController: UIViewController, WCSessionDelegate {
+class ViewController: UIViewController {
         
     var activePlayer:Player = .untouched
     
@@ -47,9 +47,7 @@ class ViewController: UIViewController, WCSessionDelegate {
     
     var playerMark = ""
     var statusText = ""
-    
-    var watchSession: WCSession!
-    
+        
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     
@@ -671,41 +669,12 @@ class ViewController: UIViewController, WCSessionDelegate {
         
         resetGame()
         
-        if WCSession.isSupported() {
-            watchSession = WCSession.default()
-            watchSession.delegate = self
-            watchSession.activate()
-            watchSession.sendMessage(["noughtMark":noughtMark, "crossMark":crossMark], replyHandler: nil, errorHandler: nil)
-        }
-        
         loadSoundsAndMusic()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    // Added by Xcode 8
-    
-    /** Called when all delegate callbacks for the previously selected watch has occurred. The session can be re-activated for the now selected watch using activateSession. */
-    @available(iOS 9.3, *)
-    public func sessionDidDeactivate(_ session: WCSession) {
-        // print(session)
-    }
-    
-    /** Called when the session can no longer be used to modify or add any new transfers and, all interactive messages will be cancelled, but delegate callbacks for background transfers can still occur. This will happen when the selected watch is being changed. */
-    @available(iOS 9.3, *)
-    public func sessionDidBecomeInactive(_ session: WCSession) {
-        // print(session)
-    }
-    
-    
-    /** Called when the session has completed activation. If session state is WCSessionActivationStateNotActivated there will be an error with more details. */
-    
-    @available(iOS 9.3, *)
-    public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        // print(activationState)
     }
     
 }

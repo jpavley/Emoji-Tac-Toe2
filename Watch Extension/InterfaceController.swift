@@ -11,10 +11,9 @@ import Foundation
 import WatchConnectivity
 
 
-class InterfaceController: WKInterfaceController, WCSessionDelegate {
+class InterfaceController: WKInterfaceController {
     
     var activePlayer:Player = .nought
-    var watchSession:WCSession!
     var aiIsPlaying = false
 
 
@@ -229,12 +228,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         
-        if WCSession.isSupported() {
-            watchSession = WCSession.default()
-            watchSession.delegate = self
-            watchSession.activate()
-        }
-
     }
 
     override func didDeactivate() {
@@ -256,12 +249,4 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
 
     }
     
-    // Added by Xcode 8
-    
-    /** Called when the session has completed activation. If session state is WCSessionActivationStateNotActivated there will be an error with more details. */
-    @available(watchOS 2.2, *)
-    public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        // print(error)
-    }
-
 }
