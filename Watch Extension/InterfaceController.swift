@@ -13,13 +13,6 @@ import WatchConnectivity
 
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
-    /** Called when the session has completed activation. If session state is WCSessionActivationStateNotActivated there will be an error with more details. */
-    @available(watchOS 2.2, *)
-    public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        print(error)
-    }
-
-        
     var activePlayer:Player = .nought
     var watchSession:WCSession!
     var aiIsPlaying = false
@@ -261,6 +254,14 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             }
         }
 
+    }
+    
+    // Added by Xcode 8
+    
+    /** Called when the session has completed activation. If session state is WCSessionActivationStateNotActivated there will be an error with more details. */
+    @available(watchOS 2.2, *)
+    public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        // print(error)
     }
 
 }
