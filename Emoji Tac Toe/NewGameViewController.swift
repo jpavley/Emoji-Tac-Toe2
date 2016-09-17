@@ -21,22 +21,9 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var mysteryModeSwitch: UISwitch!
     @IBOutlet weak var soundSwitch: UISwitch!
     
-    let player1Data = ["⭕️","🍎","⚾️","😀","😺","🤖",
-                       "💤","👍","👁","👶","👩","👳",
-                       "💪","👤","👸","🚶","😱","🤘",
-                       "👠","🎩","👜","💍","👓","👚",
-                       "🐶","🐭","🐰","🐼","🐯","🐮",
-                       "🐔","🐦","🐥","🐗","🦄","🐛",
-                       "🐆","🐃","🐄","🐫","🐐","🐑",
-                       "🐖","🐁","🦃","🐕","🐈","🐿"]
-    let player2Data = ["❌","🍊","🏈","😩","😈","👻",
-                       "💩","👎","👄","👦","👨","🎅",
-                       "🙏","👥","👰","🏃","😡","🖖",
-                       "👞","🎓","💼","👑","🕶","👔",
-                       "🐱","🐹","🐻","🐨","🦁","🐷",
-                       "🐧","🐤","🐣","🐴","🐝","🐌",
-                       "🐅","🐂","🐪","🐘","🐏","🐎",
-                       "🐀","🐓","🕊","🐩","🐇","🐉"]
+    
+    let player1Data = emojis[0..<emojis.count/2]
+    let player2Data = emojis[emojis.count/2..<emojis.count]
     
     @IBAction func mysteryModeAction(_ sender: AnyObject) {
         mysteryMode = !mysteryMode
@@ -108,7 +95,7 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             player1Label.text = useAI ? "Player \(noughtMark)" : "Player 1 \(noughtMark)"
             emojiGame.noughtMark = noughtMark
         } else {
-            crossMark = player2Data[row]
+            crossMark = player2Data[row + emojis.count/2]
             player2Row = row
             UserDefaults.standard.set(player2Row, forKey: "savedPlayer2Row")
             UserDefaults.standard.set(crossMark, forKey: "savedCrossMark")
@@ -138,7 +125,7 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         if component == 0 {
             data = player1Data[row]
         } else {
-            data = player2Data[row]
+            data = player2Data[row + emojis.count/2]
         }
 
         let title = NSAttributedString(string: data!, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 36.0, weight: UIFontWeightRegular)])

@@ -18,7 +18,7 @@ import AVFoundation
 var noughtMark = "⭕️"
 var crossMark = "❌"
 var player1Row = 0 // Picker Index number
-var player2Row = 0 // Picker Index number
+var player2Row = 0 + emojis.count/2 // Picker Index number
 var useAI = true
 var useSound = true
 var mysteryMode = false

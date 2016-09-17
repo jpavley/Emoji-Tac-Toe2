@@ -235,18 +235,18 @@ class InterfaceController: WKInterfaceController {
         super.didDeactivate()
     }
     
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        emojiGame.noughtMark = message["noughtMark"] as! String
-        emojiGame.crossMark = message["crossMark"] as! String
-        
-        titleLabel.setText("\(emojiGame.noughtMark) vs \(emojiGame.crossMark)")
-        
-        for i in 0..<emojiGame.gameBoard.count {
-            if let button = buttonForIndex(i) {
-                button.setTitle(calcTitleForButton(i))
-            }
-        }
-
-    }
+//    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+//        emojiGame.noughtMark = message["noughtMark"] as! String
+//        emojiGame.crossMark = message["crossMark"] as! String
+//        
+//        titleLabel.setText("\(emojiGame.noughtMark) vs \(emojiGame.crossMark)")
+//        
+//        for i in 0..<emojiGame.gameBoard.count {
+//            if let button = buttonForIndex(i) {
+//                button.setTitle(calcTitleForButton(i))
+//            }
+//        }
+//
+//    }
     
 }
