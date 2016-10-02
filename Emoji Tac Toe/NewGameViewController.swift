@@ -21,9 +21,9 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var mysteryModeSwitch: UISwitch!
     @IBOutlet weak var soundSwitch: UISwitch!
     
-    
-    let player1Data = emojis[0..<emojis.count/2]
-    let player2Data = emojis[emojis.count/2..<emojis.count]
+    // HINT: Make all emojis available to both players
+    let player1Data = emojis[0..<emojis.count]
+    let player2Data = emojis[0..<emojis.count]
     
     @IBAction func mysteryModeAction(_ sender: AnyObject) {
         mysteryMode = !mysteryMode
@@ -86,17 +86,40 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         }
     }
     
+    // HINT: Make all emojis available to both players
+    func ensureRowsAreUnique(component: Int, row: Int) -> Int {
+        var possibleRow = row
+        var comparisonRow = player2Row
+
+        if component == 1 {
+            comparisonRow = player1Row
+        }
+        
+        if possibleRow == comparisonRow {
+            if possibleRow == emojis.count - 1 {
+                possibleRow = comparisonRow - 1
+            } else {
+                possibleRow = comparisonRow + 1
+            }
+            player1Picker.selectRow(possibleRow, inComponent: component, animated: true)
+        }
+        return possibleRow
+    }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        // HINT: Make all emojis available to both players
+        let uniqueRow = ensureRowsAreUnique(component: component, row: row)
         if component == 0 {
-            noughtMark = player1Data[row]
-            player1Row = row
+            player1Row = uniqueRow
+            noughtMark = player1Data[uniqueRow]
             UserDefaults.standard.set(player1Row, forKey: "savedPlayer1Row")
             UserDefaults.standard.set(noughtMark, forKey: "savedNoughtMark")
             player1Label.text = useAI ? "Player \(noughtMark)" : "Player 1 \(noughtMark)"
             emojiGame.noughtMark = noughtMark
         } else {
-            crossMark = player2Data[row + emojis.count/2]
-            player2Row = row
+            // HINT: Make all emojis available to both players
+            player2Row = uniqueRow
+            crossMark = player2Data[uniqueRow]
             UserDefaults.standard.set(player2Row, forKey: "savedPlayer2Row")
             UserDefaults.standard.set(crossMark, forKey: "savedCrossMark")
             player2Label.text = useAI ? "AI \(crossMark)" : "Player 2 \(crossMark)"
@@ -125,7 +148,8 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         if component == 0 {
             data = player1Data[row]
         } else {
-            data = player2Data[row + emojis.count/2]
+            // HINT: Make all emojis available to both players
+            data = player2Data[row]
         }
 
         let title = NSAttributedString(string: data!, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 36.0, weight: UIFontWeightRegular)])

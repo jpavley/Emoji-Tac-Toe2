@@ -15,10 +15,13 @@ import AVFoundation
 // HINT: User prefs
 // TODO: Save as user prefs
 
-var noughtMark = "⭕️"
-var crossMark = "❌"
-var player1Row = 0 // Picker Index number
-var player2Row = 0 + emojis.count/2 // Picker Index number
+var noughtMark = emojis.first!
+var crossMark = emojis.last!
+
+// HINT: Make all emojis available to both players
+var player1Row = 0
+var player2Row = 1
+
 var useAI = true
 var useSound = true
 var mysteryMode = false
