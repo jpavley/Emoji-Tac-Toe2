@@ -15,8 +15,8 @@ import AVFoundation
 // HINT: User prefs
 // TODO: Save as user prefs
 
-var noughtMark = emojis.first!
-var crossMark = emojis.last!
+var noughtMark = emojis[0]
+var crossMark = emojis[1]
 
 // HINT: Make all emojis available to both players
 var player1Row = 0
@@ -638,8 +638,23 @@ class ViewController: UIViewController {
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
         
         // HINT: Pick a random pair of emojis
-        let e1 = diceRoll(emojis.count/2)
-        let e2 = diceRoll(emojis.count/2) + emojis.count/2
+        // HINT: Make all emojis available to both players
+
+        let e1 = diceRoll(emojis.count)
+        var e2 = diceRoll(emojis.count)
+        
+        //print("before e1 \(e1), e2 \(e2)")
+        
+        if e1 == e2 {
+            if e2 == emojis.count - 1 {
+                e2 = e1 - 1
+            } else {
+                e2 = e1 + 1
+            }
+            //print("after e1 \(e1), e2 \(e2)")
+        }
+        
+
         noughtMark = emojis[e1]
         crossMark = emojis[e2]
         player1Row = e1
