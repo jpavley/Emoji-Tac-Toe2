@@ -642,23 +642,20 @@ class ViewController: UIViewController {
 
         let e1 = diceRoll(emojis.count)
         var e2 = diceRoll(emojis.count)
-        
-        //print("before e1 \(e1), e2 \(e2)")
-        
+                
         if e1 == e2 {
             if e2 == emojis.count - 1 {
                 e2 = e1 - 1
             } else {
                 e2 = e1 + 1
             }
-            //print("after e1 \(e1), e2 \(e2)")
         }
         
 
         noughtMark = emojis[e1]
         crossMark = emojis[e2]
         player1Row = e1
-        player2Row = e2 - emojis.count/2
+        player2Row = e2
                 
         UserDefaults.standard.set(player1Row, forKey: "savedPlayer1Row")
         UserDefaults.standard.set(noughtMark, forKey: "savedNoughtMark")
