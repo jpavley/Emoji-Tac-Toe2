@@ -4,7 +4,7 @@ Copyright (c) 2016 Epic Loot. All rights reserved.
 
 Designed and coded by John Pavley.
 
-Version 1
+Version 1 (Released)
 
 - Current SDKs
   - iOS Universal App
@@ -17,9 +17,15 @@ Version 1
   - 3D Touch
   - Sounds
 
-Version 2 (Planned)
+Version 2 (In Progress)
+
 - Post WWDC SDKs
   - iOS 10
+  - All Emojis
   - Watch OS 3.0
+
+Version 3 (Planned)
+
+  - MessageKit
   - New tvOS
   - macOS
