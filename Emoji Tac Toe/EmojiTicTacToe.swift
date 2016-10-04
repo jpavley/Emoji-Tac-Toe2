@@ -94,15 +94,39 @@ func seachForWinForPlayer(_ board:[Player], player:Player) -> Bool {
     return false
 }
 
-func checkForUntouchedCells(_ gameBoard:[Player]) -> Bool {
+func checkForWayToWin(_ gameBoard:[Player]) -> Bool {
     
-    var result = false
-    for cell in gameBoard {
+    return true // is broken!
+    
+    // TODO: make func calcOpenCells(gameBoard:[Player])
+    var openCells = [Int]()
+    for (index, cell) in gameBoard.enumerated() {
         if cell == .untouched {
-            result = true
+            openCells.append(index)
         }
     }
-    return result
+    
+    // if there is one open cell
+    if openCells.count == 1 {
+        if !seachForWinForPlayer(gameBoard, player: .nought) {
+            // DBUG: when there is away for the human player to win search for win for player doesn't find it!
+            // no way for human player to win
+            return false
+        }
+    }
+    
+    return true
+
+}
+
+func checkForUntouchedCells(_ gameBoard:[Player]) -> Bool {
+    
+    for cell in gameBoard {
+        if cell == .untouched {
+            return true
+        }
+    }
+    return false
 
 }
 

@@ -370,6 +370,18 @@ class ViewController: UIViewController {
             checkForWinner()
             checkForDraw()
             aiIsPlaying = false
+            
+            playing = checkForWayToWin(gameBoard)
+            // TODO: make func GameOverDraw()
+            if !playing {
+                // HINT: Game over!
+                draws += 1
+                updateTitle()
+                updateStatus(.tie)
+                UserDefaults.standard.set(draws, forKey: "savedDraws")
+                presentGameOverAlert("Oops!")
+            }
+
         }
     }
     
