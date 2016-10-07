@@ -372,17 +372,20 @@ class ViewController: UIViewController {
             aiIsPlaying = false
             
             playing = checkForWayToWin(gameBoard)
-            // TODO: make func GameOverDraw()
             if !playing {
                 // HINT: Game over!
-                draws += 1
-                updateTitle()
-                updateStatus(.tie)
-                UserDefaults.standard.set(draws, forKey: "savedDraws")
-                presentGameOverAlert("Oops!")
+                gameOverDraw()
             }
 
         }
+    }
+    
+    func gameOverDraw() {
+        draws += 1
+        updateTitle()
+        updateStatus(.tie)
+        UserDefaults.standard.set(draws, forKey: "savedDraws")
+        presentGameOverAlert("Oops!")
     }
     
     func neutralizeGameboard() {
@@ -470,11 +473,7 @@ class ViewController: UIViewController {
             playing = checkForUntouchedCells(gameBoard)
             if !playing {
                 // HINT: Game over!
-                draws += 1
-                updateTitle()
-                updateStatus(.tie)
-                UserDefaults.standard.set(draws, forKey: "savedDraws")
-                presentGameOverAlert("Oops!")
+                gameOverDraw()
             }
         }
     }

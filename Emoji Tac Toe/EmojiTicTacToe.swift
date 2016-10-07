@@ -87,36 +87,41 @@ func seachForWin(_ gameBoard:[Player]) -> [Int]? {
 func seachForWinForPlayer(_ board:[Player], player:Player) -> Bool {
     
     for vector in winningVectors {
-        if board[vector[0]] == player && board[vector[0]] != .untouched && board[vector[0]] == board[vector[1]] && board[vector[0]] == board[vector[2]] {
-            return true
+        if board[vector[0]] == player {
+            if board[vector[1]] == player {
+                if board[vector[2]] == player {
+                    return true
+                }
+            }
         }
     }
     return false
 }
 
-func checkForWayToWin(_ gameBoard:[Player]) -> Bool {
-    
-    return true // is broken!
-    
-    // TODO: make func calcOpenCells(gameBoard:[Player])
+func calcOpenCells(gameBoard:[Player]) -> [Int] {
     var openCells = [Int]()
     for (index, cell) in gameBoard.enumerated() {
         if cell == .untouched {
             openCells.append(index)
         }
     }
+    return openCells
+}
+
+func checkForWayToWin(_ gameBoard:[Player]) -> Bool {
     
+    let openCells = calcOpenCells(gameBoard: gameBoard)
     // if there is one open cell
     if openCells.count == 1 {
-        if !seachForWinForPlayer(gameBoard, player: .nought) {
-            // DBUG: when there is away for the human player to win search for win for player doesn't find it!
+        print(openCells)
+        let isWayToWin = seachForWinForPlayer(gameBoard, player: .nought)
+        if !isWayToWin {
             // no way for human player to win
             return false
         }
     }
     
     return true
-
 }
 
 func checkForUntouchedCells(_ gameBoard:[Player]) -> Bool {
@@ -135,13 +140,7 @@ func aiChoose(_ gameBoard:[Player]) -> Int? {
     
     var result:Int?
     
-    var openCells = [Int]()
-    for (index, cell) in gameBoard.enumerated() {
-        if cell == .untouched {
-            openCells.append(index)
-        }
-    }
-    
+    var openCells = calcOpenCells(gameBoard: gameBoard)
     var occupiedCells = [Int]()
     for (index, cell) in gameBoard.enumerated() {
         if cell == .nought {
