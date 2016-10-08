@@ -276,6 +276,26 @@ func diceRoll(_ chances: Int) -> Int {
     return Int(arc4random_uniform(UInt32(chances)))
 }
 
+func loadEmojisIntoArray(from fileName: String) -> [String] {
+    var result = [String]()
+    
+    
+    if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+        
+        let path = dir.appendingPathComponent(fileName)
+        
+        do {
+            let text2 = try String(contentsOf: path, encoding: String.Encoding.utf8)
+        }
+        catch {
+            print("emoji file is mssing")
+        }
+    }
+
+    
+    return result
+}
+
 
 let freshGameBoard:[Player] = [.untouched, .untouched, .untouched,
                                .untouched, .untouched, .untouched,
