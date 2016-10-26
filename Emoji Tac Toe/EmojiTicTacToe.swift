@@ -52,24 +52,26 @@ struct TicTacToeGame {
     var gameOver:Bool
 }
 
-func transformGameIntoText(_ game: TicTacToeGame) -> String {
+func transformGameIntoText(gameboard: [Player], noughtMark: String, crossMark: String, untouchedMark: String) -> String {
     var result = ""
     
-    for (index, cell) in game.gameBoard.enumerated() {
+    for (index, cell) in gameboard.enumerated() {
         
         switch cell {
         case .untouched:
-            result += "⬜️ "
+            result += untouchedMark + " "
         case .nought:
-            result += game.noughtMark + " "
+            result += noughtMark + " "
         case .cross:
-            result += game.crossMark + " "
+            result += crossMark + " "
         }
         
         if index == 2 || index == 5 || index == 8 {
             result += "\n"
         }
     }
+    
+    print(result)
     
     return result
 }
@@ -110,17 +112,18 @@ func calcOpenCells(gameBoard:[Player]) -> [Int] {
 
 func checkForWayToWin(_ gameBoard:[Player]) -> Bool {
     
+    // DBUG - returns false when there is a way to win!
     let openCells = calcOpenCells(gameBoard: gameBoard)
     // if there is one open cell
     if openCells.count == 1 {
-        print(openCells)
-        let isWayToWin = seachForWinForPlayer(gameBoard, player: .nought)
-        if !isWayToWin {
-            // no way for human player to win
-            return false
-        }
+        
+        let messageToShare = transformGameIntoText(gameboard: gameBoard, noughtMark: "o", crossMark: "x", untouchedMark: "_")
+        print("")
+        print(messageToShare)
+        print("openCells \(openCells)")
+        
+        return seachForWinForPlayer(gameBoard, player: .nought)
     }
-    
     return true
 }
 

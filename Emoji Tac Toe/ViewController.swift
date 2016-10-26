@@ -56,12 +56,7 @@ class ViewController: UIViewController {
     
     @IBAction func share(_ sender: AnyObject) {
         
-        let game = TicTacToeGame(gameBoard: gameBoard,
-                                 noughtMark: noughtMark,
-                                 crossMark: crossMark,
-                                 gameOver: false)
-        
-        let messageToShare = transformGameIntoText(game)
+        let messageToShare = transformGameIntoText(gameboard: gameBoard, noughtMark: noughtMark, crossMark: crossMark, untouchedMark: "⬜️")
         let activityViewController = UIActivityViewController(activityItems: [messageToShare], applicationActivities: nil)
         
         // BFIX: Crash on iPad: "should have a non-nil sourceView or barButtonItem set before the presentation occurs"
