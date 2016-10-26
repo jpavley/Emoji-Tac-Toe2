@@ -261,7 +261,6 @@ U+1F439 ; 6.0 # 🐹 hamster face
 U+1F430 ; 6.0 # 🐰 rabbit face
 U+1F407 ; 6.0 # 🐇 rabbit
 U+1F43F ; 7.0 # 🐿 chipmunk
-U+1F987 ; 9.0 # 🦇 bat
 U+1F43B ; 6.0 # 🐻 bear face
 U+1F428 ; 6.0 # 🐨 koala
 U+1F43C ; 6.0 # 🐼 panda face
@@ -493,7 +492,6 @@ U+1F6A6 ; 6.0 # 🚦 vertical traffic light
 U+1F6A7 ; 6.0 # 🚧 construction
 U+2693 ; 4.1 # ⚓ anchor
 U+26F5 ; 5.2 # ⛵ sailboat
-U+1F6F6 ; 9.0 # 🛶 canoe
 U+1F6A4 ; 6.0 # 🚤 speedboat
 U+1F6F3 ; 7.0 # 🛳 passenger ship
 U+26F4 ; 5.2 # ⛴ ferry
@@ -663,7 +661,6 @@ U+1F3B8 ; 6.0 # 🎸 guitar
 U+1F3B9 ; 6.0 # 🎹 musical keyboard
 U+1F3BA ; 6.0 # 🎺 trumpet
 U+1F3BB ; 6.0 # 🎻 violin
-U+1F941 ; 9.0 # 🥁 drum
 U+1F4F1 ; 6.0 # 📱 mobile phone
 U+1F4F2 ; 6.0 # 📲 mobile phone with arrow
 U+260E ; 1.1 # ☎ telephone
