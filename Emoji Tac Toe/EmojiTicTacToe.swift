@@ -70,9 +70,7 @@ func transformGameIntoText(gameboard: [Player], noughtMark: String, crossMark: S
             result += "\n"
         }
     }
-    
-    print(result)
-    
+        
     return result
 }
 
@@ -116,13 +114,12 @@ func checkForWayToWin(_ gameBoard:[Player]) -> Bool {
     let openCells = calcOpenCells(gameBoard: gameBoard)
     // if there is one open cell
     if openCells.count == 1 {
-        
-        let messageToShare = transformGameIntoText(gameboard: gameBoard, noughtMark: "o", crossMark: "x", untouchedMark: "_")
-        print("")
-        print(messageToShare)
-        print("openCells \(openCells)")
-        
-        return seachForWinForPlayer(gameBoard, player: .nought)
+        // make a modifiable copy of the gameBoard
+        var testGameboard = gameBoard
+        // adjust the gameBoard so that the last remaining open cell is a nought
+        testGameboard[openCells[0]] = .nought
+        // return the result of searching for a winning vector with the test gameBoard
+        return seachForWinForPlayer(testGameboard, player: .nought)
     }
     return true
 }
