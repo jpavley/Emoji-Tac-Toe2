@@ -1182,4 +1182,5 @@
 🇾🇪 Yemen
 🇾🇹 Mayotte
 🇿🇦 South Africa
-🇿🇲 Zambia; 6.0 # 🇿🇼 Zimbabwe
+🇿🇲 Zambia
+🇿🇼 Zimbabwe

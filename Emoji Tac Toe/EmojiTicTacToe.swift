@@ -276,23 +276,27 @@ func diceRoll(_ chances: Int) -> Int {
     return Int(arc4random_uniform(UInt32(chances)))
 }
 
-//func loadEmojisIntoArray(from fileName: String) -> [String] {
-//    var result = [String]()
-//    
-//    
-//    if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-//        
-//        let path = dir.appendingPathComponent(fileName)
-//        
-//        do {
-//            let text2 = try String(contentsOf: path, encoding: String.Encoding.utf8)
-//        }
-//        catch {
-//            print("emoji file is mssing")
-//        }
-//    }
-//    return result
-//}
+func loadEmojisIntoArray(from fileName: String, fileType: String) -> [String]? {
+    
+    let path:String = Bundle.main.path(forResource: fileName, ofType: fileType)!
+    if let text = try? String(contentsOfFile: path, encoding: String.Encoding.utf8) {
+        var result = [String]()
+        let lines = text.components(separatedBy: "\n")
+        for line in lines {
+            if line != "" {
+                let characterLocationIndex = line.index(line.startIndex, offsetBy: 0)
+                let myCharacter = line[characterLocationIndex]
+                result.append(String(myCharacter))
+            }
+        }
+        return result
+        
+    } else {
+        print("unable to load \(fileName),\(fileType)")
+    }
+    
+    return nil
+}
 
 
 let freshGameBoard:[Player] = [.untouched, .untouched, .untouched,

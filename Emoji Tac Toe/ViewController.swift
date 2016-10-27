@@ -686,6 +686,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        if let emojisFromFile = loadEmojisIntoArray(from: "emoji-ordering", fileType: "txt") {
+            print(emojisFromFile)
+
+        }
+        
         restoreUserPrefs()
         
         resetGame()
