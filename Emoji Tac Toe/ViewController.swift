@@ -688,6 +688,7 @@ class ViewController: UIViewController {
         
         if let emojisFromFile = loadEmojisIntoArray(from: "emoji-ordering", fileType: "txt") {
             print(emojisFromFile)
+            emojis = emojisFromFile
 
         }
         

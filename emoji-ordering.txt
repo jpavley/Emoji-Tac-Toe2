@@ -349,7 +349,6 @@
 🌯 burrito
 🍳 cooking
 🍲 pot of food
-🥗 green salad
 🍿 popcorn
 🍱 bento box
 🍘 rice cracker
