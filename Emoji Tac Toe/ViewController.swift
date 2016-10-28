@@ -655,18 +655,17 @@ class ViewController: UIViewController {
             } else {
                 e2 = e1 + 1
             }
-            
-            noughtMark = emojis[e1]
-            crossMark = emojis[e2]
-            player1Row = e1
-            player2Row = e2
-            
-            UserDefaults.standard.set(player1Row, forKey: "savedPlayer1Row")
-            UserDefaults.standard.set(noughtMark, forKey: "savedNoughtMark")
-            UserDefaults.standard.set(player2Row, forKey: "savedPlayer2Row")
-            UserDefaults.standard.set(crossMark, forKey: "savedCrossMark")
-
         }
+        
+        noughtMark = emojis[e1]
+        crossMark = emojis[e2]
+        player1Row = e1
+        player2Row = e2
+        
+        UserDefaults.standard.set(player1Row, forKey: "savedPlayer1Row")
+        UserDefaults.standard.set(noughtMark, forKey: "savedNoughtMark")
+        UserDefaults.standard.set(player2Row, forKey: "savedPlayer2Row")
+        UserDefaults.standard.set(crossMark, forKey: "savedCrossMark")
         
         // reset score
         noughtWins = 0
