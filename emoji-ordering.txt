@@ -42,8 +42,6 @@
 🙃 upside-down face
 🤑 money-mouth face
 😲 astonished face
-☹ frowning face
-🙁 slightly frowning face
 😖 confounded face
 😞 disappointed face
 😟 worried face
@@ -565,7 +563,6 @@
 ⭐ white medium star
 🌟 glowing star
 🌠 shooting star
- cloud
 ⛅ sun behind cloud
 ⛈ cloud with lightning and rain
 🌤 sun behind small cloud
@@ -580,11 +577,9 @@
 🌀 cyclone
 🌈 rainbow
 🌂 closed umbrella
- umbrella
 ☔ umbrella with rain drops
 ⛱ umbrella on ground
 ⚡ high voltage
- snowman
 ⛄ snowman without snow
 ☄ comet
 🔥 fire
@@ -613,7 +608,6 @@
 🏆 trophy
 🏅 sports medal
 ⚽ soccer ball
- baseball
 🏀 basketball
 🏐 volleyball
 🏈 american football
@@ -662,7 +656,6 @@
 🎻 violin
 📱 mobile phone
 📲 mobile phone with arrow
- telephone
 📞 telephone receiver
 📟 pager
 📠 fax machine

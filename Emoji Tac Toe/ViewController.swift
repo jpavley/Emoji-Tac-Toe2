@@ -15,8 +15,8 @@ import AVFoundation
 // HINT: User prefs
 // TODO: Save as user prefs
 
-var noughtMark = emojis[0]
-var crossMark = emojis[1]
+var noughtMark = "⭕️"
+var crossMark = "❌"
 
 // HINT: Make all emojis available to both players
 var player1Row = 0
@@ -645,28 +645,30 @@ class ViewController: UIViewController {
         
         // HINT: Pick a random pair of emojis
         // HINT: Make all emojis available to both players
-
-        let e1 = diceRoll(emojis.count)
-        var e2 = diceRoll(emojis.count)
-                
-        if e1 == e2 {
-            if e2 == emojis.count - 1 {
-                e2 = e1 - 1
-            } else {
-                e2 = e1 + 1
-            }
-        }
         
+        if let emojiList = emojis {
+            let e1 = diceRoll(emojiList.count)
+            var e2 = diceRoll(emojiList.count)
+            
+            if e1 == e2 {
+                if e2 == emojiList.count - 1 {
+                    e2 = e1 - 1
+                } else {
+                    e2 = e1 + 1
+                }
+            }
+            
+            noughtMark = emojiList[e1]
+            crossMark = emojiList[e2]
+            player1Row = e1
+            player2Row = e2
+            
+            UserDefaults.standard.set(player1Row, forKey: "savedPlayer1Row")
+            UserDefaults.standard.set(noughtMark, forKey: "savedNoughtMark")
+            UserDefaults.standard.set(player2Row, forKey: "savedPlayer2Row")
+            UserDefaults.standard.set(crossMark, forKey: "savedCrossMark")
 
-        noughtMark = emojis[e1]
-        crossMark = emojis[e2]
-        player1Row = e1
-        player2Row = e2
-                
-        UserDefaults.standard.set(player1Row, forKey: "savedPlayer1Row")
-        UserDefaults.standard.set(noughtMark, forKey: "savedNoughtMark")
-        UserDefaults.standard.set(player2Row, forKey: "savedPlayer2Row")
-        UserDefaults.standard.set(crossMark, forKey: "savedCrossMark")
+        }
         
         // reset score
         noughtWins = 0
