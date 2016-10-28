@@ -50,10 +50,8 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
 
         // Do any additional setup after loading the view.
         
-        if let emojiList = emojis {
-            player1Data = emojiList
-            player2Data = emojiList
-        }
+        player1Data = emojis
+        player2Data = emojis
         
         player1Label.text = useAI ? "Player \(noughtMark)" : "Player 1 \(noughtMark)"
         player1Picker.selectRow(player1Row, inComponent: 0, animated: true)
@@ -101,15 +99,13 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             comparisonRow = player1Row
         }
         
-        if let emojiList = emojis {
-            if possibleRow == comparisonRow {
-                if possibleRow == emojiList.count - 1 {
-                    possibleRow = comparisonRow - 1
-                } else {
-                    possibleRow = comparisonRow + 1
-                }
-                player1Picker.selectRow(possibleRow, inComponent: component, animated: true)
+        if possibleRow == comparisonRow {
+            if possibleRow == emojis.count - 1 {
+                possibleRow = comparisonRow - 1
+            } else {
+                possibleRow = comparisonRow + 1
             }
+            player1Picker.selectRow(possibleRow, inComponent: component, animated: true)
         }
         
         

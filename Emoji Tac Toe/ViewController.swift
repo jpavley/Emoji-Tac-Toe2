@@ -646,20 +646,18 @@ class ViewController: UIViewController {
         // HINT: Pick a random pair of emojis
         // HINT: Make all emojis available to both players
         
-        if let emojiList = emojis {
-            let e1 = diceRoll(emojiList.count)
-            var e2 = diceRoll(emojiList.count)
-            
-            if e1 == e2 {
-                if e2 == emojiList.count - 1 {
-                    e2 = e1 - 1
-                } else {
-                    e2 = e1 + 1
-                }
+        let e1 = diceRoll(emojis.count)
+        var e2 = diceRoll(emojis.count)
+        
+        if e1 == e2 {
+            if e2 == emojis.count - 1 {
+                e2 = e1 - 1
+            } else {
+                e2 = e1 + 1
             }
             
-            noughtMark = emojiList[e1]
-            crossMark = emojiList[e2]
+            noughtMark = emojis[e1]
+            crossMark = emojis[e2]
             player1Row = e1
             player2Row = e2
             
@@ -688,11 +686,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        if let emojisFromFile = loadEmojisIntoArray(from: "emoji-ordering", fileType: "txt") {
-            print(emojisFromFile)
-            emojis = emojisFromFile
-
-        }
+//        if emojis == nil {
+//            if let emojisFromFile = loadEmojisIntoArray(from: "emoji-ordering", fileType: "txt") {
+//                print(emojisFromFile)
+//                emojis = emojisFromFile
+//            }
+//            
+//        }
         
         restoreUserPrefs()
         

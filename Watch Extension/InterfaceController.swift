@@ -149,13 +149,8 @@ class InterfaceController: WKInterfaceController {
         
         // start with random emojis
         
-        if let emojiList = emojis {
-            emojiGame.noughtMark = emojiList[diceRoll(emojiList.count/2)]
-            emojiGame.crossMark = emojiList[diceRoll(emojiList.count/2) + emojiList.count/2]
-        } else {
-            emojiGame.noughtMark = "⭕️"
-            emojiGame.crossMark = "❌"
-        }
+        emojiGame.noughtMark = emojis[diceRoll(emojis.count/2)]
+        emojiGame.crossMark = emojis[diceRoll(emojis.count/2) + emojis.count/2]
         
         
         emojiGame.gameBoard = freshGameBoard
