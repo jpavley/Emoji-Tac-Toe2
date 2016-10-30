@@ -337,15 +337,23 @@
                                 <rect key="frame" x="27.5" y="123" width="320" height="421"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="OT5-XN-yGU">
-                                        <rect key="frame" x="81" y="0.0" width="158" height="24"/>
+                                        <rect key="frame" x="66" y="0.0" width="188" height="24"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWw-oi-KE4">
-                                                <rect key="frame" x="0.0" y="0.0" width="68" height="24"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="83" height="24"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
                                                 <state key="normal" title="Player ⭕️"/>
+                                                <connections>
+                                                    <action selector="player1Action:" destination="2J5-AT-VT3" eventType="touchUpInside" id="BTU-LW-Smd"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TzE-xu-nNr">
-                                                <rect key="frame" x="90" y="0.0" width="68" height="24"/>
+                                                <rect key="frame" x="105" y="0.0" width="83" height="24"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
                                                 <state key="normal" title="Player ❌"/>
+                                                <connections>
+                                                    <action selector="player2Action:" destination="2J5-AT-VT3" eventType="touchUpInside" id="la0-N1-f5t"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>

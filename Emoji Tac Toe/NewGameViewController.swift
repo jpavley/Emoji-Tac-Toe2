@@ -48,6 +48,58 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         UserDefaults.standard.set(useSound, forKey: "savedUseSound")
     }
     
+    @IBAction func player1Action(_ sender: Any) {
+        jumpPicker(component: 0)
+    }
+    
+    @IBAction func player2Action(_ sender: Any) {
+        jumpPicker(component: 1)
+    }
+    
+    func jumpPicker(component: Int) {
+        let currentRow = (component == 0) ? player1Row : player2Row
+        var jumpRow = 0
+        
+        // emojiSections = [0, 171, 389, 654, 844] defined in EmojiTicTacToe.swift
+        
+        if currentRow >= emojiSections[4] {
+            jumpRow = emojiSections[0]
+        } else if currentRow >= emojiSections[3] {
+            jumpRow = emojiSections[4]
+        } else if currentRow >= emojiSections[2] {
+            jumpRow = emojiSections[3]
+        } else if currentRow >= emojiSections[1] {
+            jumpRow = emojiSections[2]
+        } else if currentRow >= emojiSections[0] {
+            jumpRow = emojiSections[1]
+        }
+        
+        // TODO: This is wet code! Dry it by creating a function for it!
+        let uniqueRow = ensureRowsAreUnique(component: component, row: jumpRow)
+        if component == 0 {
+            player1Row = uniqueRow
+            noughtMark = player1Data[uniqueRow]
+            UserDefaults.standard.set(player1Row, forKey: "savedPlayer1Row")
+            UserDefaults.standard.set(noughtMark, forKey: "savedNoughtMark")
+            let player1Label = useAI ? "Player \(noughtMark)" : "Player 1 \(noughtMark)"
+            player1Button.setTitle(player1Label, for: .normal)
+            emojiGame.noughtMark = noughtMark
+        } else {
+            player2Row = uniqueRow
+            crossMark = player2Data[uniqueRow]
+            UserDefaults.standard.set(player2Row, forKey: "savedPlayer2Row")
+            UserDefaults.standard.set(crossMark, forKey: "savedCrossMark")
+            let player2Label = useAI ? "AI \(crossMark)" : "Player 2 \(crossMark)"
+            player2Button.setTitle(player2Label, for: .normal)
+            emojiGame.crossMark = crossMark
+        }
+        resetScorePrefs()
+        player1Picker.selectRow(uniqueRow, inComponent: component, animated: true)
+        
+        // print("component \(component), currentRow \(currentRow), jumpRow \(jumpRow)")
+        
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,7 +171,7 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // HINT: Make all emojis available to both players
+        // TODO: This is wet code! Dry it by creating a function for it!
         let uniqueRow = ensureRowsAreUnique(component: component, row: row)
         if component == 0 {
             player1Row = uniqueRow
