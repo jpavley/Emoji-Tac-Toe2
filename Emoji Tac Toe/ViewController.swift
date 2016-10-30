@@ -123,7 +123,7 @@ class ViewController: UIViewController {
         }
 
         
-        let battleEmojis = ["🤖", "👻","😱", "😡","🚶", "🏃","🐿", "🐉","👸", "👰", "🦄", "🐝"]
+        let battleEmojis = ["🤖", "👻", "👽", "😱", "😡", "😠", "🚶", "🏃", "💃", "🐿", "🐉","🐼", "👸", "👰", "👩", "🦄", "🐝", "🦁", "💀", "☠", "💣", "💖", "💌", "🎁"]
         if !battleEmojis.contains(playerMark) {
             return
         }
@@ -140,18 +140,22 @@ class ViewController: UIViewController {
         
         // do the special move
         switch playerMark {
-        case "🤖", "👻":
+        case "🤖", "👻", "👽":
             replicateAllOpenCells(buttonID)
-        case "😱", "😡":
+        case "😱", "😡", "😠":
             switchLocations(buttonID)
-        case "🚶", "🏃":
+        case "🚶", "🏃", "💃":
             takeAllCorners(buttonID)
-        case "🐿", "🐉":
+        case "🐿", "🐉", "🐼":
             jumpToCenter(buttonID)
-        case "👸", "👰":
+        case "👸", "👰", "👩":
             takeAllMiddles(buttonID)
-        case "🦄", "🐝":
+        case "🦄", "🐝", "🦁":
             jumpToRandom(buttonID)
+        case "💀", "☠", "💣":
+            wipeOut(buttonID)
+        case "💖", "💌", "🎁":
+            youWin(buttonID)
         default:
             nop()
         }
@@ -185,6 +189,33 @@ class ViewController: UIViewController {
                 gameBoard[i] = activePlayer
                 let targetButton = view.viewWithTag(i + 1) as! UIButton
                 targetButton.setTitle(playerMark, for: UIControlState())
+            }
+        }
+    }
+    
+    func youWin(_ buttonID: Int) {
+        
+        let opponet = (activePlayer == Player.cross) ? Player.nought : Player.cross
+        let opponetMark = (opponet == Player.cross) ? crossMark : noughtMark
+        
+        for i in 0..<gameBoard.count {
+            if gameBoard[i] == .untouched {
+                gameBoard[i] = opponet
+                let targetButton = view.viewWithTag(i + 1) as! UIButton
+                targetButton.setTitle(opponetMark, for: UIControlState())
+                activePlayer = opponet
+                playerMark = opponetMark
+            }
+        }
+    }
+
+    
+    func wipeOut(_ buttonID: Int) {
+        for i in 0..<gameBoard.count {
+            if i != buttonID - 1 {
+                gameBoard[i] = .untouched
+                let targetButton = view.viewWithTag(i + 1) as! UIButton
+                targetButton.setTitle("", for: UIControlState())
             }
         }
     }
