@@ -14,12 +14,12 @@ import WatchConnectivity
 class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
     @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var player1Label: UILabel!
     @IBOutlet weak var player1Picker: UIPickerView!
-    @IBOutlet weak var player2Label: UILabel!
     @IBOutlet weak var aiSwitch: UISwitch!
     @IBOutlet weak var mysteryModeSwitch: UISwitch!
     @IBOutlet weak var soundSwitch: UISwitch!
+    @IBOutlet weak var player1Button: UIButton!
+    @IBOutlet weak var player2Button: UIButton!
     
     // HINT: Make all emojis available to both players
     var player1Data = [String]()
@@ -33,8 +33,12 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBAction func aiAction(_ sender: AnyObject) {
         useAI = !useAI
         UserDefaults.standard.set(useAI, forKey: "savedUseAI")
-        player1Label.text = useAI ? "Player \(noughtMark)" : "Player 1 \(noughtMark)"
-        player2Label.text = useAI ? "AI \(crossMark)" : "Player 2 \(crossMark)"
+        
+        let player1Label = useAI ? "Player \(noughtMark)" : "Player 1 \(noughtMark)"
+        player1Button.setTitle(player1Label, for: .normal)
+        
+        let player2Label = useAI ? "AI \(crossMark)" : "Player 2 \(crossMark)"
+        player2Button.setTitle(player2Label, for: .normal)
         
         resetScorePrefs()
     }
@@ -53,10 +57,12 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         player1Data = emojis
         player2Data = emojis
         
-        player1Label.text = useAI ? "Player \(noughtMark)" : "Player 1 \(noughtMark)"
+        let player1Label = useAI ? "Player \(noughtMark)" : "Player 1 \(noughtMark)"
+        player1Button.setTitle(player1Label, for: .normal)
         player1Picker.selectRow(player1Row, inComponent: 0, animated: true)
 
-        player2Label.text = useAI ? "AI \(crossMark)" : "Player 2 \(crossMark)"
+        let player2Label = useAI ? "AI \(crossMark)" : "Player 2 \(crossMark)"
+        player2Button.setTitle(player2Label, for: .normal)
         player1Picker.selectRow(player2Row, inComponent: 1, animated: true)
         
         mysteryModeSwitch.setOn(mysteryMode, animated: true)
@@ -120,7 +126,8 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             noughtMark = player1Data[uniqueRow]
             UserDefaults.standard.set(player1Row, forKey: "savedPlayer1Row")
             UserDefaults.standard.set(noughtMark, forKey: "savedNoughtMark")
-            player1Label.text = useAI ? "Player \(noughtMark)" : "Player 1 \(noughtMark)"
+            let player1Label = useAI ? "Player \(noughtMark)" : "Player 1 \(noughtMark)"
+            player1Button.setTitle(player1Label, for: .normal)
             emojiGame.noughtMark = noughtMark
         } else {
             // HINT: Make all emojis available to both players
@@ -128,7 +135,8 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             crossMark = player2Data[uniqueRow]
             UserDefaults.standard.set(player2Row, forKey: "savedPlayer2Row")
             UserDefaults.standard.set(crossMark, forKey: "savedCrossMark")
-            player2Label.text = useAI ? "AI \(crossMark)" : "Player 2 \(crossMark)"
+            let player2Label = useAI ? "AI \(crossMark)" : "Player 2 \(crossMark)"
+            player2Button.setTitle(player2Label, for: .normal)
             emojiGame.crossMark = crossMark
         }
         resetScorePrefs()
