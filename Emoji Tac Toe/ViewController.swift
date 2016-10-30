@@ -393,6 +393,11 @@ class ViewController: UIViewController {
                 crossAVPlayer.play()
             }
             
+            // TODO: when AI wins the status label say "no winner"
+            // TODO: seems to happen when AI has one of two ways to win
+            // TODO: hard to duplicate
+            // TODO: win is detected but status is incorrect
+            
             checkForWinner()
             checkForDraw()
             aiIsPlaying = false
