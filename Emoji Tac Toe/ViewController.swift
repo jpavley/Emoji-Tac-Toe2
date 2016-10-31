@@ -167,8 +167,10 @@ class ViewController: UIViewController {
             activePlayer = .nought
         }
         
-        checkForWinner()
-        checkForDraw()
+        if !checkForWinner() {
+            checkForDraw()
+        }
+        
         if useAI && activePlayer == .cross {
             if !playing {
                 return
@@ -364,8 +366,9 @@ class ViewController: UIViewController {
             gameBoard[location] = .cross
         }
         
-        checkForWinner()
-        checkForDraw()
+        if !checkForWinner() {
+            checkForDraw()
+        }
         
         if useAI && activePlayer == .cross {
             if !playing {
@@ -392,14 +395,11 @@ class ViewController: UIViewController {
                 crossAVPlayer.currentTime = 0
                 crossAVPlayer.play()
             }
+                        
+            if !checkForWinner() {
+                checkForDraw()
+            }
             
-            // TODO: when AI wins the status label say "no winner"
-            // TODO: seems to happen when AI has one of two ways to win
-            // TODO: hard to duplicate
-            // TODO: win is detected but status is incorrect
-            
-            checkForWinner()
-            checkForDraw()
             aiIsPlaying = false
             
             playing = checkForWayToWin(gameBoard)
@@ -407,7 +407,6 @@ class ViewController: UIViewController {
                 // HINT: Game over!
                 gameOverDraw()
             }
-
         }
     }
     
@@ -436,7 +435,7 @@ class ViewController: UIViewController {
         return UIColor(red: normalColorValue, green: normalColorValue, blue: normalColorValue, alpha: 1.0)
     }
     
-    func checkForWinner() {
+    func checkForWinner() -> Bool {
         if let winningVector = seachForWin(gameBoard) {
             playing = false
             winner = gameBoard[winningVector[0]]
@@ -473,6 +472,10 @@ class ViewController: UIViewController {
             
             presentGameOverAlert(alertTitle)
             
+            return true
+            
+        } else {
+            return false
         }
     }
     
