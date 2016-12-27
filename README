@@ -4,6 +4,8 @@ Copyright (c) 2016 Epic Loot. All rights reserved.
 
 Designed and coded by John Pavley.
 
+Official emoji reference: http://unicode.org/emoji/
+
 Version 1 (Released)
 
 - Current SDKs
@@ -17,7 +19,7 @@ Version 1 (Released)
   - 3D Touch
   - Sounds
 
-Version 2 (In Progress)
+Version 2 (Released)
 
 - Post WWDC SDKs
   - iOS 10
