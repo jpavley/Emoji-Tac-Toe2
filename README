@@ -2,13 +2,12 @@
 
 Copyright (c) 2016 Epic Loot. All rights reserved.
 
-Designed and coded by John Pavley.
+- Designed and coded by John Pavley.
+- Now open sourced under the MIT License
+- Find it in the App Store (free and no ads)
+- Official emoji reference: http://unicode.org/emoji/
 
-Now open sourced under the MIT License
-
-Official emoji reference: http://unicode.org/emoji/
-
-Version 1 (Released)
+## Version 1 (Released)
 
 - Current SDKs
   - iOS Universal App
@@ -21,17 +20,18 @@ Version 1 (Released)
   - 3D Touch
   - Sounds
 
-Version 2 (Released)
+## Version 2 (Released)
 
-- Post WWDC SDKs
+- Post WWDC 2016
   - iOS 10
   - Most of the Emojis (1106 in total)
   - Navigate Emoji's by category
   - New Battle Emojis (12 more)
   - Watch OS 3.0
 
-Version 3 (Planned)
+## Version 3 (Planned)
 
+- Post WWDC 2017
   - MessageKit
   - iOS 11
   - Swift 4
