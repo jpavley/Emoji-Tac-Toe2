@@ -129,8 +129,9 @@ class ViewController: UIViewController {
         }
         
         if useSound {
-            battleAVPlayer.currentTime = 0
-            battleAVPlayer.play()
+            // TODO: replace with creative commons sound effect
+//            battleAVPlayer.currentTime = 0
+//            battleAVPlayer.play()
         }
 
         
@@ -336,13 +337,16 @@ class ViewController: UIViewController {
         updateStatus(.inProgress)
         
         // HINT: Update the screen
+        
+        // TODO: replace with creative commons sound effects
+        
         if activePlayer == .nought {
             playerMark = noughtMark
             currentButton.setTitle(playerMark, for: UIControlState())
             
             if useSound {
-                noughtAVPlayer.currentTime = 0
-                noughtAVPlayer.play()
+//                noughtAVPlayer.currentTime = 0
+//                noughtAVPlayer.play()
             }
             
             activePlayer = .cross
@@ -351,8 +355,8 @@ class ViewController: UIViewController {
             currentButton.setTitle(playerMark, for: UIControlState())
             
             if useSound {
-                crossAVPlayer.currentTime = 0
-                crossAVPlayer.play()
+//                crossAVPlayer.currentTime = 0
+//                crossAVPlayer.play()
             }
 
             activePlayer = .nought
@@ -391,9 +395,11 @@ class ViewController: UIViewController {
             activePlayer = .nought
             gameBoard[aiCell] = .cross
             
+            // TODO: replace with creative commons sound effect
+            
             if useSound {
-                crossAVPlayer.currentTime = 0
-                crossAVPlayer.play()
+//                crossAVPlayer.currentTime = 0
+//                crossAVPlayer.play()
             }
                         
             if !checkForWinner() {
@@ -664,14 +670,16 @@ class ViewController: UIViewController {
         
         winLooseAVPlayer = createPlayer(name: "Emoji Tac Toe Theme3", extention: ".mp3")
         
-        noughtAVPlayer = createPlayer(name: "glossy_click_02", extention: ".wav")
-        noughtAVPlayer.prepareToPlay()
+        // TODO: Replace with creative commons sound effects
         
-        crossAVPlayer = createPlayer(name: "glossy_click_03", extention: ".wav")
-        crossAVPlayer.prepareToPlay()
-        
-        battleAVPlayer = createPlayer(name: "bongweirdness", extention: ".wav")
-        battleAVPlayer.prepareToPlay()
+//        noughtAVPlayer = createPlayer(name: "glossy_click_02", extention: ".wav")
+//        noughtAVPlayer.prepareToPlay()
+//        
+//        crossAVPlayer = createPlayer(name: "glossy_click_03", extention: ".wav")
+//        crossAVPlayer.prepareToPlay()
+//        
+//        battleAVPlayer = createPlayer(name: "bongweirdness", extention: ".wav")
+//        battleAVPlayer.prepareToPlay()
 
     }
     

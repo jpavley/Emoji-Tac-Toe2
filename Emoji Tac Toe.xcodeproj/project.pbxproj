@@ -9,12 +9,6 @@
 /* Begin PBXBuildFile section */
 		5A4AB2331D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */; };
 		5A4AB2341D6CCDC800DEAAEB /* Emoji Tac Toe Theme3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */; };
-		5A68408F1D6DF25C00FA995F /* bongweirdness.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5A68408C1D6DF25C00FA995F /* bongweirdness.wav */; };
-		5A6840901D6DF25C00FA995F /* bongweirdness.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5A68408C1D6DF25C00FA995F /* bongweirdness.wav */; };
-		5A6840911D6DF25C00FA995F /* glossy_click_02.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5A68408D1D6DF25C00FA995F /* glossy_click_02.wav */; };
-		5A6840921D6DF25C00FA995F /* glossy_click_02.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5A68408D1D6DF25C00FA995F /* glossy_click_02.wav */; };
-		5A6840931D6DF25C00FA995F /* glossy_click_03.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5A68408E1D6DF25C00FA995F /* glossy_click_03.wav */; };
-		5A6840941D6DF25C00FA995F /* glossy_click_03.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5A68408E1D6DF25C00FA995F /* glossy_click_03.wav */; };
 		5A9601B61D727C4500F9BDDB /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A9601B51D727C4500F9BDDB /* CoreMotion.framework */; };
 		5ACC58DD1D6156D70078AFBC /* EmojiTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACC58DC1D6156D70078AFBC /* EmojiTacToeViewController.swift */; };
 		5ACDE3891DA350820067FBFE /* emoji-ordering.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5ACDE3881DA350820067FBFE /* emoji-ordering.txt */; };
@@ -85,9 +79,6 @@
 
 /* Begin PBXFileReference section */
 		5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Emoji Tac Toe Theme3.mp3"; sourceTree = "<group>"; };
-		5A68408C1D6DF25C00FA995F /* bongweirdness.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bongweirdness.wav; sourceTree = "<group>"; };
-		5A68408D1D6DF25C00FA995F /* glossy_click_02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = glossy_click_02.wav; sourceTree = "<group>"; };
-		5A68408E1D6DF25C00FA995F /* glossy_click_03.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = glossy_click_03.wav; sourceTree = "<group>"; };
 		5A9601B51D727C4500F9BDDB /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		5ACC58DC1D6156D70078AFBC /* EmojiTacToeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiTacToeViewController.swift; sourceTree = "<group>"; };
 		5ACDE3881DA350820067FBFE /* emoji-ordering.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "emoji-ordering.txt"; sourceTree = "<group>"; };
@@ -149,9 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */,
-				5A68408C1D6DF25C00FA995F /* bongweirdness.wav */,
-				5A68408D1D6DF25C00FA995F /* glossy_click_02.wav */,
-				5A68408E1D6DF25C00FA995F /* glossy_click_03.wav */,
 			);
 			name = Audio;
 			path = "Emoji Tac Toe";
@@ -387,10 +375,7 @@
 				5A4AB2331D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 in Resources */,
 				5AD407951D4ED8E800FBBA62 /* LaunchScreen.storyboard in Resources */,
 				5ACDE3891DA350820067FBFE /* emoji-ordering.txt in Resources */,
-				5A6840911D6DF25C00FA995F /* glossy_click_02.wav in Resources */,
 				5AD4078A1D4ED69B00FBBA62 /* Assets.xcassets in Resources */,
-				5A68408F1D6DF25C00FA995F /* bongweirdness.wav in Resources */,
-				5A6840931D6DF25C00FA995F /* glossy_click_03.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,11 +402,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A4AB2341D6CCDC800DEAAEB /* Emoji Tac Toe Theme3.mp3 in Resources */,
-				5A6840941D6DF25C00FA995F /* glossy_click_03.wav in Resources */,
 				B92B07471D60BC1700E20A6D /* Assets.xcassets in Resources */,
 				B92B07451D60BC1700E20A6D /* Main.storyboard in Resources */,
-				5A6840921D6DF25C00FA995F /* glossy_click_02.wav in Resources */,
-				5A6840901D6DF25C00FA995F /* bongweirdness.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
