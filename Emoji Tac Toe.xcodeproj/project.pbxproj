@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5A3834A91EF6DC4B00891224 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5A3834A81EF6DC4B00891224 /* .gitignore */; };
+		5A3834AB1EF6E25A00891224 /* License in Resources */ = {isa = PBXBuildFile; fileRef = 5A3834AA1EF6E25A00891224 /* License */; };
 		5A4AB2331D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */; };
 		5A4AB2341D6CCDC800DEAAEB /* Emoji Tac Toe Theme3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */; };
 		5A9601B61D727C4500F9BDDB /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A9601B51D727C4500F9BDDB /* CoreMotion.framework */; };
@@ -80,6 +81,7 @@
 
 /* Begin PBXFileReference section */
 		5A3834A81EF6DC4B00891224 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		5A3834AA1EF6E25A00891224 /* License */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License; sourceTree = "<group>"; };
 		5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Emoji Tac Toe Theme3.mp3"; sourceTree = "<group>"; };
 		5A9601B51D727C4500F9BDDB /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		5ACC58DC1D6156D70078AFBC /* EmojiTacToeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiTacToeViewController.swift; sourceTree = "<group>"; };
@@ -151,8 +153,9 @@
 			isa = PBXGroup;
 			children = (
 				5A3834A81EF6DC4B00891224 /* .gitignore */,
-				5A9601B51D727C4500F9BDDB /* CoreMotion.framework */,
+				5A3834AA1EF6E25A00891224 /* License */,
 				5AD407A01D4EDDC500FBBA62 /* README */,
+				5A9601B51D727C4500F9BDDB /* CoreMotion.framework */,
 				B904F3D31D4F7B1D00CA2D75 /* Shared */,
 				5A6840951D6DF27500FA995F /* Audio */,
 				5AD407811D4ED69B00FBBA62 /* iOS */,
@@ -375,6 +378,7 @@
 			files = (
 				5AD407A11D4EDDC500FBBA62 /* README in Resources */,
 				5A3834A91EF6DC4B00891224 /* .gitignore in Resources */,
+				5A3834AB1EF6E25A00891224 /* License in Resources */,
 				5AD407971D4ED91600FBBA62 /* Main.storyboard in Resources */,
 				5A4AB2331D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 in Resources */,
 				5AD407951D4ED8E800FBBA62 /* LaunchScreen.storyboard in Resources */,
