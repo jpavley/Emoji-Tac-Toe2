@@ -14,6 +14,22 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     
     var ticTacToeUT: TicTacToeGame!
     
+    let noughtWinningGameBoard:[Player] = [.nought,    .untouched, .cross,
+                                           .untouched, .nought,    .untouched,
+                                           .cross,     .untouched, .nought]
+    
+    let crossWinningGameBoard:[Player] = [.untouched, .nought, .untouched,
+                                          .cross,     .cross,  .cross,
+                                          .untouched, .nought, .untouched]
+    
+    let losingGameBoard:[Player] = [.nought, .cross,     .nought,
+                                    .cross,  .untouched, .nought,
+                                    .cross,  .nought,    .cross]
+    
+    let noughtMark = "⭕️"
+    let crossMark = "❌"
+    let untouchedMark = "⬜️"
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -31,8 +47,17 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
         super.tearDown()
     }
     
-    func testGameboardIsFresh() {
+    func testGameIsFresh() {
         XCTAssertEqual(freshGameBoard, ticTacToeUT.gameBoard)
+    }
+    
+    func testTransformGameIntoText() {
+        
+        let requiredGameText = "⭕️ ❌ ⭕️ \n❌ ⬜️ ⭕️ \n❌ ⭕️ ❌ \n"
+        ticTacToeUT.gameBoard = losingGameBoard
+        
+        XCTAssertEqual(requiredGameText, transformGameIntoText(gameboard: ticTacToeUT.gameBoard, noughtMark: "⭕️", crossMark: "❌", untouchedMark: "⬜️"))
+        
     }
     
 }
