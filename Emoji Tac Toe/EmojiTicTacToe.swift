@@ -124,10 +124,8 @@ func transformGameIntoText(gameboard: [Player], noughtMark: String, crossMark: S
     return result
 }
 
-// TODO: seachForWin is mispelled
-
 /// Returns the first winning vector found or nil is there is no win
-func seachForWin(_ gameBoard:[Player]) -> [Int]? {
+func searchForWin(_ gameBoard:[Player]) -> [Int]? {
     
     for vector in winningVectors {
         if gameBoard[vector[0]] != .untouched && gameBoard[vector[0]] == gameBoard[vector[1]] && gameBoard[vector[0]] == gameBoard[vector[2]] {

@@ -442,7 +442,7 @@ class ViewController: UIViewController {
     }
     
     func checkForWinner() -> Bool {
-        if let winningVector = seachForWin(gameBoard) {
+        if let winningVector = searchForWin(gameBoard) {
             playing = false
             winner = gameBoard[winningVector[0]]
             

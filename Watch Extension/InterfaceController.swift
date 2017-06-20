@@ -131,7 +131,7 @@ class InterfaceController: WKInterfaceController {
     }
     
     func checkForWinner() -> Bool {
-        if let winningVector = seachForWin(emojiGame.gameBoard) {
+        if let winningVector = searchForWin(emojiGame.gameBoard) {
             emojiGame.gameOver = true
             
             for cell in winningVector {

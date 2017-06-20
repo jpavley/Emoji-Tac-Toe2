@@ -62,13 +62,13 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     func testSearchForWinFail() {
         ticTacToeUT.gameBoard = losingGameBoard
         
-        XCTAssertNil(seachForWin(ticTacToeUT.gameBoard))
+        XCTAssertNil(searchForWin(ticTacToeUT.gameBoard))
     }
     
     func testSearchForWinSuccess() {
         ticTacToeUT.gameBoard = noughtWinningGameBoard
         
-        XCTAssertEqual([0,4,8], seachForWin(ticTacToeUT.gameBoard)!)
+        XCTAssertEqual([0,4,8], searchForWin(ticTacToeUT.gameBoard)!)
     }
     
 }
