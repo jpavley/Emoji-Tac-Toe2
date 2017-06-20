@@ -57,7 +57,18 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
         ticTacToeUT.gameBoard = losingGameBoard
         
         XCTAssertEqual(requiredGameText, transformGameIntoText(gameboard: ticTacToeUT.gameBoard, noughtMark: "⭕️", crossMark: "❌", untouchedMark: "⬜️"))
+    }
+    
+    func testSearchForWinFail() {
+        ticTacToeUT.gameBoard = losingGameBoard
         
+        XCTAssertNil(seachForWin(ticTacToeUT.gameBoard))
+    }
+    
+    func testSearchForWinSuccess() {
+        ticTacToeUT.gameBoard = noughtWinningGameBoard
+        
+        XCTAssertEqual([0,4,8], seachForWin(ticTacToeUT.gameBoard)!)
     }
     
 }

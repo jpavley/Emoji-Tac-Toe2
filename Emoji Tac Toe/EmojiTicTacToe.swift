@@ -101,6 +101,7 @@ struct TicTacToeGame {
     var gameOver:Bool
 }
 
+/// Returns a string with line breaks and emoji that represents the game
 func transformGameIntoText(gameboard: [Player], noughtMark: String, crossMark: String, untouchedMark: String) -> String {
     var result = ""
     
@@ -123,6 +124,9 @@ func transformGameIntoText(gameboard: [Player], noughtMark: String, crossMark: S
     return result
 }
 
+// TODO: seachForWin is mispelled
+
+/// Returns the first winning vector found or nil is there is no win
 func seachForWin(_ gameBoard:[Player]) -> [Int]? {
     
     for vector in winningVectors {
