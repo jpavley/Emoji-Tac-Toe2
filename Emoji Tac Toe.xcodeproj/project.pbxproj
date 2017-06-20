@@ -12,6 +12,7 @@
 		5A4AB2331D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */; };
 		5A4AB2341D6CCDC800DEAAEB /* Emoji Tac Toe Theme3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */; };
 		5A9601B61D727C4500F9BDDB /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A9601B51D727C4500F9BDDB /* CoreMotion.framework */; };
+		5AC946711EF8B3D100137DBF /* Emoji_Tac_Toe_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AC946701EF8B3D100137DBF /* Emoji_Tac_Toe_Tests.swift */; };
 		5ACC58DD1D6156D70078AFBC /* EmojiTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACC58DC1D6156D70078AFBC /* EmojiTacToeViewController.swift */; };
 		5ACDE3891DA350820067FBFE /* emoji-ordering.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5ACDE3881DA350820067FBFE /* emoji-ordering.txt */; };
 		5ACDE38A1DA350820067FBFE /* emoji-ordering.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5ACDE3881DA350820067FBFE /* emoji-ordering.txt */; };
@@ -38,6 +39,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5AC946731EF8B3D100137DBF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AD407771D4ED69B00FBBA62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5AD4077E1D4ED69B00FBBA62;
+			remoteInfo = "Emoji Tac Toe";
+		};
 		B904F3BA1D4F715200CA2D75 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5AD407771D4ED69B00FBBA62 /* Project object */;
@@ -84,6 +92,9 @@
 		5A3834AA1EF6E25A00891224 /* License */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License; sourceTree = "<group>"; };
 		5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Emoji Tac Toe Theme3.mp3"; sourceTree = "<group>"; };
 		5A9601B51D727C4500F9BDDB /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		5AC9466E1EF8B3D100137DBF /* Emoji Tac Toe Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Emoji Tac Toe Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AC946701EF8B3D100137DBF /* Emoji_Tac_Toe_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji_Tac_Toe_Tests.swift; sourceTree = "<group>"; };
+		5AC946721EF8B3D100137DBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5ACC58DC1D6156D70078AFBC /* EmojiTacToeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiTacToeViewController.swift; sourceTree = "<group>"; };
 		5ACDE3881DA350820067FBFE /* emoji-ordering.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "emoji-ordering.txt"; sourceTree = "<group>"; };
 		5AD4077F1D4ED69B00FBBA62 /* Emoji Tac Toe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Emoji Tac Toe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +126,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5AC9466B1EF8B3D100137DBF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5AD4077C1D4ED69B00FBBA62 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -149,6 +167,15 @@
 			path = "Emoji Tac Toe";
 			sourceTree = "<group>";
 		};
+		5AC9466F1EF8B3D100137DBF /* Emoji Tac Toe Tests */ = {
+			isa = PBXGroup;
+			children = (
+				5AC946701EF8B3D100137DBF /* Emoji_Tac_Toe_Tests.swift */,
+				5AC946721EF8B3D100137DBF /* Info.plist */,
+			);
+			path = "Emoji Tac Toe Tests";
+			sourceTree = "<group>";
+		};
 		5AD407761D4ED69B00FBBA62 = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +189,7 @@
 				B904F3AD1D4F715200CA2D75 /* watchOS */,
 				B904F3BC1D4F715200CA2D75 /* Watch Extension */,
 				B92B073E1D60BC1700E20A6D /* tvOS */,
+				5AC9466F1EF8B3D100137DBF /* Emoji Tac Toe Tests */,
 				5AD407801D4ED69B00FBBA62 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -173,6 +201,7 @@
 				B904F3AC1D4F715200CA2D75 /* Watch.app */,
 				B904F3B81D4F715200CA2D75 /* Watch Extension.appex */,
 				B92B073D1D60BC1600E20A6D /* television.app */,
+				5AC9466E1EF8B3D100137DBF /* Emoji Tac Toe Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,6 +278,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5AC9466D1EF8B3D100137DBF /* Emoji Tac Toe Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5AC946771EF8B3D100137DBF /* Build configuration list for PBXNativeTarget "Emoji Tac Toe Tests" */;
+			buildPhases = (
+				5AC9466A1EF8B3D100137DBF /* Sources */,
+				5AC9466B1EF8B3D100137DBF /* Frameworks */,
+				5AC9466C1EF8B3D100137DBF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5AC946741EF8B3D100137DBF /* PBXTargetDependency */,
+			);
+			name = "Emoji Tac Toe Tests";
+			productName = "Emoji Tac Toe Tests";
+			productReference = 5AC9466E1EF8B3D100137DBF /* Emoji Tac Toe Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		5AD4077E1D4ED69B00FBBA62 /* Emoji Tac Toe */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5AD407911D4ED69B00FBBA62 /* Build configuration list for PBXNativeTarget "Emoji Tac Toe" */;
@@ -325,10 +372,16 @@
 		5AD407771D4ED69B00FBBA62 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Epic Loot";
 				TargetAttributes = {
+					5AC9466D1EF8B3D100137DBF = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = QZ7SMYA7GB;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 5AD4077E1D4ED69B00FBBA62;
+					};
 					5AD4077E1D4ED69B00FBBA62 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = QZ7SMYA7GB;
@@ -367,11 +420,19 @@
 				B904F3AB1D4F715200CA2D75 /* Watch */,
 				B904F3B71D4F715200CA2D75 /* Watch Extension */,
 				B92B073C1D60BC1600E20A6D /* television */,
+				5AC9466D1EF8B3D100137DBF /* Emoji Tac Toe Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5AC9466C1EF8B3D100137DBF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5AD4077D1D4ED69B00FBBA62 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -418,6 +479,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5AC9466A1EF8B3D100137DBF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AC946711EF8B3D100137DBF /* Emoji_Tac_Toe_Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5AD4077B1D4ED69B00FBBA62 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -452,6 +521,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5AC946741EF8B3D100137DBF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5AD4077E1D4ED69B00FBBA62 /* Emoji Tac Toe */;
+			targetProxy = 5AC946731EF8B3D100137DBF /* PBXContainerItemProxy */;
+		};
 		B904F3BB1D4F715200CA2D75 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B904F3B71D4F715200CA2D75 /* Watch Extension */;
@@ -484,6 +558,43 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5AC946751EF8B3D100137DBF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = QZ7SMYA7GB;
+				INFOPLIST_FILE = "Emoji Tac Toe Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pavley.Emoji-Tac-Toe-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Emoji Tac Toe.app/Emoji Tac Toe";
+			};
+			name = Debug;
+		};
+		5AC946761EF8B3D100137DBF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = QZ7SMYA7GB;
+				INFOPLIST_FILE = "Emoji Tac Toe Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pavley.Emoji-Tac-Toe-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Emoji Tac Toe.app/Emoji Tac Toe";
+			};
+			name = Release;
+		};
 		5AD4078F1D4ED69B00FBBA62 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -718,6 +829,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5AC946771EF8B3D100137DBF /* Build configuration list for PBXNativeTarget "Emoji Tac Toe Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5AC946751EF8B3D100137DBF /* Debug */,
+				5AC946761EF8B3D100137DBF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		5AD4077A1D4ED69B00FBBA62 /* Build configuration list for PBXProject "Emoji Tac Toe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
