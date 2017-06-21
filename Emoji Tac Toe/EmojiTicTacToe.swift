@@ -135,6 +135,8 @@ func searchForWin(_ gameBoard:[Player]) -> [Int]? {
     return nil
 }
 
+
+/// Returns true if the player has a winning vector on the gameboard
 func seachForWinForPlayer(_ board:[Player], player:Player) -> Bool {
     
     for vector in winningVectors {

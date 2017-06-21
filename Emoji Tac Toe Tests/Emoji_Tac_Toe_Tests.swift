@@ -71,4 +71,15 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
         XCTAssertEqual([0,4,8], searchForWin(ticTacToeUT.gameBoard)!)
     }
     
+    func testSearchForWinForPlayerFail() {
+        let requiredResult = seachForWinForPlayer(crossWinningGameBoard, player: .nought)
+        XCTAssertFalse(requiredResult)
+    }
+    
+    func testSearchForWinForPlayerSuccess() {
+        let requiredResult = seachForWinForPlayer(crossWinningGameBoard, player: .cross)
+        XCTAssertTrue(requiredResult)
+    }
+
+    
 }
