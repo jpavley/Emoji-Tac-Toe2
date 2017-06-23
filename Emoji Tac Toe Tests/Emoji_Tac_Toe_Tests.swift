@@ -26,6 +26,11 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
                                     .cross,  .untouched, .nought,
                                     .cross,  .nought,    .cross]
     
+    let fullGameBoard:[Player] = [.nought, .cross,  .nought,
+                                  .cross,  .nought, .nought,
+                                  .cross,  .nought, .cross]
+
+    
     let noughtMark = "⭕️"
     let crossMark = "❌"
     let untouchedMark = "⬜️"
@@ -60,26 +65,62 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     }
     
     func testSearchForWinFail() {
+        
         ticTacToeUT.gameBoard = losingGameBoard
         
         XCTAssertNil(searchForWin(ticTacToeUT.gameBoard))
     }
     
     func testSearchForWinSuccess() {
+        
         ticTacToeUT.gameBoard = noughtWinningGameBoard
         
         XCTAssertEqual([0,4,8], searchForWin(ticTacToeUT.gameBoard)!)
     }
     
     func testSearchForWinForPlayerFail() {
+        
         let requiredResult = seachForWinForPlayer(crossWinningGameBoard, player: .nought)
+        
         XCTAssertFalse(requiredResult)
     }
     
     func testSearchForWinForPlayerSuccess() {
+        
         let requiredResult = seachForWinForPlayer(crossWinningGameBoard, player: .cross)
+        
         XCTAssertTrue(requiredResult)
     }
-
+    
+    func testCalcOpenCellsSuccess() {
+        
+        let requiredResult1 = calcOpenCells(gameBoard: noughtWinningGameBoard)
+        let testOpenCells1 = [1,3,5,7]
+        
+        XCTAssertEqual(testOpenCells1, requiredResult1)
+    }
+    
+    func testCalcOpenCellsFail() {
+        
+        let requiredResult2 = calcOpenCells(gameBoard: fullGameBoard)
+        let testOpenCells2:[Int] = []
+        
+        XCTAssertEqual(testOpenCells2, requiredResult2)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
