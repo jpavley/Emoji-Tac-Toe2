@@ -181,6 +181,7 @@ func checkForWayToWin(_ gameBoard:[Player]) -> Bool {
     return true
 }
 
+/// Returns true if there are open (untouched) cell on the board
 func checkForUntouchedCells(_ gameBoard:[Player]) -> Bool {
     
     for cell in gameBoard {

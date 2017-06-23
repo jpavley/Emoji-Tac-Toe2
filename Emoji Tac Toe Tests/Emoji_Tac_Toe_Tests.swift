@@ -114,6 +114,7 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     func testCheckForWayToWinSuccess() {
         
         XCTAssertTrue(checkForWayToWin(wayToWinGameBoard))
+        XCTAssertTrue(checkForWayToWin(fullGameBoard))
     }
     
     func testCheckForWayToWinFail() {
@@ -121,6 +122,13 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
 
     }
     
+    func testCheckForUntouchedCellsSuccess() {
+        XCTAssertTrue(checkForUntouchedCells(wayToWinGameBoard))
+    }
+    
+    func testCheckForUntouchedCellsFail() {
+        XCTAssertFalse(checkForUntouchedCells(fullGameBoard))
+    }
     
     
     
