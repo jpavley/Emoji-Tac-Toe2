@@ -151,6 +151,7 @@ func seachForWinForPlayer(_ board:[Player], player:Player) -> Bool {
     return false
 }
 
+/// Returns a vector [Int] of untouched cells or an empty vector [Int]
 func calcOpenCells(gameBoard:[Player]) -> [Int] {
     var openCells = [Int]()
     for (index, cell) in gameBoard.enumerated() {
@@ -161,9 +162,12 @@ func calcOpenCells(gameBoard:[Player]) -> [Int] {
     return openCells
 }
 
+/// Returns true if there is more than 1 open cell or if there is only 1 open
+/// cell that nought can win if it takes that cell
 func checkForWayToWin(_ gameBoard:[Player]) -> Bool {
+    // TODO: This is pretty werid function. It is not a generalized check
+    //       that there exists a way to win on the board.
     
-    // DBUG - returns false when there is a way to win!
     let openCells = calcOpenCells(gameBoard: gameBoard)
     // if there is one open cell
     if openCells.count == 1 {

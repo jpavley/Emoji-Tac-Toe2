@@ -30,6 +30,9 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
                                   .cross,  .nought, .nought,
                                   .cross,  .nought, .cross]
 
+    let wayToWinGameBoard:[Player] = [.nought, .untouched, .nought,
+                                      .cross,  .nought,    .nought,
+                                      .cross,  .nought,    .cross]
     
     let noughtMark = "⭕️"
     let crossMark = "❌"
@@ -107,6 +110,17 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
         
         XCTAssertEqual(testOpenCells2, requiredResult2)
     }
+    
+    func testCheckForWayToWinSuccess() {
+        
+        XCTAssertTrue(checkForWayToWin(wayToWinGameBoard))
+    }
+    
+    func testCheckForWayToWinFail() {
+        XCTAssertFalse(checkForWayToWin(losingGameBoard))
+
+    }
+    
     
     
     
