@@ -385,7 +385,7 @@ class ViewController: UIViewController {
     }
     
     func aiClassicTakeTurn() {
-        if let aiCell = aiChoose(gameBoard) {
+        if let aiCell = aiChoose(gameBoard, unpredicible: true) {
             neutralizeGameboard()
             updateStatus(.inProgress)
             playerMark = crossMark

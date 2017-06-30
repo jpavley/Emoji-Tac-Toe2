@@ -194,7 +194,7 @@ func checkForUntouchedCells(_ gameBoard:[Player]) -> Bool {
 }
 
 /// Returns a move that the AI wants to make
-func aiChoose(_ gameBoard:[Player]) -> Int? {
+func aiChoose(_ gameBoard:[Player], unpredicible: Bool) -> Int? {
     
     var result:Int?
     
@@ -218,7 +218,7 @@ func aiChoose(_ gameBoard:[Player]) -> Int? {
         
         // 2. Unpredicible (need to turn this off to do a true test!)
         // x% of the time be unpredictible
-        if result == nil {
+        if result == nil && unpredicible {
             let chanceToBeRandom = diceRoll(20)
             if chanceToBeRandom <= 3 {
                 result = openCells.count > 0 ? openCells[diceRoll(openCells.count)] : nil

@@ -216,7 +216,7 @@ class InterfaceController: WKInterfaceController {
     }
     
     func aiTakeTurn() {
-        if let aiCell = aiChoose(emojiGame.gameBoard) {
+        if let aiCell = aiChoose(emojiGame.gameBoard, unpredicible: true) {
             if let aiButton = buttonForIndex(aiCell) {
                 aiButton.setTitle(emojiGame.crossMark)
                 emojiGame.gameBoard[aiCell] = .cross
