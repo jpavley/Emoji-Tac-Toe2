@@ -213,8 +213,10 @@ func aiChoose(_ gameBoard:[Player]) -> Int? {
         }
     }
     
+    // 1. Zero open cells
     if openCells.count > 0 {
         
+        // 2. Unpredicible (need to turn this off to do a true test!)
         // x% of the time be unpredictible
         if result == nil {
             let chanceToBeRandom = diceRoll(20)
@@ -224,6 +226,7 @@ func aiChoose(_ gameBoard:[Player]) -> Int? {
             }
         }
         
+        // 3. Blocking move
         // Search for blocking move
         if result == nil {
             for cell in openCells {
@@ -236,6 +239,7 @@ func aiChoose(_ gameBoard:[Player]) -> Int? {
             }
         }
         
+        // 4. Take another corner
         // If player has middle and corner and AI has oposite corner take another corner
         if result == nil {
             let results1 = [0,2,6,8].filter {occupiedCells.contains($0)}
@@ -248,6 +252,7 @@ func aiChoose(_ gameBoard:[Player]) -> Int? {
             }
         }
         
+        // 5. Grab a middle
         // AI has a corner grab a middle
         if result == nil {
             let results1 = [0,2,6,8].filter {ownedCells.contains($0)}
@@ -257,6 +262,7 @@ func aiChoose(_ gameBoard:[Player]) -> Int? {
             }
         }
         
+        // 6. Grab a corner
         // Player has a middle grab a corner
         if result == nil {
             let results1 = [1,3,5,7].filter {occupiedCells.contains($0)}
@@ -266,6 +272,7 @@ func aiChoose(_ gameBoard:[Player]) -> Int? {
             }
         }
         
+        // 7. Grab the center
         // Grab the center if it's open
         if result == nil {
             if openCells.contains(4) {
@@ -273,6 +280,7 @@ func aiChoose(_ gameBoard:[Player]) -> Int? {
             }
         }
         
+        // 8. Grab a middle position
         // if AI has the center grab middle position
         if result == nil {
             if ownedCells.contains(4) {
@@ -281,6 +289,7 @@ func aiChoose(_ gameBoard:[Player]) -> Int? {
             }
         }
         
+        // 9. Grab corner opposite opponent
         // Search for a corner opposite the opponent
         if result == nil {
             if occupiedCells.contains(0) {
@@ -302,6 +311,7 @@ func aiChoose(_ gameBoard:[Player]) -> Int? {
             }
         }
         
+        // 10. Winning Move
         // Search for winning move
         for cell in openCells {
             var testGameboard = gameBoard
@@ -311,12 +321,14 @@ func aiChoose(_ gameBoard:[Player]) -> Int? {
             }
         }
         
+        // 11. Any corner
         // Search for a corner
         if result == nil {
             let results = [0,2,6,8].filter {openCells.contains($0)}
             result = results.count > 0 ? results[diceRoll(results.count)] : nil
         }
         
+        // 12. Random move
         // Search for random moves
         if result == nil {
             let diceRoll = Int(arc4random_uniform(UInt32(openCells.count)))
