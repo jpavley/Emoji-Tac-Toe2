@@ -130,6 +130,21 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
         XCTAssertFalse(checkForUntouchedCells(fullGameBoard))
     }
     
+    // Test Plan for aiChoose(gameBoard:)
+    // 1. Zero open cells
+    // 2. Unpredicible (need to turn this off to do a true test!)
+    // 3. Blocking move
+    // 4. Take another corner
+    // 5. Grab a middle
+    // 6. Grab a corner
+    // 7. Grab the center
+    // 8. Grab a middle position
+    // 9. Grab corner opposite opponent
+    // 10. Winning Move
+    // 11. Any corner
+    // 12. Random move
+    
+    
     
     
     
