@@ -34,6 +34,9 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
                                       .cross,  .nought,    .nought,
                                       .cross,  .nought,    .cross]
     
+    let wayToWinGameBoard2:[Player] = [.nought, .cross,     .nought,
+                                       .cross,  .nought,    .nought,
+                                       .cross,  .untouched, .cross]
     let noughtMark = "⭕️"
     let crossMark = "❌"
     let untouchedMark = "⬜️"
@@ -194,10 +197,20 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     // 2. Unpredicible (need to turn this off to do a true test!)
     // 2.1. Test for a random cell
     func testAiChooseUnpredicible() {
-        
+        // TODO: figure out how to test
     }
     
     // 3. Blocking move
+    func testSearchForBlockingMoveSuccess() {
+        XCTAssertNotNil(searchForBlockingMove(gameBoard: wayToWinGameBoard, for: .cross))
+        XCTAssertNotNil(searchForBlockingMove(gameBoard: wayToWinGameBoard2, for: .nought))
+    }
+    
+    func testSearchForBlockingMoveFail() {
+        XCTAssertNil(searchForBlockingMove(gameBoard: wayToWinGameBoard, for: .nought))
+        XCTAssertNil(searchForBlockingMove(gameBoard: wayToWinGameBoard2, for: .cross))
+    }
+   
     // 4. Take another corner
     // 5. Grab a middle
     // 6. Grab a corner

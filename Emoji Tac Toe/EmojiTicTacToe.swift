@@ -229,6 +229,27 @@ func randomCell(_ gameBoard:[Player], threshold: Int) -> Int? {
     return result
 }
 
+/// Returns a block moving for specificed player, one that would pervent opponent
+/// from win or nil is there is no blocking move
+func searchForBlockingMove(gameBoard: [Player], for player: Player) -> Int? {
+    var result:Int?
+    let openCells = calcOpenCells(gameBoard: gameBoard)
+    
+    // reverse player as we find a winning move for the opponent and 
+    // return it as a blocking move for the player
+    let opponent:Player = (player == .nought) ? .cross : .nought
+    
+    for cell in openCells {
+        var testGameboard = gameBoard
+        testGameboard[cell] = opponent
+        
+        if seachForWinForPlayer(testGameboard, player: opponent) {
+            result = cell
+        }
+    }
+    return result
+}
+
 /// Returns a cell index that the AI wants to mark
 /// NOTE: AI is always cross and player is always nought (regardless of mark)
 func aiChoose(_ gameBoard:[Player], unpredicible: Bool) -> Int? {
@@ -251,14 +272,7 @@ func aiChoose(_ gameBoard:[Player], unpredicible: Bool) -> Int? {
         // 3. Blocking move
         // Search for blocking move
         if result == nil {
-            for cell in openCells {
-                var testGameboard = gameBoard
-                testGameboard[cell] = .nought
-                
-                if seachForWinForPlayer(testGameboard, player: .nought) {
-                    result = cell
-                }
-            }
+                result = searchForBlockingMove(gameBoard: gameBoard, for: .cross)
         }
         
         // 4. Take another corner
