@@ -130,9 +130,73 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
         XCTAssertFalse(checkForUntouchedCells(fullGameBoard))
     }
     
-    // Test Plan for aiChoose(gameBoard:)
+    func testCalcOccupiedCellsFail() {
+        let requiredCells1 = calcOccupiedCells(freshGameBoard, for: .cross)
+        XCTAssertEqual(requiredCells1.count, 0)
+        
+        let requiredCells2 = calcOccupiedCells(freshGameBoard, for: .nought)
+        XCTAssertEqual(requiredCells2.count, 0)
+        
+        let requiredCells3 = calcOccupiedCells(freshGameBoard, for: .untouched)
+        XCTAssertEqual(requiredCells3.count, 9)
+    }
+    
+    func testCalcOccupiedCellsSuccess() {
+        let requiredCells1 = calcOccupiedCells(fullGameBoard, for: .cross)
+        XCTAssertEqual(requiredCells1.count, 4)
+        
+        let requiredCells2 = calcOccupiedCells(fullGameBoard, for: .nought)
+        XCTAssertEqual(requiredCells2.count, 5)
+
+        let requiredCells3 = calcOccupiedCells(fullGameBoard, for: .untouched)
+        XCTAssertEqual(requiredCells3.count, 0)
+    }
+    
+    func testRandomCellFail() {
+        let requiredCell1 = randomCell(freshGameBoard, threshold: 0)
+        XCTAssertNil(requiredCell1)
+        
+        let requiredCell2 = randomCell(fullGameBoard, threshold: 100)
+        XCTAssertNil(requiredCell2)
+    }
+    
+    func testRandomCellSuccess() {
+        let requiredCell1 = randomCell(freshGameBoard, threshold: 100)
+        XCTAssertNotNil(requiredCell1)
+    }
+    
+    func testRandomCellSuccessFiftyPercent() {
+        var successCount = 0
+        for _ in 0..<10000 {
+            let requiredCell = randomCell(freshGameBoard, threshold: 50)
+            if requiredCell != nil {
+                successCount += 1
+            }
+        }
+        let successRange = 5000..<5200
+        XCTAssertTrue(successRange.contains(successCount), "successCount \(successCount)")
+    }
+
+    
+    // Tests for aiChoose(gameBoard:)
+    
     // 1. Zero open cells
+    func testAiChooseZeroOpenCellsFail() {
+        XCTAssertNil(aiChoose(fullGameBoard, unpredicible: true))
+        XCTAssertNil(aiChoose(fullGameBoard, unpredicible: false))
+    }
+    
+    func testAiChooseZeroOpenCellsSucess() {
+        XCTAssertNotNil(aiChoose(freshGameBoard, unpredicible: true))
+        XCTAssertNotNil(aiChoose(freshGameBoard, unpredicible: false))
+    }
+
     // 2. Unpredicible (need to turn this off to do a true test!)
+    // 2.1. Test for a random cell
+    func testAiChooseUnpredicible() {
+        
+    }
+    
     // 3. Blocking move
     // 4. Take another corner
     // 5. Grab a middle

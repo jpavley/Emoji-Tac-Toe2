@@ -193,37 +193,59 @@ func checkForUntouchedCells(_ gameBoard:[Player]) -> Bool {
 
 }
 
-/// Returns a move that the AI wants to make
+/// Returns array of cells with marks or emply array if there no open cells
+/// NOTE: Used for both owned and taken cells
+func calcOccupiedCells(_ gameBoard:[Player], for player: Player) -> [Int] {
+    var occupiedCells = [Int]()
+    for (index, cell) in gameBoard.enumerated() {
+        if cell == player {
+            occupiedCells.append(index)
+        }
+    }
+    return occupiedCells
+}
+
+/// Returns an open cell id or nil with a probability of randomness
+/// threshold = 0 means 0% chance of returning a random cell id (always nil)
+/// threshold = 100 means  100% chance of returning a random cell id (never nil)
+/// The game is usually played with a threshold of 30%
+/// (Thus the ai has the potential to make a mistake 30% of time)
+/// NOTE: the less open cells the more likely a random move will be a good move
+func randomCell(_ gameBoard:[Player], threshold: Int) -> Int? {
+    var result:Int?
+    let openCells = calcOpenCells(gameBoard: gameBoard)
+    
+    // early return
+    if openCells.count == 0 {
+        return nil
+    }
+    
+    let chanceToBeRandom = diceRoll(100)
+    // print("chanceToBeRandom \(chanceToBeRandom)")
+    if chanceToBeRandom <= threshold {
+        result = openCells.count > 0 ? openCells[diceRoll(openCells.count)] : nil
+        // print("result \(result!)")
+    }
+    return result
+}
+
+/// Returns a cell index that the AI wants to mark
+/// NOTE: AI is always cross and player is always nought (regardless of mark)
 func aiChoose(_ gameBoard:[Player], unpredicible: Bool) -> Int? {
     
     var result:Int?
     
     var openCells = calcOpenCells(gameBoard: gameBoard)
-    var occupiedCells = [Int]()
-    for (index, cell) in gameBoard.enumerated() {
-        if cell == .nought {
-            occupiedCells.append(index)
-        }
-    }
-    
-    var ownedCells = [Int]()
-    for (index, cell) in gameBoard.enumerated() {
-        if cell == .cross {
-            ownedCells.append(index)
-        }
-    }
-    
+    let occupiedCells = calcOccupiedCells(gameBoard, for: .nought)
+    let ownedCells = calcOccupiedCells(gameBoard, for: .cross)
+
     // 1. Zero open cells
     if openCells.count > 0 {
         
         // 2. Unpredicible (need to turn this off to do a true test!)
         // x% of the time be unpredictible
         if result == nil && unpredicible {
-            let chanceToBeRandom = diceRoll(20)
-            if chanceToBeRandom <= 3 {
-                result = openCells.count > 0 ? openCells[diceRoll(openCells.count)] : nil
-                //print("chanceToBeRandom \(chanceToBeRandom), result \(result)")
-            }
+            result = randomCell(gameBoard, threshold: 30)
         }
         
         // 3. Blocking move
