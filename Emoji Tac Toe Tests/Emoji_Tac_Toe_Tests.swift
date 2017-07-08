@@ -37,6 +37,15 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     let wayToWinGameBoard2:[Player] = [.nought, .cross,     .nought,
                                        .cross,  .nought,    .nought,
                                        .cross,  .untouched, .cross]
+    
+    let noughtHasMiddleAndCorner:[Player] = [.untouched, .untouched, .cross,
+                                             .untouched, .nought,    .untouched,
+                                             .untouched, .untouched, .nought]
+    
+    let crossHasMiddleAndCorner:[Player] = [ .nought, .untouched, .untouched,
+                                             .untouched, .cross,     .untouched,
+                                             .cross,     .untouched, .untouched]
+
     let noughtMark = "⭕️"
     let crossMark = "❌"
     let untouchedMark = "⬜️"
@@ -176,7 +185,7 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
                 successCount += 1
             }
         }
-        let successRange = 5000..<5200
+        let successRange = 4700..<5300
         XCTAssertTrue(successRange.contains(successCount), "successCount \(successCount)")
     }
 
@@ -212,6 +221,17 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     }
    
     // 4. Take another corner
+    func testSearchForCornerIfOpponentHasMiddleAndCornerSuccess() {
+        XCTAssertNotNil(searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameBoard: noughtHasMiddleAndCorner, for: .cross))
+        XCTAssertNotNil(searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameBoard: crossHasMiddleAndCorner, for: .nought))
+    }
+    
+    func testSearchForCornerIfOpponentHasMiddleAndCornerFail() {
+        XCTAssertNil(searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameBoard: noughtHasMiddleAndCorner, for: .nought))
+        XCTAssertNil(searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameBoard: crossHasMiddleAndCorner, for: .cross))
+    }
+
+    
     // 5. Grab a middle
     // 6. Grab a corner
     // 7. Grab the center

@@ -231,6 +231,10 @@ func randomCell(_ gameBoard:[Player], threshold: Int) -> Int? {
 
 /// Returns a block moving for specificed player, one that would pervent opponent
 /// from win or nil is there is no blocking move
+/// ⬜️⬜️❌
+/// ⬜️⭕️⬜️
+/// ⬜️⭕️⬜️
+
 func searchForBlockingMove(gameBoard: [Player], for player: Player) -> Int? {
     var result:Int?
     let openCells = calcOpenCells(gameBoard: gameBoard)
@@ -246,6 +250,32 @@ func searchForBlockingMove(gameBoard: [Player], for player: Player) -> Int? {
         if seachForWinForPlayer(testGameboard, player: opponent) {
             result = cell
         }
+    }
+    return result
+}
+
+/// Returns a corner move for specific player if opponet has middle and a corner
+/// and player has a corner or nil if no other corner move can be found
+/// ⬜️⬜️❌
+/// ⬜️⭕️⬜️
+/// ⬜️⬜️⭕️
+
+func searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameBoard: [Player], for player: Player) -> Int? {
+    var result:Int?
+    let openCells = calcOpenCells(gameBoard: gameBoard)
+    let opponent:Player = (player == .nought) ? .cross : .nought
+
+    let occupiedCells = calcOccupiedCells(gameBoard, for: opponent)
+    let ownedCells = calcOccupiedCells(gameBoard, for: player)
+
+
+    let results1 = [0,2,6,8].filter {occupiedCells.contains($0)}
+    let flag1 = occupiedCells.contains(4)
+    let results2 = [0,2,6,8].filter {ownedCells.contains($0)}
+    
+    if results1.count > 0 && flag1 && results2.count > 0 {
+        let results3 = [0,2,6,8].filter {openCells.contains($0)}
+        result = results3.count > 0 ? results3[diceRoll(results3.count)] : nil
     }
     return result
 }
@@ -278,14 +308,7 @@ func aiChoose(_ gameBoard:[Player], unpredicible: Bool) -> Int? {
         // 4. Take another corner
         // If player has middle and corner and AI has oposite corner take another corner
         if result == nil {
-            let results1 = [0,2,6,8].filter {occupiedCells.contains($0)}
-            let flag1 = occupiedCells.contains(4)
-            let results2 = [0,2,6,8].filter {ownedCells.contains($0)}
-            
-            if results1.count > 0 && flag1 && results2.count > 0 {
-                let results3 = [0,2,6,8].filter {openCells.contains($0)}
-                result = results3.count > 0 ? results3[diceRoll(results3.count)] : nil
-            }
+            result = searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameBoard: gameBoard, for: .cross)
         }
         
         // 5. Grab a middle
