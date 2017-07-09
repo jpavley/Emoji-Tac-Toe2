@@ -151,38 +151,12 @@ func seachForWinForPlayer(_ board:[Player], player:Player) -> Bool {
     return false
 }
 
-/// Returns a vector [Int] of untouched cells or an empty vector [Int]
-func calcOpenCells(gameBoard:[Player]) -> [Int] {
-    var openCells = [Int]()
-    for (index, cell) in gameBoard.enumerated() {
-        if cell == .untouched {
-            openCells.append(index)
-        }
-    }
-    return openCells
-}
-
-/// Returns true if there is more than 1 open cell or if there is only 1 open
-/// cell that nought can win if it takes that cell
-func checkForWayToWin(_ gameBoard:[Player]) -> Bool {
-    // TODO: This is pretty werid function. It is not a generalized check
-    //       that there exists a way to win on the board.
-    
-    let openCells = calcOpenCells(gameBoard: gameBoard)
-    // if there is one open cell
-    if openCells.count == 1 {
-        // make a modifiable copy of the gameBoard
-        var testGameboard = gameBoard
-        // adjust the gameBoard so that the last remaining open cell is a nought
-        testGameboard[openCells[0]] = .nought
-        // return the result of searching for a winning vector with the test gameBoard
-        return seachForWinForPlayer(testGameboard, player: .nought)
-    }
-    return true
-}
-
 /// Returns true if there are open (untouched) cell on the board
+/// ⬜️⬜️❌
+/// ⬜️⬜️⬜️
+/// ⬜️⬜️⭕️
 func checkForUntouchedCells(_ gameBoard:[Player]) -> Bool {
+    // TODO: Generalize this for all player types (.cross, .nought, .untouched
     
     for cell in gameBoard {
         if cell == .untouched {
@@ -193,9 +167,31 @@ func checkForUntouchedCells(_ gameBoard:[Player]) -> Bool {
 
 }
 
+/// Returns a vector [Int] of untouched cells or an empty vector [Int]
+/// ❌⬜️❌
+/// ⬜️⬜️⬜️
+/// ⭕️⬜️⭕️
+func calcOpenCells(gameBoard:[Player]) -> [Int] {
+    // TODO: Generalize this for all player types (.cross, .nought, .untouched
+    // TODO: Merge with calcOccupiedCells into a general calcCellInventory()
+
+    var openCells = [Int]()
+    for (index, cell) in gameBoard.enumerated() {
+        if cell == .untouched {
+            openCells.append(index)
+        }
+    }
+    return openCells
+}
+
 /// Returns array of cells with marks or emply array if there no open cells
 /// NOTE: Used for both owned and taken cells
+/// ❓❓❌
+/// ❓❓❓
+/// ❓❓⭕️
 func calcOccupiedCells(_ gameBoard:[Player], for player: Player) -> [Int] {
+    // TODO: Merge with calcOccupiedCells into a general calcCellInventory()
+
     var occupiedCells = [Int]()
     for (index, cell) in gameBoard.enumerated() {
         if cell == player {
@@ -211,6 +207,10 @@ func calcOccupiedCells(_ gameBoard:[Player], for player: Player) -> [Int] {
 /// The game is usually played with a threshold of 30%
 /// (Thus the ai has the potential to make a mistake 30% of time)
 /// NOTE: the less open cells the more likely a random move will be a good move
+/// ❓❓❌
+/// ❓❓❓
+/// ❓❓⭕️
+
 func randomCell(_ gameBoard:[Player], threshold: Int) -> Int? {
     var result:Int?
     let openCells = calcOpenCells(gameBoard: gameBoard)
@@ -229,12 +229,40 @@ func randomCell(_ gameBoard:[Player], threshold: Int) -> Int? {
     return result
 }
 
+/// Returns true if there is more than 1 open cell or if there is only 1 open
+/// cell that nought can win if it takes that cell
+/// NOTE: This is pretty werid function. It is not a generalized check
+///       that there exists a way to win on the board.
+/// ⭕️❌❌
+/// ⭕️❌❌
+/// ❓⭕️⭕️
+func checkForWayToWin(_ gameBoard:[Player]) -> Bool {
+    // TODO: Generalize this for all player types (.cross, .nought, .untouched
+    // TODO: Generalize this into a true search for a way to win even if there
+    //       is more than one cell open. (Don't just return true if openCells == 1)
+    // TODO: Merge with searchForWayToWin()
+    
+    let openCells = calcOpenCells(gameBoard: gameBoard)
+    // if there is one open cell
+    if openCells.count == 1 {
+        // make a modifiable copy of the gameBoard
+        var testGameboard = gameBoard
+        // adjust the gameBoard so that the last remaining open cell is a nought
+        testGameboard[openCells[0]] = .nought
+        // return the result of searching for a winning vector with the test gameBoard
+        return seachForWinForPlayer(testGameboard, player: .nought)
+    }
+    return true
+}
+
 /// Returns a block moving for specificed player, one that would pervent opponent
 /// from win or nil is there is no blocking move
 /// ⬜️❓❌
 /// ⬜️⭕️⬜️
 /// ⬜️⭕️⬜️
 func searchForBlockingMove(gameBoard: [Player], for player: Player) -> Int? {
+    // TODO: Merge with checkForWayToWin() as blocking move is a way to win 🤔
+    
     var result:Int?
     let openCells = calcOpenCells(gameBoard: gameBoard)
     
