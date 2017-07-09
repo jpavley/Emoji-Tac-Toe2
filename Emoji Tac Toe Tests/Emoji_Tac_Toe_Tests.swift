@@ -50,6 +50,14 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
                                               .untouched, .untouched,  .untouched,
                                               .untouched, .untouched,  .nought]
     
+    let noughtMiddleCrossCenter:[Player] = [.untouched, .untouched, .untouched,
+                                            .untouched, .cross,     .nought,
+                                            .untouched, .untouched, .nought]
+
+    let noughtCenterCrossMiddle:[Player] = [.untouched, .untouched, .untouched,
+                                            .untouched, .nought,    .cross,
+                                            .untouched, .untouched, .nought]
+    
     let noughtMark = "⭕️"
     let crossMark = "❌"
     let untouchedMark = "⬜️"
@@ -246,8 +254,19 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
         XCTAssertNil(searchForMiddleIfCorner(gameBoard: fullGameBoard, for: .nought))
     }
 
-    
     // 6. Grab a corner
+    func testSearchForCornerIfOpponentHasMiddleSuccess() {
+        XCTAssertNotNil(searchForCornerIfOpponentHasMiddle(gameBoard: noughtMiddleCrossCenter, for: .cross))
+        XCTAssertNotNil(searchForCornerIfOpponentHasMiddle(gameBoard: noughtCenterCrossMiddle, for: .nought))
+    }
+    
+    func testSearchForCornerIfOpponentHasMiddleFail() {
+        XCTAssertNil(searchForCornerIfOpponentHasMiddle(gameBoard: noughtMiddleCrossCenter, for: .nought))
+        XCTAssertNil(searchForCornerIfOpponentHasMiddle(gameBoard: noughtCenterCrossMiddle, for: .cross))
+    }
+
+    
+    
     // 7. Grab the center
     // 8. Grab a middle position
     // 9. Grab corner opposite opponent

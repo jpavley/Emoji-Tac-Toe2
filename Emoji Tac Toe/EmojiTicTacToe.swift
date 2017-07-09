@@ -6,6 +6,11 @@
 //  Copyright © 2016 Epic Loot. All rights reserved.
 //
 
+// NOTE: Almost all functions names should start with the following prefixs:
+//       - check: a query that returns true or false
+//       - search: a query that returns results
+//       - calc: a query that reutrns a value
+
 import Foundation
 
 enum Player:String {
@@ -210,8 +215,9 @@ func calcOccupiedCells(_ gameBoard:[Player], for player: Player) -> [Int] {
 /// ❓❓❌
 /// ❓❓❓
 /// ❓❓⭕️
-
 func randomCell(_ gameBoard:[Player], threshold: Int) -> Int? {
+    // TODO: change function name to calcRandomCell()
+    
     var result:Int?
     let openCells = calcOpenCells(gameBoard: gameBoard)
     
@@ -328,6 +334,27 @@ func searchForMiddleIfCorner(gameBoard: [Player], for player: Player) -> Int? {
     return result
 }
 
+/// Returns a corner move if the opponent already has a middle or nil
+/// NOTE: Middle is not center. Center is cell 4 while cells 1, 3, 5, 7 are middles
+/// ❓⬜️❓
+/// ⬜️❌⭕️
+/// ❓⬜️❓
+func searchForCornerIfOpponentHasMiddle(gameBoard: [Player], for player: Player) -> Int? {
+    // TODO: Use specific var names (results1 and results2 too general)
+
+    var result:Int?
+    let openCells = calcOpenCells(gameBoard: gameBoard)
+    let opponent:Player = (player == .nought) ? .cross : .nought
+    let occupiedCells = calcOccupiedCells(gameBoard, for: opponent)
+
+    let results1 = [1,3,5,7].filter {occupiedCells.contains($0)}
+    if results1.count > 0 {
+        let results2 = [0,2,6,8].filter {openCells.contains($0)}
+        result = results2.count > 0 ? results2[diceRoll(results2.count)] : nil
+    }
+    return result
+}
+
 /// Returns a cell index that the AI wants to mark
 /// NOTE: AI is always cross and player is always nought (regardless of mark)
 func aiChoose(_ gameBoard:[Player], unpredicible: Bool) -> Int? {
@@ -368,11 +395,7 @@ func aiChoose(_ gameBoard:[Player], unpredicible: Bool) -> Int? {
         // 6. Grab a corner
         // Player has a middle grab a corner
         if result == nil {
-            let results1 = [1,3,5,7].filter {occupiedCells.contains($0)}
-            if results1.count > 0 {
-                let results2 = [0,2,6,8].filter {openCells.contains($0)}
-                result = results2.count > 0 ? results2[diceRoll(results2.count)] : nil
-            }
+            result = searchForCornerIfOpponentHasMiddle(gameBoard: gameBoard, for: .cross)
         }
         
         // 7. Grab the center
