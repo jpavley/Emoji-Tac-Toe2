@@ -287,8 +287,8 @@ func searchForBlockingMove(gameBoard: [Player], for player: Player) -> Int? {
 /// ⬜️⭕️⬜️
 /// ❓⬜️⭕️
 func searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameBoard: [Player], for player: Player) -> Int? {
-    
     // TODO: Is this ever called? searchForBlockingMove() should catch this use case!
+    // TODO: Use specific var names (results1 and results2 too general)
     
     var result:Int?
     let openCells = calcOpenCells(gameBoard: gameBoard)
@@ -314,6 +314,8 @@ func searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameBoard: [Player], for
 /// ❓⬜️❓
 /// ⬜️❓⭕️
 func searchForMiddleIfCorner(gameBoard: [Player], for player: Player) -> Int? {
+    // TODO: Use specific var names (results1 and results2 too general)
+    
     var result:Int?
     let openCells = calcOpenCells(gameBoard: gameBoard)
     let ownedCells = calcOccupiedCells(gameBoard, for: player)
