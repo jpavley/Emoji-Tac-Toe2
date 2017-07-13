@@ -264,10 +264,16 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
         XCTAssertNil(searchForCornerIfOpponentHasMiddle(gameBoard: noughtMiddleCrossCenter, for: .nought))
         XCTAssertNil(searchForCornerIfOpponentHasMiddle(gameBoard: noughtCenterCrossMiddle, for: .cross))
     }
-
-    
     
     // 7. Grab the center
+    func testSearchForCenterIfOpenSuccess() {
+        XCTAssertNotNil(searchForCenterIfOpen(gameBoard: freshGameBoard))
+    }
+    
+    func testSearchForCenterIfOpenFial() {
+        XCTAssertNil(searchForCenterIfOpen(gameBoard: fullGameBoard))
+    }
+    
     // 8. Grab a middle position
     // 9. Grab corner opposite opponent
     // 10. Winning Move

@@ -10,6 +10,7 @@
 //       - check: a query that returns true or false
 //       - search: a query that returns results
 //       - calc: a query that reutrns a value
+//       - transform: mutate the input data type into the output data type
 
 import Foundation
 
@@ -355,6 +356,21 @@ func searchForCornerIfOpponentHasMiddle(gameBoard: [Player], for player: Player)
     return result
 }
 
+/// Returns a center move if open or nil if not.
+/// ⬜️⬜️⬜️
+/// ⬜️❓⬜️
+/// ⬜️⬜️⬜️
+func searchForCenterIfOpen(gameBoard: [Player]) -> Int? {
+    var result:Int?
+    let openCells = calcOpenCells(gameBoard: gameBoard)
+
+    if openCells.contains(4) {
+        result = 4
+    }
+    
+    return result
+}
+
 /// Returns a cell index that the AI wants to mark
 /// NOTE: AI is always cross and player is always nought (regardless of mark)
 func aiChoose(_ gameBoard:[Player], unpredicible: Bool) -> Int? {
@@ -401,9 +417,7 @@ func aiChoose(_ gameBoard:[Player], unpredicible: Bool) -> Int? {
         // 7. Grab the center
         // Grab the center if it's open
         if result == nil {
-            if openCells.contains(4) {
-                result = 4
-            }
+            result = searchForCenterIfOpen(gameBoard: gameBoard)
         }
         
         // 8. Grab a middle position
