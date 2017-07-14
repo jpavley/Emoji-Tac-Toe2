@@ -15,6 +15,10 @@ import AVFoundation
 // HINT: User prefs
 // TODO: Save as user prefs
 
+enum GameStatus {
+    case notStarted, starting, inProgress, playerPlaying, aiPlaying, win, tie
+}
+
 var noughtMark = "⭕️"
 var crossMark = "❌"
 

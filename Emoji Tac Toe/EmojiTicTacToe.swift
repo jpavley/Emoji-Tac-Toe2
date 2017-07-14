@@ -18,9 +18,19 @@ enum Player:String {
     case untouched, nought, cross
 }
 
-enum GameStatus {
-    case notStarted, starting, inProgress, playerPlaying, aiPlaying, win, tie
+enum Cell: Int {
+    case topLeft = 0
+    case topMiddle = 1
+    case topRight = 2
+    case midLeft = 3
+    case center = 4
+    case midRight = 5
+    case botLeft = 6
+    case botMiddle = 7
+    case botRight = 8
 }
+
+typealias GameBoard = [Player]
 
 let emojiSections = [0, 171, 389, 654, 844]
 
@@ -129,6 +139,9 @@ func transformGameIntoText(gameboard: [Player], noughtMark: String, crossMark: S
         
     return result
 }
+
+// TODO: Project the search functions: are all getting called? Are they in the
+//       optimal order?
 
 /// Returns the first winning vector found or nil is there is no win
 func searchForWin(_ gameBoard:[Player]) -> [Int]? {
@@ -371,6 +384,25 @@ func searchForCenterIfOpen(gameBoard: [Player]) -> Int? {
     return result
 }
 
+/// Returns a middle move if the player already has the center or nil
+/// NOTE: Middle is not center. Center is cell 4 while cells 1, 3, 5, 7 are middles
+/// ⬜️❓⬜️
+/// ❓❌❓
+/// ⬜️❓⭕️
+func searchForMiddleIfCenter(gameBoard: [Player], for player: Player) -> Int? {
+    // TODO: Use specific var names (results1 and results2 too general)
+
+    var result:Int?
+    let openCells = calcOpenCells(gameBoard: gameBoard)
+    let ownedCells = calcOccupiedCells(gameBoard, for: player)
+
+    if ownedCells.contains(4) {
+        let results = [1,3,5,7].filter {openCells.contains($0)}
+        result = results[diceRoll(results.count)]
+    }
+    return result
+}
+
 /// Returns a cell index that the AI wants to mark
 /// NOTE: AI is always cross and player is always nought (regardless of mark)
 func aiChoose(_ gameBoard:[Player], unpredicible: Bool) -> Int? {
@@ -379,7 +411,6 @@ func aiChoose(_ gameBoard:[Player], unpredicible: Bool) -> Int? {
     
     var openCells = calcOpenCells(gameBoard: gameBoard)
     let occupiedCells = calcOccupiedCells(gameBoard, for: .nought)
-    let ownedCells = calcOccupiedCells(gameBoard, for: .cross)
 
     // 1. Zero open cells
     if openCells.count > 0 {
@@ -423,10 +454,7 @@ func aiChoose(_ gameBoard:[Player], unpredicible: Bool) -> Int? {
         // 8. Grab a middle position
         // if AI has the center grab middle position
         if result == nil {
-            if ownedCells.contains(4) {
-                let results = [1,3,5,7].filter {openCells.contains($0)}
-                result = results[diceRoll(results.count)]
-            }
+            result = searchForMiddleIfCenter(gameBoard: gameBoard, for: .cross)
         }
         
         // 9. Grab corner opposite opponent

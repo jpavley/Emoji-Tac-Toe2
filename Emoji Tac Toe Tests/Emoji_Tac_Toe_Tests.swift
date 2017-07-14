@@ -275,6 +275,7 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     }
     
     // 8. Grab a middle position
+    
     // 9. Grab corner opposite opponent
     // 10. Winning Move
     // 11. Any corner
