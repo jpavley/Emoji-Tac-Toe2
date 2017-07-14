@@ -35,9 +35,9 @@ var noughtWins = 0
 var crossWins = 0
 var draws = 0
 
-var gameBoard:[Player] = [.untouched, .untouched, .untouched,
-                          .untouched, .untouched, .untouched,
-                          .untouched, .untouched, .untouched]
+var gameBoard:GameBoard = [.untouched, .untouched, .untouched,
+                           .untouched, .untouched, .untouched,
+                           .untouched, .untouched, .untouched]
 
 var winLooseAVPlayer = AVAudioPlayer()
 var noughtAVPlayer = AVAudioPlayer()

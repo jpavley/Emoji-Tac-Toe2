@@ -111,14 +111,14 @@ let winningVectors = [
 ]
 
 struct TicTacToeGame {
-    var gameBoard:[Player]
+    var gameBoard:GameBoard
     var noughtMark:String
     var crossMark:String
     var gameOver:Bool
 }
 
 /// Returns a string with line breaks and emoji that represents the game
-func transformGameIntoText(gameboard: [Player], noughtMark: String, crossMark: String, untouchedMark: String) -> String {
+func transformGameIntoText(gameboard: GameBoard, noughtMark: String, crossMark: String, untouchedMark: String) -> String {
     var result = ""
     
     for (index, cell) in gameboard.enumerated() {
@@ -144,7 +144,7 @@ func transformGameIntoText(gameboard: [Player], noughtMark: String, crossMark: S
 //       optimal order?
 
 /// Returns the first winning vector found or nil is there is no win
-func searchForWin(_ gameBoard:[Player]) -> [Int]? {
+func searchForWin(_ gameBoard:GameBoard) -> [Int]? {
     
     for vector in winningVectors {
         if gameBoard[vector[0]] != .untouched && gameBoard[vector[0]] == gameBoard[vector[1]] && gameBoard[vector[0]] == gameBoard[vector[2]] {
@@ -156,7 +156,7 @@ func searchForWin(_ gameBoard:[Player]) -> [Int]? {
 
 
 /// Returns true if the player has a winning vector on the gameboard
-func seachForWinForPlayer(_ board:[Player], player:Player) -> Bool {
+func seachForWinForPlayer(_ board:GameBoard, player:Player) -> Bool {
     
     for vector in winningVectors {
         if board[vector[0]] == player {
@@ -174,7 +174,7 @@ func seachForWinForPlayer(_ board:[Player], player:Player) -> Bool {
 /// ⬜️⬜️❌
 /// ⬜️⬜️⬜️
 /// ⬜️⬜️⭕️
-func checkForUntouchedCells(_ gameBoard:[Player]) -> Bool {
+func checkForUntouchedCells(_ gameBoard:GameBoard) -> Bool {
     // TODO: Generalize this for all player types (.cross, .nought, .untouched
     
     for cell in gameBoard {
@@ -190,7 +190,7 @@ func checkForUntouchedCells(_ gameBoard:[Player]) -> Bool {
 /// ❌⬜️❌
 /// ⬜️⬜️⬜️
 /// ⭕️⬜️⭕️
-func calcOpenCells(gameBoard:[Player]) -> [Int] {
+func calcOpenCells(gameBoard:GameBoard) -> [Int] {
     // TODO: Generalize this for all player types (.cross, .nought, .untouched
     // TODO: Merge with calcOccupiedCells into a general calcCellInventory()
 
@@ -208,7 +208,7 @@ func calcOpenCells(gameBoard:[Player]) -> [Int] {
 /// ❓❓❌
 /// ❓❓❓
 /// ❓❓⭕️
-func calcOccupiedCells(_ gameBoard:[Player], for player: Player) -> [Int] {
+func calcOccupiedCells(_ gameBoard:GameBoard, for player: Player) -> [Int] {
     // TODO: Merge with calcOccupiedCells into a general calcCellInventory()
 
     var occupiedCells = [Int]()
@@ -229,7 +229,7 @@ func calcOccupiedCells(_ gameBoard:[Player], for player: Player) -> [Int] {
 /// ❓❓❌
 /// ❓❓❓
 /// ❓❓⭕️
-func randomCell(_ gameBoard:[Player], threshold: Int) -> Int? {
+func randomCell(_ gameBoard:GameBoard, threshold: Int) -> Int? {
     // TODO: change function name to calcRandomCell()
     
     var result:Int?
@@ -256,7 +256,7 @@ func randomCell(_ gameBoard:[Player], threshold: Int) -> Int? {
 /// ⭕️❌❌
 /// ⭕️❌❌
 /// ❓⭕️⭕️
-func checkForWayToWin(_ gameBoard:[Player]) -> Bool {
+func checkForWayToWin(_ gameBoard:GameBoard) -> Bool {
     // TODO: Generalize this for all player types (.cross, .nought, .untouched
     // TODO: Generalize this into a true search for a way to win even if there
     //       is more than one cell open. (Don't just return true if openCells == 1)
@@ -280,7 +280,7 @@ func checkForWayToWin(_ gameBoard:[Player]) -> Bool {
 /// ⬜️❓❌
 /// ⬜️⭕️⬜️
 /// ⬜️⭕️⬜️
-func searchForBlockingMove(gameBoard: [Player], for player: Player) -> Int? {
+func searchForBlockingMove(gameBoard: GameBoard, for player: Player) -> Int? {
     // TODO: Merge with checkForWayToWin() as blocking move is a way to win 🤔
     
     var result:Int?
@@ -306,7 +306,7 @@ func searchForBlockingMove(gameBoard: [Player], for player: Player) -> Int? {
 /// ❓⬜️❌
 /// ⬜️⭕️⬜️
 /// ❓⬜️⭕️
-func searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameBoard: [Player], for player: Player) -> Int? {
+func searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameBoard: GameBoard, for player: Player) -> Int? {
     // TODO: Is this ever called? searchForBlockingMove() should catch this use case!
     // TODO: Use specific var names (results1 and results2 too general)
     
@@ -333,7 +333,7 @@ func searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameBoard: [Player], for
 /// ⬜️❓❌
 /// ❓⬜️❓
 /// ⬜️❓⭕️
-func searchForMiddleIfCorner(gameBoard: [Player], for player: Player) -> Int? {
+func searchForMiddleIfCorner(gameBoard: GameBoard, for player: Player) -> Int? {
     // TODO: Use specific var names (results1 and results2 too general)
     
     var result:Int?
@@ -353,7 +353,7 @@ func searchForMiddleIfCorner(gameBoard: [Player], for player: Player) -> Int? {
 /// ❓⬜️❓
 /// ⬜️❌⭕️
 /// ❓⬜️❓
-func searchForCornerIfOpponentHasMiddle(gameBoard: [Player], for player: Player) -> Int? {
+func searchForCornerIfOpponentHasMiddle(gameBoard: GameBoard, for player: Player) -> Int? {
     // TODO: Use specific var names (results1 and results2 too general)
 
     var result:Int?
@@ -373,7 +373,7 @@ func searchForCornerIfOpponentHasMiddle(gameBoard: [Player], for player: Player)
 /// ⬜️⬜️⬜️
 /// ⬜️❓⬜️
 /// ⬜️⬜️⬜️
-func searchForCenterIfOpen(gameBoard: [Player]) -> Int? {
+func searchForCenterIfOpen(gameBoard: GameBoard) -> Int? {
     var result:Int?
     let openCells = calcOpenCells(gameBoard: gameBoard)
 
@@ -389,7 +389,7 @@ func searchForCenterIfOpen(gameBoard: [Player]) -> Int? {
 /// ⬜️❓⬜️
 /// ❓❌❓
 /// ⬜️❓⭕️
-func searchForMiddleIfCenter(gameBoard: [Player], for player: Player) -> Int? {
+func searchForMiddleIfCenter(gameBoard: GameBoard, for player: Player) -> Int? {
     // TODO: Use specific var names (results1 and results2 too general)
 
     var result:Int?
@@ -405,7 +405,7 @@ func searchForMiddleIfCenter(gameBoard: [Player], for player: Player) -> Int? {
 
 /// Returns a cell index that the AI wants to mark
 /// NOTE: AI is always cross and player is always nought (regardless of mark)
-func aiChoose(_ gameBoard:[Player], unpredicible: Bool) -> Int? {
+func aiChoose(_ gameBoard:GameBoard, unpredicible: Bool) -> Int? {
     
     var result:Int?
     
@@ -537,7 +537,7 @@ func loadEmojisIntoArray(from fileName: String, fileType: String) -> [String]? {
 }
 
 
-let freshGameBoard:[Player] = [.untouched, .untouched, .untouched,
+let freshGameBoard:GameBoard = [.untouched, .untouched, .untouched,
                                .untouched, .untouched, .untouched,
                                .untouched, .untouched, .untouched]
 

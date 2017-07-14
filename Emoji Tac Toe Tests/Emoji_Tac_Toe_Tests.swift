@@ -14,49 +14,49 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     
     var ticTacToeUT: TicTacToeGame!
     
-    let noughtWinningGameBoard:[Player] = [.nought,    .untouched, .cross,
-                                           .untouched, .nought,    .untouched,
-                                           .cross,     .untouched, .nought]
+    let noughtWinningGameBoard:GameBoard = [.nought,    .untouched, .cross,
+                                            .untouched, .nought,    .untouched,
+                                            .cross,     .untouched, .nought]
     
-    let crossWinningGameBoard:[Player] = [.untouched, .nought, .untouched,
-                                          .cross,     .cross,  .cross,
-                                          .untouched, .nought, .untouched]
+    let crossWinningGameBoard:GameBoard = [.untouched, .nought, .untouched,
+                                           .cross,     .cross,  .cross,
+                                           .untouched, .nought, .untouched]
     
-    let losingGameBoard:[Player] = [.nought, .cross,     .nought,
-                                    .cross,  .untouched, .nought,
-                                    .cross,  .nought,    .cross]
+    let losingGameBoard:GameBoard = [.nought, .cross,     .nought,
+                                     .cross,  .untouched, .nought,
+                                     .cross,  .nought,    .cross]
     
-    let fullGameBoard:[Player] = [.nought, .cross,  .nought,
-                                  .cross,  .nought, .nought,
-                                  .cross,  .nought, .cross]
-
-    let wayToWinGameBoard:[Player] = [.nought, .untouched, .nought,
-                                      .cross,  .nought,    .nought,
-                                      .cross,  .nought,    .cross]
+    let fullGameBoard:GameBoard = [.nought, .cross,  .nought,
+                                   .cross,  .nought, .nought,
+                                   .cross,  .nought, .cross]
     
-    let wayToWinGameBoard2:[Player] = [.nought, .cross,     .nought,
+    let wayToWinGameBoard:GameBoard = [.nought, .untouched, .nought,
                                        .cross,  .nought,    .nought,
-                                       .cross,  .untouched, .cross]
+                                       .cross,  .nought,    .cross]
     
-    let noughtHasMiddleAndCorner:[Player] = [.untouched, .untouched, .cross,
-                                             .untouched, .nought,    .untouched,
+    let wayToWinGameBoard2:GameBoard = [.nought, .cross,     .nought,
+                                        .cross,  .nought,    .nought,
+                                        .cross,  .untouched, .cross]
+    
+    let noughtHasMiddleAndCorner:GameBoard = [.untouched, .untouched, .cross,
+                                              .untouched, .nought,    .untouched,
+                                              .untouched, .untouched, .nought]
+    
+    let crossHasMiddleAndCorner:GameBoard = [ .nought, .untouched, .untouched,
+                                              .untouched, .cross,     .untouched,
+                                              .cross,     .untouched, .untouched]
+    
+    let noughtCornerCrossHasCorner:GameBoard = [.untouched, .untouched, .cross,
+                                                .untouched, .untouched,  .untouched,
+                                                .untouched, .untouched,  .nought]
+    
+    let noughtMiddleCrossCenter:GameBoard = [.untouched, .untouched, .untouched,
+                                             .untouched, .cross,     .nought,
                                              .untouched, .untouched, .nought]
     
-    let crossHasMiddleAndCorner:[Player] = [ .nought, .untouched, .untouched,
-                                             .untouched, .cross,     .untouched,
-                                             .cross,     .untouched, .untouched]
-    
-    let noughtCornerCrossHasCorner:[Player] = [.untouched, .untouched, .cross,
-                                              .untouched, .untouched,  .untouched,
-                                              .untouched, .untouched,  .nought]
-    
-    let noughtMiddleCrossCenter:[Player] = [.untouched, .untouched, .untouched,
-                                            .untouched, .cross,     .nought,
-                                            .untouched, .untouched, .nought]
-
-    let noughtCenterCrossMiddle:[Player] = [.untouched, .untouched, .untouched,
-                                            .untouched, .nought,    .cross,
-                                            .untouched, .untouched, .nought]
+    let noughtCenterCrossMiddle:GameBoard = [.untouched, .untouched, .untouched,
+                                             .untouched, .nought,    .cross,
+                                             .untouched, .untouched, .nought]
     
     let noughtMark = "⭕️"
     let crossMark = "❌"
