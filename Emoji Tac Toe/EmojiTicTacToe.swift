@@ -403,14 +403,42 @@ func searchForMiddleIfCenter(gameBoard: GameBoard, for player: Player) -> Int? {
     return result
 }
 
+/// Returns a corner move opposite the opponents corner or nil
+/// ❓⬜️⬜️
+/// ⬜️⬜️⬜️
+/// ⬜️⬜️⭕️
+func searchForCornerOppositeOpponent(gameBoard: GameBoard, for player: Player) -> Int? {
+    var result:Int?
+    let openCells = calcOpenCells(gameBoard: gameBoard)
+    let opponent:Player = (player == .nought) ? .cross : .nought
+    let occupiedCells = calcOccupiedCells(gameBoard, for: opponent)
+
+    if occupiedCells.contains(0) {
+        if openCells.contains(8) {
+            result = 8
+        }
+    } else if occupiedCells.contains(2) {
+        if openCells.contains(6) {
+            result = 6
+        }
+    } else if occupiedCells.contains(6) {
+        if openCells.contains(2) {
+            result = 2
+        }
+    } else if occupiedCells.contains(8) {
+        if openCells.contains(0) {
+            result = 0
+        }
+    }
+    return result
+}
+
 /// Returns a cell index that the AI wants to mark
 /// NOTE: AI is always cross and player is always nought (regardless of mark)
 func aiChoose(_ gameBoard:GameBoard, unpredicible: Bool) -> Int? {
     
     var result:Int?
-    
     var openCells = calcOpenCells(gameBoard: gameBoard)
-    let occupiedCells = calcOccupiedCells(gameBoard, for: .nought)
 
     // 1. Zero open cells
     if openCells.count > 0 {
@@ -460,23 +488,7 @@ func aiChoose(_ gameBoard:GameBoard, unpredicible: Bool) -> Int? {
         // 9. Grab corner opposite opponent
         // Search for a corner opposite the opponent
         if result == nil {
-            if occupiedCells.contains(0) {
-                if openCells.contains(8) {
-                    result = 8
-                }
-            } else if occupiedCells.contains(2) {
-                if openCells.contains(6) {
-                    result = 6
-                }
-            } else if occupiedCells.contains(6) {
-                if openCells.contains(2) {
-                    result = 2
-                }
-            } else if occupiedCells.contains(8) {
-                if openCells.contains(0) {
-                    result = 0
-                }
-            }
+            result = searchForCornerOppositeOpponent(gameBoard: gameBoard, for: .cross)
         }
         
         // 10. Winning Move
