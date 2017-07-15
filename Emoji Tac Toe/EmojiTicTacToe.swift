@@ -312,6 +312,25 @@ func checkForWayToWin(_ gameBoard:GameBoard) -> Bool {
     return true
 }
 
+/// Returns a winning move for the player or nil
+/// ⬜️❓⭕️
+/// ⬜️❌⬜️
+/// ⬜️❌⬜️
+func searchForWinningMove(gameBoard: GameBoard, for player: Player) -> Int? {
+    var result:Int?
+    let openCells = calcOpenCells(gameBoard: gameBoard)
+    
+    for cell in openCells {
+        var testGameboard = gameBoard
+        testGameboard[cell] = player
+        
+        if seachForWinForPlayer(testGameboard, player: player) {
+            result = cell
+        }
+    }
+    return result
+}
+
 /// Returns a block moving for specificed player, one that would pervent opponent
 /// from win or nil is there is no blocking move
 /// ⬜️❓❌
@@ -320,22 +339,11 @@ func checkForWayToWin(_ gameBoard:GameBoard) -> Bool {
 func searchForBlockingMove(gameBoard: GameBoard, for player: Player) -> Int? {
     // TODO: Merge with checkForWayToWin() as blocking move is a way to win 🤔
     
-    var result:Int?
-    let openCells = calcOpenCells(gameBoard: gameBoard)
-    
     // reverse player as we find a winning move for the opponent and 
     // return it as a blocking move for the player
-    let opponent:Player = (player == .nought) ? .cross : .nought
+    let opponent: Player = (player == .nought) ? .cross : .nought
     
-    for cell in openCells {
-        var testGameboard = gameBoard
-        testGameboard[cell] = opponent
-        
-        if seachForWinForPlayer(testGameboard, player: opponent) {
-            result = cell
-        }
-    }
-    return result
+    return searchForWinningMove(gameBoard: gameBoard, for: opponent)
 }
 
 /// Returns a corner move for specific player if opponet has middle and a corner
@@ -530,13 +538,16 @@ func aiChoose(_ gameBoard:GameBoard, unpredicible: Bool) -> Int? {
         
         // 10. Winning Move
         // Search for winning move
-        for cell in openCells {
-            var testGameboard = gameBoard
-            testGameboard[cell] = .cross
-            if seachForWinForPlayer(testGameboard, player: .cross) {
-                result = cell
-            }
-        }
+        // if result == nil {
+            // TODO: Originally search for winning move was not wrapped by result==nil
+            //       which means it is always called, even if a result was found previously.
+            //       And yet then I search for any corner and for a random move.
+            //       In hindsight, none of this makes sense. So the todo here is to 
+            //       make it make sense. Probably need to look for a winning move at the 
+            //       very beginning or very end.
+        result = searchForWinningMove(gameBoard: gameBoard, for: .cross)
+        // }
+        
         
         // 11. Any corner
         // Search for a corner

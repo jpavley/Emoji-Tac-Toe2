@@ -316,6 +316,17 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     }
     
     // 10. Winning Move
+    
+    func testSearchForWinningMoveFail() {
+        XCTAssertNil(searchForWinningMove(gameBoard: noughtWinningGameBoard, for: .cross))
+        XCTAssertNil(searchForWinningMove(gameBoard: crossWinningGameBoard, for: .nought))
+    }
+    
+    func testSearchForWinningMoveSuccess() {
+        XCTAssertNotNil(searchForWinningMove(gameBoard: noughtWinningGameBoard, for: .nought))
+        XCTAssertNotNil(searchForWinningMove(gameBoard: crossWinningGameBoard, for: .cross))
+    }
+
     // 11. Any corner
     // 12. Random move
     
