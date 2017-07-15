@@ -293,10 +293,27 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     }
     
     // 9. Grab corner opposite opponent
-    func testSearchForConterOpposteOpponentFail() {
+    func testSearchForConterOpposteOpponentSuccess() {
+        let testGame1 = transformTextIntoGameBoard(textRepresentation: "________o")
+        XCTAssertNotNil(searchForCornerOppositeOpponent(gameBoard: testGame1!, for: .cross))
         
+        let testGame3 = transformTextIntoGameBoard(textRepresentation: "__o______")
+        XCTAssertNotNil(searchForCornerOppositeOpponent(gameBoard: testGame3!, for: .cross))
+        
+        let testGame4 = transformTextIntoGameBoard(textRepresentation: "______o__")
+        XCTAssertNotNil(searchForCornerOppositeOpponent(gameBoard: testGame4!, for: .cross))
+        
+        let testGame2 = transformTextIntoGameBoard(textRepresentation: "x________")
+        XCTAssertNotNil(searchForCornerOppositeOpponent(gameBoard: testGame2!, for: .nought))
     }
     
+    func testSearchForConterOpposteOpponentFail() {
+        let testGame1 = transformTextIntoGameBoard(textRepresentation: "x_x___x_o")
+        XCTAssertNil(searchForCornerOppositeOpponent(gameBoard: testGame1!, for: .cross))
+        
+        let testGame2 = transformTextIntoGameBoard(textRepresentation: "o_o___o_x")
+        XCTAssertNil(searchForCornerOppositeOpponent(gameBoard: testGame2!, for: .nought))
+    }
     
     // 10. Winning Move
     // 11. Any corner
