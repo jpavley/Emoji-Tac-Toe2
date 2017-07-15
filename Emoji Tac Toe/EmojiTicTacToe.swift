@@ -118,7 +118,11 @@ struct TicTacToeGame {
 }
 
 /// Returns a string with line breaks and emoji that represents the game
+/// .nought     .untouched .nought
+/// .untouched .cross      .untouched
+/// .untouched .cross      .untouched
 func transformGameIntoText(gameboard: GameBoard, noughtMark: String, crossMark: String, untouchedMark: String) -> String {
+    // TODO: Return an optional if string can not be created
     var result = ""
     
     for (index, cell) in gameboard.enumerated() {
@@ -140,7 +144,40 @@ func transformGameIntoText(gameboard: GameBoard, noughtMark: String, crossMark: 
     return result
 }
 
-// TODO: Project the search functions: are all getting called? Are they in the
+/// Returns a GameBoard based on a text representation of a game. The text must reprent a 
+/// complete game with 9 cells. By default the marks o, x, and _ are used.
+/// o_o
+/// _x_
+/// _x_
+func transformTextIntoGameBoard(textRepresentation: String, noughtMark: String = "o", crossMark: String = "x", untouchedMark: String = "_") -> GameBoard? {
+    var result:GameBoard?
+    
+    if textRepresentation.characters.count < 9 {
+        // incomplete gameboard
+        return result
+    }
+    
+    result = GameBoard()
+    
+    for mark in textRepresentation.characters {
+        switch mark {
+        case Character(noughtMark):
+            result?.append(.nought)
+        case Character(crossMark):
+            result?.append(.cross)
+        case Character(untouchedMark):
+            result?.append(.untouched)
+        default:
+            // textRepresentation contains unexpected data--Abort!
+            result = nil
+            break
+        }
+    }
+    
+    return result
+}
+
+// TODO: Profile the search functions: are all getting called? Are they in the
 //       optimal order?
 
 /// Returns the first winning vector found or nil is there is no win

@@ -275,16 +275,22 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     }
     
     // 8. Grab a middle position
-    
     func testSearchForMiddleIfCenterFail() {
         XCTAssertNil(searchForMiddleIfCenter(gameBoard: noughtCenterCrossMiddle, for: .cross))
+        XCTAssertNil(searchForMiddleIfCenter(gameBoard: noughtMiddleCrossCenter, for: .nought))
     }
     
     func testSearchForMiddleIfCenterSuccess() {
         XCTAssertNotNil(searchForMiddleIfCenter(gameBoard: noughtMiddleCrossCenter, for: .cross))
+        XCTAssertNotNil(searchForMiddleIfCenter(gameBoard: noughtCenterCrossMiddle, for: .nought))
     }
     
     // 9. Grab corner opposite opponent
+    func testSearchForConterOpposteOpponentFail() {
+        
+    }
+    
+    
     // 10. Winning Move
     // 11. Any corner
     // 12. Random move
