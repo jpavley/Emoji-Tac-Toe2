@@ -84,11 +84,18 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     }
     
     func testTransformGameIntoText() {
-        
         let requiredGameText = "⭕️ ❌ ⭕️ \n❌ ⬜️ ⭕️ \n❌ ⭕️ ❌ \n"
         ticTacToeUT.gameBoard = losingGameBoard
         
         XCTAssertEqual(requiredGameText, transformGameIntoText(gameboard: ticTacToeUT.gameBoard, noughtMark: "⭕️", crossMark: "❌", untouchedMark: "⬜️"))
+    }
+    
+    func testTransformTextIntoGameBoard() {
+        XCTAssertEqual(losingGameBoard, transformTextIntoGameBoard(textRepresentation: "oxox_oxox")!)
+        XCTAssertNil(transformTextIntoGameBoard(textRepresentation: "oxox_oxo"))
+        XCTAssertNil(transformTextIntoGameBoard(textRepresentation: "oxo@_oxox"))
+        XCTAssertEqual(losingGameBoard, transformTextIntoGameBoard(textRepresentation: "*+*+-*+*+", noughtMark: "*", crossMark: "+", untouchedMark: "-")!)
+
     }
     
     func testSearchForWinFail() {
