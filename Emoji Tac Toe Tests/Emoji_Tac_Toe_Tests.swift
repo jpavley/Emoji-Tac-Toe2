@@ -328,7 +328,16 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     }
 
     // 11. Any corner
-    // 12. Random move
+    
+    func testSearchForAnyOpenCornerFail() {
+        let testGame1 = transformTextIntoGameBoard(textRepresentation: "o_o___o_o")
+        XCTAssertNil(searchForAnyOpenCorner(gameBoard: testGame1!))
+    }
+    
+    func testSearchForAnyOpenCornerSuccess() {
+        XCTAssertNotNil(searchForAnyOpenCorner(gameBoard: freshGameBoard))
+    }
+
     
     
     
