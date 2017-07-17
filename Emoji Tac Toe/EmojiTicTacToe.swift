@@ -555,7 +555,7 @@ func aiChoose(_ gameBoard:GameBoard, unpredicible: Bool) -> Int? {
         // Search for a corner opposite the opponent
         if result == nil {
             result = searchForCornerOppositeOpponent(gameBoard: gameBoard, for: .cross)
-            print("searchForCornerOppositeOpponent \(result!)")
+            if result != nil { print("searchForCornerOppositeOpponent \(result!)") }
         }
         
         // 10. Winning Move
