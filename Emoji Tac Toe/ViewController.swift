@@ -553,7 +553,7 @@ class ViewController: UIViewController {
         if mysteryMode {
             battleModeSignal = "⚔️"
         }
-        titleLabel.text =  "\(noughtMark) vs \(crossMark)  \(noughtWins):\(crossWins):\(draws) \(battleModeSignal)"
+        titleLabel.text =  "\(battleModeSignal) \(noughtMark) vs \(crossMark)  \(noughtWins):\(crossWins):\(draws) \(battleModeSignal)"
     }
     
     func updateStatus(_ mode:GameStatus) {
