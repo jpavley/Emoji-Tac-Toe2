@@ -218,7 +218,7 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             data = player2Data[row]
         }
 
-        let title = NSAttributedString(string: data!, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 36.0, weight: UIFontWeightRegular)])
+        let title = NSAttributedString(string: data!, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 36.0, weight: UIFont.Weight.regular)])
         label?.attributedText = title
         label?.textAlignment = .center
         return label!

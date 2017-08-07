@@ -69,7 +69,7 @@ class ViewController: UIViewController {
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             
-            if activityViewController.responds(to: #selector(getter: UIViewController.popoverPresentationController)) {
+            if NSObject.responds(to: #selector(getter: UIViewController.popoverPresentationController)) {
                 activityViewController.popoverPresentationController?.sourceView = self.view
             }
         }
@@ -388,7 +388,7 @@ class ViewController: UIViewController {
 
     }
     
-    func aiClassicTakeTurn() {
+    @objc func aiClassicTakeTurn() {
         if let aiCell = aiChoose(gameBoard, unpredicible: true) {
             neutralizeGameboard()
             updateStatus(.inProgress)
