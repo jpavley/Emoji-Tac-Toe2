@@ -85,7 +85,7 @@ class ViewController: UIViewController {
         classicTTTButtonTouch(sender as! UIButton)
     }
     
-    
+    // TODO: Update for new battle mode interaction: random attack for any emoji in battle mode!
     @IBAction func longPressAction(_ sender: AnyObject) {
         if let lpgr = sender as? UILongPressGestureRecognizer {
             if lpgr.state == .began {
