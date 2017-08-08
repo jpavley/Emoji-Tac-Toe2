@@ -85,7 +85,6 @@ class ViewController: UIViewController {
         classicTTTButtonTouch(sender as! UIButton)
     }
     
-    // TODO: Update for new battle mode interaction: random attack for any emoji in battle mode!
     @IBAction func longPressAction(_ sender: AnyObject) {
         if let lpgr = sender as? UILongPressGestureRecognizer {
             if lpgr.state == .began {
@@ -126,12 +125,6 @@ class ViewController: UIViewController {
             playerMark = crossMark
         }
 
-        
-        let battleEmojis = ["🤖", "👻", "👽", "😱", "😡", "😠", "🚶", "🏃", "💃", "🐿", "🐉","🐼", "👸", "👰", "👩", "🦄", "🐝", "🦁", "💀", "☠", "💣", "💖", "💌", "🎁"]
-        if !battleEmojis.contains(playerMark) {
-            return
-        }
-        
         if useSound {
             // TODO: replace with creative commons sound effect
 //            battleAVPlayer.currentTime = 0
@@ -143,23 +136,28 @@ class ViewController: UIViewController {
         neutralizeGameboard()
         updateStatus(.inProgress)
         
+        // TODO: Rank the random moves such that the weaker attacks are more likely
+        //       and the stronger attacks are less likely
+        
+        let randomMove = diceRoll(8)
+        
         // do the special move
-        switch playerMark {
-        case "🤖", "👻", "👽":
+        switch randomMove {
+        case 0:
             replicateAllOpenCells(buttonID)
-        case "😱", "😡", "😠":
+        case 1:
             switchLocations(buttonID)
-        case "🚶", "🏃", "💃":
+        case 2:
             takeAllCorners(buttonID)
-        case "🐿", "🐉", "🐼":
+        case 3:
             jumpToCenter(buttonID)
-        case "👸", "👰", "👩":
+        case 4:
             takeAllMiddles(buttonID)
-        case "🦄", "🐝", "🦁":
+        case 5:
             jumpToRandom(buttonID)
-        case "💀", "☠", "💣":
+        case 6:
             wipeOut(buttonID)
-        case "💖", "💌", "🎁":
+        case 7:
             youWin(buttonID)
         default:
             nop()

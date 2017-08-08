@@ -588,6 +588,7 @@ func aiChoose(_ gameBoard:GameBoard, unpredicible: Bool) -> Int? {
     return result
 }
 
+/// Returns a random Int between 0 and chances
 func diceRoll(_ chances: Int) -> Int {
     return Int(arc4random_uniform(UInt32(chances)))
 }
