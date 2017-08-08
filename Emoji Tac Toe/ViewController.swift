@@ -19,6 +19,17 @@ enum GameStatus {
     case notStarted, starting, inProgress, playerPlaying, aiPlaying, win, tie
 }
 
+enum BattleModeAttack:Int {
+    case replicateAllOpenCells = 0
+    case youWin = 7
+    case takeAllCorners = 2
+    case takeAllMiddles = 4
+    case switchLocations = 1
+    case jumpToCenter = 3
+    case jumpToRandom = 5
+    case wipeOut = 6
+}
+
 var noughtMark = "⭕️"
 var crossMark = "❌"
 
@@ -111,6 +122,62 @@ class ViewController: UIViewController {
         }
     }
     
+    /// Chooses a battlemode attack move based on the following probability table
+    /// Rank 1: Instant Win (2% probability)
+    /// Rank 2: Nearly Instant Win (8% probability)
+    /// Rank 3: Mixer upper (90% probability)
+    /// Within each rank an attack move is chosen at random
+    func chooseAttackID() -> BattleModeAttack {
+        
+        enum AttackRank:Int {
+            case instantWin = 1
+            case nearlyInstantWin = 2
+            case mixerUpper = 3
+        }
+        
+        // assemble the list of ranks with frequency based on probability
+        
+        var rankList = [AttackRank]()
+        
+        for _ in 0..<2 {
+            rankList.append(.instantWin)
+        }
+        
+        for _ in 0..<8 {
+            rankList.append(.nearlyInstantWin)
+        }
+        
+        for _ in 0..<90 {
+            rankList.append(.mixerUpper)
+        }
+        
+        // find the rank of the attack based on the probability
+        let randomRankID = diceRoll(100)
+        let randomRank = rankList[randomRankID]
+        
+        let rank1Attacks:[BattleModeAttack] = [.replicateAllOpenCells, .youWin]
+        let rank2Attacks:[BattleModeAttack] = [.takeAllCorners, .takeAllMiddles]
+        let rank3Attacks:[BattleModeAttack] = [.switchLocations, .jumpToCenter, .jumpToRandom, .wipeOut]
+        
+        var randomMoveID = 0
+        var randomMove: BattleModeAttack
+        
+        // find the attack based on the rank
+        switch randomRank {
+        case .instantWin:
+            randomMoveID = diceRoll(2)
+            randomMove = rank1Attacks[randomMoveID]
+        case .nearlyInstantWin:
+            randomMoveID = diceRoll(2)
+            randomMove = rank2Attacks[randomMoveID]
+        case .mixerUpper:
+            randomMoveID = diceRoll(4)
+            randomMove = rank3Attacks[randomMoveID]
+        }
+        return randomMove
+
+    }
+    
     
     func battleModeAttack(_ buttonID: Int) {
         
@@ -135,80 +202,36 @@ class ViewController: UIViewController {
         // set up this turn
         neutralizeGameboard()
         updateStatus(.inProgress)
-        
-        // Rank 1: Instant Win (2% probability)
-        // Rank 2: Nearly Instant Win (8% probability)
-        // Rank 3: Mixer upper (90% probability)
-        
-        var rankList = [Int]()
-        
-        for _ in 0..<2 {
-            rankList.append(1)
-        }
-        
-        for _ in 0..<8 {
-            rankList.append(2)
-        }
-        
-        for _ in 0..<90 {
-            rankList.append(3)
-        }
-        
-        // find the rank of the attack based on the probability
-        let randomRankID = diceRoll(100)
-        let randomRank = rankList[randomRankID]
-        
-        let rank1Attacks = [0,7]
-        let rank2Attacks = [2,4]
-        let rank3Attacks = [1,3,5,6]
-        
-        var randomMoveID = 0
-        var randomMove = 0
-        
-        // find the attack based on the rank
-        switch randomRank {
-        case 1:
-            randomMoveID = diceRoll(2)
-            randomMove = rank1Attacks[randomMoveID]
-        case 2:
-            randomMoveID = diceRoll(2)
-            randomMove = rank2Attacks[randomMoveID]
-        case 3:
-            randomMoveID = diceRoll(4)
-            randomMove = rank3Attacks[randomMoveID]
-        default:
-            randomMoveID = diceRoll(4)
-            randomMove = rank3Attacks[randomMoveID]
-        }
-        
+
         // do the attack!
+        
+        let randomMove = chooseAttackID()
+        
         switch randomMove {
-        case 0:
+        case .replicateAllOpenCells:
             // rank: 1
             replicateAllOpenCells(buttonID)
-        case 7:
+        case .youWin:
             // rank: 1
             youWin(buttonID)
-        case 2:
+        case .takeAllCorners:
             // rank: 2
             takeAllCorners(buttonID)
-        case 4:
+        case .takeAllMiddles:
             // rank: 2
             takeAllMiddles(buttonID)
-        case 1:
+        case .switchLocations:
             // rank: 3
             switchLocations(buttonID)
-        case 3:
+        case .jumpToCenter:
             // rank: 3
             jumpToCenter(buttonID)
-        case 5:
+        case .jumpToRandom:
             // rank: 3
             jumpToRandom(buttonID)
-        case 6:
+        case .wipeOut:
             // rank: 3
             wipeOut(buttonID)
-        default:
-            nop()
         }
         
         // prep for next turn
@@ -229,10 +252,6 @@ class ViewController: UIViewController {
             aiIsPlaying = true
             perform(#selector(self.aiClassicTakeTurn), with: nil, afterDelay: 1)
         }
-        
-    }
-    
-    func nop() {
         
     }
     
