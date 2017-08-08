@@ -124,41 +124,89 @@ class ViewController: UIViewController {
         } else {
             playerMark = crossMark
         }
-
+        
         if useSound {
             // TODO: replace with creative commons sound effect
-//            battleAVPlayer.currentTime = 0
-//            battleAVPlayer.play()
+            //            battleAVPlayer.currentTime = 0
+            //            battleAVPlayer.play()
         }
-
+        
         
         // set up this turn
         neutralizeGameboard()
         updateStatus(.inProgress)
         
-        // TODO: Rank the random moves such that the weaker attacks are more likely
-        //       and the stronger attacks are less likely
+        // Rank 1: Instant Win (2% probability)
+        // Rank 2: Nearly Instant Win (8% probability)
+        // Rank 3: Mixer upper (90% probability)
         
-        let randomMove = diceRoll(8)
+        var rankList = [Int]()
         
-        // do the special move
+        for _ in 0..<2 {
+            rankList.append(1)
+        }
+        
+        for _ in 0..<8 {
+            rankList.append(2)
+        }
+        
+        for _ in 0..<90 {
+            rankList.append(3)
+        }
+        
+        // find the rank of the attack based on the probability
+        let randomRankID = diceRoll(100)
+        let randomRank = rankList[randomRankID]
+        
+        let rank1Attacks = [0,7]
+        let rank2Attacks = [2,4]
+        let rank3Attacks = [1,3,5,6]
+        
+        var randomMoveID = 0
+        var randomMove = 0
+        
+        // find the attack based on the rank
+        switch randomRank {
+        case 1:
+            randomMoveID = diceRoll(2)
+            randomMove = rank1Attacks[randomMoveID]
+        case 2:
+            randomMoveID = diceRoll(2)
+            randomMove = rank2Attacks[randomMoveID]
+        case 3:
+            randomMoveID = diceRoll(4)
+            randomMove = rank3Attacks[randomMoveID]
+        default:
+            randomMoveID = diceRoll(4)
+            randomMove = rank3Attacks[randomMoveID]
+        }
+        
+        // do the attack!
         switch randomMove {
         case 0:
+            // rank: 1
             replicateAllOpenCells(buttonID)
-        case 1:
-            switchLocations(buttonID)
+        case 7:
+            // rank: 1
+            youWin(buttonID)
         case 2:
+            // rank: 2
             takeAllCorners(buttonID)
-        case 3:
-            jumpToCenter(buttonID)
         case 4:
+            // rank: 2
             takeAllMiddles(buttonID)
+        case 1:
+            // rank: 3
+            switchLocations(buttonID)
+        case 3:
+            // rank: 3
+            jumpToCenter(buttonID)
         case 5:
+            // rank: 3
             jumpToRandom(buttonID)
         case 6:
+            // rank: 3
             wipeOut(buttonID)
-        case 7:
-            youWin(buttonID)
         default:
             nop()
         }
@@ -181,7 +229,7 @@ class ViewController: UIViewController {
             aiIsPlaying = true
             perform(#selector(self.aiClassicTakeTurn), with: nil, afterDelay: 1)
         }
-
+        
     }
     
     func nop() {
