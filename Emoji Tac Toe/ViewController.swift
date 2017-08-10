@@ -584,6 +584,8 @@ class ViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
             self.present(alert, animated: true, completion: nil)
         })
+        // TODO: Figure out how to use perform with Swift functions
+        // perform(#selector(self.present(alert, animated: true, completion: nil)), with: nil, afterDelay: 1.0)
 
     }
     
