@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13147.4"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Avenir.ttc">
+            <string>Avenir-Book</string>
+        </array>
+        <array key="Futura.ttc">
+            <string>Futura-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Main-->
         <scene sceneID="tne-QT-ifu">
@@ -251,11 +259,35 @@
                                     <constraint firstAttribute="width" constant="320" id="XjN-7J-k9p"/>
                                 </constraints>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NDG-L6-Xs4" customClass="NotificationCardView" customModule="Emoji_Tac_Toe" customModuleProvider="target">
+                                <rect key="frame" x="67" y="269.5" width="240" height="128"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Battle Mode Attack!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hM1-ho-Nuo">
+                                        <rect key="frame" x="23" y="54" width="194" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="194" id="0pP-VG-nQP"/>
+                                            <constraint firstAttribute="height" constant="21" id="icj-Lr-bPt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="hM1-ho-Nuo" firstAttribute="centerY" secondItem="NDG-L6-Xs4" secondAttribute="centerY" id="3Dd-x9-rbM"/>
+                                    <constraint firstAttribute="width" constant="240" id="kYE-rI-kde"/>
+                                    <constraint firstItem="hM1-ho-Nuo" firstAttribute="centerX" secondItem="NDG-L6-Xs4" secondAttribute="centerX" id="neD-Xy-v8a"/>
+                                    <constraint firstAttribute="height" constant="128" id="yOZ-AY-kxK"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="NDG-L6-Xs4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0bc-eL-1Sp"/>
                             <constraint firstItem="RSO-c3-xkp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="IeM-pS-jVu"/>
+                            <constraint firstItem="NDG-L6-Xs4" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="NK6-lJ-8XB"/>
                             <constraint firstItem="RSO-c3-xkp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sRc-e7-edR"/>
                         </constraints>
                         <connections>
@@ -263,6 +295,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="notificationCard" destination="NDG-L6-Xs4" id="HAc-74-W29"/>
                         <outlet property="statusLabel" destination="YJX-cK-mVK" id="ghL-ZC-sbn"/>
                         <outlet property="titleLabel" destination="0cL-dE-XJ1" id="2dv-Su-I07"/>
                     </connections>
@@ -319,7 +352,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="356" y="295"/>
+            <point key="canvasLocation" x="356" y="294.60269865067471"/>
         </scene>
         <!--New Game-->
         <scene sceneID="8hD-2v-lZI">
