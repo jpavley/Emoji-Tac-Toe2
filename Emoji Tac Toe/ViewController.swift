@@ -102,7 +102,7 @@ class ViewController: UIViewController {
             if lpgr.state == .began {
                 if mysteryMode {
                     battleModeAttack((lpgr.view?.tag)!)
-                    presentNotifcationCard(forHowLong: 2, withMessage: "Battle Attack")
+                    presentNotifcationCard(forHowLong: 1.0, withMessage: "Battle Attack")
                 }
             }
         }
