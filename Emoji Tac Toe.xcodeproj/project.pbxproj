@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		483E97761F3BD87B002B544C /* NotificationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 483E97751F3BD87B002B544C /* NotificationCardView.swift */; };
 		5A3834A91EF6DC4B00891224 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5A3834A81EF6DC4B00891224 /* .gitignore */; };
 		5A3834AB1EF6E25A00891224 /* License in Resources */ = {isa = PBXBuildFile; fileRef = 5A3834AA1EF6E25A00891224 /* License */; };
 		5A4AB2331D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */; };
@@ -89,7 +88,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		483E97751F3BD87B002B544C /* NotificationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCardView.swift; sourceTree = "<group>"; };
 		5A3834A81EF6DC4B00891224 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5A3834AA1EF6E25A00891224 /* License */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License; sourceTree = "<group>"; };
 		5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Emoji Tac Toe Theme3.mp3"; sourceTree = "<group>"; };
@@ -218,7 +216,6 @@
 				5AD407891D4ED69B00FBBA62 /* Assets.xcassets */,
 				5AD407941D4ED8E800FBBA62 /* LaunchScreen.storyboard */,
 				5AD4078E1D4ED69B00FBBA62 /* Info.plist */,
-				483E97751F3BD87B002B544C /* NotificationCardView.swift */,
 			);
 			name = iOS;
 			path = "Emoji Tac Toe";
@@ -495,7 +492,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				483E97761F3BD87B002B544C /* NotificationCardView.swift in Sources */,
 				5AD4079F1D4ED9EA00FBBA62 /* AppDelegate.swift in Sources */,
 				5AD4079D1D4ED94F00FBBA62 /* EmojiTicTacToe.swift in Sources */,
 				5AD407991D4ED93700FBBA62 /* ViewController.swift in Sources */,
