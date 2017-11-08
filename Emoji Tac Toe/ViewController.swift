@@ -68,7 +68,6 @@ class ViewController: UIViewController {
         
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var notificationCard: NotificationCardView!
     
     @IBAction func share(_ sender: AnyObject) {
         
@@ -102,7 +101,6 @@ class ViewController: UIViewController {
             if lpgr.state == .began {
                 if mysteryMode {
                     battleModeAttack((lpgr.view?.tag)!)
-                    presentNotifcationCard(forHowLong: 1.0, withMessage: "Battle Attack")
                 }
             }
         }
@@ -122,15 +120,6 @@ class ViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    func presentNotifcationCard(forHowLong duration: TimeInterval, withMessage message: String) {
-        notificationCard.isHidden = false
-        perform(#selector(self.hideNotificationCard), with: nil, afterDelay: duration)
-    }
-    
-    @objc func hideNotificationCard() {
-        notificationCard.isHidden = true
     }
     
     /// Chooses a battlemode attack move based on the following probability table
@@ -605,9 +594,7 @@ class ViewController: UIViewController {
         playing = true
         winner = Player.untouched
         activePlayer = .nought
-        
-        notificationCard.isHidden = true
-        
+                
         updateTitle()
         updateStatus(.starting)
         
