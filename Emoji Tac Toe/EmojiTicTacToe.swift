@@ -152,14 +152,14 @@ func transformGameIntoText(gameboard: GameBoard, noughtMark: String, crossMark: 
 func transformTextIntoGameBoard(textRepresentation: String, noughtMark: String = "o", crossMark: String = "x", untouchedMark: String = "_") -> GameBoard? {
     var result:GameBoard?
     
-    if textRepresentation.characters.count < 9 {
+    if textRepresentation.count < 9 {
         // incomplete gameboard
         return result
     }
     
     result = GameBoard()
     
-    for mark in textRepresentation.characters {
+    for mark in textRepresentation {
         switch mark {
         case Character(noughtMark):
             result?.append(.nought)
