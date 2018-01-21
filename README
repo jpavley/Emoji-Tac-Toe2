@@ -32,12 +32,22 @@ Copyright (c) 2016 Epic Loot. All rights reserved.
 ## Version 3 (Planned)
 
 - Post WWDC 2017
-- Battle mode rebooted: long press on any emoji triggers a random battle mode move (which is usually good but could be bad for the player!)
-  - MessageKit
+  - Battle mode rebooted: long press on any emoji triggers a random battle mode move (which is usually good but could be bad for the player!)
+  - Support emoji 4 and emoji 5
+  - Clean up code
+  - Dynamic Text Layout
+  - iPad Layout
+  - Royalty free sound effects
+  - Redsign player mark choosing
   - iOS 11
   - Swift 4
-  - Bluetooth Gameplay
-  - iPad Layout
-  - VRKit
   - tvOS
+
+## Version 4 (Planned)
+
+- Post WWDC 2018
+  - MessageKit
+  - Bluetooth Gameplay
+  - ARKit
   - macOS
+
