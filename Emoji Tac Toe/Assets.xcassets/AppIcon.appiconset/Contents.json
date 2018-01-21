@@ -1,6 +1,18 @@
 {
   "images" : [
     {
+      "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "Tickmoji-icon-41.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "Tickmoji-icon-61.png",
+      "scale" : "3x"
+    },
+    {
       "size" : "29x29",
       "idiom" : "iphone",
       "filename" : "Tickmoji-icon-59.png",
@@ -35,6 +47,18 @@
       "idiom" : "iphone",
       "filename" : "Tickmoji-icon-180.png",
       "scale" : "3x"
+    },
+    {
+      "size" : "20x20",
+      "idiom" : "ipad",
+      "filename" : "Tickmoji-icon-20.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "20x20",
+      "idiom" : "ipad",
+      "filename" : "Tickmoji-icon-42.png",
+      "scale" : "2x"
     },
     {
       "size" : "29x29",
@@ -77,6 +101,12 @@
       "idiom" : "ipad",
       "filename" : "Tickmoji-icon-167.png",
       "scale" : "2x"
+    },
+    {
+      "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "Tickmoji icon 1024.png",
+      "scale" : "1x"
     },
     {
       "size" : "24x24",
@@ -131,6 +161,12 @@
       "scale" : "2x",
       "role" : "quickLook",
       "subtype" : "42mm"
+    },
+    {
+      "size" : "1024x1024",
+      "idiom" : "watch-marketing",
+      "filename" : "Tickmoji icon 1024-1.png",
+      "scale" : "1x"
     }
   ],
   "info" : {

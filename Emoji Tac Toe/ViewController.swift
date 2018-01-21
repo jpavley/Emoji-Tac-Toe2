@@ -19,6 +19,17 @@ enum GameStatus {
     case notStarted, starting, inProgress, playerPlaying, aiPlaying, win, tie
 }
 
+enum BattleModeAttack:Int {
+    case replicateAllOpenCells = 0
+    case youWin = 7
+    case takeAllCorners = 2
+    case takeAllMiddles = 4
+    case switchLocations = 1
+    case jumpToCenter = 3
+    case jumpToRandom = 5
+    case wipeOut = 6
+}
+
 var noughtMark = "⭕️"
 var crossMark = "❌"
 
@@ -69,7 +80,7 @@ class ViewController: UIViewController {
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             
-            if activityViewController.responds(to: #selector(getter: UIViewController.popoverPresentationController)) {
+            if NSObject.responds(to: #selector(getter: UIViewController.popoverPresentationController)) {
                 activityViewController.popoverPresentationController?.sourceView = self.view
             }
         }
@@ -84,7 +95,6 @@ class ViewController: UIViewController {
         
         classicTTTButtonTouch(sender as! UIButton)
     }
-    
     
     @IBAction func longPressAction(_ sender: AnyObject) {
         if let lpgr = sender as? UILongPressGestureRecognizer {
@@ -112,6 +122,62 @@ class ViewController: UIViewController {
         }
     }
     
+    /// Chooses a battlemode attack move based on the following probability table
+    /// Rank 1: Instant Win (2% probability)
+    /// Rank 2: Nearly Instant Win (8% probability)
+    /// Rank 3: Mixer upper (90% probability)
+    /// Within each rank an attack move is chosen at random
+    func chooseAttackID() -> BattleModeAttack {
+        
+        enum AttackRank:Int {
+            case instantWin = 1
+            case nearlyInstantWin = 2
+            case mixerUpper = 3
+        }
+        
+        // assemble the list of ranks with frequency based on probability
+        
+        var rankList = [AttackRank]()
+        
+        for _ in 0..<2 {
+            rankList.append(.instantWin)
+        }
+        
+        for _ in 0..<8 {
+            rankList.append(.nearlyInstantWin)
+        }
+        
+        for _ in 0..<90 {
+            rankList.append(.mixerUpper)
+        }
+        
+        // find the rank of the attack based on the probability
+        let randomRankID = diceRoll(100)
+        let randomRank = rankList[randomRankID]
+        
+        let rank1Attacks:[BattleModeAttack] = [.replicateAllOpenCells, .youWin]
+        let rank2Attacks:[BattleModeAttack] = [.takeAllCorners, .takeAllMiddles]
+        let rank3Attacks:[BattleModeAttack] = [.switchLocations, .jumpToCenter, .jumpToRandom, .wipeOut]
+        
+        var randomMoveID = 0
+        var randomMove: BattleModeAttack
+        
+        // find the attack based on the rank
+        switch randomRank {
+        case .instantWin:
+            randomMoveID = diceRoll(2)
+            randomMove = rank1Attacks[randomMoveID]
+        case .nearlyInstantWin:
+            randomMoveID = diceRoll(2)
+            randomMove = rank2Attacks[randomMoveID]
+        case .mixerUpper:
+            randomMoveID = diceRoll(4)
+            randomMove = rank3Attacks[randomMoveID]
+        }
+        return randomMove
+
+    }
+    
     
     func battleModeAttack(_ buttonID: Int) {
         
@@ -125,44 +191,47 @@ class ViewController: UIViewController {
         } else {
             playerMark = crossMark
         }
-
-        
-        let battleEmojis = ["🤖", "👻", "👽", "😱", "😡", "😠", "🚶", "🏃", "💃", "🐿", "🐉","🐼", "👸", "👰", "👩", "🦄", "🐝", "🦁", "💀", "☠", "💣", "💖", "💌", "🎁"]
-        if !battleEmojis.contains(playerMark) {
-            return
-        }
         
         if useSound {
             // TODO: replace with creative commons sound effect
-//            battleAVPlayer.currentTime = 0
-//            battleAVPlayer.play()
+            //            battleAVPlayer.currentTime = 0
+            //            battleAVPlayer.play()
         }
-
+        
         
         // set up this turn
         neutralizeGameboard()
         updateStatus(.inProgress)
+
+        // do the attack!
         
-        // do the special move
-        switch playerMark {
-        case "🤖", "👻", "👽":
+        let randomMove = chooseAttackID()
+        
+        switch randomMove {
+        case .replicateAllOpenCells:
+            // rank: 1
             replicateAllOpenCells(buttonID)
-        case "😱", "😡", "😠":
-            switchLocations(buttonID)
-        case "🚶", "🏃", "💃":
-            takeAllCorners(buttonID)
-        case "🐿", "🐉", "🐼":
-            jumpToCenter(buttonID)
-        case "👸", "👰", "👩":
-            takeAllMiddles(buttonID)
-        case "🦄", "🐝", "🦁":
-            jumpToRandom(buttonID)
-        case "💀", "☠", "💣":
-            wipeOut(buttonID)
-        case "💖", "💌", "🎁":
+        case .youWin:
+            // rank: 1
             youWin(buttonID)
-        default:
-            nop()
+        case .takeAllCorners:
+            // rank: 2
+            takeAllCorners(buttonID)
+        case .takeAllMiddles:
+            // rank: 2
+            takeAllMiddles(buttonID)
+        case .switchLocations:
+            // rank: 3
+            switchLocations(buttonID)
+        case .jumpToCenter:
+            // rank: 3
+            jumpToCenter(buttonID)
+        case .jumpToRandom:
+            // rank: 3
+            jumpToRandom(buttonID)
+        case .wipeOut:
+            // rank: 3
+            wipeOut(buttonID)
         }
         
         // prep for next turn
@@ -183,10 +252,6 @@ class ViewController: UIViewController {
             aiIsPlaying = true
             perform(#selector(self.aiClassicTakeTurn), with: nil, afterDelay: 1)
         }
-
-    }
-    
-    func nop() {
         
     }
     
@@ -388,7 +453,7 @@ class ViewController: UIViewController {
 
     }
     
-    func aiClassicTakeTurn() {
+    @objc func aiClassicTakeTurn() {
         if let aiCell = aiChoose(gameBoard, unpredicible: true) {
             neutralizeGameboard()
             updateStatus(.inProgress)
@@ -508,6 +573,8 @@ class ViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
             self.present(alert, animated: true, completion: nil)
         })
+        // TODO: Figure out how to use perform with Swift functions
+        // perform(#selector(self.present(alert, animated: true, completion: nil)), with: nil, afterDelay: 1.0)
 
     }
     
@@ -527,7 +594,7 @@ class ViewController: UIViewController {
         playing = true
         winner = Player.untouched
         activePlayer = .nought
-        
+                
         updateTitle()
         updateStatus(.starting)
         
@@ -549,7 +616,7 @@ class ViewController: UIViewController {
     }
     
     func updateTitle() {
-        titleLabel.text =  "\(noughtMark) vs \(crossMark)" + "  \(noughtWins):\(crossWins):\(draws)"
+        titleLabel.text =  "\(noughtMark) vs \(crossMark)  \(noughtWins):\(crossWins):\(draws)"
     }
     
     func updateStatus(_ mode:GameStatus) {
