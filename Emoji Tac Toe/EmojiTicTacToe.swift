@@ -149,7 +149,10 @@ func transformGameIntoText(gameboard: GameBoard, noughtMark: String, crossMark: 
 /// o_o
 /// _x_
 /// _x_
-func transformTextIntoGameBoard(textRepresentation: String, noughtMark: String = "o", crossMark: String = "x", untouchedMark: String = "_") -> GameBoard? {
+func transformTextIntoGameBoard(textRepresentation: String,
+                                noughtMark: String = "o",
+                                crossMark: String = "x",
+                                untouchedMark: String = "_") -> GameBoard? {
     var result:GameBoard?
     
     if textRepresentation.count < 9 {

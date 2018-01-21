@@ -8,7 +8,7 @@
 
 import XCTest
 
-@testable import Emoji_Tac_Toe
+//@testable import Emoji_Tac_Toe
 
 class Emoji_Tac_Toe_Tests: XCTestCase {
     
@@ -205,7 +205,7 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
             }
         }
         let successRange = 4700..<5300
-        XCTAssertTrue(successRange.contains(successCount), "successCount \(successCount)")
+        XCTAssertTrue(successRange.contains(successCount))
     }
 
     
