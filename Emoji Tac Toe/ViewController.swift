@@ -47,7 +47,7 @@ var noughtWins = 0
 var crossWins = 0
 var draws = 0
 
-var gameBoard:GameBoard = [.untouched, .untouched, .untouched,
+var gameboard:Gameboard = [.untouched, .untouched, .untouched,
                            .untouched, .untouched, .untouched,
                            .untouched, .untouched, .untouched]
 
@@ -72,7 +72,7 @@ class ViewController: UIViewController {
     
     @IBAction func share(_ sender: AnyObject) {
         
-        let ticTacToeGame = TicTacToeGame(gameboard: gameBoard, noughtMark: noughtMark, crossMark: crossMark, untouchedMark: "⬜️", gameOver: false)
+        let ticTacToeGame = TicTacToeGame(gameboard: gameboard, noughtMark: noughtMark, crossMark: crossMark, untouchedMark: "⬜️", gameOver: false)
         let messageToShare = transformGameIntoText(game: ticTacToeGame)
         let activityViewController = UIActivityViewController(activityItems: [messageToShare], applicationActivities: nil)
         
@@ -183,7 +183,7 @@ class ViewController: UIViewController {
     
     func battleModeAttack(_ buttonID: Int) {
         
-        if gameBoard[buttonID - 1] != activePlayer {
+        if gameboard[buttonID - 1] != activePlayer {
             // HINT: ignore if activePlayer is pressing on other player's button!
             return
         }
@@ -258,9 +258,9 @@ class ViewController: UIViewController {
     }
     
     func replicateAllOpenCells(_ buttonID: Int) {
-        for i in 0..<gameBoard.count {
-            if gameBoard[i] == .untouched {
-                gameBoard[i] = activePlayer
+        for i in 0..<gameboard.count {
+            if gameboard[i] == .untouched {
+                gameboard[i] = activePlayer
                 let targetButton = view.viewWithTag(i + 1) as! UIButton
                 targetButton.setTitle(playerMark, for: UIControlState())
             }
@@ -272,9 +272,9 @@ class ViewController: UIViewController {
         let opponet = (activePlayer == Player.cross) ? Player.nought : Player.cross
         let opponetMark = (opponet == Player.cross) ? crossMark : noughtMark
         
-        for i in 0..<gameBoard.count {
-            if gameBoard[i] == .untouched {
-                gameBoard[i] = opponet
+        for i in 0..<gameboard.count {
+            if gameboard[i] == .untouched {
+                gameboard[i] = opponet
                 let targetButton = view.viewWithTag(i + 1) as! UIButton
                 targetButton.setTitle(opponetMark, for: UIControlState())
                 activePlayer = opponet
@@ -285,9 +285,9 @@ class ViewController: UIViewController {
 
     
     func wipeOut(_ buttonID: Int) {
-        for i in 0..<gameBoard.count {
+        for i in 0..<gameboard.count {
             if i != buttonID - 1 {
-                gameBoard[i] = .untouched
+                gameboard[i] = .untouched
                 let targetButton = view.viewWithTag(i + 1) as! UIButton
                 targetButton.setTitle("", for: UIControlState())
             }
@@ -295,13 +295,13 @@ class ViewController: UIViewController {
     }
     
     func switchLocations(_ buttonID: Int) {
-        for i in 0..<gameBoard.count {
-            if gameBoard[i] == .nought {
-                gameBoard[i] = .cross
+        for i in 0..<gameboard.count {
+            if gameboard[i] == .nought {
+                gameboard[i] = .cross
                 let targetButton = view.viewWithTag(i + 1) as! UIButton
                 targetButton.setTitle(crossMark, for: UIControlState())
-            } else if (gameBoard[i] != .untouched) {
-                gameBoard[i] = .nought
+            } else if (gameboard[i] != .untouched) {
+                gameboard[i] = .nought
                 let targetButton = view.viewWithTag(i + 1) as! UIButton
                 targetButton.setTitle(noughtMark, for: UIControlState())
             }
@@ -314,7 +314,7 @@ class ViewController: UIViewController {
         let sourceButton = view.viewWithTag(buttonID) as! UIButton
         sourceButton.setTitle("", for: UIControlState())
         let sourceLocation = buttonID - 1
-        gameBoard[sourceLocation] = .untouched
+        gameboard[sourceLocation] = .untouched
         
         // HINT: replace mark at the center
         let cornerIDs = [1,3,7,9]
@@ -322,7 +322,7 @@ class ViewController: UIViewController {
             let targetButton = view.viewWithTag(cornerIDs[i]) as! UIButton
             targetButton.setTitle(playerMark, for: UIControlState())
             let targetLocation = cornerIDs[i] - 1
-            gameBoard[targetLocation] = activePlayer
+            gameboard[targetLocation] = activePlayer
         }
     }
     
@@ -331,7 +331,7 @@ class ViewController: UIViewController {
         let sourceButton = view.viewWithTag(buttonID) as! UIButton
         sourceButton.setTitle("", for: UIControlState())
         let sourceLocation = buttonID - 1
-        gameBoard[sourceLocation] = .untouched
+        gameboard[sourceLocation] = .untouched
         
         // HINT: replace mark at the center
         let cornerIDs = [2,4,6,8]
@@ -339,7 +339,7 @@ class ViewController: UIViewController {
             let targetButton = view.viewWithTag(cornerIDs[i]) as! UIButton
             targetButton.setTitle(playerMark, for: UIControlState())
             let targetLocation = cornerIDs[i] - 1
-            gameBoard[targetLocation] = activePlayer
+            gameboard[targetLocation] = activePlayer
         }
     }
 
@@ -348,14 +348,14 @@ class ViewController: UIViewController {
         let sourceButton = view.viewWithTag(buttonID) as! UIButton
         sourceButton.setTitle("", for: UIControlState())
         let sourceLocation = buttonID - 1
-        gameBoard[sourceLocation] = .untouched
+        gameboard[sourceLocation] = .untouched
         
         // HINT: replace mark at the center
         let centerID = 5
         let targetButton = view.viewWithTag(centerID) as! UIButton
         targetButton.setTitle(playerMark, for: UIControlState())
         let targetLocation = centerID - 1
-        gameBoard[targetLocation] = activePlayer
+        gameboard[targetLocation] = activePlayer
     }
     
     func jumpToRandom(_ buttonID: Int) {
@@ -363,7 +363,7 @@ class ViewController: UIViewController {
         let sourceButton = view.viewWithTag(buttonID) as! UIButton
         sourceButton.setTitle("", for: UIControlState())
         let sourceLocation = buttonID - 1
-        gameBoard[sourceLocation] = .untouched
+        gameboard[sourceLocation] = .untouched
         
         // HINT: replace mark at the center
         let potentialButtonIDs = [1,2,3,4,5,6,7,8,9].filter {$0 != buttonID}
@@ -372,7 +372,7 @@ class ViewController: UIViewController {
         let targetButton = view.viewWithTag(randomButtonID) as! UIButton
         targetButton.setTitle(playerMark, for: UIControlState())
         let targetLocation = randomButtonID - 1
-        gameBoard[targetLocation] = activePlayer
+        gameboard[targetLocation] = activePlayer
     }
     
     func stealVictory(_ buttonID: Int) {
@@ -390,7 +390,7 @@ class ViewController: UIViewController {
             result = true
         }
         
-        if gameBoard[location] != .untouched {
+        if gameboard[location] != .untouched {
             result = true
         }
         
@@ -436,9 +436,9 @@ class ViewController: UIViewController {
         // HINT: Update the game board
         let location = currentButton.tag - 1
         if playerMark == noughtMark {
-            gameBoard[location] = .nought
+            gameboard[location] = .nought
         } else {
-            gameBoard[location] = .cross
+            gameboard[location] = .cross
         }
         
         if !checkForWinner() {
@@ -456,7 +456,7 @@ class ViewController: UIViewController {
     }
     
     @objc func aiClassicTakeTurn() {
-        if let aiCell = aiChoose(gameBoard, unpredicible: true) {
+        if let aiCell = aiChoose(gameboard, unpredicible: true) {
             neutralizeGameboard()
             updateStatus(.inProgress)
             playerMark = crossMark
@@ -464,7 +464,7 @@ class ViewController: UIViewController {
             let aiButton = view.viewWithTag(tag) as! UIButton
             aiButton.setTitle(playerMark, for: UIControlState())
             activePlayer = .nought
-            gameBoard[aiCell] = .cross
+            gameboard[aiCell] = .cross
             
             // TODO: replace with creative commons sound effect
             
@@ -479,7 +479,7 @@ class ViewController: UIViewController {
             
             aiIsPlaying = false
             
-            playing = checkForWayToWin(gameBoard)
+            playing = checkForWayToWin(gameboard)
             if !playing {
                 // HINT: Game over!
                 gameOverDraw()
@@ -501,7 +501,7 @@ class ViewController: UIViewController {
             button = view.viewWithTag(tag) as! UIButton
             button.backgroundColor = getNormalButtonColor()
             let location = tag - 1
-            if gameBoard[location] == .untouched {
+            if gameboard[location] == .untouched {
                 button.setTitle("", for: UIControlState())
             }
         }
@@ -513,9 +513,9 @@ class ViewController: UIViewController {
     }
     
     func checkForWinner() -> Bool {
-        if let winningVector = searchForWin(gameBoard) {
+        if let winningVector = searchForWin(gameboard) {
             playing = false
-            winner = gameBoard[winningVector[0]]
+            winner = gameboard[winningVector[0]]
             
             if winner == .cross {
                 crossWins += 1
@@ -583,7 +583,7 @@ class ViewController: UIViewController {
     func checkForDraw() {
         
         if playing {
-            playing = checkForUntouchedCells(gameBoard)
+            playing = checkForUntouchedCells(gameboard)
             if !playing {
                 // HINT: Game over!
                 gameOverDraw()
@@ -600,8 +600,8 @@ class ViewController: UIViewController {
         updateTitle()
         updateStatus(.starting)
         
-        for i in 0..<gameBoard.count {
-            gameBoard[i] = .untouched
+        for i in 0..<gameboard.count {
+            gameboard[i] = .untouched
         }
 
         var button:UIButton
@@ -611,7 +611,7 @@ class ViewController: UIViewController {
             button.setTitle("", for: UIControlState())
         }
         
-        emojiGame = TicTacToeGame(gameboard: gameBoard,
+        emojiGame = TicTacToeGame(gameboard: gameboard,
                                   noughtMark: noughtMark,
                                   crossMark: crossMark,
                                   untouchedMark: untouchedMark,

@@ -153,7 +153,7 @@ class InterfaceController: WKInterfaceController {
         emojiGame.crossMark = emojis[diceRoll(emojis.count/2) + emojis.count/2]
         
         
-        emojiGame.gameboard = freshGameBoard
+        emojiGame.gameboard = freshGameboard
         activePlayer = .nought
         titleLabel.setText("\(emojiGame.noughtMark) vs \(emojiGame.crossMark)")
         if statusLabel != nil {
