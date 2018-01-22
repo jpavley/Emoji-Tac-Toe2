@@ -69,6 +69,7 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
         ticTacToeUT = TicTacToeGame(gameBoard:freshGameBoard,
                                     noughtMark: "⭕️",
                                     crossMark: "❌",
+                                    untouchedMark: "⬜️",
                                     gameOver: false)
     }
     
@@ -87,7 +88,8 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
         let requiredGameText = "⭕️ ❌ ⭕️ \n❌ ⬜️ ⭕️ \n❌ ⭕️ ❌ \n"
         ticTacToeUT.gameBoard = losingGameBoard
         
-        XCTAssertEqual(requiredGameText, transformGameIntoText(gameboard: ticTacToeUT.gameBoard, noughtMark: "⭕️", crossMark: "❌", untouchedMark: "⬜️"))
+        let ticTacToeGame = TicTacToeGame(gameBoard: ticTacToeUT.gameBoard, noughtMark: "⭕️", crossMark: "❌", untouchedMark: "⬜️", gameOver: false)
+        XCTAssertEqual(requiredGameText, transformGameIntoText(game: ticTacToeGame))
     }
     
     func testTransformTextIntoGameBoard() {

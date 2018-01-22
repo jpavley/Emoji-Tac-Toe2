@@ -111,29 +111,31 @@ let winningVectors = [
 ]
 
 struct TicTacToeGame {
-    var gameBoard:GameBoard
+    var gameboard:GameBoard
     var noughtMark:String
     var crossMark:String
+    var untouchedMark:String
     var gameOver:Bool
 }
 
 /// Returns a string with line breaks and emoji that represents the game
-/// .nought     .untouched .nought
+/// .nought    .untouched .nought
 /// .untouched .cross      .untouched
 /// .untouched .cross      .untouched
-func transformGameIntoText(gameboard: GameBoard, noughtMark: String, crossMark: String, untouchedMark: String) -> String {
+func transformGameIntoText(game g: TicTacToeGame) -> String {
+
     // TODO: Return an optional if string can not be created
     var result = ""
     
-    for (index, cell) in gameboard.enumerated() {
+    for (index, cell) in g.gameboard.enumerated() {
         
         switch cell {
         case .untouched:
-            result += untouchedMark + " "
+            result += "\(g.untouchedMark) "
         case .nought:
-            result += noughtMark + " "
+            result += "\(g.noughtMark) "
         case .cross:
-            result += crossMark + " "
+            result += "\(g.crossMark) "
         }
         
         if index == 2 || index == 5 || index == 8 {
@@ -623,9 +625,10 @@ let freshGameBoard:GameBoard = [.untouched, .untouched, .untouched,
                                .untouched, .untouched, .untouched,
                                .untouched, .untouched, .untouched]
 
-var emojiGame = TicTacToeGame(gameBoard:freshGameBoard,
+var emojiGame = TicTacToeGame(gameboard:freshGameBoard,
                               noughtMark: "⭕️",
                               crossMark: "❌",
+                              untouchedMark: "⬜️",
                               gameOver: false)
 
 

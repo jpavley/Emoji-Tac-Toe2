@@ -32,6 +32,7 @@ enum BattleModeAttack:Int {
 
 var noughtMark = "⭕️"
 var crossMark = "❌"
+var untouchedMark = "⬜️"
 
 // HINT: Make all emojis available to both players
 var player1Row = 0
@@ -71,7 +72,8 @@ class ViewController: UIViewController {
     
     @IBAction func share(_ sender: AnyObject) {
         
-        let messageToShare = transformGameIntoText(gameboard: gameBoard, noughtMark: noughtMark, crossMark: crossMark, untouchedMark: "⬜️")
+        let ticTacToeGame = TicTacToeGame(gameboard: gameBoard, noughtMark: noughtMark, crossMark: crossMark, untouchedMark: "⬜️", gameOver: false)
+        let messageToShare = transformGameIntoText(game: ticTacToeGame)
         let activityViewController = UIActivityViewController(activityItems: [messageToShare], applicationActivities: nil)
         
         // BFIX: Crash on iPad: "should have a non-nil sourceView or barButtonItem set before the presentation occurs"
@@ -609,9 +611,10 @@ class ViewController: UIViewController {
             button.setTitle("", for: UIControlState())
         }
         
-        emojiGame = TicTacToeGame(gameBoard: gameBoard,
+        emojiGame = TicTacToeGame(gameboard: gameBoard,
                                   noughtMark: noughtMark,
                                   crossMark: crossMark,
+                                  untouchedMark: untouchedMark,
                                   gameOver: false)
     }
     
