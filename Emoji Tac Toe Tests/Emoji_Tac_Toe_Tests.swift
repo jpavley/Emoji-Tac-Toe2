@@ -192,22 +192,22 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     }
     
     func testRandomCellFail() {
-        let requiredCell1 = calcRandomCell(freshGameboard, threshold: 0)
+        let requiredCell1 = getRandomCell(freshGameboard, threshold: 0)
         XCTAssertNil(requiredCell1)
         
-        let requiredCell2 = calcRandomCell(fullGameboard, threshold: 100)
+        let requiredCell2 = getRandomCell(fullGameboard, threshold: 100)
         XCTAssertNil(requiredCell2)
     }
     
     func testRandomCellSuccess() {
-        let requiredCell1 = calcRandomCell(freshGameboard, threshold: 100)
+        let requiredCell1 = getRandomCell(freshGameboard, threshold: 100)
         XCTAssertNotNil(requiredCell1)
     }
     
     func testRandomCellSuccessFiftyPercent() {
         var successCount = 0
         for _ in 0..<10000 {
-            let requiredCell = calcRandomCell(freshGameboard, threshold: 50)
+            let requiredCell = getRandomCell(freshGameboard, threshold: 50)
             if requiredCell != nil {
                 successCount += 1
             }
