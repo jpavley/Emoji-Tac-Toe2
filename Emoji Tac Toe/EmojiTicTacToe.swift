@@ -323,7 +323,7 @@ func searchForBlockingMove(_ gameboard: Gameboard, for player: Player) -> Int? {
 /// ❓⬜️❌
 /// ⬜️⭕️⬜️
 /// ❓⬜️⭕️
-func searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameboard: Gameboard, for player: Player) -> Int? {
+func searchForAnotherCornerIfOpponentHasMiddleAndCorner(_ gameboard: Gameboard, for player: Player) -> Int? {
     // TODO: Is this ever called? searchForBlockingMove() should catch this use case!
     // TODO: Use specific var names (results1 and results2 too general)
     
@@ -490,7 +490,7 @@ func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
         // 4. Take another corner
         // If player has middle and corner and AI has oposite corner take another corner
         if result == nil {
-            result = searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameboard: gameboard, for: .cross)
+            result = searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameboard, for: .cross)
             if result != nil { print("searchForAnotherCornerIfOpponentHasMiddleAndCorner \(result!)") }
         }
         
