@@ -30,13 +30,13 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
                                    .cross,  .nought, .nought,
                                    .cross,  .nought, .cross]
     
-    let wayToWinGameboard:Gameboard = [.nought, .untouched, .nought,
-                                       .cross,  .nought,    .nought,
-                                       .cross,  .nought,    .cross]
+    let wayToWinGameboardNought:Gameboard = [.nought, .untouched, .nought,
+                                             .cross,  .nought,    .nought,
+                                             .cross,  .nought,    .cross]
     
-    let wayToWinGameboard2:Gameboard = [.nought, .cross,     .nought,
-                                        .cross,  .nought,    .nought,
-                                        .cross,  .untouched, .cross]
+    let wayToWinGameboardCross:Gameboard = [.nought, .cross,     .nought,
+                                            .cross,  .nought,    .nought,
+                                            .cross,  .untouched, .cross]
     
     let noughtHasCenterAndCorner:Gameboard = [.untouched, .untouched, .cross,
                                               .untouched, .nought,    .untouched,
@@ -144,19 +144,25 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
         XCTAssertEqual(testOpenCells2, requiredResult2)
     }
     
-    func testCheckForWayToWinSuccess() {
+    func testIsThereAFinalWinningMoveSuccess() {
         
-        XCTAssertTrue(checkForWayToWin(wayToWinGameboard))
-        XCTAssertTrue(checkForWayToWin(fullGameboard))
-    }
-    
-    func testCheckForWayToWinFail() {
-        XCTAssertFalse(checkForWayToWin(losingGameboard))
+        XCTAssertTrue(isThereAFinalWinningMove(wayToWinGameboardNought, for: .nought))
+        XCTAssertFalse(isThereAFinalWinningMove(wayToWinGameboardCross, for: .nought))
+        
+        XCTAssertTrue(isThereAFinalWinningMove(wayToWinGameboardCross, for: .cross))
+        XCTAssertFalse(isThereAFinalWinningMove(wayToWinGameboardNought, for: .cross))
 
     }
     
+    func testIsThereAFinalWinningMoveFail() {
+        XCTAssertFalse(isThereAFinalWinningMove(wayToWinGameboardCross, for: .nought))
+        XCTAssertFalse(isThereAFinalWinningMove(wayToWinGameboardNought, for: .cross))
+    }
+    
     func testCheckForUntouchedCellsSuccess() {
-        XCTAssertTrue(checkForUntouchedCells(wayToWinGameboard))
+        XCTAssertTrue(checkForUntouchedCells(wayToWinGameboardNought))
+        XCTAssertTrue(checkForUntouchedCells(wayToWinGameboardCross))
+
     }
     
     func testCheckForUntouchedCellsFail() {
@@ -232,13 +238,13 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     
     // 3. Blocking move
     func testSearchForBlockingMoveSuccess() {
-        XCTAssertNotNil(searchForBlockingMove(gameboard: wayToWinGameboard, for: .cross))
-        XCTAssertNotNil(searchForBlockingMove(gameboard: wayToWinGameboard2, for: .nought))
+        XCTAssertNotNil(searchForBlockingMove(gameboard: wayToWinGameboardNought, for: .cross))
+        XCTAssertNotNil(searchForBlockingMove(gameboard: wayToWinGameboardCross, for: .nought))
     }
     
     func testSearchForBlockingMoveFail() {
-        XCTAssertNil(searchForBlockingMove(gameboard: wayToWinGameboard, for: .nought))
-        XCTAssertNil(searchForBlockingMove(gameboard: wayToWinGameboard2, for: .cross))
+        XCTAssertNil(searchForBlockingMove(gameboard: wayToWinGameboardNought, for: .nought))
+        XCTAssertNil(searchForBlockingMove(gameboard: wayToWinGameboardCross, for: .cross))
     }
    
     // 4. Take another corner
@@ -320,13 +326,13 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     // 10. Winning Move
     
     func testSearchForWinningMoveFail() {
-        XCTAssertNil(searchForWinningMove(gameboard: noughtWinningGameboard, for: .cross))
-        XCTAssertNil(searchForWinningMove(gameboard: crossWinningGameboard, for: .nought))
+        XCTAssertNil(searchForWinningMove(noughtWinningGameboard, for: .cross))
+        XCTAssertNil(searchForWinningMove(crossWinningGameboard, for: .nought))
     }
     
     func testSearchForWinningMoveSuccess() {
-        XCTAssertNotNil(searchForWinningMove(gameboard: noughtWinningGameboard, for: .nought))
-        XCTAssertNotNil(searchForWinningMove(gameboard: crossWinningGameboard, for: .cross))
+        XCTAssertNotNil(searchForWinningMove(noughtWinningGameboard, for: .nought))
+        XCTAssertNotNil(searchForWinningMove(crossWinningGameboard, for: .cross))
     }
 
     // 11. Any corner

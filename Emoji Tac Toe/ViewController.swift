@@ -479,10 +479,12 @@ class ViewController: UIViewController {
             
             aiIsPlaying = false
             
-            playing = checkForWayToWin(gameboard)
-            if !playing {
-                // HINT: Game over!
-                gameOverDraw()
+            let openCells = calcOpenCells(gameboard)
+            if openCells.count == 1 {
+                if !isThereAFinalWinningMove(gameboard, for: .nought) {
+                    // HINT: No way for .nought to win
+                    gameOverDraw()
+                }
             }
         }
     }

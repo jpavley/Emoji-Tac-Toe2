@@ -262,16 +262,13 @@ func calcRandomCell(_ gameboard: Gameboard, threshold: Int) -> Int? {
     var result:Int?
     let openCells = calcOpenCells(gameboard)
     
-    // early return
     if openCells.count == 0 {
         return nil
     }
     
     let chanceToBeRandom = diceRoll(100)
-    // print("chanceToBeRandom \(chanceToBeRandom)")
     if chanceToBeRandom <= threshold {
         result = openCells.count > 0 ? openCells[diceRoll(openCells.count)] : nil
-        // print("result \(result!)")
     }
     return result
 }
@@ -283,30 +280,17 @@ func calcRandomCell(_ gameboard: Gameboard, threshold: Int) -> Int? {
 /// ⭕️❌❌
 /// ⭕️❌❌
 /// ❓⭕️⭕️
-func checkForWayToWin(_ gameboard: Gameboard) -> Bool {
-    // TODO: Generalize this for all player types (.cross, .nought, .untouched
-    // TODO: Generalize this into a true search for a way to win even if there
-    //       is more than one cell open. (Don't just return true if openCells == 1)
-    // TODO: Merge with searchForWayToWin()
-    
+func isThereAFinalWinningMove(_ gameboard: Gameboard, for mark: Player) -> Bool {
     let openCells = calcOpenCells(gameboard)
-    // if there is one open cell
-    if openCells.count == 1 {
-        // make a modifiable copy of the gameboard
-        var testGameboard = gameboard
-        // adjust the gameboard so that the last remaining open cell is a nought
-        testGameboard[openCells[0]] = .nought
-        // return the result of searching for a winning vector with the test gameboard
-        return seachForWinForPlayer(testGameboard, player: .nought)
-    }
-    return true
+    let winningMove = searchForWinningMove(gameboard, for: mark)
+    return openCells.count == 1 && winningMove != nil
 }
 
 /// Returns a winning move for the player or nil
 /// ⬜️❓⭕️
 /// ⬜️❌⬜️
 /// ⬜️❌⬜️
-func searchForWinningMove(gameboard: Gameboard, for player: Player) -> Int? {
+func searchForWinningMove(_ gameboard: Gameboard, for player: Player) -> Int? {
     var result:Int?
     let openCells = calcOpenCells(gameboard)
     
@@ -333,7 +317,7 @@ func searchForBlockingMove(gameboard: Gameboard, for player: Player) -> Int? {
     // return it as a blocking move for the player
     let opponent: Player = (player == .nought) ? .cross : .nought
     
-    return searchForWinningMove(gameboard: gameboard, for: opponent)
+    return searchForWinningMove(gameboard, for: opponent)
 }
 
 /// Returns a corner move for specific player if opponet has middle and a corner
@@ -551,7 +535,7 @@ func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
         // 10. Winning Move
         // Search for winning move
          if result == nil {
-            result = searchForWinningMove(gameboard: gameboard, for: .cross)
+            result = searchForWinningMove(gameboard, for: .cross)
             if result != nil { print("searchForWinningMove \(result!)") }
          }
         
