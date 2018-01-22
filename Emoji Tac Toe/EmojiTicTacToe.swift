@@ -310,13 +310,11 @@ func searchForWinningMove(_ gameboard: Gameboard, for player: Player) -> Int? {
 /// ⬜️❓❌
 /// ⬜️⭕️⬜️
 /// ⬜️⭕️⬜️
-func searchForBlockingMove(gameboard: Gameboard, for player: Player) -> Int? {
-    // TODO: Merge with checkForWayToWin() as blocking move is a way to win 🤔
+func searchForBlockingMove(_ gameboard: Gameboard, for player: Player) -> Int? {
     
     // reverse player as we find a winning move for the opponent and 
     // return it as a blocking move for the player
     let opponent: Player = (player == .nought) ? .cross : .nought
-    
     return searchForWinningMove(gameboard, for: opponent)
 }
 
@@ -485,7 +483,7 @@ func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
         // 3. Blocking move
         // Search for blocking move
         if result == nil {
-            result = searchForBlockingMove(gameboard: gameboard, for: .cross)
+            result = searchForBlockingMove(gameboard, for: .cross)
             if result != nil { print("searchForBlockingMove \(result!)") }
         }
         

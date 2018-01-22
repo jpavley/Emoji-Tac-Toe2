@@ -238,13 +238,13 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     
     // 3. Blocking move
     func testSearchForBlockingMoveSuccess() {
-        XCTAssertNotNil(searchForBlockingMove(gameboard: wayToWinGameboardNought, for: .cross))
-        XCTAssertNotNil(searchForBlockingMove(gameboard: wayToWinGameboardCross, for: .nought))
+        XCTAssertNotNil(searchForBlockingMove(wayToWinGameboardNought, for: .cross))
+        XCTAssertNotNil(searchForBlockingMove(wayToWinGameboardCross, for: .nought))
     }
     
     func testSearchForBlockingMoveFail() {
-        XCTAssertNil(searchForBlockingMove(gameboard: wayToWinGameboardNought, for: .nought))
-        XCTAssertNil(searchForBlockingMove(gameboard: wayToWinGameboardCross, for: .cross))
+        XCTAssertNil(searchForBlockingMove(wayToWinGameboardNought, for: .nought))
+        XCTAssertNil(searchForBlockingMove(wayToWinGameboardCross, for: .cross))
     }
    
     // 4. Take another corner
