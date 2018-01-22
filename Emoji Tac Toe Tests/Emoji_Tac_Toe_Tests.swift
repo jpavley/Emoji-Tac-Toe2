@@ -130,7 +130,7 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     
     func testCalcOpenCellsSuccess() {
         
-        let requiredResult1 = calcOpenCells(gameboard: noughtWinningGameboard)
+        let requiredResult1 = calcOpenCells(noughtWinningGameboard)
         let testOpenCells1 = [1,3,5,7]
         
         XCTAssertEqual(testOpenCells1, requiredResult1)
@@ -138,7 +138,7 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     
     func testCalcOpenCellsFail() {
         
-        let requiredResult2 = calcOpenCells(gameboard: fullGameboard)
+        let requiredResult2 = calcOpenCells(fullGameboard)
         let testOpenCells2:[Int] = []
         
         XCTAssertEqual(testOpenCells2, requiredResult2)

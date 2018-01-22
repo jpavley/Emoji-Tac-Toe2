@@ -214,33 +214,16 @@ func seachForWinForPlayer(_ board:Gameboard, player:Player) -> Bool {
 /// ⬜️⬜️❌
 /// ⬜️⬜️⬜️
 /// ⬜️⬜️⭕️
-func checkForUntouchedCells(_ gameboard:Gameboard) -> Bool {
-    // TODO: Generalize this for all player types (.cross, .nought, .untouched
-    
-    for cell in gameboard {
-        if cell == .untouched {
-            return true
-        }
-    }
-    return false
-
+func checkForUntouchedCells(_ gameboard: Gameboard) -> Bool {
+    return getUsedCells(gameboard, for: .untouched).count != 0
 }
 
 /// Returns a vector [Int] of untouched cells or an empty vector [Int]
 /// ❌⬜️❌
 /// ⬜️⬜️⬜️
 /// ⭕️⬜️⭕️
-func calcOpenCells(gameboard:Gameboard) -> [Int] {
-    // TODO: Generalize this for all player types (.cross, .nought, .untouched
-    // TODO: Merge with calcOccupiedCells into a general calcCellInventory()
-
-    var openCells = [Int]()
-    for (index, cell) in gameboard.enumerated() {
-        if cell == .untouched {
-            openCells.append(index)
-        }
-    }
-    return openCells
+func calcOpenCells(_ gameboard: Gameboard) -> [Int] {
+    return getUsedCells(gameboard, for: .untouched)
 }
 
 /// Returns array of cells with marks or emply array if there no open cells
@@ -248,16 +231,21 @@ func calcOpenCells(gameboard:Gameboard) -> [Int] {
 /// ❓❓❌
 /// ❓❓❓
 /// ❓❓⭕️
-func calcOccupiedCells(_ gameboard:Gameboard, for player: Player) -> [Int] {
-    // TODO: Merge with calcOccupiedCells into a general calcCellInventory()
+func calcOccupiedCells(_ gameboard: Gameboard, for player: Player) -> [Int] {
+    return getUsedCells(gameboard, for: player)
+}
 
-    var occupiedCells = [Int]()
+/// Returns array of cells used by a mark or an empty array if none are found.
+/// Player.untouched are open cells. Player.cross and Player.nought are
+/// occupided cells.
+func getUsedCells(_ gameboard: Gameboard, for mark: Player) -> [Int] {
+    var cells = [Int]()
     for (index, cell) in gameboard.enumerated() {
-        if cell == player {
-            occupiedCells.append(index)
+        if cell == mark {
+            cells.append(index)
         }
     }
-    return occupiedCells
+    return cells
 }
 
 /// Returns an open cell id or nil with a probability of randomness
@@ -269,10 +257,10 @@ func calcOccupiedCells(_ gameboard:Gameboard, for player: Player) -> [Int] {
 /// ❓❓❌
 /// ❓❓❓
 /// ❓❓⭕️
-func calcRandomCell(_ gameboard:Gameboard, threshold: Int) -> Int? {
+func calcRandomCell(_ gameboard: Gameboard, threshold: Int) -> Int? {
     
     var result:Int?
-    let openCells = calcOpenCells(gameboard: gameboard)
+    let openCells = calcOpenCells(gameboard)
     
     // early return
     if openCells.count == 0 {
@@ -295,13 +283,13 @@ func calcRandomCell(_ gameboard:Gameboard, threshold: Int) -> Int? {
 /// ⭕️❌❌
 /// ⭕️❌❌
 /// ❓⭕️⭕️
-func checkForWayToWin(_ gameboard:Gameboard) -> Bool {
+func checkForWayToWin(_ gameboard: Gameboard) -> Bool {
     // TODO: Generalize this for all player types (.cross, .nought, .untouched
     // TODO: Generalize this into a true search for a way to win even if there
     //       is more than one cell open. (Don't just return true if openCells == 1)
     // TODO: Merge with searchForWayToWin()
     
-    let openCells = calcOpenCells(gameboard: gameboard)
+    let openCells = calcOpenCells(gameboard)
     // if there is one open cell
     if openCells.count == 1 {
         // make a modifiable copy of the gameboard
@@ -320,7 +308,7 @@ func checkForWayToWin(_ gameboard:Gameboard) -> Bool {
 /// ⬜️❌⬜️
 func searchForWinningMove(gameboard: Gameboard, for player: Player) -> Int? {
     var result:Int?
-    let openCells = calcOpenCells(gameboard: gameboard)
+    let openCells = calcOpenCells(gameboard)
     
     for cell in openCells {
         var testGameboard = gameboard
@@ -358,7 +346,7 @@ func searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameboard: Gameboard, fo
     // TODO: Use specific var names (results1 and results2 too general)
     
     var result:Int?
-    let openCells = calcOpenCells(gameboard: gameboard)
+    let openCells = calcOpenCells(gameboard)
     let opponent:Player = (player == .nought) ? .cross : .nought
     let occupiedCells = calcOccupiedCells(gameboard, for: opponent)
     let ownedCells = calcOccupiedCells(gameboard, for: player)
@@ -384,7 +372,7 @@ func searchForMiddleIfCorner(gameboard: Gameboard, for player: Player) -> Int? {
     // TODO: Use specific var names (results1 and results2 too general)
     
     var result:Int?
-    let openCells = calcOpenCells(gameboard: gameboard)
+    let openCells = calcOpenCells(gameboard)
     let ownedCells = calcOccupiedCells(gameboard, for: player)
 
     let results1 = [0,2,6,8].filter {ownedCells.contains($0)}
@@ -404,7 +392,7 @@ func searchForCornerIfOpponentHasMiddle(gameboard: Gameboard, for player: Player
     // TODO: Use specific var names (results1 and results2 too general)
 
     var result:Int?
-    let openCells = calcOpenCells(gameboard: gameboard)
+    let openCells = calcOpenCells(gameboard)
     let opponent:Player = (player == .nought) ? .cross : .nought
     let occupiedCells = calcOccupiedCells(gameboard, for: opponent)
 
@@ -422,7 +410,7 @@ func searchForCornerIfOpponentHasMiddle(gameboard: Gameboard, for player: Player
 /// ⬜️⬜️⬜️
 func searchForCenterIfOpen(gameboard: Gameboard) -> Int? {
     var result:Int?
-    let openCells = calcOpenCells(gameboard: gameboard)
+    let openCells = calcOpenCells(gameboard)
 
     if openCells.contains(4) {
         result = 4
@@ -440,7 +428,7 @@ func searchForMiddleIfCenter(gameboard: Gameboard, for player: Player) -> Int? {
     // TODO: Use specific var names (results1 and results2 too general)
 
     var result:Int?
-    let openCells = calcOpenCells(gameboard: gameboard)
+    let openCells = calcOpenCells(gameboard)
     let ownedCells = calcOccupiedCells(gameboard, for: player)
 
     if ownedCells.contains(4) {
@@ -456,7 +444,7 @@ func searchForMiddleIfCenter(gameboard: Gameboard, for player: Player) -> Int? {
 /// ⬜️⬜️⭕️
 func searchForCornerOppositeOpponent(gameboard: Gameboard, for player: Player) -> Int? {
     var result:Int?
-    let openCells = calcOpenCells(gameboard: gameboard)
+    let openCells = calcOpenCells(gameboard)
     let opponent:Player = (player == .nought) ? .cross : .nought
     let occupiedCells = calcOccupiedCells(gameboard, for: opponent)
 
@@ -486,7 +474,7 @@ func searchForCornerOppositeOpponent(gameboard: Gameboard, for player: Player) -
 /// ❓⬜️❓
 func searchForAnyOpenCorner(gameboard: Gameboard) -> Int? {
     var result:Int?
-    let openCells = calcOpenCells(gameboard: gameboard)
+    let openCells = calcOpenCells(gameboard)
 
     let cornerCells = [0,2,6,8].filter {openCells.contains($0)}
     result = cornerCells.count > 0 ? cornerCells[diceRoll(cornerCells.count)] : nil
@@ -498,7 +486,7 @@ func searchForAnyOpenCorner(gameboard: Gameboard) -> Int? {
 func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
     
     var result:Int?
-    let openCells = calcOpenCells(gameboard: gameboard)
+    let openCells = calcOpenCells(gameboard)
 
     // 1. Zero open cells
     if openCells.count > 0 {
