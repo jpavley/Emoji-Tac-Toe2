@@ -66,7 +66,7 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        ticTacToeUT = TicTacToeGame(gameBoard:freshGameBoard,
+        ticTacToeUT = TicTacToeGame(gameboard:freshGameBoard,
                                     noughtMark: "⭕️",
                                     crossMark: "❌",
                                     untouchedMark: "⬜️",
@@ -81,14 +81,14 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     }
     
     func testGameIsFresh() {
-        XCTAssertEqual(freshGameBoard, ticTacToeUT.gameBoard)
+        XCTAssertEqual(freshGameBoard, ticTacToeUT.gameboard)
     }
     
     func testTransformGameIntoText() {
         let requiredGameText = "⭕️ ❌ ⭕️ \n❌ ⬜️ ⭕️ \n❌ ⭕️ ❌ \n"
-        ticTacToeUT.gameBoard = losingGameBoard
+        ticTacToeUT.gameboard = losingGameBoard
         
-        let ticTacToeGame = TicTacToeGame(gameBoard: ticTacToeUT.gameBoard, noughtMark: "⭕️", crossMark: "❌", untouchedMark: "⬜️", gameOver: false)
+        let ticTacToeGame = TicTacToeGame(gameboard: ticTacToeUT.gameboard, noughtMark: "⭕️", crossMark: "❌", untouchedMark: "⬜️", gameOver: false)
         XCTAssertEqual(requiredGameText, transformGameIntoText(game: ticTacToeGame))
     }
     
@@ -102,16 +102,16 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     
     func testSearchForWinFail() {
         
-        ticTacToeUT.gameBoard = losingGameBoard
+        ticTacToeUT.gameboard = losingGameBoard
         
-        XCTAssertNil(searchForWin(ticTacToeUT.gameBoard))
+        XCTAssertNil(searchForWin(ticTacToeUT.gameboard))
     }
     
     func testSearchForWinSuccess() {
         
-        ticTacToeUT.gameBoard = noughtWinningGameBoard
+        ticTacToeUT.gameboard = noughtWinningGameBoard
         
-        XCTAssertEqual([0,4,8], searchForWin(ticTacToeUT.gameBoard)!)
+        XCTAssertEqual([0,4,8], searchForWin(ticTacToeUT.gameboard)!)
     }
     
     func testSearchForWinForPlayerFail() {

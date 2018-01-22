@@ -124,7 +124,6 @@ struct TicTacToeGame {
 /// .untouched .cross      .untouched
 func transformGameIntoText(game g: TicTacToeGame) -> String {
 
-    // TODO: Return an optional if string can not be created
     var result = ""
     
     for (index, cell) in g.gameboard.enumerated() {
@@ -185,7 +184,8 @@ func transformTextIntoGameBoard(textRepresentation: String,
 // TODO: Profile the search functions: are all getting called? Are they in the
 //       optimal order?
 
-/// Returns the first winning vector found or nil is there is no win
+/// Returns the first winning vector found or nil if no winning vector is found.
+/// (Regardless of player.)
 func searchForWin(_ gameBoard:GameBoard) -> [Int]? {
     
     for vector in winningVectors {
@@ -198,17 +198,15 @@ func searchForWin(_ gameBoard:GameBoard) -> [Int]? {
 
 
 /// Returns true if the player has a winning vector on the gameboard
+/// (Regardless of which vector.)
 func seachForWinForPlayer(_ board:GameBoard, player:Player) -> Bool {
     
     for vector in winningVectors {
-        if board[vector[0]] == player {
-            if board[vector[1]] == player {
-                if board[vector[2]] == player {
-                    return true
-                }
-            }
+        if board[vector[0]] == player && board[vector[1]] == player && board[vector[2]] == player {
+            return true
         }
     }
+
     return false
 }
 
