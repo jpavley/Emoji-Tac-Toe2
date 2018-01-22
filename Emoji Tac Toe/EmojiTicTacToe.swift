@@ -273,8 +273,8 @@ func calcRandomCell(_ gameboard: Gameboard, threshold: Int) -> Int? {
     return result
 }
 
-/// Returns true if there is more than 1 open cell or if there is only 1 open
-/// cell that nought can win if it takes that cell
+/// Returns true if there is 1 open cell and the player
+/// can win if it takes that cell.
 /// NOTE: This is pretty werid function. It is not a generalized check
 ///       that there exists a way to win on the board.
 /// ⭕️❌❌
