@@ -269,8 +269,7 @@ func calcOccupiedCells(_ gameboard:Gameboard, for player: Player) -> [Int] {
 /// ❓❓❌
 /// ❓❓❓
 /// ❓❓⭕️
-func randomCell(_ gameboard:Gameboard, threshold: Int) -> Int? {
-    // TODO: change function name to calcRandomCell()
+func calcRandomCell(_ gameboard:Gameboard, threshold: Int) -> Int? {
     
     var result:Int?
     let openCells = calcOpenCells(gameboard: gameboard)
@@ -507,7 +506,7 @@ func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
         // 2. Unpredicible (need to turn this off to do a true test!)
         // x% of the time be unpredictible
         if result == nil && unpredicible {
-            result = randomCell(gameboard, threshold: 30)
+            result = calcRandomCell(gameboard, threshold: 30)
             if result != nil { print("randomCell \(result!) threshold 30") }
         }
         
@@ -579,7 +578,7 @@ func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
         // 2. Random move
         // Search for random moves
         if result == nil {
-            result = randomCell(gameboard, threshold: 100)
+            result = calcRandomCell(gameboard, threshold: 100)
             if result != nil { print("randomCell \(result!) threshold 100") }
 
         }
