@@ -347,13 +347,13 @@ fileprivate func getStrategicCorner(_ gameboard: Gameboard,
                                     _ occupiedCorners: [Int],
                                     _ occupiedMiddle: Bool,
                                     _ ownedCorners: [Int]) -> Int? {
-    var foundCorner:Int?
+
     let openCells = calcOpenCells(gameboard)
     if occupiedCorners.count > 0 && occupiedMiddle && ownedCorners.count > 0 {
         let availableCorners = cellCorners.filter {openCells.contains($0)}
-        foundCorner = availableCorners.count > 0 ? availableCorners[diceRoll(availableCorners.count)] : nil
+        return availableCorners.count > 0 ? availableCorners[diceRoll(availableCorners.count)] : nil
     }
-    return foundCorner
+    return nil
 }
 
 
