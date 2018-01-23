@@ -282,11 +282,11 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     
     // 7. Grab the center
     func testSearchForCenterIfOpenSuccess() {
-        XCTAssertNotNil(searchForCenterIfOpen(gameboard: freshGameboard))
+        XCTAssertNotNil(searchForCenterIfOpen(freshGameboard))
     }
     
     func testSearchForCenterIfOpenFial() {
-        XCTAssertNil(searchForCenterIfOpen(gameboard: fullGameboard))
+        XCTAssertNil(searchForCenterIfOpen(fullGameboard))
     }
     
     // 8. Grab a middle position

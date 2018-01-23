@@ -400,15 +400,9 @@ func searchForCornerIfOpponentHasMiddle(gameboard: Gameboard, for player: Player
 /// ⬜️⬜️⬜️
 /// ⬜️❓⬜️
 /// ⬜️⬜️⬜️
-func searchForCenterIfOpen(gameboard: Gameboard) -> Int? {
-    var result:Int?
+func searchForCenterIfOpen(_ gameboard: Gameboard) -> Int? {
     let openCells = calcOpenCells(gameboard)
-
-    if openCells.contains(4) {
-        result = 4
-    }
-    
-    return result
+    return openCells.contains(cellCenter) ? cellCenter : nil
 }
 
 /// Returns a middle move if the player already has the center or nil
@@ -521,7 +515,7 @@ func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
         // 7. Grab the center
         // Grab the center if it's open
         if result == nil {
-            result = searchForCenterIfOpen(gameboard: gameboard)
+            result = searchForCenterIfOpen(gameboard)
             if result != nil { print("grab center if open \(result!)") }
 
         }
