@@ -260,24 +260,24 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     
     // 5. Grab a middle
     func testSearchForMiddleIfCornerSuccess() {
-        XCTAssertNotNil(searchForMiddleIfCorner(gameboard: noughtCornerCrossHasCorner, for: .cross))
-        XCTAssertNotNil(searchForMiddleIfCorner(gameboard: noughtCornerCrossHasCorner, for: .nought))
+        XCTAssertNotNil(searchForMiddleIfCorner(noughtCornerCrossHasCorner, for: .cross))
+        XCTAssertNotNil(searchForMiddleIfCorner(noughtCornerCrossHasCorner, for: .nought))
     }
     
     func testSearchForMiddleIfCornerFail() {
-        XCTAssertNil(searchForMiddleIfCorner(gameboard: fullGameboard, for: .cross))
-        XCTAssertNil(searchForMiddleIfCorner(gameboard: fullGameboard, for: .nought))
+        XCTAssertNil(searchForMiddleIfCorner(fullGameboard, for: .cross))
+        XCTAssertNil(searchForMiddleIfCorner(fullGameboard, for: .nought))
     }
 
     // 6. Grab a corner
     func testSearchForCornerIfOpponentHasMiddleSuccess() {
-        XCTAssertNotNil(searchForCornerIfOpponentHasMiddle(gameboard: noughtMiddleCrossCenter, for: .cross))
-        XCTAssertNotNil(searchForCornerIfOpponentHasMiddle(gameboard: noughtCenterCrossMiddle, for: .nought))
+        XCTAssertNotNil(searchForCornerIfOpponentHasMiddle(noughtMiddleCrossCenter, for: .cross))
+        XCTAssertNotNil(searchForCornerIfOpponentHasMiddle(noughtCenterCrossMiddle, for: .nought))
     }
     
     func testSearchForCornerIfOpponentHasMiddleFail() {
-        XCTAssertNil(searchForCornerIfOpponentHasMiddle(gameboard: noughtMiddleCrossCenter, for: .nought))
-        XCTAssertNil(searchForCornerIfOpponentHasMiddle(gameboard: noughtCenterCrossMiddle, for: .cross))
+        XCTAssertNil(searchForCornerIfOpponentHasMiddle(noughtMiddleCrossCenter, for: .nought))
+        XCTAssertNil(searchForCornerIfOpponentHasMiddle(noughtCenterCrossMiddle, for: .cross))
     }
     
     // 7. Grab the center
@@ -291,36 +291,36 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     
     // 8. Grab a middle position
     func testSearchForMiddleIfCenterFail() {
-        XCTAssertNil(searchForMiddleIfCenter(gameboard: noughtCenterCrossMiddle, for: .cross))
-        XCTAssertNil(searchForMiddleIfCenter(gameboard: noughtMiddleCrossCenter, for: .nought))
+        XCTAssertNil(searchForMiddleIfCenter(noughtCenterCrossMiddle, for: .cross))
+        XCTAssertNil(searchForMiddleIfCenter(noughtMiddleCrossCenter, for: .nought))
     }
     
     func testSearchForMiddleIfCenterSuccess() {
-        XCTAssertNotNil(searchForMiddleIfCenter(gameboard: noughtMiddleCrossCenter, for: .cross))
-        XCTAssertNotNil(searchForMiddleIfCenter(gameboard: noughtCenterCrossMiddle, for: .nought))
+        XCTAssertNotNil(searchForMiddleIfCenter(noughtMiddleCrossCenter, for: .cross))
+        XCTAssertNotNil(searchForMiddleIfCenter(noughtCenterCrossMiddle, for: .nought))
     }
     
     // 9. Grab corner opposite opponent
     func testSearchForConterOpposteOpponentSuccess() {
         let testGame1 = transformTextIntoGameboard(textRepresentation: "________o")
-        XCTAssertNotNil(searchForCornerOppositeOpponent(gameboard: testGame1!, for: .cross))
+        XCTAssertNotNil(searchForCornerOppositeOpponent(testGame1!, for: .cross))
         
         let testGame3 = transformTextIntoGameboard(textRepresentation: "__o______")
-        XCTAssertNotNil(searchForCornerOppositeOpponent(gameboard: testGame3!, for: .cross))
+        XCTAssertNotNil(searchForCornerOppositeOpponent(testGame3!, for: .cross))
         
         let testGame4 = transformTextIntoGameboard(textRepresentation: "______o__")
-        XCTAssertNotNil(searchForCornerOppositeOpponent(gameboard: testGame4!, for: .cross))
+        XCTAssertNotNil(searchForCornerOppositeOpponent(testGame4!, for: .cross))
         
         let testGame2 = transformTextIntoGameboard(textRepresentation: "x________")
-        XCTAssertNotNil(searchForCornerOppositeOpponent(gameboard: testGame2!, for: .nought))
+        XCTAssertNotNil(searchForCornerOppositeOpponent(testGame2!, for: .nought))
     }
     
     func testSearchForConterOpposteOpponentFail() {
         let testGame1 = transformTextIntoGameboard(textRepresentation: "x_x___x_o")
-        XCTAssertNil(searchForCornerOppositeOpponent(gameboard: testGame1!, for: .cross))
+        XCTAssertNil(searchForCornerOppositeOpponent(testGame1!, for: .cross))
         
         let testGame2 = transformTextIntoGameboard(textRepresentation: "o_o___o_x")
-        XCTAssertNil(searchForCornerOppositeOpponent(gameboard: testGame2!, for: .nought))
+        XCTAssertNil(searchForCornerOppositeOpponent(testGame2!, for: .nought))
     }
     
     // 10. Winning Move
@@ -339,11 +339,11 @@ class Emoji_Tac_Toe_Tests: XCTestCase {
     
     func testSearchForAnyOpenCornerFail() {
         let testGame1 = transformTextIntoGameboard(textRepresentation: "o_o___o_o")
-        XCTAssertNil(searchForAnyOpenCorner(gameboard: testGame1!))
+        XCTAssertNil(searchForAnyOpenCorner(testGame1!))
     }
     
     func testSearchForAnyOpenCornerSuccess() {
-        XCTAssertNotNil(searchForAnyOpenCorner(gameboard: freshGameboard))
+        XCTAssertNotNil(searchForAnyOpenCorner(freshGameboard))
     }
 
     

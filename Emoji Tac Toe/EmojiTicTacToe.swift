@@ -364,7 +364,7 @@ fileprivate func getStrategicCorner(_ gameboard: Gameboard,
 /// ⬜️❓❌
 /// ❓⬜️❓
 /// ⬜️❓⭕️
-func searchForMiddleIfCorner(gameboard: Gameboard, for player: Player) -> Int? {
+func searchForMiddleIfCorner(_ gameboard: Gameboard, for player: Player) -> Int? {
     
     let ownedCorners = getOwnedCorners(gameboard, for: player)
     
@@ -382,7 +382,7 @@ func searchForMiddleIfCorner(gameboard: Gameboard, for player: Player) -> Int? {
 /// ❓⬜️❓
 /// ⬜️❌⭕️
 /// ❓⬜️❓
-func searchForCornerIfOpponentHasMiddle(gameboard: Gameboard, for player: Player) -> Int? {
+func searchForCornerIfOpponentHasMiddle(_ gameboard: Gameboard, for player: Player) -> Int? {
 
     let opponent:Player = (player == .nought) ? .cross : .nought
     let occupiedCells = calcOccupiedCells(gameboard, for: opponent)
@@ -410,7 +410,7 @@ func searchForCenterIfOpen(_ gameboard: Gameboard) -> Int? {
 /// ⬜️❓⬜️
 /// ❓❌❓
 /// ⬜️❓⭕️
-func searchForMiddleIfCenter(gameboard: Gameboard, for player: Player) -> Int? {
+func searchForMiddleIfCenter(_ gameboard: Gameboard, for player: Player) -> Int? {
     // TODO: Use specific var names (results1 and results2 too general)
 
     var result:Int?
@@ -428,7 +428,7 @@ func searchForMiddleIfCenter(gameboard: Gameboard, for player: Player) -> Int? {
 /// ❓⬜️⬜️
 /// ⬜️⬜️⬜️
 /// ⬜️⬜️⭕️
-func searchForCornerOppositeOpponent(gameboard: Gameboard, for player: Player) -> Int? {
+func searchForCornerOppositeOpponent(_ gameboard: Gameboard, for player: Player) -> Int? {
     var result:Int?
     let openCells = calcOpenCells(gameboard)
     let opponent:Player = (player == .nought) ? .cross : .nought
@@ -458,7 +458,7 @@ func searchForCornerOppositeOpponent(gameboard: Gameboard, for player: Player) -
 /// ❓⬜️❓
 /// ⬜️⬜️⬜️
 /// ❓⬜️❓
-func searchForAnyOpenCorner(gameboard: Gameboard) -> Int? {
+func searchForAnyOpenCorner(_ gameboard: Gameboard) -> Int? {
     var result:Int?
     let openCells = calcOpenCells(gameboard)
 
@@ -501,14 +501,14 @@ func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
         // 5. Grab a middle
         // AI has a corner grab a middle
         if result == nil {
-            result = searchForMiddleIfCorner(gameboard: gameboard, for: .cross)
+            result = searchForMiddleIfCorner(gameboard, for: .cross)
             if result != nil { print("searchForMiddleIfCorner \(result!)") }
         }
         
         // 6. Grab a corner
         // Player has a middle grab a corner
         if result == nil {
-            result = searchForCornerIfOpponentHasMiddle(gameboard: gameboard, for: .cross)
+            result = searchForCornerIfOpponentHasMiddle(gameboard, for: .cross)
             if result != nil { print("have middle grab corner \(result!)") }
         }
         
@@ -523,14 +523,14 @@ func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
         // 8. Grab a middle position
         // if AI has the center grab middle position
         if result == nil {
-            result = searchForMiddleIfCenter(gameboard: gameboard, for: .cross)
+            result = searchForMiddleIfCenter(gameboard, for: .cross)
             if result != nil { print("searchForMiddleIfCenter \(result!)") }
         }
         
         // 9. Grab corner opposite opponent
         // Search for a corner opposite the opponent
         if result == nil {
-            result = searchForCornerOppositeOpponent(gameboard: gameboard, for: .cross)
+            result = searchForCornerOppositeOpponent(gameboard, for: .cross)
             if result != nil { print("searchForCornerOppositeOpponent \(result!)") }
         }
         
@@ -545,7 +545,7 @@ func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
         // 11. Any corner
         // Search for a corner
         if result == nil {
-            result = searchForAnyOpenCorner(gameboard: gameboard)
+            result = searchForAnyOpenCorner(gameboard)
             if result != nil { print("searchForAnyOpenCorner \(result!)") }
         }
         
