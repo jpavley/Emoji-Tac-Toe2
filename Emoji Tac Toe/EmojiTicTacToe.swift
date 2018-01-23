@@ -258,18 +258,16 @@ func getUsedCells(_ gameboard: Gameboard, for mark: Player) -> [Int] {
 /// ❓❓⭕️
 func getRandomCell(_ gameboard: Gameboard, threshold: Int) -> Int? {
     
-    var result:Int?
     let openCells = calcOpenCells(gameboard)
-    
     if openCells.count == 0 {
         return nil
     }
     
     let chanceToBeRandom = diceRoll(100)
     if chanceToBeRandom <= threshold {
-        result = openCells.count > 0 ? openCells[diceRoll(openCells.count)] : nil
+        return openCells.count > 0 ? openCells[diceRoll(openCells.count)] : nil
     }
-    return result
+    return nil
 }
 
 /// Returns true if there is 1 open cell and the player
@@ -467,12 +465,9 @@ func searchForCornerOppositeOpponent(_ gameboard: Gameboard, for player: Player)
 /// ⬜️⬜️⬜️
 /// ❓⬜️❓
 func searchForAnyOpenCorner(_ gameboard: Gameboard) -> Int? {
-    var result:Int?
     let openCells = calcOpenCells(gameboard)
-
-    let cornerCells = [0,2,6,8].filter {openCells.contains($0)}
-    result = cornerCells.count > 0 ? cornerCells[diceRoll(cornerCells.count)] : nil
-    return result
+    let cornerCells = cellCorners.filter {openCells.contains($0)}
+    return cornerCells.count > 0 ? cornerCells[diceRoll(cornerCells.count)] : nil
 }
 
 /// Returns a cell index that the AI wants to mark
