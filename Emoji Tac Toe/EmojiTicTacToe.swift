@@ -365,18 +365,16 @@ fileprivate func getStrategicCorner(_ gameboard: Gameboard,
 /// ❓⬜️❓
 /// ⬜️❓⭕️
 func searchForMiddleIfCorner(gameboard: Gameboard, for player: Player) -> Int? {
-    // TODO: Use specific var names (results1 and results2 too general)
     
-    var result:Int?
-    let openCells = calcOpenCells(gameboard)
-    let ownedCells = calcOccupiedCells(gameboard, for: player)
-
-    let results1 = [0,2,6,8].filter {ownedCells.contains($0)}
-    if results1.count > 0 {
-        let results2 = [1,3,5,7].filter {openCells.contains($0)}
-        result = results2.count > 0 ? results2[diceRoll(results2.count)] : nil
+    let ownedCorners = getOwnedCorners(gameboard, for: player)
+    
+    if ownedCorners.count > 0 {
+        let openCells = calcOpenCells(gameboard)
+        let openMiddles = cellMiddles.filter {openCells.contains($0)}
+        return openMiddles.count > 0 ? openMiddles[diceRoll(openMiddles.count)] : nil
     }
-    return result
+    
+    return nil
 }
 
 /// Returns a corner move if the opponent already has a middle or nil
