@@ -26,6 +26,10 @@ typealias Gameboard = [Player]
 let cellCorners = [0,2,6,8]
 let cellMiddles = [1,3,5,7]
 let cellCenter = 4
+let cellTopLeftCorner = cellCorners[0]
+let cellTopRightCorner = cellCorners[1]
+let cellBottomleftCorner = cellCorners[2]
+let cellBottomRightCorner = cellCorners[3]
 
 let emojiSections = [0, 171, 389, 654, 843]
 
@@ -393,6 +397,7 @@ func searchForCornerIfOpponentHasMiddle(_ gameboard: Gameboard, for player: Play
         let openCorners = cellCorners.filter {openCells.contains($0)}
         return openCorners.count > 0 ? openCorners[diceRoll(openCorners.count)] : nil
     }
+    
     return nil
 }
 
@@ -420,37 +425,41 @@ func searchForMiddleIfCenter(_ gameboard: Gameboard, for player: Player) -> Int?
         let openMiddles = cellMiddles.filter {openCells.contains($0)}
         return openMiddles[diceRoll(openMiddles.count)]
     }
+    
     return nil
 }
 
 /// Returns a corner move opposite the opponents corner or nil
+// 0 1 2
+// 3 4 5
+// 6 7 8
+
 /// ❓⬜️⬜️
 /// ⬜️⬜️⬜️
 /// ⬜️⬜️⭕️
 func searchForCornerOppositeOpponent(_ gameboard: Gameboard, for player: Player) -> Int? {
-    var result:Int?
     let openCells = calcOpenCells(gameboard)
     let opponent:Player = (player == .nought) ? .cross : .nought
     let occupiedCells = calcOccupiedCells(gameboard, for: opponent)
-
-    if occupiedCells.contains(0) {
-        if openCells.contains(8) {
-            result = 8
+    
+    if occupiedCells.contains(cellTopLeftCorner) {
+        if openCells.contains(cellBottomRightCorner) {
+            return cellBottomRightCorner
         }
-    } else if occupiedCells.contains(2) {
-        if openCells.contains(6) {
-            result = 6
+    } else if occupiedCells.contains(cellTopRightCorner) {
+        if openCells.contains(cellBottomleftCorner) {
+            return cellBottomleftCorner
         }
-    } else if occupiedCells.contains(6) {
-        if openCells.contains(2) {
-            result = 2
+    } else if occupiedCells.contains(cellBottomleftCorner) {
+        if openCells.contains(cellTopRightCorner) {
+            return cellTopRightCorner
         }
-    } else if occupiedCells.contains(8) {
-        if openCells.contains(0) {
-            result = 0
+    } else if occupiedCells.contains(cellBottomRightCorner) {
+        if openCells.contains(cellTopLeftCorner) {
+            return cellTopLeftCorner
         }
     }
-    return result
+    return nil
 }
 
 /// Returns a random open corner move or nil
