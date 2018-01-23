@@ -413,15 +413,14 @@ func searchForCenterIfOpen(_ gameboard: Gameboard) -> Int? {
 func searchForMiddleIfCenter(_ gameboard: Gameboard, for player: Player) -> Int? {
     // TODO: Use specific var names (results1 and results2 too general)
 
-    var result:Int?
-    let openCells = calcOpenCells(gameboard)
     let ownedCells = calcOccupiedCells(gameboard, for: player)
 
-    if ownedCells.contains(4) {
-        let results = [1,3,5,7].filter {openCells.contains($0)}
-        result = results[diceRoll(results.count)]
+    if ownedCells.contains(cellCenter) {
+        let openCells = calcOpenCells(gameboard)
+        let openMiddles = cellMiddles.filter {openCells.contains($0)}
+        return openMiddles[diceRoll(openMiddles.count)]
     }
-    return result
+    return nil
 }
 
 /// Returns a corner move opposite the opponents corner or nil
