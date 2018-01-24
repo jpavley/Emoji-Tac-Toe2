@@ -50,33 +50,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func handleShortcut(_ shortcutValue: String) -> Bool {
         
         if shortcutValue == "New Game" {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "NewGame") as! NewGameViewController
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window?.rootViewController = vc
-            self.window?.makeKeyAndVisible()
+            newGame()
         }
         
         if shortcutValue == "Single Player" {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "GameBoard") as! ViewController
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window?.rootViewController = vc
-            self.window?.makeKeyAndVisible()
-            useAI = true
+            singlePlayer()
         }
         
         if shortcutValue == "Two Player" {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "GameBoard") as! ViewController
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window?.rootViewController = vc
-            self.window?.makeKeyAndVisible()
-            useAI = false
+            twoPlayer()
         }
         
         return true
     }
-
+    
+    fileprivate func newGame() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "NewGame") as! NewGameViewController
+        makeWindowVisible(with: vc)
+    }
+    
+    fileprivate func singlePlayer() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "GameBoard") as! ViewController
+        makeWindowVisible(with: vc)
+        useAI = true
+    }
+    
+    fileprivate func twoPlayer() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "GameBoard") as! ViewController
+        makeWindowVisible(with: vc)
+        useAI = false
+    }
+    
+    fileprivate func makeWindowVisible(with vc: UIViewController) {
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = vc
+        self.window?.makeKeyAndVisible()
+    }
 }
 
