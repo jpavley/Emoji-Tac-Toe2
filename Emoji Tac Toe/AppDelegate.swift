@@ -50,6 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let newGameID = "New Game"
     let singlePlayerID  = "Single Player"
     let twoPlayerID = "Two Player"
+    let mainStoryboardID = "Main"
+    let newGameViewControllerID = "NewGame"
+    let gameBoardViewControllerID = "GameBoard"
     
     func handleShortcut(_ shortcutValue: String) -> Bool {
         
@@ -68,21 +71,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     fileprivate func newGame() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "NewGame") as! NewGameViewController
+        let storyboard = UIStoryboard(name: mainStoryboardID, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: newGameViewControllerID) as! NewGameViewController
         makeWindowVisible(with: vc)
     }
     
     fileprivate func singlePlayer() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "GameBoard") as! ViewController
+        let storyboard = UIStoryboard(name: mainStoryboardID, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: gameBoardViewControllerID) as! ViewController
         makeWindowVisible(with: vc)
         useAI = true
     }
     
     fileprivate func twoPlayer() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "GameBoard") as! ViewController
+        let storyboard = UIStoryboard(name: mainStoryboardID, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: gameBoardViewControllerID) as! ViewController
         makeWindowVisible(with: vc)
         useAI = false
     }
