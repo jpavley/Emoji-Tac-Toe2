@@ -100,6 +100,7 @@ class ViewController: UIViewController {
     
     @IBAction func longPressAction(_ sender: AnyObject) {
         if let lpgr = sender as? UILongPressGestureRecognizer {
+            
             if lpgr.state == .began && mysteryMode {
                 battleModeAttack((lpgr.view?.tag)!)
             }
@@ -108,16 +109,18 @@ class ViewController: UIViewController {
     
     @IBAction func panAction(_ sender: AnyObject) {
         if let pgr = sender as? UIPanGestureRecognizer {
-            if pgr.state == .ended {
-                if playing {
-                    let velocity = pgr.velocity(in: view)
-                    if velocity.y > 0 {
-                        useSound = false
-                    } else {
-                        useSound = true
-                    }
-                    UserDefaults.standard.set(useSound, forKey: "savedUseSound")
+            
+            if pgr.state == .ended && playing {
+                
+                let velocity = pgr.velocity(in: view)
+                
+                if velocity.y > 0 {
+                    useSound = false
+                } else {
+                    useSound = true
                 }
+                
+                UserDefaults.standard.set(useSound, forKey: "savedUseSound")
             }
         }
     }
