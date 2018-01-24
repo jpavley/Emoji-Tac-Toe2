@@ -100,10 +100,8 @@ class ViewController: UIViewController {
     
     @IBAction func longPressAction(_ sender: AnyObject) {
         if let lpgr = sender as? UILongPressGestureRecognizer {
-            if lpgr.state == .began {
-                if mysteryMode {
-                    battleModeAttack((lpgr.view?.tag)!)
-                }
+            if lpgr.state == .began && mysteryMode {
+                battleModeAttack((lpgr.view?.tag)!)
             }
         }
     }
