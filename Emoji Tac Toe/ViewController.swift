@@ -186,7 +186,7 @@ class ViewController: UIViewController {
             randomMove = attackList[1][diceRoll(2)]
             
         case .mixerUpper:
-            randomMove = attackList[3][diceRoll(4)]
+            randomMove = attackList[2][diceRoll(4)]
         }
         
         return randomMove
@@ -196,7 +196,7 @@ class ViewController: UIViewController {
     
     func battleModeAttack(_ buttonID: Int) {
         
-        if gameboard[buttonID - 1] != activePlayer {
+        if gameboard[buttonID - 1] == activePlayer {
             // HINT: ignore if activePlayer is pressing on other player's button!
             return
         }
