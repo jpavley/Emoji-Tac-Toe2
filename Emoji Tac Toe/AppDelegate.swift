@@ -10,7 +10,7 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-        
+    
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -47,18 +47,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         completionHandler(handleShortcut(shortcutItem.localizedTitle))
     }
     
+    let newGameID = "New Game"
+    let singlePlayerID  = "Single Player"
+    let twoPlayerID = "Two Player"
+    
     func handleShortcut(_ shortcutValue: String) -> Bool {
         
-        if shortcutValue == "New Game" {
+        switch shortcutValue {
+        case newGameID:
             newGame()
-        }
-        
-        if shortcutValue == "Single Player" {
+        case singlePlayerID:
             singlePlayer()
-        }
-        
-        if shortcutValue == "Two Player" {
+        case twoPlayerID:
             twoPlayer()
+        default:
+            print("error in handleShortcut()")
         }
         
         return true
