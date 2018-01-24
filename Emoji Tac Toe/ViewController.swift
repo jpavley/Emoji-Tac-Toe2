@@ -70,6 +70,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     
+    /// Share the current game as text.
     @IBAction func share(_ sender: AnyObject) {
         
         let ticTacToeGame = TicTacToeGame(gameboard: gameboard, noughtMark: noughtMark, crossMark: crossMark, untouchedMark: "⬜️", gameOver: false)
@@ -91,13 +92,13 @@ class ViewController: UIViewController {
 
     }
     
-    
-    
+    /// Initiate a normal move.
     @IBAction func gameButtonAction(_ sender: AnyObject) {
         
         classicTTTButtonTouch(sender as! UIButton)
     }
     
+    /// Initiate a battlemode move.
     @IBAction func longPressAction(_ sender: AnyObject) {
         if let lpgr = sender as? UILongPressGestureRecognizer {
             
@@ -107,6 +108,8 @@ class ViewController: UIViewController {
         }
     }
     
+    /// Pan up: Sound on.
+    /// Pan down: Sound off.
     @IBAction func panAction(_ sender: AnyObject) {
         if let pgr = sender as? UIPanGestureRecognizer {
             
@@ -125,18 +128,18 @@ class ViewController: UIViewController {
         }
     }
     
-    /// Chooses a battlemode attack move based on the following probability table
-    /// Rank 1: Instant Win (2% probability)
-    /// Rank 2: Nearly Instant Win (8% probability)
-    /// Rank 3: Mixer upper (90% probability)
-    /// Within each rank an attack move is chosen at random
+    enum AttackRank:Int {
+        case instantWin = 1
+        case nearlyInstantWin = 2
+        case mixerUpper = 3
+    }
+    
+    /// Chooses a battlemode attack move based on the following probability table.
+    /// Rank 1: Instant Win (2% probability).
+    /// Rank 2: Nearly Instant Win (8% probability).
+    /// Rank 3: Mixer upper (90% probability).
+    /// Within each rank an attack move is chosen at random.
     func chooseAttackID() -> BattleModeAttack {
-        
-        enum AttackRank:Int {
-            case instantWin = 1
-            case nearlyInstantWin = 2
-            case mixerUpper = 3
-        }
         
         // assemble the list of ranks with frequency based on probability
         
@@ -155,31 +158,40 @@ class ViewController: UIViewController {
         }
         
         // find the rank of the attack based on the probability
-        let randomRankID = diceRoll(100)
-        let randomRank = rankList[randomRankID]
+        let randomRank = rankList[diceRoll(100)]
+        let attackList = createAttackList()
+        
+        return findAttackBaseOnRank(randomRank: randomRank, attackList: attackList)
+    }
+    
+    fileprivate func createAttackList() -> [[BattleModeAttack]] {
         
         let rank1Attacks:[BattleModeAttack] = [.replicateAllOpenCells, .youWin]
         let rank2Attacks:[BattleModeAttack] = [.takeAllCorners, .takeAllMiddles]
         let rank3Attacks:[BattleModeAttack] = [.switchLocations, .jumpToCenter, .jumpToRandom, .wipeOut]
         
-        var randomMoveID = 0
+        return [rank1Attacks, rank2Attacks, rank3Attacks]
+    }
+    
+    fileprivate func findAttackBaseOnRank(randomRank: AttackRank, attackList: [[BattleModeAttack]]) -> BattleModeAttack {
+        
         var randomMove: BattleModeAttack
         
-        // find the attack based on the rank
         switch randomRank {
+            
         case .instantWin:
-            randomMoveID = diceRoll(2)
-            randomMove = rank1Attacks[randomMoveID]
+            randomMove = attackList[0][diceRoll(2)]
+            
         case .nearlyInstantWin:
-            randomMoveID = diceRoll(2)
-            randomMove = rank2Attacks[randomMoveID]
+            randomMove = attackList[1][diceRoll(2)]
+            
         case .mixerUpper:
-            randomMoveID = diceRoll(4)
-            randomMove = rank3Attacks[randomMoveID]
+            randomMove = attackList[3][diceRoll(4)]
         }
+        
         return randomMove
-
     }
+
     
     
     func battleModeAttack(_ buttonID: Int) {
