@@ -403,7 +403,7 @@ func searchForCornerIfOpponentHasMiddle(_ gameboard: Gameboard, for player: Play
 /// ⬜️⬜️⬜️
 /// ⬜️❓⬜️
 /// ⬜️⬜️⬜️
-func searchForCenterIfOpen(_ gameboard: Gameboard) -> Int? {
+func searchForCenterIfOpen(_ gameboard: Gameboard, for player: Player) -> Int? {
     let openCells = calcOpenCells(gameboard)
     return openCells.contains(cellCenter) ? cellCenter : nil
 }
@@ -464,14 +464,18 @@ func searchForCornerOppositeOpponent(_ gameboard: Gameboard, for player: Player)
 /// ❓⬜️❓
 /// ⬜️⬜️⬜️
 /// ❓⬜️❓
-func searchForAnyOpenCorner(_ gameboard: Gameboard) -> Int? {
+func searchForAnyOpenCorner(_ gameboard: Gameboard, for player: Player) -> Int? {
     let openCells = calcOpenCells(gameboard)
     let cornerCells = cellCorners.filter {openCells.contains($0)}
     return cornerCells.count > 0 ? cornerCells[diceRoll(cornerCells.count)] : nil
 }
 
-/// Returns a cell index that the AI wants to mark
-/// NOTE: AI is always cross and player is always nought (regardless of mark)
+/// Returns a cell index that the AI wants to mark.
+/// NOTE: AI is always cross and player is always nought (regardless of mark).
+/// This is essentially a big switch statement. It starts from the top
+/// and works its way to the end of the function. If, at anytime, result
+/// != nil no other functions are called and the the result (the move)
+/// is returned. Oney one result (move) can be returned.
 func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
     
     var result:Int?
@@ -518,7 +522,7 @@ func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
         // 7. Grab the center
         // Grab the center if it's open
         if result == nil {
-            result = searchForCenterIfOpen(gameboard)
+            result = searchForCenterIfOpen(gameboard, for: .cross)
             if result != nil { print("grab center if open \(result!)") }
 
         }
@@ -548,11 +552,11 @@ func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
         // 11. Any corner
         // Search for a corner
         if result == nil {
-            result = searchForAnyOpenCorner(gameboard)
+            result = searchForAnyOpenCorner(gameboard, for: .cross)
             if result != nil { print("searchForAnyOpenCorner \(result!)") }
         }
         
-        // 2. Random move
+        // 12. Random move
         // Search for random moves
         if result == nil {
             result = getRandomCell(gameboard, threshold: 100)
@@ -563,6 +567,7 @@ func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
         
         result = nil
     }
+    
     if result != nil { print("result choosen \(result!)") }
     return result
 }
