@@ -10,6 +10,7 @@
 		48D29FCF201941A600659AEA /* BattleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D29FCE201941A600659AEA /* BattleMode.swift */; };
 		48D29FD1201AB92300659AEA /* BattleModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D29FD0201AB92300659AEA /* BattleModeTests.swift */; };
 		48D29FD2201AB93C00659AEA /* BattleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D29FCE201941A600659AEA /* BattleMode.swift */; };
+		48D29FD3201BF0B000659AEA /* BattleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D29FCE201941A600659AEA /* BattleMode.swift */; };
 		5A3834A91EF6DC4B00891224 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5A3834A81EF6DC4B00891224 /* .gitignore */; };
 		5A3834AB1EF6E25A00891224 /* License in Resources */ = {isa = PBXBuildFile; fileRef = 5A3834AA1EF6E25A00891224 /* License */; };
 		5A4AB2331D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */; };
@@ -224,7 +225,6 @@
 				5AD407891D4ED69B00FBBA62 /* Assets.xcassets */,
 				5AD407941D4ED8E800FBBA62 /* LaunchScreen.storyboard */,
 				5AD4078E1D4ED69B00FBBA62 /* Info.plist */,
-				48D29FCE201941A600659AEA /* BattleMode.swift */,
 			);
 			name = iOS;
 			path = "Emoji Tac Toe";
@@ -266,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				5AD4079C1D4ED94F00FBBA62 /* EmojiTicTacToe.swift */,
+				48D29FCE201941A600659AEA /* BattleMode.swift */,
 				5ACDE3881DA350820067FBFE /* emoji-ordering.txt */,
 			);
 			name = Shared;
@@ -521,6 +522,7 @@
 				B904F3C21D4F715200CA2D75 /* ExtensionDelegate.swift in Sources */,
 				B904F3C01D4F715200CA2D75 /* InterfaceController.swift in Sources */,
 				B904F3D41D4F7B2F00CA2D75 /* EmojiTicTacToe.swift in Sources */,
+				48D29FD3201BF0B000659AEA /* BattleMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

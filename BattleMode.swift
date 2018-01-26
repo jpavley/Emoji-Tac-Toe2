@@ -106,6 +106,7 @@ class BattleMode {
     /// All untouched cells become player cells
     func replicateAllOpenCells() -> Gameboard {
         var updatedGameboard = currentGameboard
+        
         for i in 0..<currentGameboard.count {
             if currentGameboard[i] == .untouched {
                 updatedGameboard[i] = activePlayer
@@ -131,12 +132,7 @@ class BattleMode {
     
     /// All cells cells become untouched
     func wipeOut() -> Gameboard {
-        var updatedGameboard = currentGameboard
-
-        for i in 0..<currentGameboard.count {
-            updatedGameboard[i] = .untouched
-        }
-        return updatedGameboard
+        return transformTextIntoGameboard(textRepresentation: "_________")!
     }
     
     /// Player cells switch places with opponet cells

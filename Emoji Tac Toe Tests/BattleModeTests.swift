@@ -61,4 +61,23 @@ class BattleModeTests: XCTestCase {
         XCTAssertTrue(updatedGameboard == expectedGameboard)
     }
     
+    func testYouWin() {
+        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard, touchedCell: cellCenter)
+        
+        let updatedGameboard = battleMode.youWin()
+        let expectedGameboard = transformTextIntoGameboard(textRepresentation: "oxxxxoxox")!
+        
+        XCTAssertTrue(updatedGameboard == expectedGameboard)
+    }
+    
+    func testWipeOut() {
+        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard, touchedCell: cellCenter)
+        
+        let updatedGameboard = battleMode.wipeOut()
+        let expectedGameboard = transformTextIntoGameboard(textRepresentation: "_________")!
+        
+        XCTAssertTrue(updatedGameboard == expectedGameboard)
+    }
+
+    
 }
