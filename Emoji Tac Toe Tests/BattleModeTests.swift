@@ -10,10 +10,7 @@ import XCTest
 
 class BattleModeTests: XCTestCase {
     
-    let testGameboard:Gameboard = [.nought,     .cross,    .untouched,
-                                   .cross,     .untouched, .nought,
-                                   .untouched, .nought,    .cross]
-
+    let testGameboard = transformTextIntoGameboard(textRepresentation: "ox_x_o_ox")!
     
     override func setUp() {
         super.setUp()
@@ -53,7 +50,15 @@ class BattleModeTests: XCTestCase {
         
         let updatedGameboard = battleMode.attack()
         XCTAssertNotNil(updatedGameboard)
-
+    }
+    
+    func testReplicateAllOpenCells() {
+        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard, touchedCell: cellCenter)
+        
+        let updatedGameboard = battleMode.replicateAllOpenCells()
+        let expectedGameboard = transformTextIntoGameboard(textRepresentation: "oxoxoooox")!
+        
+        XCTAssertTrue(updatedGameboard == expectedGameboard)
     }
     
 }
