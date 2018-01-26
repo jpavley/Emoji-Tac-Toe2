@@ -8,9 +8,21 @@
 
 import Foundation
 
+enum BattleModeAttack: Int {
+    case replicateAllOpenCells = 0
+    case youWin = 7
+    case takeAllCorners = 2
+    case takeAllMiddles = 4
+    case switchLocations = 1
+    case jumpToCenter = 3
+    case jumpToRandom = 5
+    case wipeOut = 6
+}
+
 class BattleMode {
     
-    enum AttackRank:Int {
+    
+    enum AttackRank: Int {
         case instantWin = 1
         case nearlyInstantWin = 2
         case mixerUpper = 3
@@ -86,7 +98,7 @@ class BattleMode {
         return randomMove
     }
     
-    func battleModeAttack(touchedCell: Int) -> Gameboard {
+    func attack() -> Gameboard {
         
         let randomMove = chooseAttackID()
         var updatedGameboard: Gameboard

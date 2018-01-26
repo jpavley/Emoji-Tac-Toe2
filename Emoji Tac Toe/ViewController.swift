@@ -19,17 +19,6 @@ enum GameStatus {
     case notStarted, starting, inProgress, playerPlaying, aiPlaying, win, tie
 }
 
-enum BattleModeAttack:Int {
-    case replicateAllOpenCells = 0
-    case youWin = 7
-    case takeAllCorners = 2
-    case takeAllMiddles = 4
-    case switchLocations = 1
-    case jumpToCenter = 3
-    case jumpToRandom = 5
-    case wipeOut = 6
-}
-
 var noughtMark = "⭕️"
 var crossMark = "❌"
 var untouchedMark = "⬜️"
@@ -103,7 +92,10 @@ class ViewController: UIViewController {
         if let lpgr = sender as? UILongPressGestureRecognizer {
             
             if lpgr.state == .began && mysteryMode {
-                battleModeAttack((lpgr.view?.tag)!)
+                // TODO: replace below with
+                // let battleMode = BattleMode(activePlayer: .cross, currentGameboard: gameboard, touchedCell: lpgr.view?.tag - 1)
+                // battleMode.attack()
+                attack((lpgr.view?.tag)!)
             }
         }
     }
@@ -194,7 +186,7 @@ class ViewController: UIViewController {
 
     
     
-    func battleModeAttack(_ buttonID: Int) {
+    func attack(_ buttonID: Int) {
         
         if gameboard[buttonID - 1] == activePlayer {
             // HINT: ignore if activePlayer is pressing on other player's button!
