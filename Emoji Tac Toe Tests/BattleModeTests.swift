@@ -52,6 +52,7 @@ class BattleModeTests: XCTestCase {
         let battleMode = BattleMode(activePlayer: .cross, currentGameboard: testGameboard, touchedCell: cellCenter)
         
         let updatedGameboard = battleMode.attack()
+        XCTAssertNotNil(updatedGameboard)
 
     }
     

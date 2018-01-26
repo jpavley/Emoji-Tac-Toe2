@@ -79,59 +79,28 @@ class BattleMode {
         return findAttackBaseOnRank(randomRank: randomRank, attackList: attackList)
     }
     
-    fileprivate func findAttackBaseOnRank(randomRank: AttackRank, attackList: [[BattleModeAttack]]) -> BattleModeAttack {
-        
-        var randomMove: BattleModeAttack
-        
-        switch randomRank {
-            
-        case .instantWin:
-            randomMove = attackList[0][diceRoll(2)]
-            
-        case .nearlyInstantWin:
-            randomMove = attackList[1][diceRoll(2)]
-            
-        case .mixerUpper:
-            randomMove = attackList[2][diceRoll(4)]
-        }
-        
-        return randomMove
+    fileprivate func findAttackBaseOnRank(randomRank: AttackRank,
+                                          attackList: [[BattleModeAttack]]) -> BattleModeAttack {
+        let attackRankID = randomRank.rawValue - 1
+        return attackList[attackRankID][diceRoll(2)]
     }
     
+    /// Returns an updated gameboard with the effects of an attack
+    /// randomly chosen.
     func attack() -> Gameboard {
         
+        var attacks = [replicateAllOpenCells,
+                       youWin,
+                       takeAllCorners,
+                       takeAllMiddles,
+                       switchLocations,
+                       jumpToCenter,
+                       jumpToRandom,
+                       wipeOut]
+        
         let randomMove = chooseAttackID()
-        var updatedGameboard: Gameboard
-        
-        switch randomMove {
-        case .replicateAllOpenCells:
-            // rank: 1
-            updatedGameboard = replicateAllOpenCells()
-        case .youWin:
-            // rank: 1
-            updatedGameboard = youWin()
-        case .takeAllCorners:
-            // rank: 2
-            updatedGameboard = takeAllCorners()
-        case .takeAllMiddles:
-            // rank: 2
-            updatedGameboard = takeAllMiddles()
-        case .switchLocations:
-            // rank: 3
-            updatedGameboard = switchLocations()
-        case .jumpToCenter:
-            // rank: 3
-            updatedGameboard = jumpToCenter()
-        case .jumpToRandom:
-            // rank: 3
-            updatedGameboard = jumpToRandom()
-        case .wipeOut:
-            // rank: 3
-            updatedGameboard = wipeOut()
-        }
-        
+        let updatedGameboard = attacks[randomMove.rawValue]()
         return updatedGameboard
-        
     }
     
     /// All untouched cells become player cells
