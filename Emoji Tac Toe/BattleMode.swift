@@ -17,14 +17,12 @@ class BattleMode {
     }
     
     var activePlayer: Player
-    var playerMark: String
     var currentGameboard: Gameboard
     var touchedCell: Int
     var attackList: [[BattleModeAttack]]
     
-    init(activePlayer: Player, playerMark: String, currentGameboard: Gameboard, touchedCell: Int) {
+    init(activePlayer: Player, currentGameboard: Gameboard, touchedCell: Int) {
         self.activePlayer = activePlayer
-        self.playerMark = playerMark
         self.currentGameboard = currentGameboard
         self.touchedCell = touchedCell
         self.attackList = [[BattleModeAttack]]()
@@ -89,12 +87,6 @@ class BattleMode {
     }
     
     func battleModeAttack(touchedCell: Int) -> Gameboard {
-        
-        if activePlayer == .nought {
-            playerMark = noughtMark
-        } else {
-            playerMark = crossMark
-        }
         
         let randomMove = chooseAttackID()
         var updatedGameboard: Gameboard
@@ -214,7 +206,6 @@ class BattleMode {
     func jumpToRandom() -> Gameboard {
         var updatedGameboard = currentGameboard
 
-        // HINT: replace mark at the center
         let potentialLocations = cells.filter {$0 != touchedCell}
         let randomIndex = diceRoll(potentialLocations.count)
         let randomButtonID = potentialLocations[randomIndex]
