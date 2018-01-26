@@ -10,20 +10,35 @@ import Foundation
 
 class BattleMode {
     
-    var activePlayer: Player
-    var playerMark: String
-    var currentGameboard: Gameboard
-    
-    init(activePlayer: Player, playerMark: String, currentGameboard: Gameboard) {
-        self.activePlayer = activePlayer
-        self.playerMark = playerMark
-        self.currentGameboard = currentGameboard
-    }
-    
     enum AttackRank:Int {
         case instantWin = 1
         case nearlyInstantWin = 2
         case mixerUpper = 3
+    }
+    
+    var activePlayer: Player
+    var playerMark: String
+    var currentGameboard: Gameboard
+    var touchedCell: Int
+    var attackList: [[BattleModeAttack]]
+    
+    init(activePlayer: Player, playerMark: String, currentGameboard: Gameboard, touchedCell: Int) {
+        self.activePlayer = activePlayer
+        self.playerMark = playerMark
+        self.currentGameboard = currentGameboard
+        self.touchedCell = touchedCell
+        self.attackList = [[BattleModeAttack]]()
+
+        createAttackList()
+    }
+    
+    fileprivate func createAttackList(){
+        
+        let rank1Attacks:[BattleModeAttack] = [.replicateAllOpenCells, .youWin]
+        let rank2Attacks:[BattleModeAttack] = [.takeAllCorners, .takeAllMiddles]
+        let rank3Attacks:[BattleModeAttack] = [.switchLocations, .jumpToCenter, .jumpToRandom, .wipeOut]
+        
+        attackList.append(contentsOf: [rank1Attacks, rank2Attacks, rank3Attacks])
     }
     
     /// Chooses a battlemode attack move based on the following probability table.
@@ -51,18 +66,7 @@ class BattleMode {
         
         // find the rank of the attack based on the probability
         let randomRank = rankList[diceRoll(100)]
-        let attackList = createAttackList()
-        
         return findAttackBaseOnRank(randomRank: randomRank, attackList: attackList)
-    }
-    
-    fileprivate func createAttackList() -> [[BattleModeAttack]] {
-        
-        let rank1Attacks:[BattleModeAttack] = [.replicateAllOpenCells, .youWin]
-        let rank2Attacks:[BattleModeAttack] = [.takeAllCorners, .takeAllMiddles]
-        let rank3Attacks:[BattleModeAttack] = [.switchLocations, .jumpToCenter, .jumpToRandom, .wipeOut]
-        
-        return [rank1Attacks, rank2Attacks, rank3Attacks]
     }
     
     fileprivate func findAttackBaseOnRank(randomRank: AttackRank, attackList: [[BattleModeAttack]]) -> BattleModeAttack {
@@ -98,28 +102,28 @@ class BattleMode {
         switch randomMove {
         case .replicateAllOpenCells:
             // rank: 1
-            updatedGameboard = replicateAllOpenCells(touchedCell)
+            updatedGameboard = replicateAllOpenCells()
         case .youWin:
             // rank: 1
-            updatedGameboard = youWin(touchedCell)
+            updatedGameboard = youWin()
         case .takeAllCorners:
             // rank: 2
-            updatedGameboard = takeAllCorners(touchedCell)
+            updatedGameboard = takeAllCorners()
         case .takeAllMiddles:
             // rank: 2
-            updatedGameboard = takeAllMiddles(touchedCell)
+            updatedGameboard = takeAllMiddles()
         case .switchLocations:
             // rank: 3
-            updatedGameboard = switchLocations(touchedCell)
+            updatedGameboard = switchLocations()
         case .jumpToCenter:
             // rank: 3
-            updatedGameboard = jumpToCenter(touchedCell)
+            updatedGameboard = jumpToCenter()
         case .jumpToRandom:
             // rank: 3
-            updatedGameboard = jumpToRandom(touchedCell)
+            updatedGameboard = jumpToRandom()
         case .wipeOut:
             // rank: 3
-            updatedGameboard = wipeOut(touchedCell)
+            updatedGameboard = wipeOut()
         }
         
         return updatedGameboard
@@ -127,7 +131,7 @@ class BattleMode {
     }
     
     /// All untouched cells become player cells
-    func replicateAllOpenCells(_ touchLocation: Int) -> Gameboard {
+    func replicateAllOpenCells() -> Gameboard {
         var updatedGameboard = currentGameboard
         for i in 0..<currentGameboard.count {
             if currentGameboard[i] == .untouched {
@@ -138,7 +142,7 @@ class BattleMode {
     }
     
     /// All untouched cells become opponet's cells
-    func youWin(_ touchLocation: Int) -> Gameboard {
+    func youWin() -> Gameboard {
         var updatedGameboard = currentGameboard
 
         let opponet = (activePlayer == Player.cross) ? Player.nought : Player.cross
@@ -153,7 +157,7 @@ class BattleMode {
     }
     
     /// All cells cells become untouched
-    func wipeOut(_ touchLocation: Int) -> Gameboard {
+    func wipeOut() -> Gameboard {
         var updatedGameboard = currentGameboard
 
         for i in 0..<currentGameboard.count {
@@ -163,7 +167,7 @@ class BattleMode {
     }
     
     /// Player cells switch places with opponet cells
-    func switchLocations(_ touchedLocation: Int) -> Gameboard {
+    func switchLocations() -> Gameboard {
         var updatedGameboard = currentGameboard
 
         for i in 0..<currentGameboard.count {
@@ -178,7 +182,7 @@ class BattleMode {
     }
     
     
-    func takeAllCorners(_ touchedLocation: Int) -> Gameboard {
+    func takeAllCorners() -> Gameboard {
         var updatedGameboard = currentGameboard
         
         for i in 0..<cellCorners.count {
@@ -188,7 +192,7 @@ class BattleMode {
         return updatedGameboard
     }
     
-    func takeAllMiddles(_ buttonID: Int)  -> Gameboard {
+    func takeAllMiddles()  -> Gameboard {
         var updatedGameboard = currentGameboard
 
         for i in 0..<cellMiddles.count {
@@ -199,7 +203,7 @@ class BattleMode {
     }
     
     /// Take the center
-    func jumpToCenter(_ touchedLocation: Int) -> Gameboard {
+    func jumpToCenter() -> Gameboard {
         var updatedGameboard = currentGameboard
         
         updatedGameboard[cellCenter] = activePlayer
@@ -207,11 +211,11 @@ class BattleMode {
     }
     
     /// Take random cell
-    func jumpToRandom(_ touchedLocation: Int) -> Gameboard {
+    func jumpToRandom() -> Gameboard {
         var updatedGameboard = currentGameboard
 
         // HINT: replace mark at the center
-        let potentialLocations = cells.filter {$0 != touchedLocation}
+        let potentialLocations = cells.filter {$0 != touchedCell}
         let randomIndex = diceRoll(potentialLocations.count)
         let randomButtonID = potentialLocations[randomIndex]
         let targetLocation = randomButtonID - 1
@@ -220,7 +224,7 @@ class BattleMode {
         return updatedGameboard
     }
     
-    func stealVictory(_ buttonID: Int) -> Gameboard {
+    func stealVictory() -> Gameboard {
         let updatedGameboard = currentGameboard
 
         // if the user loses it turns the loss into a win
