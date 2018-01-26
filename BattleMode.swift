@@ -89,7 +89,7 @@ class BattleMode {
     /// randomly chosen.
     func attack() -> Gameboard {
         
-        var attacks = [replicateAllOpenCells,
+        var attacks = [meWin,
                        youWin,
                        takeAllCorners,
                        takeAllMiddles,
@@ -104,7 +104,7 @@ class BattleMode {
     }
     
     /// All untouched cells become player cells
-    func replicateAllOpenCells() -> Gameboard {
+    func meWin() -> Gameboard {
         var updatedGameboard = currentGameboard
         
         for i in 0..<currentGameboard.count {

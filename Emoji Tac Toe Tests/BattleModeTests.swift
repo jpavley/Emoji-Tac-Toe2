@@ -52,10 +52,10 @@ class BattleModeTests: XCTestCase {
         XCTAssertNotNil(updatedGameboard)
     }
     
-    func testReplicateAllOpenCells() {
+    func testMeWin() {
         let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard, touchedCell: cellCenter)
         
-        let updatedGameboard = battleMode.replicateAllOpenCells()
+        let updatedGameboard = battleMode.meWin()
         let expectedGameboard = transformTextIntoGameboard(textRepresentation: "oxoxoooox")!
         
         XCTAssertTrue(updatedGameboard == expectedGameboard)
