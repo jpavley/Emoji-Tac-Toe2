@@ -96,6 +96,16 @@ class BattleModeTests: XCTestCase {
         
         XCTAssertTrue(updatedGameboard == expectedGameboard)
     }
+    
+    func testTakeAllMiddles() {
+        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard, touchedCell: cellCenter)
+        
+        let updatedGameboard = battleMode.takeAllMiddles()
+        let expectedGameboard = transformTextIntoGameboard(textRepresentation: "oo_o_o_ox")!
+        
+        XCTAssertTrue(updatedGameboard == expectedGameboard)
+    }
+
 
 
     

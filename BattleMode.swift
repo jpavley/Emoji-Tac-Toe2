@@ -151,6 +151,7 @@ class BattleMode {
         return updatedGameboard
     }
     
+    /// Player steals the middle cells of the gameboard
     func takeAllMiddles()  -> Gameboard {
         var updatedGameboard = currentGameboard
 
