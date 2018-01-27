@@ -105,24 +105,21 @@ class BattleMode {
     
     /// All untouched cells become player cells
     func meWin() -> Gameboard {
-        var updatedGameboard = currentGameboard
+        let gameString = TicTacToeGame(gameboard: currentGameboard)
+            .text
+            .replacingOccurrences(of: "_", with: activePlayer.rawValue)
         
-        for i in 0..<currentGameboard.count {
-            if currentGameboard[i] == .untouched {
-                updatedGameboard[i] = activePlayer
-            }
-        }
-        return updatedGameboard
+        return transformTextIntoGameboard(textRepresentation: gameString)!
     }
     
     /// All untouched cells become opponet's cells
     func youWin() -> Gameboard {
-
         let opponent = (activePlayer == Player.cross) ? Player.nought : Player.cross
-        let gameString = TicTacToeGame(gameboard: currentGameboard).text.replacingOccurrences(of: "_", with: opponent.rawValue)
+        let gameString = TicTacToeGame(gameboard: currentGameboard)
+            .text
+            .replacingOccurrences(of: "_", with: opponent.rawValue)
         
         return transformTextIntoGameboard(textRepresentation: gameString)!
-        
     }
     
     /// All cells cells become untouched
