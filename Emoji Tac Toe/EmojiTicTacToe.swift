@@ -15,7 +15,9 @@
 import Foundation
 
 enum Player:String {
-    case untouched, nought, cross
+    case untouched = "_"
+    case nought = "o"
+    case cross = "x"
 }
 
 typealias Gameboard = [Player]
@@ -116,6 +118,39 @@ struct TicTacToeGame {
     var crossMark:String
     var untouchedMark:String
     var gameOver:Bool
+    
+    init(gameboard: Gameboard, noughtMark: String = "o", crossMark: String = "x",
+         untouchedMark: String = "_", gameOver: Bool = false) {
+        
+        self.gameboard = gameboard
+        self.noughtMark = noughtMark
+        self.crossMark = crossMark
+        self.untouchedMark = untouchedMark
+        self.gameOver = gameOver
+    }
+    
+    init(from text: String) {
+        self.init(gameboard: transformTextIntoGameboard(textRepresentation: text) ?? freshGameboard)
+    }
+    
+    var text: String {
+        var result = ""
+        
+        for cell in gameboard {
+            
+            switch cell {
+            case .untouched:
+                result += "\(untouchedMark)"
+            case .nought:
+                result += "\(noughtMark)"
+            case .cross:
+                result += "\(crossMark)"
+            }
+        }
+        
+        return result
+    }
+    
 }
 
 /// Returns a string with line breaks and emoji that represents the game
@@ -172,7 +207,7 @@ func transformTextIntoGameboard(textRepresentation: String,
         case Character(untouchedMark):
             result?.append(.untouched)
         default:
-            // textRepresentation contains unexpected data--Abort!
+            print("textRepresentation contains unexpected data--Abort!")
             result = nil
             break
         }
