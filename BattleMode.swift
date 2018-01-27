@@ -129,17 +129,15 @@ class BattleMode {
     
     /// Player cells switch places with opponet cells
     func switchLocations() -> Gameboard {
-        var updatedGameboard = currentGameboard
+        let opponent = (activePlayer == Player.cross) ? Player.nought : Player.cross
+        let gameString = TicTacToeGame(gameboard: currentGameboard)
+            .text
+            .replacingOccurrences(of: opponent.rawValue, with: "@")
+            .replacingOccurrences(of: activePlayer.rawValue, with: opponent.rawValue)
+            .replacingOccurrences(of: "@", with: activePlayer.rawValue)
+
+        return transformTextIntoGameboard(textRepresentation: gameString)!
         
-        for i in 0..<currentGameboard.count {
-            if currentGameboard[i] == .nought {
-                updatedGameboard[i] = .cross
-            } else if (currentGameboard[i] != .untouched) {
-                updatedGameboard[i] = .nought
-            }
-        }
-        
-        return updatedGameboard
     }
     
     
