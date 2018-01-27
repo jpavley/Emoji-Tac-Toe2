@@ -78,6 +78,16 @@ class BattleModeTests: XCTestCase {
         
         XCTAssertTrue(updatedGameboard == expectedGameboard)
     }
+    
+    func testSwitchLocations() {
+        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard, touchedCell: cellCenter)
+        
+        let updatedGameboard = battleMode.switchLocations()
+        let expectedGameboard = transformTextIntoGameboard(textRepresentation: "xo_o_x_xo")!
+        
+        XCTAssertTrue(updatedGameboard == expectedGameboard)
+
+    }
 
     
 }

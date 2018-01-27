@@ -138,7 +138,7 @@ class BattleMode {
     /// Player cells switch places with opponet cells
     func switchLocations() -> Gameboard {
         var updatedGameboard = currentGameboard
-
+        
         for i in 0..<currentGameboard.count {
             if currentGameboard[i] == .nought {
                 updatedGameboard[i] = .cross
