@@ -86,8 +86,17 @@ class BattleModeTests: XCTestCase {
         let expectedGameboard = transformTextIntoGameboard(textRepresentation: "xo_o_x_xo")!
         
         XCTAssertTrue(updatedGameboard == expectedGameboard)
-
     }
+    
+    func testTakeAllCorners() {
+        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard, touchedCell: cellCenter)
+        
+        let updatedGameboard = battleMode.takeAllCorners()
+        let expectedGameboard = transformTextIntoGameboard(textRepresentation: "oxox_oooo")!
+        
+        XCTAssertTrue(updatedGameboard == expectedGameboard)
+    }
+
 
     
 }

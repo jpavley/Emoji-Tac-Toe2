@@ -140,12 +140,12 @@ class BattleMode {
         
     }
     
-    
+    /// Player steals the corners of the gameboard
     func takeAllCorners() -> Gameboard {
         var updatedGameboard = currentGameboard
         
-        for i in 0..<cellCorners.count {
-            updatedGameboard[i] = activePlayer
+        for cell in cellCorners {
+            updatedGameboard[cell] = activePlayer
         }
         
         return updatedGameboard
@@ -154,8 +154,8 @@ class BattleMode {
     func takeAllMiddles()  -> Gameboard {
         var updatedGameboard = currentGameboard
 
-        for i in 0..<cellMiddles.count {
-            updatedGameboard[i] = activePlayer
+        for cell in cellMiddles {
+            updatedGameboard[cell] = activePlayer
         }
         
         return updatedGameboard
