@@ -205,9 +205,14 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+
+        var label: UILabel
+        if view != nil {
+            label = view as! UILabel
+        } else {
+            label = UILabel()
+        }
         
-        let label = view as! UILabel
-                
         var data:String?
         if component == 0 {
             data = player1Data[row]

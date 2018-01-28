@@ -58,6 +58,8 @@ class ViewController: UIViewController {
         
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
+    // TODO: Enable and disable cheat button per game logic
+    @IBOutlet weak var cheatButton: UIButton!
     
     /// Share the current game as text.
     @IBAction func share(_ sender: AnyObject) {
@@ -85,6 +87,12 @@ class ViewController: UIViewController {
     @IBAction func gameButtonAction(_ sender: AnyObject) {
         
         classicTTTButtonTouch(sender as! UIButton)
+    }
+    
+    @IBAction func cheatButtonAction(_ sender: Any) {
+        // TODO: Eliminate long press for battle mode
+        // TODO: Wire up cheat button for battle mode
+        print("cheater!")
     }
     
     /// Initiate a battlemode move.

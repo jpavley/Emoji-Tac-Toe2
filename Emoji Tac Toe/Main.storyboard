@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14087.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14075.4"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Avenir.ttc">
-            <string>Avenir-Book</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Main-->
         <scene sceneID="tne-QT-ifu">
@@ -256,11 +252,22 @@
                                     <constraint firstAttribute="width" constant="320" id="XjN-7J-k9p"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B49-t2-TBg">
+                                <rect key="frame" x="140" y="505" width="41" height="30"/>
+                                <state key="normal" title="Cheat"/>
+                                <connections>
+                                    <action selector="cheatButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6xN-AR-V8s"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="RSO-c3-xkp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="IeM-pS-jVu"/>
+                            <constraint firstItem="B49-t2-TBg" firstAttribute="top" secondItem="RSO-c3-xkp" secondAttribute="bottom" constant="8" id="Ui6-xz-2x7"/>
+                            <constraint firstItem="B49-t2-TBg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="124" id="VHz-Em-dVd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="B49-t2-TBg" secondAttribute="trailing" constant="123" id="gxt-hi-Qyz"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="B49-t2-TBg" secondAttribute="bottom" constant="33" id="hsV-pG-ALP"/>
                             <constraint firstItem="RSO-c3-xkp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sRc-e7-edR"/>
                         </constraints>
                         <connections>
@@ -268,6 +275,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="cheatButton" destination="B49-t2-TBg" id="6YR-X6-46V"/>
                         <outlet property="statusLabel" destination="YJX-cK-mVK" id="ghL-ZC-sbn"/>
                         <outlet property="titleLabel" destination="0cL-dE-XJ1" id="2dv-Su-I07"/>
                     </connections>
