@@ -24,7 +24,7 @@ class BattleModeTests: XCTestCase {
     }
     
     func testBattleModeInit() {
-        let battleMode = BattleMode(activePlayer: .cross, currentGameboard: freshGameboard, touchedCell: 0)
+        let battleMode = BattleMode(activePlayer: .cross, currentGameboard: freshGameboard)
         
         XCTAssertNotNil(battleMode)
         
@@ -38,7 +38,7 @@ class BattleModeTests: XCTestCase {
     }
     
     func testChooseAttackID() {
-        let battleMode = BattleMode(activePlayer: .cross, currentGameboard: freshGameboard, touchedCell: 0)
+        let battleMode = BattleMode(activePlayer: .cross, currentGameboard: freshGameboard)
         
         let attackID = battleMode.chooseAttackID()
         XCTAssertTrue(attackID.rawValue > 0 && attackID.rawValue <  8)
@@ -46,14 +46,14 @@ class BattleModeTests: XCTestCase {
     }
     
     func testAttack() {
-        let battleMode = BattleMode(activePlayer: .cross, currentGameboard: testGameboard, touchedCell: cellCenter)
+        let battleMode = BattleMode(activePlayer: .cross, currentGameboard: testGameboard)
         
         let updatedGameboard = battleMode.attack()
         XCTAssertNotNil(updatedGameboard)
     }
     
     func testMeWin() {
-        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard, touchedCell: cellCenter)
+        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard)
         
         let updatedGameboard = battleMode.meWin()
         let expectedGameboard = transformTextIntoGameboard(textRepresentation: "oxoxoooox")!
@@ -62,7 +62,7 @@ class BattleModeTests: XCTestCase {
     }
     
     func testYouWin() {
-        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard, touchedCell: cellCenter)
+        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard)
         
         let updatedGameboard = battleMode.youWin()
         let expectedGameboard = transformTextIntoGameboard(textRepresentation: "oxxxxoxox")!
@@ -71,7 +71,7 @@ class BattleModeTests: XCTestCase {
     }
     
     func testWipeOut() {
-        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard, touchedCell: cellCenter)
+        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard)
         
         let updatedGameboard = battleMode.wipeOut()
         let expectedGameboard = transformTextIntoGameboard(textRepresentation: "_________")!
@@ -80,7 +80,7 @@ class BattleModeTests: XCTestCase {
     }
     
     func testSwitchLocations() {
-        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard, touchedCell: cellCenter)
+        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard)
         
         let updatedGameboard = battleMode.switchLocations()
         let expectedGameboard = transformTextIntoGameboard(textRepresentation: "xo_o_x_xo")!
@@ -89,7 +89,7 @@ class BattleModeTests: XCTestCase {
     }
     
     func testTakeAllCorners() {
-        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard, touchedCell: cellCenter)
+        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard)
         
         let updatedGameboard = battleMode.takeAllCorners()
         let expectedGameboard = transformTextIntoGameboard(textRepresentation: "oxox_oooo")!
@@ -98,12 +98,30 @@ class BattleModeTests: XCTestCase {
     }
     
     func testTakeAllMiddles() {
-        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard, touchedCell: cellCenter)
+        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard)
         
         let updatedGameboard = battleMode.takeAllMiddles()
         let expectedGameboard = transformTextIntoGameboard(textRepresentation: "oo_o_o_ox")!
         
         XCTAssertTrue(updatedGameboard == expectedGameboard)
+    }
+    
+    func testJumpToCenter() {
+        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard)
+        
+        let updatedGameboard = battleMode.jumpToCenter()
+        let expectedGameboard = transformTextIntoGameboard(textRepresentation: "ox_xoo_ox")!
+        
+        XCTAssertTrue(updatedGameboard == expectedGameboard)
+    }
+    
+    func testMixUp() {
+        let battleMode = BattleMode(activePlayer: .nought, currentGameboard: testGameboard)
+        
+        let updatedGameboard = battleMode.mixUp()
+        let expectedGameboard = transformTextIntoGameboard(textRepresentation: "ox_x_o_ox")!
+        
+        XCTAssertTrue(updatedGameboard != expectedGameboard)
     }
 
 

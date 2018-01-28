@@ -82,7 +82,6 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YnI-Gf-0DN"/>
-                                                            <outletCollection property="gestureRecognizers" destination="GPP-EG-qEq" appends="YES" id="f74-b6-vN5"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUF-ZW-2y2">
@@ -99,7 +98,6 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OFn-2v-cJu"/>
-                                                            <outletCollection property="gestureRecognizers" destination="85C-au-jMG" appends="YES" id="gpn-gd-FCO"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lsu-Fa-PWf">
@@ -116,7 +114,6 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cxy-Uz-Q70"/>
-                                                            <outletCollection property="gestureRecognizers" destination="8TY-zp-3TI" appends="YES" id="Gt4-j8-LNv"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -138,7 +135,6 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nn8-nm-yqU"/>
-                                                            <outletCollection property="gestureRecognizers" destination="QEF-9u-DJ8" appends="YES" id="eWQ-GH-Es2"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ze-t6-dK2">
@@ -155,7 +151,6 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="978-rq-rRX"/>
-                                                            <outletCollection property="gestureRecognizers" destination="K0Z-Y5-fQr" appends="YES" id="9tz-gf-LKF"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gVX-7o-lV0">
@@ -172,7 +167,6 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9V5-sL-6oe"/>
-                                                            <outletCollection property="gestureRecognizers" destination="Sxy-VX-0tb" appends="YES" id="9R1-Tr-177"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -194,7 +188,6 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qvh-xI-iCe"/>
-                                                            <outletCollection property="gestureRecognizers" destination="HOp-yb-WF3" appends="YES" id="Ggu-6Q-F9T"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sd-gU-qzz">
@@ -211,7 +204,6 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yxi-dm-7tB"/>
-                                                            <outletCollection property="gestureRecognizers" destination="iEM-sg-aFr" appends="YES" id="fV1-Wr-TiB"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6XM-W9-fPm">
@@ -228,7 +220,6 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wNx-Gf-XJ5"/>
-                                                            <outletCollection property="gestureRecognizers" destination="w83-RT-S3K" appends="YES" id="iIF-aE-Mje"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -281,51 +272,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="GPP-EG-qEq">
-                    <connections>
-                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="kcV-0b-Tvy"/>
-                    </connections>
-                </pongPressGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="85C-au-jMG">
-                    <connections>
-                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="uYr-TZ-Dkk"/>
-                    </connections>
-                </pongPressGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="8TY-zp-3TI">
-                    <connections>
-                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="NJw-7d-lhB"/>
-                    </connections>
-                </pongPressGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="QEF-9u-DJ8">
-                    <connections>
-                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="iCh-be-wex"/>
-                    </connections>
-                </pongPressGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="K0Z-Y5-fQr">
-                    <connections>
-                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="fXO-HB-Z6u"/>
-                    </connections>
-                </pongPressGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Sxy-VX-0tb">
-                    <connections>
-                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="BgY-kI-UJh"/>
-                    </connections>
-                </pongPressGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="HOp-yb-WF3">
-                    <connections>
-                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="aIf-wB-E96"/>
-                    </connections>
-                </pongPressGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="iEM-sg-aFr">
-                    <connections>
-                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="QPX-iN-Q0n"/>
-                    </connections>
-                </pongPressGestureRecognizer>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="w83-RT-S3K">
-                    <connections>
-                        <action selector="longPressAction:" destination="BYZ-38-t0r" id="92w-kv-0nu"/>
-                    </connections>
-                </pongPressGestureRecognizer>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="YLw-rB-Tj9">
                     <connections>
                         <action selector="panAction:" destination="BYZ-38-t0r" id="vIm-x7-Nsh"/>

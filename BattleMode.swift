@@ -30,13 +30,11 @@ class BattleMode {
     
     var activePlayer: Player
     var currentGameboard: Gameboard
-    var touchedCell: Int
     var attackList: [[BattleModeAttack]]
     
-    init(activePlayer: Player, currentGameboard: Gameboard, touchedCell: Int) {
+    init(activePlayer: Player, currentGameboard: Gameboard) {
         self.activePlayer = activePlayer
         self.currentGameboard = currentGameboard
-        self.touchedCell = touchedCell
         self.attackList = [[BattleModeAttack]]()
 
         createAttackList()
@@ -95,7 +93,7 @@ class BattleMode {
                        takeAllMiddles,
                        switchLocations,
                        jumpToCenter,
-                       jumpToRandom,
+                       mixUp,
                        wipeOut]
         
         let randomMove = chooseAttackID()
@@ -170,24 +168,16 @@ class BattleMode {
         return updatedGameboard
     }
     
-    /// Take random cell
-    func jumpToRandom() -> Gameboard {
+    /// Scramble the board
+    func mixUp() -> Gameboard {
         var updatedGameboard = currentGameboard
-
-        let potentialLocations = cells.filter {$0 != touchedCell}
-        let randomIndex = diceRoll(potentialLocations.count)
-        let randomButtonID = potentialLocations[randomIndex]
-        let targetLocation = randomButtonID - 1
-        updatedGameboard[targetLocation] = activePlayer
+        
+        let states: [Player] = [.untouched, .nought, .cross]
+        
+        for i in 0..<updatedGameboard.count {
+            updatedGameboard[i] = states[diceRoll(3)]
+        }
     
         return updatedGameboard
     }
-    
-    func stealVictory() -> Gameboard {
-        let updatedGameboard = currentGameboard
-
-        // if the user loses it turns the loss into a win
-        return updatedGameboard
-    }
-
 }

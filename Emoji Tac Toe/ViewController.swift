@@ -68,9 +68,10 @@ class ViewController: UIViewController {
         let messageToShare = transformGameIntoText(game: ticTacToeGame)
         let activityViewController = UIActivityViewController(activityItems: [messageToShare], applicationActivities: nil)
         
-        // BFIX: Crash on iPad: "should have a non-nil sourceView or barButtonItem set before the presentation occurs"
-        //       On iPad the activity view controller will be displayed as a popover using the popoverPresentationController
-        //       Need to set the sourceView to the calling view
+        // BFIX: Crash on iPad: "should have a non-nil sourceView or barButtonItem set before the
+        //       presentation occurs" On iPad the activity view controller will be displayed as a
+        //       popover using the popoverPresentationController Need to set the sourceView to the
+        //       calling view
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             
@@ -90,24 +91,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func cheatButtonAction(_ sender: Any) {
-        // TODO: Eliminate long press for battle mode
-        // TODO: Wire up cheat button for battle mode
         print("cheater!")
+        
+         let battleMode = BattleMode(activePlayer: .cross, currentGameboard: gameboard)
+         let updatedGameboard = battleMode.attack()
+        // TODO: Process changes
+
     }
-    
-    /// Initiate a battlemode move.
-    @IBAction func longPressAction(_ sender: AnyObject) {
-        if let lpgr = sender as? UILongPressGestureRecognizer {
-            
-            if lpgr.state == .began && mysteryMode {
-                // TODO: replace below with
-                // let battleMode = BattleMode(activePlayer: .cross, currentGameboard: gameboard, touchedCell: lpgr.view?.tag - 1)
-                // battleMode.attack()
-                attack((lpgr.view?.tag)!)
-            }
-        }
-    }
-    
+        
     /// Pan up: Sound on.
     /// Pan down: Sound off.
     @IBAction func panAction(_ sender: AnyObject) {
