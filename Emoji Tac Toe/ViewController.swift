@@ -50,7 +50,11 @@ class ViewController: UIViewController {
         
     var activePlayer:Player = .untouched
     
-    var aiIsPlaying = false
+    var aiIsPlaying = false {
+        didSet {
+            cheatButton.isEnabled = !aiIsPlaying
+        }
+    }
     var winner = Player.untouched
     
     var playerMark = ""
