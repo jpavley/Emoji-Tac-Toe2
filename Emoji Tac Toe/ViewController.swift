@@ -62,7 +62,6 @@ class ViewController: UIViewController {
         
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
-    // TODO: Enable and disable cheat button per game logic
     @IBOutlet weak var cheatButton: UIButton!
     
     /// Share the current game as text.
