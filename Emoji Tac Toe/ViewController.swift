@@ -140,41 +140,12 @@ class ViewController: UIViewController {
         let battleMode = BattleMode(activePlayer: .cross, currentGameboard: gameboard)
         let updatedGameboard = battleMode.attack()
         
-        processBattleModeAttackChanges(updatedGameboard)
+        // update gameboard and view with the results
+        gameboard = updatedGameboard
+        updateGameView(updatedGameboard)
         
         completeThisTurn()
         setupNextTurn()
-    }
-    
-    fileprivate func playSoundForPlayer() {
-//        battleAVPlayer.currentTime = 0
-//        battleAVPlayer.play()
-    }
-    
-    fileprivate func processBattleModeAttackChanges(_ updatedGameboard: Gameboard) {
-        // TODO: do some kind of animation to distract the user
-        
-        // update the gameboard with the results of the attack
-        gameboard = updatedGameboard
-        var button:UIButton
-        for tag in 1...9 {
-            button = view.viewWithTag(tag) as! UIButton
-            let location = tag - 1
-            switch gameboard[location] {
-            case .untouched:
-                button.setTitle("", for: UIControlState())
-            case .nought:
-                button.setTitle(noughtMark, for: UIControlState())
-            case .cross:
-                button.setTitle(playerMark, for: UIControlState())
-            }
-        }
-
-        // TODO: present the results to the user with some kind of animation
-    }
-    
-    fileprivate func getActivePlayerMark() -> String {
-        return activePlayer == .nought ? noughtMark : crossMark
     }
     
     fileprivate func setupThisTurn() {
@@ -182,6 +153,46 @@ class ViewController: UIViewController {
         playSoundForPlayer()
         neutralizeGameboard()
         updateStatus(.inProgress)
+    }
+    
+    fileprivate func getActivePlayerMark() -> String {
+        return activePlayer == .nought ? noughtMark : crossMark
+    }
+    
+    fileprivate func playSoundForPlayer() {
+//        battleAVPlayer.currentTime = 0
+//        battleAVPlayer.play()
+    }
+    
+    fileprivate func updateGameView(_ updatedGameboard: Gameboard) {
+        
+        var button:UIButton
+        
+        for tag in 1...9 {
+            
+            button = view.viewWithTag(tag) as! UIButton
+            let location = tag - 1
+            
+            switch gameboard[location] {
+                
+            case .untouched:
+                button.setTitle("", for: UIControlState())
+                
+            case .nought:
+                button.setTitle(noughtMark, for: UIControlState())
+                
+            case .cross:
+                button.setTitle(crossMark, for: UIControlState())
+            }
+        }
+    }
+    
+    fileprivate func setupNextTurn() {
+        if useAI && activePlayer == .cross && playing {
+            activePlayer = getOpponent()
+            aiIsPlaying = true
+            perform(#selector(self.aiClassicTakeTurn), with: nil, afterDelay: 1)
+        }
     }
     
     fileprivate func getOpponent()  -> Player {
@@ -194,20 +205,12 @@ class ViewController: UIViewController {
         }
     }
     
-    fileprivate func setupNextTurn() {
-        if useAI && activePlayer == .cross && playing {
-            activePlayer = getOpponent()
-            aiIsPlaying = true
-            perform(#selector(self.aiClassicTakeTurn), with: nil, afterDelay: 1)
-        }
-    }
-    
     func playerTurn() {
-        
+        // TODO: Rewrite classicTTTButtonTouch
     }
     
     func aiTurn() {
-        
+        // TODO: Rewrite aiClassicTakeTurn
     }
     
     func classicTTTButtonTouch(_ currentButton: UIButton) {
@@ -233,7 +236,6 @@ class ViewController: UIViewController {
 //                noughtAVPlayer.play()
             }
             
-            activePlayer = .cross
         } else {
             playerMark = crossMark
             currentButton.setTitle(playerMark, for: UIControlState())
@@ -242,8 +244,6 @@ class ViewController: UIViewController {
 //                crossAVPlayer.currentTime = 0
 //                crossAVPlayer.play()
             }
-
-            activePlayer = .nought
         }
         
         // HINT: Update the game board
@@ -257,6 +257,8 @@ class ViewController: UIViewController {
         if !checkForWinner() {
             checkForDraw()
         }
+        
+        activePlayer = getOpponent()
         
         if useAI && activePlayer == .cross && playing {
             aiIsPlaying = true
@@ -273,7 +275,6 @@ class ViewController: UIViewController {
             let tag = aiCell + 1
             let aiButton = view.viewWithTag(tag) as! UIButton
             aiButton.setTitle(playerMark, for: UIControlState())
-            activePlayer = .nought
             gameboard[aiCell] = .cross
             
             // TODO: replace with creative commons sound effect
@@ -288,6 +289,7 @@ class ViewController: UIViewController {
             }
             
             aiIsPlaying = false
+            activePlayer = .nought
             
             let openCells = calcOpenCells(gameboard)
             if openCells.count == 1 {
@@ -452,7 +454,8 @@ class ViewController: UIViewController {
                 result = useAI ? "Player \(noughtMark)'s turn" : "Player 1 \(noughtMark)'s turn"
             }
         case .win:
-            if activePlayer == .nought {
+            // TODO: This seems revered! If activePlayer is nought
+            if activePlayer == .cross {
                 result = useAI ? "AI \(crossMark) Wins" : "Player 2 \(crossMark)Wins"
             } else {
                 result = useAI ? "Player \(noughtMark) Wins" : "Player 1 \(noughtMark) Wins"
