@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48C3918A20212CB4009A536D /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C3918920212CB4009A536D /* GameEngine.swift */; };
 		48D29FCF201941A600659AEA /* BattleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D29FCE201941A600659AEA /* BattleMode.swift */; };
 		48D29FD1201AB92300659AEA /* BattleModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D29FD0201AB92300659AEA /* BattleModeTests.swift */; };
 		48D29FD2201AB93C00659AEA /* BattleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D29FCE201941A600659AEA /* BattleMode.swift */; };
@@ -94,6 +95,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		48C3918920212CB4009A536D /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		48D29FCE201941A600659AEA /* BattleMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleMode.swift; sourceTree = "<group>"; };
 		48D29FD0201AB92300659AEA /* BattleModeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleModeTests.swift; sourceTree = "<group>"; };
 		5A3834A81EF6DC4B00891224 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				5AD4079C1D4ED94F00FBBA62 /* EmojiTicTacToe.swift */,
 				48D29FCE201941A600659AEA /* BattleMode.swift */,
 				5ACDE3881DA350820067FBFE /* emoji-ordering.txt */,
+				48C3918920212CB4009A536D /* GameEngine.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AD4079F1D4ED9EA00FBBA62 /* AppDelegate.swift in Sources */,
+				48C3918A20212CB4009A536D /* GameEngine.swift in Sources */,
 				5AD4079D1D4ED94F00FBBA62 /* EmojiTicTacToe.swift in Sources */,
 				5AD407991D4ED93700FBBA62 /* ViewController.swift in Sources */,
 				5AD4079B1D4ED94500FBBA62 /* NewGameViewController.swift in Sources */,
@@ -718,7 +722,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
