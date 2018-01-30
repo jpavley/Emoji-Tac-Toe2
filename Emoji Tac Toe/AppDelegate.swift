@@ -10,7 +10,7 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-        
+    
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -47,36 +47,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         completionHandler(handleShortcut(shortcutItem.localizedTitle))
     }
     
+    let newGameID = "New Game"
+    let singlePlayerID  = "Single Player"
+    let twoPlayerID = "Two Player"
+    let mainStoryboardID = "Main"
+    let newGameViewControllerID = "NewGame"
+    let gameBoardViewControllerID = "GameBoard"
+    
     func handleShortcut(_ shortcutValue: String) -> Bool {
         
-        if shortcutValue == "New Game" {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "NewGame") as! NewGameViewController
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window?.rootViewController = vc
-            self.window?.makeKeyAndVisible()
-        }
-        
-        if shortcutValue == "Single Player" {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "GameBoard") as! ViewController
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window?.rootViewController = vc
-            self.window?.makeKeyAndVisible()
-            useAI = true
-        }
-        
-        if shortcutValue == "Two Player" {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "GameBoard") as! ViewController
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window?.rootViewController = vc
-            self.window?.makeKeyAndVisible()
-            useAI = false
+        switch shortcutValue {
+        case newGameID:
+            newGame()
+        case singlePlayerID:
+            singlePlayer()
+        case twoPlayerID:
+            twoPlayer()
+        default:
+            print("error in handleShortcut()")
         }
         
         return true
     }
-
+    
+    fileprivate func newGame() {
+        let storyboard = UIStoryboard(name: mainStoryboardID, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: newGameViewControllerID) as! NewGameViewController
+        makeWindowVisible(with: vc)
+    }
+    
+    fileprivate func singlePlayer() {
+        let storyboard = UIStoryboard(name: mainStoryboardID, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: gameBoardViewControllerID) as! ViewController
+        makeWindowVisible(with: vc)
+        useAI = true
+    }
+    
+    fileprivate func twoPlayer() {
+        let storyboard = UIStoryboard(name: mainStoryboardID, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: gameBoardViewControllerID) as! ViewController
+        makeWindowVisible(with: vc)
+        useAI = false
+    }
+    
+    fileprivate func makeWindowVisible(with vc: UIViewController) {
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = vc
+        self.window?.makeKeyAndVisible()
+    }
 }
 

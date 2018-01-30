@@ -77,9 +77,9 @@ class InterfaceController: WKInterfaceController {
             return
         }
         
-        if emojiGame.gameBoard[tag] == .untouched {
+        if emojiGame.gameboard[tag] == .untouched {
             
-            emojiGame.gameBoard[tag] = activePlayer
+            emojiGame.gameboard[tag] = activePlayer
 
             let titleText = (activePlayer == .cross) ? emojiGame.crossMark : emojiGame.noughtMark
             
@@ -109,7 +109,7 @@ class InterfaceController: WKInterfaceController {
             return
         }
         
-        if !emojiGame.gameOver && !checkForUntouchedCells(emojiGame.gameBoard) {
+        if !emojiGame.gameOver && !checkForUntouchedCells(emojiGame.gameboard) {
             if statusLabel != nil {
                 statusLabel.setText("no winner 😔")
             } else {
@@ -131,7 +131,7 @@ class InterfaceController: WKInterfaceController {
     }
     
     func checkForWinner() -> Bool {
-        if let winningVector = searchForWin(emojiGame.gameBoard) {
+        if let winningVector = searchForWin(emojiGame.gameboard) {
             emojiGame.gameOver = true
             
             for cell in winningVector {
@@ -153,14 +153,14 @@ class InterfaceController: WKInterfaceController {
         emojiGame.crossMark = emojis[diceRoll(emojis.count/2) + emojis.count/2]
         
         
-        emojiGame.gameBoard = freshGameBoard
+        emojiGame.gameboard = freshGameboard
         activePlayer = .nought
         titleLabel.setText("\(emojiGame.noughtMark) vs \(emojiGame.crossMark)")
         if statusLabel != nil {
             statusLabel.setText("\(emojiGame.noughtMark)'s turn")
         }
         
-        for i in 0..<emojiGame.gameBoard.count {
+        for i in 0..<emojiGame.gameboard.count {
             if let button = buttonForIndex(i) {
                 button.setTitle(calcTitleForButton(i))
                 button.setBackgroundColor(UIColor.darkGray)
@@ -179,7 +179,7 @@ class InterfaceController: WKInterfaceController {
     }
     
     func calcTitleForButton(_ tag: Int) -> String {
-        switch emojiGame.gameBoard[tag] {
+        switch emojiGame.gameboard[tag] {
         case .untouched:
             return ""
         case .nought:
@@ -216,10 +216,10 @@ class InterfaceController: WKInterfaceController {
     }
     
     @objc func aiTakeTurn() {
-        if let aiCell = aiChoose(emojiGame.gameBoard, unpredicible: true) {
+        if let aiCell = aiChoose(emojiGame.gameboard, unpredicible: true) {
             if let aiButton = buttonForIndex(aiCell) {
                 aiButton.setTitle(emojiGame.crossMark)
-                emojiGame.gameBoard[aiCell] = .cross
+                emojiGame.gameboard[aiCell] = .cross
                 aiIsPlaying = false
                 checkForEndGame()
             }

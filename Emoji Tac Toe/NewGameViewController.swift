@@ -205,8 +205,11 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        var label = view as! UILabel!
-        if label == nil {
+
+        var label: UILabel
+        if view != nil {
+            label = view as! UILabel
+        } else {
             label = UILabel()
         }
         
@@ -219,9 +222,9 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         }
 
         let title = NSAttributedString(string: data!, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 36.0, weight: UIFont.Weight.regular)])
-        label?.attributedText = title
-        label?.textAlignment = .center
-        return label!
+        label.attributedText = title
+        label.textAlignment = .center
+        return label
 
     }
     

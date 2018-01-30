@@ -19,19 +19,9 @@ enum GameStatus {
     case notStarted, starting, inProgress, playerPlaying, aiPlaying, win, tie
 }
 
-enum BattleModeAttack:Int {
-    case replicateAllOpenCells = 0
-    case youWin = 7
-    case takeAllCorners = 2
-    case takeAllMiddles = 4
-    case switchLocations = 1
-    case jumpToCenter = 3
-    case jumpToRandom = 5
-    case wipeOut = 6
-}
-
 var noughtMark = "⭕️"
 var crossMark = "❌"
+var untouchedMark = "⬜️"
 
 // HINT: Make all emojis available to both players
 var player1Row = 0
@@ -46,7 +36,7 @@ var noughtWins = 0
 var crossWins = 0
 var draws = 0
 
-var gameBoard:GameBoard = [.untouched, .untouched, .untouched,
+var gameboard:Gameboard = [.untouched, .untouched, .untouched,
                            .untouched, .untouched, .untouched,
                            .untouched, .untouched, .untouched]
 
@@ -65,18 +55,23 @@ class ViewController: UIViewController {
     
     var playerMark = ""
     var statusText = ""
+    var battleModeAttackName = ""
         
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var cheatButton: UIButton!
     
+    /// Share the current game as text.
     @IBAction func share(_ sender: AnyObject) {
         
-        let messageToShare = transformGameIntoText(gameboard: gameBoard, noughtMark: noughtMark, crossMark: crossMark, untouchedMark: "⬜️")
+        let ticTacToeGame = TicTacToeGame(gameboard: gameboard, noughtMark: noughtMark, crossMark: crossMark, untouchedMark: "⬜️", gameOver: false)
+        let messageToShare = transformGameIntoText(game: ticTacToeGame)
         let activityViewController = UIActivityViewController(activityItems: [messageToShare], applicationActivities: nil)
         
-        // BFIX: Crash on iPad: "should have a non-nil sourceView or barButtonItem set before the presentation occurs"
-        //       On iPad the activity view controller will be displayed as a popover using the popoverPresentationController
-        //       Need to set the sourceView to the calling view
+        // BFIX: Crash on iPad: "should have a non-nil sourceView or barButtonItem set before the
+        //       presentation occurs" On iPad the activity view controller will be displayed as a
+        //       popover using the popoverPresentationController Need to set the sourceView to the
+        //       calling view
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             
@@ -89,292 +84,34 @@ class ViewController: UIViewController {
 
     }
     
-    
-    
+    /// Initiate a normal turn.
     @IBAction func gameButtonAction(_ sender: AnyObject) {
-        
         classicTTTButtonTouch(sender as! UIButton)
     }
     
-    @IBAction func longPressAction(_ sender: AnyObject) {
-        if let lpgr = sender as? UILongPressGestureRecognizer {
-            if lpgr.state == .began {
-                if mysteryMode {
-                    battleModeAttack((lpgr.view?.tag)!)
-                }
-            }
-        }
+    /// Initiate a BattleMode turn.
+    @IBAction func cheatButtonAction(_ sender: Any) {
+        battleModeTurn(sender as! UIButton)
     }
     
+    /// Pan up: Sound on.
+    /// Pan down: Sound off.
     @IBAction func panAction(_ sender: AnyObject) {
         if let pgr = sender as? UIPanGestureRecognizer {
-            if pgr.state == .ended {
-                if playing {
-                    let velocity = pgr.velocity(in: view)
-                    if velocity.y > 0 {
-                        useSound = false
-                    } else {
-                        useSound = true
-                    }
-                    UserDefaults.standard.set(useSound, forKey: "savedUseSound")
+            
+            if pgr.state == .ended && playing {
+                
+                let velocity = pgr.velocity(in: view)
+
+                if velocity.y > 0 {
+                    useSound = false
+                } else {
+                    useSound = true
                 }
+                
+                UserDefaults.standard.set(useSound, forKey: "savedUseSound")
             }
         }
-    }
-    
-    /// Chooses a battlemode attack move based on the following probability table
-    /// Rank 1: Instant Win (2% probability)
-    /// Rank 2: Nearly Instant Win (8% probability)
-    /// Rank 3: Mixer upper (90% probability)
-    /// Within each rank an attack move is chosen at random
-    func chooseAttackID() -> BattleModeAttack {
-        
-        enum AttackRank:Int {
-            case instantWin = 1
-            case nearlyInstantWin = 2
-            case mixerUpper = 3
-        }
-        
-        // assemble the list of ranks with frequency based on probability
-        
-        var rankList = [AttackRank]()
-        
-        for _ in 0..<2 {
-            rankList.append(.instantWin)
-        }
-        
-        for _ in 0..<8 {
-            rankList.append(.nearlyInstantWin)
-        }
-        
-        for _ in 0..<90 {
-            rankList.append(.mixerUpper)
-        }
-        
-        // find the rank of the attack based on the probability
-        let randomRankID = diceRoll(100)
-        let randomRank = rankList[randomRankID]
-        
-        let rank1Attacks:[BattleModeAttack] = [.replicateAllOpenCells, .youWin]
-        let rank2Attacks:[BattleModeAttack] = [.takeAllCorners, .takeAllMiddles]
-        let rank3Attacks:[BattleModeAttack] = [.switchLocations, .jumpToCenter, .jumpToRandom, .wipeOut]
-        
-        var randomMoveID = 0
-        var randomMove: BattleModeAttack
-        
-        // find the attack based on the rank
-        switch randomRank {
-        case .instantWin:
-            randomMoveID = diceRoll(2)
-            randomMove = rank1Attacks[randomMoveID]
-        case .nearlyInstantWin:
-            randomMoveID = diceRoll(2)
-            randomMove = rank2Attacks[randomMoveID]
-        case .mixerUpper:
-            randomMoveID = diceRoll(4)
-            randomMove = rank3Attacks[randomMoveID]
-        }
-        return randomMove
-
-    }
-    
-    
-    func battleModeAttack(_ buttonID: Int) {
-        
-        if gameBoard[buttonID - 1] != activePlayer {
-            // HINT: ignore if activePlayer is pressing on other player's button!
-            return
-        }
-        
-        if activePlayer == .nought {
-            playerMark = noughtMark
-        } else {
-            playerMark = crossMark
-        }
-        
-        if useSound {
-            // TODO: replace with creative commons sound effect
-            //            battleAVPlayer.currentTime = 0
-            //            battleAVPlayer.play()
-        }
-        
-        
-        // set up this turn
-        neutralizeGameboard()
-        updateStatus(.inProgress)
-
-        // do the attack!
-        
-        let randomMove = chooseAttackID()
-        
-        switch randomMove {
-        case .replicateAllOpenCells:
-            // rank: 1
-            replicateAllOpenCells(buttonID)
-        case .youWin:
-            // rank: 1
-            youWin(buttonID)
-        case .takeAllCorners:
-            // rank: 2
-            takeAllCorners(buttonID)
-        case .takeAllMiddles:
-            // rank: 2
-            takeAllMiddles(buttonID)
-        case .switchLocations:
-            // rank: 3
-            switchLocations(buttonID)
-        case .jumpToCenter:
-            // rank: 3
-            jumpToCenter(buttonID)
-        case .jumpToRandom:
-            // rank: 3
-            jumpToRandom(buttonID)
-        case .wipeOut:
-            // rank: 3
-            wipeOut(buttonID)
-        }
-        
-        // prep for next turn
-        if activePlayer == .nought {
-            activePlayer = .cross
-        } else {
-            activePlayer = .nought
-        }
-        
-        if !checkForWinner() {
-            checkForDraw()
-        }
-        
-        if useAI && activePlayer == .cross {
-            if !playing {
-                return
-            }
-            aiIsPlaying = true
-            perform(#selector(self.aiClassicTakeTurn), with: nil, afterDelay: 1)
-        }
-        
-    }
-    
-    func replicateAllOpenCells(_ buttonID: Int) {
-        for i in 0..<gameBoard.count {
-            if gameBoard[i] == .untouched {
-                gameBoard[i] = activePlayer
-                let targetButton = view.viewWithTag(i + 1) as! UIButton
-                targetButton.setTitle(playerMark, for: UIControlState())
-            }
-        }
-    }
-    
-    func youWin(_ buttonID: Int) {
-        
-        let opponet = (activePlayer == Player.cross) ? Player.nought : Player.cross
-        let opponetMark = (opponet == Player.cross) ? crossMark : noughtMark
-        
-        for i in 0..<gameBoard.count {
-            if gameBoard[i] == .untouched {
-                gameBoard[i] = opponet
-                let targetButton = view.viewWithTag(i + 1) as! UIButton
-                targetButton.setTitle(opponetMark, for: UIControlState())
-                activePlayer = opponet
-                playerMark = opponetMark
-            }
-        }
-    }
-
-    
-    func wipeOut(_ buttonID: Int) {
-        for i in 0..<gameBoard.count {
-            if i != buttonID - 1 {
-                gameBoard[i] = .untouched
-                let targetButton = view.viewWithTag(i + 1) as! UIButton
-                targetButton.setTitle("", for: UIControlState())
-            }
-        }
-    }
-    
-    func switchLocations(_ buttonID: Int) {
-        for i in 0..<gameBoard.count {
-            if gameBoard[i] == .nought {
-                gameBoard[i] = .cross
-                let targetButton = view.viewWithTag(i + 1) as! UIButton
-                targetButton.setTitle(crossMark, for: UIControlState())
-            } else if (gameBoard[i] != .untouched) {
-                gameBoard[i] = .nought
-                let targetButton = view.viewWithTag(i + 1) as! UIButton
-                targetButton.setTitle(noughtMark, for: UIControlState())
-            }
-        }
-
-    }
-    
-    func takeAllCorners(_ buttonID: Int) {
-        // HINT: erase mark at current colition
-        let sourceButton = view.viewWithTag(buttonID) as! UIButton
-        sourceButton.setTitle("", for: UIControlState())
-        let sourceLocation = buttonID - 1
-        gameBoard[sourceLocation] = .untouched
-        
-        // HINT: replace mark at the center
-        let cornerIDs = [1,3,7,9]
-        for i in 0..<cornerIDs.count {
-            let targetButton = view.viewWithTag(cornerIDs[i]) as! UIButton
-            targetButton.setTitle(playerMark, for: UIControlState())
-            let targetLocation = cornerIDs[i] - 1
-            gameBoard[targetLocation] = activePlayer
-        }
-    }
-    
-    func takeAllMiddles(_ buttonID: Int) {
-        // HINT: erase mark at current colition
-        let sourceButton = view.viewWithTag(buttonID) as! UIButton
-        sourceButton.setTitle("", for: UIControlState())
-        let sourceLocation = buttonID - 1
-        gameBoard[sourceLocation] = .untouched
-        
-        // HINT: replace mark at the center
-        let cornerIDs = [2,4,6,8]
-        for i in 0..<cornerIDs.count {
-            let targetButton = view.viewWithTag(cornerIDs[i]) as! UIButton
-            targetButton.setTitle(playerMark, for: UIControlState())
-            let targetLocation = cornerIDs[i] - 1
-            gameBoard[targetLocation] = activePlayer
-        }
-    }
-
-    func jumpToCenter(_ buttonID: Int) {
-        // HINT: erase mark at current colition
-        let sourceButton = view.viewWithTag(buttonID) as! UIButton
-        sourceButton.setTitle("", for: UIControlState())
-        let sourceLocation = buttonID - 1
-        gameBoard[sourceLocation] = .untouched
-        
-        // HINT: replace mark at the center
-        let centerID = 5
-        let targetButton = view.viewWithTag(centerID) as! UIButton
-        targetButton.setTitle(playerMark, for: UIControlState())
-        let targetLocation = centerID - 1
-        gameBoard[targetLocation] = activePlayer
-    }
-    
-    func jumpToRandom(_ buttonID: Int) {
-        // HINT: erase mark at current colition
-        let sourceButton = view.viewWithTag(buttonID) as! UIButton
-        sourceButton.setTitle("", for: UIControlState())
-        let sourceLocation = buttonID - 1
-        gameBoard[sourceLocation] = .untouched
-        
-        // HINT: replace mark at the center
-        let potentialButtonIDs = [1,2,3,4,5,6,7,8,9].filter {$0 != buttonID}
-        let randomIndex = diceRoll(potentialButtonIDs.count)
-        let randomButtonID = potentialButtonIDs[randomIndex]
-        let targetButton = view.viewWithTag(randomButtonID) as! UIButton
-        targetButton.setTitle(playerMark, for: UIControlState())
-        let targetLocation = randomButtonID - 1
-        gameBoard[targetLocation] = activePlayer
-    }
-    
-    func stealVictory(_ buttonID: Int) {
-        // if the user loses it turns the loss into a win
     }
     
     func dontRespond(_ location: Int) -> Bool {
@@ -388,11 +125,96 @@ class ViewController: UIViewController {
             result = true
         }
         
-        if gameBoard[location] != .untouched {
+        if gameboard[location] != .untouched {
             result = true
         }
         
         return result
+    }
+    
+    func battleModeTurn(_ currentButton: UIButton) {
+        
+        setupThisTurn()
+        
+        // do the attack
+        let battleMode = BattleMode(activePlayer: .cross, currentGameboard: gameboard)
+        let (updatedGameboard, attackName) = battleMode.attack()
+        
+        // update gameboard and view with the results
+        gameboard = updatedGameboard
+        battleModeAttackName = attackName
+        print(attackName)
+        updateGameView()
+        
+        completeThisTurn()
+        setupNextTurn()
+    }
+    
+    fileprivate func setupThisTurn() {
+        playerMark = getActivePlayerMark()
+        playSoundForPlayer()
+        neutralizeGameboard()
+        updateStatus(.inProgress)
+    }
+    
+    fileprivate func getActivePlayerMark() -> String {
+        return activePlayer == .nought ? noughtMark : crossMark
+    }
+    
+    fileprivate func playSoundForPlayer() {
+//        battleAVPlayer.currentTime = 0
+//        battleAVPlayer.play()
+    }
+    
+    fileprivate func updateGameView() {
+        
+        // TODO: Somehow with BattleMode.attack() the player marks are reversed
+        
+        var button:UIButton
+        
+        for tag in 1...9 {
+            
+            button = view.viewWithTag(tag) as! UIButton
+            let location = tag - 1
+            
+            switch gameboard[location] {
+                
+            case .untouched:
+                button.setTitle("", for: UIControlState())
+                
+            case .nought:
+                button.setTitle(noughtMark, for: UIControlState())
+                
+            case .cross:
+                button.setTitle(crossMark, for: UIControlState())
+            }
+        }
+    }
+    
+    fileprivate func setupNextTurn() {
+        if useAI && activePlayer == .cross && playing {
+            activePlayer = getOpponent()
+            aiIsPlaying = true
+            perform(#selector(self.aiClassicTakeTurn), with: nil, afterDelay: 1)
+        }
+    }
+    
+    fileprivate func getOpponent()  -> Player {
+        return activePlayer == .nought ? .cross : .nought
+    }
+    
+    fileprivate func completeThisTurn() {
+        if !checkForWinner() {
+            checkForDraw()
+        }
+    }
+    
+    func playerTurn() {
+        // TODO: Rewrite classicTTTButtonTouch
+    }
+    
+    func aiTurn() {
+        // TODO: Rewrite aiClassicTakeTurn
     }
     
     func classicTTTButtonTouch(_ currentButton: UIButton) {
@@ -418,7 +240,6 @@ class ViewController: UIViewController {
 //                noughtAVPlayer.play()
             }
             
-            activePlayer = .cross
         } else {
             playerMark = crossMark
             currentButton.setTitle(playerMark, for: UIControlState())
@@ -427,26 +248,23 @@ class ViewController: UIViewController {
 //                crossAVPlayer.currentTime = 0
 //                crossAVPlayer.play()
             }
-
-            activePlayer = .nought
         }
         
         // HINT: Update the game board
         let location = currentButton.tag - 1
         if playerMark == noughtMark {
-            gameBoard[location] = .nought
+            gameboard[location] = .nought
         } else {
-            gameBoard[location] = .cross
+            gameboard[location] = .cross
         }
         
         if !checkForWinner() {
             checkForDraw()
         }
         
-        if useAI && activePlayer == .cross {
-            if !playing {
-                return
-            }
+        activePlayer = getOpponent()
+        
+        if useAI && activePlayer == .cross && playing {
             aiIsPlaying = true
             perform(#selector(self.aiClassicTakeTurn), with: nil, afterDelay: 1)
         }
@@ -454,15 +272,14 @@ class ViewController: UIViewController {
     }
     
     @objc func aiClassicTakeTurn() {
-        if let aiCell = aiChoose(gameBoard, unpredicible: true) {
+        if let aiCell = aiChoose(gameboard, unpredicible: true) {
             neutralizeGameboard()
             updateStatus(.inProgress)
             playerMark = crossMark
             let tag = aiCell + 1
             let aiButton = view.viewWithTag(tag) as! UIButton
             aiButton.setTitle(playerMark, for: UIControlState())
-            activePlayer = .nought
-            gameBoard[aiCell] = .cross
+            gameboard[aiCell] = .cross
             
             // TODO: replace with creative commons sound effect
             
@@ -476,11 +293,14 @@ class ViewController: UIViewController {
             }
             
             aiIsPlaying = false
+            activePlayer = .nought
             
-            playing = checkForWayToWin(gameBoard)
-            if !playing {
-                // HINT: Game over!
-                gameOverDraw()
+            let openCells = calcOpenCells(gameboard)
+            if openCells.count == 1 {
+                if !isThereAFinalWinningMove(gameboard, for: .nought) {
+                    // HINT: No way for .nought to win
+                    gameOverDraw()
+                }
             }
         }
     }
@@ -499,7 +319,7 @@ class ViewController: UIViewController {
             button = view.viewWithTag(tag) as! UIButton
             button.backgroundColor = getNormalButtonColor()
             let location = tag - 1
-            if gameBoard[location] == .untouched {
+            if gameboard[location] == .untouched {
                 button.setTitle("", for: UIControlState())
             }
         }
@@ -511,9 +331,9 @@ class ViewController: UIViewController {
     }
     
     func checkForWinner() -> Bool {
-        if let winningVector = searchForWin(gameBoard) {
+        if let winningVector = searchForWin(gameboard) {
             playing = false
-            winner = gameBoard[winningVector[0]]
+            winner = gameboard[winningVector[0]]
             
             if winner == .cross {
                 crossWins += 1
@@ -581,7 +401,7 @@ class ViewController: UIViewController {
     func checkForDraw() {
         
         if playing {
-            playing = checkForUntouchedCells(gameBoard)
+            playing = checkForUntouchedCells(gameboard)
             if !playing {
                 // HINT: Game over!
                 gameOverDraw()
@@ -598,8 +418,8 @@ class ViewController: UIViewController {
         updateTitle()
         updateStatus(.starting)
         
-        for i in 0..<gameBoard.count {
-            gameBoard[i] = .untouched
+        for i in 0..<gameboard.count {
+            gameboard[i] = .untouched
         }
 
         var button:UIButton
@@ -609,9 +429,10 @@ class ViewController: UIViewController {
             button.setTitle("", for: UIControlState())
         }
         
-        emojiGame = TicTacToeGame(gameBoard: gameBoard,
+        emojiGame = TicTacToeGame(gameboard: gameboard,
                                   noughtMark: noughtMark,
                                   crossMark: crossMark,
+                                  untouchedMark: untouchedMark,
                                   gameOver: false)
     }
     
@@ -629,6 +450,9 @@ class ViewController: UIViewController {
             } else {
                 result = useAI ? "AI \(crossMark)'s turn" : "Player 2 \(crossMark)'s turn"
             }
+            
+            cheatButton.isEnabled = !useAI || activePlayer == .cross
+            
         case .inProgress:
             // HINT: turn = next player
             if activePlayer == .nought {
@@ -636,25 +460,40 @@ class ViewController: UIViewController {
             } else {
                 result = useAI ? "Player \(noughtMark)'s turn" : "Player 1 \(noughtMark)'s turn"
             }
+            
+            cheatButton.isEnabled = !useAI || activePlayer == .cross
+            
         case .win:
-            if activePlayer == .nought {
+            // TODO: This seems revered! If activePlayer is nought
+            if activePlayer == .cross {
                 result = useAI ? "AI \(crossMark) Wins" : "Player 2 \(crossMark)Wins"
             } else {
                 result = useAI ? "Player \(noughtMark) Wins" : "Player 1 \(noughtMark) Wins"
             }
             if mysteryMode {
-                result = result + " Battle Mode!"
+                result = result + " with\(battleModeAttackName)"
             } else {
                 result = result + "!"
             }
+            
+            cheatButton.isEnabled = false
+
         case .tie:
             result = "no winner 😔"
+            cheatButton.isEnabled = false
+
         case .notStarted:
             print(mode)
+            cheatButton.isEnabled = false
+
         case .playerPlaying:
             print(mode)
+            cheatButton.isEnabled = false
+
         case .aiPlaying:
             print(mode)
+            cheatButton.isEnabled = false
+
         }
         
         statusLabel.text = result
