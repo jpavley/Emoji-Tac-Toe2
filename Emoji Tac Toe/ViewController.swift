@@ -59,6 +59,7 @@ class ViewController: UIViewController {
     
     var playerMark = ""
     var statusText = ""
+    var battleModeAttackName = ""
         
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
@@ -145,6 +146,7 @@ class ViewController: UIViewController {
         
         // update gameboard and view with the results
         gameboard = updatedGameboard
+        battleModeAttackName = attackName
         print(attackName)
         updateGameView()
         
@@ -465,7 +467,7 @@ class ViewController: UIViewController {
                 result = useAI ? "Player \(noughtMark) Wins" : "Player 1 \(noughtMark) Wins"
             }
             if mysteryMode {
-                result = result + " Battle Mode!"
+                result = result + " with \(battleModeAttackName)"
             } else {
                 result = result + "!"
             }
