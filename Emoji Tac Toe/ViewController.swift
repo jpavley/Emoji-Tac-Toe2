@@ -141,11 +141,12 @@ class ViewController: UIViewController {
         
         // do the attack
         let battleMode = BattleMode(activePlayer: .cross, currentGameboard: gameboard)
-        let updatedGameboard = battleMode.attack()
+        let (updatedGameboard, attackName) = battleMode.attack()
         
         // update gameboard and view with the results
         gameboard = updatedGameboard
-        updateGameView(updatedGameboard)
+        print(attackName)
+        updateGameView()
         
         completeThisTurn()
         setupNextTurn()
@@ -167,7 +168,7 @@ class ViewController: UIViewController {
 //        battleAVPlayer.play()
     }
     
-    fileprivate func updateGameView(_ updatedGameboard: Gameboard) {
+    fileprivate func updateGameView() {
         
         var button:UIButton
         

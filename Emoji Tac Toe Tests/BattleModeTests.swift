@@ -41,6 +41,7 @@ class BattleModeTests: XCTestCase {
         let battleMode = BattleMode(activePlayer: .cross, currentGameboard: freshGameboard)
         
         let attackID = battleMode.chooseAttackID()
+        print("attackID.rawValue \(attackID.rawValue)")
         XCTAssertTrue(attackID.rawValue > 0 && attackID.rawValue <  8)
 
     }
@@ -48,8 +49,9 @@ class BattleModeTests: XCTestCase {
     func testAttack() {
         let battleMode = BattleMode(activePlayer: .cross, currentGameboard: testGameboard)
         
-        let updatedGameboard = battleMode.attack()
+        let (updatedGameboard, attackName) = battleMode.attack()
         XCTAssertNotNil(updatedGameboard)
+        XCTAssertNotNil(attackName)
     }
     
     func testMeWin() {

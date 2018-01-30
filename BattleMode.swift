@@ -9,23 +9,33 @@
 import Foundation
 
 enum BattleModeAttack: Int {
-    case replicateAllOpenCells = 0
-    case youWin = 7
+    case meWin = 0
+    case youWin = 1
     case takeAllCorners = 2
-    case takeAllMiddles = 4
-    case switchLocations = 1
-    case jumpToCenter = 3
-    case jumpToRandom = 5
-    case wipeOut = 6
+    case takeAllMiddles = 3
+    case switchLocations = 4
+    case jumpToCenter = 5
+    case mixUp = 6
+    case wipeOut = 7
 }
 
 class BattleMode {
-    
     
     enum AttackRank: Int {
         case instantWin = 1
         case nearlyInstantWin = 2
         case mixerUpper = 3
+    }
+    
+    struct attackNames {
+        static let meWin = "Me Win"
+        static let youWin = " You Win"
+        static let takeAllCorners = "Take All Corners"
+        static let takeAllMiddles = "Take All Middles"
+        static let switchLocations = "Swap Places"
+        static let jumpToCenter = "Take Center"
+        static let mixUp = "Mix It Up"
+        static let wipeOut = "Wipe Out"
     }
     
     var activePlayer: Player
@@ -42,63 +52,88 @@ class BattleMode {
     
     fileprivate func createAttackList(){
         
-        let rank1Attacks:[BattleModeAttack] = [.replicateAllOpenCells, .youWin]
+        let rank1Attacks:[BattleModeAttack] = [.meWin, .youWin]
         let rank2Attacks:[BattleModeAttack] = [.takeAllCorners, .takeAllMiddles]
-        let rank3Attacks:[BattleModeAttack] = [.switchLocations, .jumpToCenter, .jumpToRandom, .wipeOut]
+        let rank3Attacks:[BattleModeAttack] = [.switchLocations, .jumpToCenter, .mixUp, .wipeOut]
         
         attackList.append(contentsOf: [rank1Attacks, rank2Attacks, rank3Attacks])
     }
     
     /// Chooses a battlemode attack move based on the following probability table.
-    /// Rank 1: Instant Win (2% probability).
-    /// Rank 2: Nearly Instant Win (8% probability).
-    /// Rank 3: Mixer upper (90% probability).
+    /// Rank 1: Instant Win (10% probability).
+    /// Rank 2: Nearly Instant Win (20% probability).
+    /// Rank 3: Mixer upper (70% probability).
     /// Within each rank an attack move is chosen at random.
     func chooseAttackID() -> BattleModeAttack {
         
         // assemble the list of ranks with frequency based on probability
-        
         var rankList = [AttackRank]()
         
-        for _ in 0..<2 {
+        for _ in 0..<10 {
             rankList.append(.instantWin)
         }
         
-        for _ in 0..<8 {
+        for _ in 0..<20 {
             rankList.append(.nearlyInstantWin)
         }
         
-        for _ in 0..<90 {
+        for _ in 0..<70 {
             rankList.append(.mixerUpper)
         }
         
         // find the rank of the attack based on the probability
         let randomRank = rankList[diceRoll(100)]
-        return findAttackBaseOnRank(randomRank: randomRank, attackList: attackList)
-    }
-    
-    fileprivate func findAttackBaseOnRank(randomRank: AttackRank,
-                                          attackList: [[BattleModeAttack]]) -> BattleModeAttack {
+        
+        // some ranks have more attacks then other
+        var rankCount: Int
+        
+        switch randomRank {
+        case .instantWin:
+            rankCount = 2
+        case .nearlyInstantWin:
+            rankCount = 2
+        case .mixerUpper:
+            rankCount = 4
+        }
+        
+        // return a random attack based on the random rank
         let attackRankID = randomRank.rawValue - 1
-        return attackList[attackRankID][diceRoll(2)]
+        let battleModeAttack = attackList[attackRankID][diceRoll(rankCount)]
+        return battleModeAttack
     }
     
     /// Returns an updated gameboard with the effects of an attack
     /// randomly chosen.
-    func attack() -> Gameboard {
-        
-        var attacks = [meWin,
-                       youWin,
-                       takeAllCorners,
-                       takeAllMiddles,
-                       switchLocations,
-                       jumpToCenter,
-                       mixUp,
-                       wipeOut]
+    func attack() -> (Gameboard, String) {
         
         let randomMove = chooseAttackID()
-        let updatedGameboard = attacks[randomMove.rawValue]()
-        return updatedGameboard
+        
+        switch randomMove {
+            
+        case .meWin:           // rank 1 (10%)
+            return (meWin(), attackNames.meWin)
+            
+        case .youWin:          // rank 1 (10%)
+            return (youWin(), attackNames.youWin)
+            
+        case .takeAllCorners:  // rank 2 (20%)
+            return (takeAllCorners(), attackNames.takeAllCorners)
+            
+        case .takeAllMiddles:  // rank 2 (20%)
+            return (takeAllMiddles(), attackNames.takeAllMiddles)
+            
+        case .switchLocations: // rank 3 (70%)
+            return (switchLocations(), attackNames.switchLocations)
+            
+        case .jumpToCenter:    // rank 3 (70%)
+            return (jumpToCenter(), attackNames.jumpToCenter)
+            
+        case .mixUp:           // rank 3 (70%)
+            return (mixUp(), attackNames.mixUp)
+            
+        case .wipeOut:         // rank 3 (70%)
+            return (wipeOut(), attackNames.wipeOut)
+        }
     }
     
     /// All untouched cells become player cells
