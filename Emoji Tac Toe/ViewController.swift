@@ -50,11 +50,7 @@ class ViewController: UIViewController {
         
     var activePlayer:Player = .untouched
     
-    var aiIsPlaying = false {
-        didSet {
-            cheatButton.isEnabled = !aiIsPlaying
-        }
-    }
+    var aiIsPlaying = false
     var winner = Player.untouched
     
     var playerMark = ""
@@ -171,6 +167,8 @@ class ViewController: UIViewController {
     }
     
     fileprivate func updateGameView() {
+        
+        // TODO: Somehow with BattleMode.attack() the player marks are reversed
         
         var button:UIButton
         
@@ -452,6 +450,9 @@ class ViewController: UIViewController {
             } else {
                 result = useAI ? "AI \(crossMark)'s turn" : "Player 2 \(crossMark)'s turn"
             }
+            
+            cheatButton.isEnabled = !useAI || activePlayer == .cross
+            
         case .inProgress:
             // HINT: turn = next player
             if activePlayer == .nought {
@@ -459,6 +460,9 @@ class ViewController: UIViewController {
             } else {
                 result = useAI ? "Player \(noughtMark)'s turn" : "Player 1 \(noughtMark)'s turn"
             }
+            
+            cheatButton.isEnabled = !useAI || activePlayer == .cross
+            
         case .win:
             // TODO: This seems revered! If activePlayer is nought
             if activePlayer == .cross {
@@ -467,18 +471,29 @@ class ViewController: UIViewController {
                 result = useAI ? "Player \(noughtMark) Wins" : "Player 1 \(noughtMark) Wins"
             }
             if mysteryMode {
-                result = result + " with \(battleModeAttackName)"
+                result = result + " with\(battleModeAttackName)"
             } else {
                 result = result + "!"
             }
+            
+            cheatButton.isEnabled = false
+
         case .tie:
             result = "no winner 😔"
+            cheatButton.isEnabled = false
+
         case .notStarted:
             print(mode)
+            cheatButton.isEnabled = false
+
         case .playerPlaying:
             print(mode)
+            cheatButton.isEnabled = false
+
         case .aiPlaying:
             print(mode)
+            cheatButton.isEnabled = false
+
         }
         
         statusLabel.text = result
