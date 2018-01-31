@@ -12,9 +12,16 @@ enum PlayerKind {
     case human, ai
 }
 
+typealias PlayerToken = String
+
+/// Differenitate between Player Kind, Mark, and Token
+/// Kind is human or machine (species?)
+/// Role is is both the role (nought or cross) and the state of the board (untouched)
+/// Token is the glyph used to represent the role/board state to the UI
 struct GamePlayer {
     var kind: PlayerKind
-    var mark: Player
+    var role: PlayerRole
+    var token: PlayerToken
 }
 
 struct GameScore {
@@ -46,11 +53,47 @@ class GameEngine {
     var score: GameScore
     var state: GameState
     
-    init() {
+    var gameboard: Gameboard {
+        get {
+            return ticTacToeGame.gameboard
+        }
+        set {
+            ticTacToeGame.gameboard = newValue
+        }
+    }
+    
+    var activePlayerRole: PlayerRole {
+        get {
+            switch round {
+                
+            case .playerOneRound:
+                return playerOne.role
+                
+            case .playerTwoRound:
+                return playerTwo.role
+            }
+        }
+    }
+    
+    var activePlayerToken: PlayerToken {
+        get {
+            switch round {
+                
+            case .playerOneRound:
+                return playerOne.token
+                
+            case .playerTwoRound:
+                return playerTwo.token
+            }
+        }
+    }
+
+        
+    init(noughtToken: String, crossToken: String) {
         ticTacToeGame = TicTacToeGame(from: "_________")
 
-        playerOne = GamePlayer(kind: .human, mark: .nought)
-        playerTwo = GamePlayer(kind: .ai, mark: .cross)
+        playerOne = GamePlayer(kind: .human, role: .nought, token: noughtToken)
+        playerTwo = GamePlayer(kind: .ai, role: .cross, token: crossToken)
         round = .playerOneRound
         
         aiEnabled = true
@@ -70,10 +113,10 @@ class GameEngine {
         if let winningVector = searchForWin(ticTacToeGame.gameboard) {
             let winner = ticTacToeGame.gameboard[winningVector[0]]
             
-            if playerOne.mark == winner {
+            if playerOne.role == winner {
                 score.playerOneWins += 1
                 state = .playerOneWin
-            } else if playerTwo.mark == winner {
+            } else if playerTwo.role == winner {
                 score.playerTwoWins += 1
                 state = .playerTwoWin
             }
@@ -86,8 +129,8 @@ class GameEngine {
             state = .draw
             ticTacToeGame.gameOver = true
 
-        } else if isThereAFinalWinningMove(ticTacToeGame.gameboard, for: playerOne.mark) ||
-                  isThereAFinalWinningMove(ticTacToeGame.gameboard, for: playerTwo.mark) {
+        } else if isThereAFinalWinningMove(ticTacToeGame.gameboard, for: playerOne.role) ||
+                  isThereAFinalWinningMove(ticTacToeGame.gameboard, for: playerTwo.role) {
             score.draws += 1
             state = .draw
             ticTacToeGame.gameOver = true
@@ -114,7 +157,11 @@ class GameEngine {
         }
     }
     
-    func nextGame() {
+    func nextGame(noughtToken: String, crossToken: String) {
+        
+        playerOne.token = noughtToken
+        playerTwo.token = crossToken
+
         ticTacToeGame = TicTacToeGame(from: "_________")
         
         round = .playerOneRound

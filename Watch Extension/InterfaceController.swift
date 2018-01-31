@@ -13,9 +13,7 @@ import WatchConnectivity
 
 class InterfaceController: WKInterfaceController {
     
-    var activePlayer:Player = .nought
-    var aiIsPlaying = false
-
+    var gameEngine = GameEngine(noughtToken: "⭕️", crossToken: "❌")
 
     @IBOutlet var titleLabel: WKInterfaceLabel!
     @IBOutlet var statusLabel: WKInterfaceLabel! // HINT: Only exists in 42mm layout
@@ -68,20 +66,22 @@ class InterfaceController: WKInterfaceController {
     
     func handleButtonPress(_ tag: Int) {
         
-        if aiIsPlaying {
+        if gameEngine.aiEnabled {
             return
         }
         
-        if emojiGame.gameOver {
+        if gameEngine.isGameOver() {
             newGame()
             return
         }
         
-        if emojiGame.gameboard[tag] == .untouched {
+        if gameEngine.gameboard[tag] == .untouched {
             
-            emojiGame.gameboard[tag] = activePlayer
+            gameEngine.gameboard[tag] = gameEngine.activePlayerRole
 
-            let titleText = (activePlayer == .cross) ? emojiGame.crossMark : emojiGame.noughtMark
+            let titleText = (gameEngine.round == .playerOneRound)
+                ? gameEngine.playerOne.token
+                : gameEngine.playerTwo.token
             
             if let button = buttonForIndex(tag) {
                 button.setTitle(titleText)
@@ -89,58 +89,71 @@ class InterfaceController: WKInterfaceController {
             
             checkForEndGame()
             
-            if !emojiGame.gameOver {
-                aiIsPlaying = true
+            if !gameEngine.isGameOver() {
+                gameEngine.nextRound()
                 perform(#selector(self.aiTakeTurn), with: nil, afterDelay: 1)
             }
         }
     }
     
     func checkForEndGame() {
-        if checkForWinner() {
-            let winnerMark = (activePlayer == .cross) ? emojiGame.crossMark : emojiGame.noughtMark
+        
+        let gameOver = checkForWinner()
+        
+        if gameOver {
+            
+            var winnerMark = ""
+            var statusText = ""
+            
+            switch gameEngine.state {
+                
+            case .playerOneWin:
+                winnerMark =  gameEngine.playerOne.token
+                statusText = "\(winnerMark) Wins!"
+
+            case .playerTwoWin:
+                winnerMark =  gameEngine.playerOne.token
+                statusText = "\(winnerMark) Wins!"
+
+            case .draw:
+                winnerMark =  "😔"
+                statusText = " no winner \(winnerMark)"
+
+            default:
+                print("error in checkForEndGame()")
+            }
             
             if statusLabel != nil {
-                statusLabel.setText("\(winnerMark) Wins!")
+                statusLabel.setText(statusText)
             } else {
-                titleLabel.setText("\(winnerMark) Wins!")
+                titleLabel.setText(statusText)
             }
-            emojiGame.gameOver = true
-            return
-        }
-        
-        if !emojiGame.gameOver && !checkForUntouchedCells(emojiGame.gameboard) {
-            if statusLabel != nil {
-                statusLabel.setText("no winner 😔")
-            } else {
-                titleLabel.setText("no winner 😔")
-            }
-            emojiGame.gameOver = true
-            return
-        }
-        
-        if !emojiGame.gameOver {
-            activePlayer = (activePlayer == .cross) ? .nought : .cross
+            
+        } else {
+            
+            gameEngine.nextRound()
             
             if statusLabel != nil {
-                let nextMark = (activePlayer == .cross) ? emojiGame.crossMark : emojiGame.noughtMark
+                let nextMark = gameEngine.activePlayerToken
                 statusLabel.setText("\(nextMark)'s turn")
             }
         }
-
     }
     
     func checkForWinner() -> Bool {
-        if let winningVector = searchForWin(emojiGame.gameboard) {
-            emojiGame.gameOver = true
-            
-            for cell in winningVector {
-                
-                if let button = buttonForIndex(cell) {
-                    button.setBackgroundColor(UIColor.gray)
+        
+        gameEngine.checkForWinOrDraw()
+        
+        if gameEngine.isGameOver() {
+            if let winningVector = searchForWin(gameEngine.gameboard) {
+                for cell in winningVector {
+                    
+                    if let button = buttonForIndex(cell) {
+                        button.setBackgroundColor(UIColor.gray)
+                    }
                 }
+                return true
             }
-            return true
         }
         return false
     }
@@ -148,27 +161,22 @@ class InterfaceController: WKInterfaceController {
     func newGame() {
         
         // start with random emojis
+        let tokenOne = emojis[diceRoll(emojis.count/2)]
+        let tokenTwo = emojis[diceRoll(emojis.count/2) + emojis.count/2]
+
+        gameEngine.nextGame(noughtToken: tokenOne, crossToken: tokenTwo)
         
-        emojiGame.noughtMark = emojis[diceRoll(emojis.count/2)]
-        emojiGame.crossMark = emojis[diceRoll(emojis.count/2) + emojis.count/2]
-        
-        
-        emojiGame.gameboard = freshGameboard
-        activePlayer = .nought
-        titleLabel.setText("\(emojiGame.noughtMark) vs \(emojiGame.crossMark)")
+        titleLabel.setText("\(gameEngine.playerOne.token) vs \(gameEngine.playerTwo.token)")
         if statusLabel != nil {
-            statusLabel.setText("\(emojiGame.noughtMark)'s turn")
+            statusLabel.setText("\(gameEngine.activePlayerToken)'s turn")
         }
         
-        for i in 0..<emojiGame.gameboard.count {
+        for i in 0..<gameEngine.gameboard.count {
             if let button = buttonForIndex(i) {
                 button.setTitle(calcTitleForButton(i))
                 button.setBackgroundColor(UIColor.darkGray)
             }
         }
-        
-        emojiGame.gameOver = false
-        aiIsPlaying = false
     }
     
     override func awake(withContext context: Any?) {
@@ -179,13 +187,13 @@ class InterfaceController: WKInterfaceController {
     }
     
     func calcTitleForButton(_ tag: Int) -> String {
-        switch emojiGame.gameboard[tag] {
+        switch gameEngine.gameboard[tag] {
         case .untouched:
             return ""
         case .nought:
-            return emojiGame.noughtMark
+            return gameEngine.playerOne.token
         case .cross:
-            return emojiGame.crossMark
+            return gameEngine.playerTwo.token
         }
     }
     
@@ -216,11 +224,11 @@ class InterfaceController: WKInterfaceController {
     }
     
     @objc func aiTakeTurn() {
-        if let aiCell = aiChoose(emojiGame.gameboard, unpredicible: true) {
+        if let aiCell = aiChoose(gameEngine.gameboard, unpredicible: true) {
             if let aiButton = buttonForIndex(aiCell) {
-                aiButton.setTitle(emojiGame.crossMark)
-                emojiGame.gameboard[aiCell] = .cross
-                aiIsPlaying = false
+                aiButton.setTitle(gameEngine.playerTwo.token)
+                gameEngine.gameboard[aiCell] = .cross
+                gameEngine.nextRound()
                 checkForEndGame()
             }
         }

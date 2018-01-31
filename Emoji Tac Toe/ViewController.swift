@@ -19,6 +19,8 @@ enum GameStatus {
     case notStarted, starting, inProgress, playerPlaying, aiPlaying, win, tie
 }
 
+// TODO: Emliminate the need for these globals shared between the two VCs
+
 var noughtMark = "⭕️"
 var crossMark = "❌"
 var untouchedMark = "⬜️"
@@ -30,15 +32,10 @@ var player2Row = 1
 var useAI = true
 var useSound = true
 var mysteryMode = false
-var playing = true
 
 var noughtWins = 0
 var crossWins = 0
 var draws = 0
-
-var gameboard:Gameboard = [.untouched, .untouched, .untouched,
-                           .untouched, .untouched, .untouched,
-                           .untouched, .untouched, .untouched]
 
 var winLooseAVPlayer = AVAudioPlayer()
 var noughtAVPlayer = AVAudioPlayer()
@@ -48,13 +45,7 @@ var battleAVPlayer = AVAudioPlayer()
 
 class ViewController: UIViewController {
         
-    var activePlayer:Player = .untouched
-    
-    var aiIsPlaying = false
-    var winner = Player.untouched
-    
-    var playerMark = ""
-    var statusText = ""
+    var gameEngine = GameEngine()
     var battleModeAttackName = ""
         
     @IBOutlet weak var titleLabel: UILabel!
@@ -64,8 +55,7 @@ class ViewController: UIViewController {
     /// Share the current game as text.
     @IBAction func share(_ sender: AnyObject) {
         
-        let ticTacToeGame = TicTacToeGame(gameboard: gameboard, noughtMark: noughtMark, crossMark: crossMark, untouchedMark: "⬜️", gameOver: false)
-        let messageToShare = transformGameIntoText(game: ticTacToeGame)
+        let messageToShare = transformGameIntoText(game: gameEngine.ticTacToeGame)
         let activityViewController = UIActivityViewController(activityItems: [messageToShare], applicationActivities: nil)
         
         // BFIX: Crash on iPad: "should have a non-nil sourceView or barButtonItem set before the
@@ -99,7 +89,7 @@ class ViewController: UIViewController {
     @IBAction func panAction(_ sender: AnyObject) {
         if let pgr = sender as? UIPanGestureRecognizer {
             
-            if pgr.state == .ended && playing {
+            if pgr.state == .ended && !gameEngine.isGameOver() {
                 
                 let velocity = pgr.velocity(in: view)
 
@@ -117,15 +107,15 @@ class ViewController: UIViewController {
     func dontRespond(_ location: Int) -> Bool {
         var result = false
         
-        if !playing {
+        if gameEngine.isGameOver() {
             result = true
         }
         
-        if aiIsPlaying {
+        if gameEngine.aiEnabled {
             result = true
         }
         
-        if gameboard[location] != .untouched {
+        if gameEngine.gameboard[location] != .untouched {
             result = true
         }
         
@@ -137,11 +127,11 @@ class ViewController: UIViewController {
         setupThisTurn()
         
         // do the attack
-        let battleMode = BattleMode(activePlayer: .cross, currentGameboard: gameboard)
+        let battleMode = BattleMode(activePlayer: .cross, currentGameboard: gameEngine.gameboard)
         let (updatedGameboard, attackName) = battleMode.attack()
         
         // update gameboard and view with the results
-        gameboard = updatedGameboard
+        gameEngine.gameboard = updatedGameboard
         battleModeAttackName = attackName
         print(attackName)
         updateGameView()
@@ -151,7 +141,6 @@ class ViewController: UIViewController {
     }
     
     fileprivate func setupThisTurn() {
-        playerMark = getActivePlayerMark()
         playSoundForPlayer()
         neutralizeGameboard()
         updateStatus(.inProgress)
@@ -177,7 +166,7 @@ class ViewController: UIViewController {
             button = view.viewWithTag(tag) as! UIButton
             let location = tag - 1
             
-            switch gameboard[location] {
+            switch gameEngine.gameboard[location] {
                 
             case .untouched:
                 button.setTitle("", for: UIControlState())
@@ -199,7 +188,7 @@ class ViewController: UIViewController {
         }
     }
     
-    fileprivate func getOpponent()  -> Player {
+    fileprivate func getOpponent()  -> PlayerRole {
         return activePlayer == .nought ? .cross : .nought
     }
     
@@ -412,7 +401,7 @@ class ViewController: UIViewController {
         
     func resetGame() {
         playing = true
-        winner = Player.untouched
+        winner = PlayerRole.untouched
         activePlayer = .nought
                 
         updateTitle()

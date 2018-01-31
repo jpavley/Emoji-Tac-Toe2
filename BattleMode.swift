@@ -38,11 +38,11 @@ class BattleMode {
         static let wipeOut = "Wipe Out"
     }
     
-    var activePlayer: Player
+    var activePlayer: PlayerRole
     var currentGameboard: Gameboard
     var attackList: [[BattleModeAttack]]
     
-    init(activePlayer: Player, currentGameboard: Gameboard) {
+    init(activePlayer: PlayerRole, currentGameboard: Gameboard) {
         self.activePlayer = activePlayer
         self.currentGameboard = currentGameboard
         self.attackList = [[BattleModeAttack]]()
@@ -147,7 +147,7 @@ class BattleMode {
     
     /// All untouched cells become opponet's cells
     func youWin() -> Gameboard {
-        let opponent = (activePlayer == Player.cross) ? Player.nought : Player.cross
+        let opponent = (activePlayer == PlayerRole.cross) ? PlayerRole.nought : PlayerRole.cross
         let gameString = TicTacToeGame(gameboard: currentGameboard)
             .text
             .replacingOccurrences(of: "_", with: opponent.rawValue)
@@ -162,7 +162,7 @@ class BattleMode {
     
     /// Player cells switch places with opponet cells
     func switchLocations() -> Gameboard {
-        let opponent = (activePlayer == Player.cross) ? Player.nought : Player.cross
+        let opponent = (activePlayer == PlayerRole.cross) ? PlayerRole.nought : PlayerRole.cross
         let gameString = TicTacToeGame(gameboard: currentGameboard)
             .text
             .replacingOccurrences(of: opponent.rawValue, with: "@")
@@ -207,7 +207,7 @@ class BattleMode {
     func mixUp() -> Gameboard {
         var updatedGameboard = currentGameboard
         
-        let states: [Player] = [.untouched, .nought, .cross]
+        let states: [PlayerRole] = [.untouched, .nought, .cross]
         
         for i in 0..<updatedGameboard.count {
             updatedGameboard[i] = states[diceRoll(3)]
