@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		48C3918A20212CB4009A536D /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C3918920212CB4009A536D /* GameEngine.swift */; };
+		48C3918C20213C46009A536D /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C3918B20213C46009A536D /* GameEngineTests.swift */; };
+		48C3918D20213CA4009A536D /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C3918920212CB4009A536D /* GameEngine.swift */; };
 		48D29FCF201941A600659AEA /* BattleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D29FCE201941A600659AEA /* BattleMode.swift */; };
 		48D29FD1201AB92300659AEA /* BattleModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D29FD0201AB92300659AEA /* BattleModeTests.swift */; };
 		48D29FD2201AB93C00659AEA /* BattleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D29FCE201941A600659AEA /* BattleMode.swift */; };
@@ -96,6 +98,7 @@
 
 /* Begin PBXFileReference section */
 		48C3918920212CB4009A536D /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
+		48C3918B20213C46009A536D /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		48D29FCE201941A600659AEA /* BattleMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleMode.swift; sourceTree = "<group>"; };
 		48D29FD0201AB92300659AEA /* BattleModeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleModeTests.swift; sourceTree = "<group>"; };
 		5A3834A81EF6DC4B00891224 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -180,6 +183,7 @@
 		5AC9466F1EF8B3D100137DBF /* Emoji Tac Toe Tests */ = {
 			isa = PBXGroup;
 			children = (
+				48C3918B20213C46009A536D /* GameEngineTests.swift */,
 				48D29FD0201AB92300659AEA /* BattleModeTests.swift */,
 				5AC946701EF8B3D100137DBF /* Emoji_Tac_Toe_Tests.swift */,
 				5AC946721EF8B3D100137DBF /* Info.plist */,
@@ -498,6 +502,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48C3918C20213C46009A536D /* GameEngineTests.swift in Sources */,
+				48C3918D20213CA4009A536D /* GameEngine.swift in Sources */,
 				48D29FD2201AB93C00659AEA /* BattleMode.swift in Sources */,
 				5AC946711EF8B3D100137DBF /* Emoji_Tac_Toe_Tests.swift in Sources */,
 				5A69712E2014E508009C80AC /* EmojiTicTacToe.swift in Sources */,

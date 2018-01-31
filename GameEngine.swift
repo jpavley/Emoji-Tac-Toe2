@@ -47,11 +47,7 @@ class GameEngine {
     var state: GameState
     
     init() {
-        ticTacToeGame = TicTacToeGame(gameboard: gameboard,
-                                      noughtMark: noughtMark,
-                                      crossMark: crossMark,
-                                      untouchedMark: untouchedMark,
-                                      gameOver: false)
+        ticTacToeGame = TicTacToeGame(from: "_________")
 
         playerOne = GamePlayer(kind: .human, mark: .nought)
         playerTwo = GamePlayer(kind: .ai, mark: .cross)
@@ -72,7 +68,7 @@ class GameEngine {
     func checkForWinOrDraw() {
         
         if let winningVector = searchForWin(ticTacToeGame.gameboard) {
-            let winner = gameboard[winningVector[0]]
+            let winner = ticTacToeGame.gameboard[winningVector[0]]
             
             if playerOne.mark == winner {
                 score.playerOneWins += 1
@@ -119,11 +115,7 @@ class GameEngine {
     }
     
     func nextGame() {
-        ticTacToeGame = TicTacToeGame(gameboard: gameboard,
-                                      noughtMark: noughtMark,
-                                      crossMark: crossMark,
-                                      untouchedMark: untouchedMark,
-                                      gameOver: false)
+        ticTacToeGame = TicTacToeGame(from: "_________")
         
         round = .playerOneRound
         state = .playerOnePlaying
