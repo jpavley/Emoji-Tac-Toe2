@@ -273,8 +273,8 @@
 			children = (
 				5AD4079C1D4ED94F00FBBA62 /* EmojiTicTacToe.swift */,
 				48D29FCE201941A600659AEA /* BattleMode.swift */,
-				5ACDE3881DA350820067FBFE /* emoji-ordering.txt */,
 				48C3918920212CB4009A536D /* GameEngine.swift */,
+				5ACDE3881DA350820067FBFE /* emoji-ordering.txt */,
 			);
 			name = Shared;
 			sourceTree = "<group>";

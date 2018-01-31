@@ -17,6 +17,7 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var player1Picker: UIPickerView!
     @IBOutlet weak var aiSwitch: UISwitch!
     @IBOutlet weak var mysteryModeSwitch: UISwitch!
+    @IBOutlet weak var instantGameSwitch: UISwitch!
     @IBOutlet weak var soundSwitch: UISwitch!
     @IBOutlet weak var player1Button: UIButton!
     @IBOutlet weak var player2Button: UIButton!
