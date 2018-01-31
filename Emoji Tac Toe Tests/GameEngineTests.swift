@@ -44,8 +44,71 @@ class GameEngineTests: XCTestCase {
         
         XCTAssertEqual(gameEngine.ticTacToeGame.gameboard, freshGameboard)
         XCTAssertEqual(gameEngine.ticTacToeGame.gameOver, false)
+    }
+    
+    func testWinningStateAndIsGameOverPlayerOne() {
+        let gameEngine = GameEngine()
+        gameEngine.ticTacToeGame.gameboard = transformTextIntoGameboard(textRepresentation: "ooooooooo")!
+        gameEngine.checkForWinOrDraw()
+        XCTAssertTrue(gameEngine.isGameOver())
+        XCTAssertEqual(gameEngine.state, .playerOneWin)
+        XCTAssertEqual(gameEngine.score.playerOneWins, 1)
+        XCTAssertEqual(gameEngine.ticTacToeGame.gameOver, true)
+    }
+    
+    func testWinningStateAndIsGameOverPlayerTwo() {
+        let gameEngine = GameEngine()
+        gameEngine.ticTacToeGame.gameboard = transformTextIntoGameboard(textRepresentation: "xxxxxxxxx")!
+        gameEngine.checkForWinOrDraw()
+        XCTAssertTrue(gameEngine.isGameOver())
+        XCTAssertEqual(gameEngine.state, .playerTwoWin)
+        XCTAssertEqual(gameEngine.score.playerTwoWins, 1)
+        XCTAssertEqual(gameEngine.ticTacToeGame.gameOver, true)
+    }
+    
+    func testNextRound() {
+        let gameEngine = GameEngine()
+        gameEngine.nextRound()
+        
+        XCTAssertFalse(gameEngine.isGameOver())
+        XCTAssertEqual(gameEngine.state, .aiPlaying)
+        XCTAssertEqual(gameEngine.round, .playerTwoRound)
+        XCTAssertEqual(gameEngine.ticTacToeGame.gameOver, false)
+        
+        gameEngine.nextRound()
+        XCTAssertFalse(gameEngine.isGameOver())
+        XCTAssertEqual(gameEngine.state, .playerOnePlaying)
+        XCTAssertEqual(gameEngine.round, .playerOneRound)
+        XCTAssertEqual(gameEngine.ticTacToeGame.gameOver, false)
+
+        gameEngine.aiEnabled = false
+        gameEngine.nextRound()
+        XCTAssertFalse(gameEngine.isGameOver())
+        XCTAssertEqual(gameEngine.state, .playerTwoPlaying)
+        XCTAssertEqual(gameEngine.round, .playerTwoRound)
+        XCTAssertEqual(gameEngine.ticTacToeGame.gameOver, false)
+        
+        gameEngine.nextRound()
+        XCTAssertFalse(gameEngine.isGameOver())
+        XCTAssertEqual(gameEngine.state, .playerOnePlaying)
+        XCTAssertEqual(gameEngine.round, .playerOneRound)
+        XCTAssertEqual(gameEngine.ticTacToeGame.gameOver, false)
+    }
+    
+    func testNextGame() {
+        let gameEngine = GameEngine()
+        gameEngine.nextGame()
+        
+        XCTAssertFalse(gameEngine.isGameOver())
+        XCTAssertEqual(gameEngine.state, .playerOnePlaying)
+        XCTAssertEqual(gameEngine.round, .playerOneRound)
+        
+        XCTAssertEqual(gameEngine.ticTacToeGame.gameboard, freshGameboard)
+        XCTAssertEqual(gameEngine.ticTacToeGame.gameOver, false)
+
 
     }
+
     
     
 }
