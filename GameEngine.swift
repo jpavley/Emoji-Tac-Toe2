@@ -32,7 +32,7 @@ struct GameScore {
 }
 
 enum GameState {
-    case playerOnePlaying, playerTwoPlaying, aiPlaying, playerOneWin, playerTwoWin, draw
+    case playerOnePlaying, playerTwoPlaying, playerOneWin, playerTwoWin, draw
 }
 
 enum GameRound {
@@ -49,6 +49,10 @@ class GameEngine {
     var aiEnabled: Bool
     var cheatingEnabled: Bool
     var instantEnabled: Bool
+    var soundEnabled: Bool
+    var playerOneRow: Int
+    var playerTwoRow: Int
+    var untouchedToken: String
     
     var score: GameScore
     var state: GameState
@@ -89,16 +93,20 @@ class GameEngine {
     }
 
         
-    init(noughtToken: String, crossToken: String) {
+    init(noughtToken: String, crossToken: String, untouchedToken: String) {
         ticTacToeGame = TicTacToeGame(from: "_________")
 
         playerOne = GamePlayer(kind: .human, role: .nought, token: noughtToken)
         playerTwo = GamePlayer(kind: .ai, role: .cross, token: crossToken)
+        self.untouchedToken = untouchedToken
         round = .playerOneRound
         
         aiEnabled = true
         cheatingEnabled = false
         instantEnabled = false
+        soundEnabled = true
+        playerOneRow = 0
+        playerTwoRow = 1
         
         score = GameScore(playerOneWins: 0, playerTwoWins: 0, draws: 0, rounds: 0)
         state = .playerOnePlaying
@@ -144,12 +152,7 @@ class GameEngine {
             
         case .playerOneRound:
             round = .playerTwoRound
-            
-            if aiEnabled {
-                state = .aiPlaying
-            } else {
-                state = .playerTwoPlaying
-            }
+            state = .playerTwoPlaying
             
         case .playerTwoRound:
             round = .playerOneRound
@@ -157,11 +160,8 @@ class GameEngine {
         }
     }
     
-    func nextGame(noughtToken: String, crossToken: String) {
+    func nextGame() {
         
-        playerOne.token = noughtToken
-        playerTwo.token = crossToken
-
         ticTacToeGame = TicTacToeGame(from: "_________")
         
         round = .playerOneRound

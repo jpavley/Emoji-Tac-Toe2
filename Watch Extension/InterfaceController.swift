@@ -13,7 +13,7 @@ import WatchConnectivity
 
 class InterfaceController: WKInterfaceController {
     
-    var gameEngine = GameEngine(noughtToken: "⭕️", crossToken: "❌")
+    var gameEngine = GameEngine(noughtToken: "⭕️", crossToken: "❌", untouchedToken: "⬜️")
 
     @IBOutlet var titleLabel: WKInterfaceLabel!
     @IBOutlet var statusLabel: WKInterfaceLabel! // HINT: Only exists in 42mm layout
@@ -161,10 +161,10 @@ class InterfaceController: WKInterfaceController {
     func newGame() {
         
         // start with random emojis
-        let tokenOne = emojis[diceRoll(emojis.count/2)]
-        let tokenTwo = emojis[diceRoll(emojis.count/2) + emojis.count/2]
+        gameEngine.playerOne.token = emojis[diceRoll(emojis.count/2)]
+        gameEngine.playerTwo.token = emojis[diceRoll(emojis.count/2) + emojis.count/2]
 
-        gameEngine.nextGame(noughtToken: tokenOne, crossToken: tokenTwo)
+        gameEngine.nextGame()
         
         titleLabel.setText("\(gameEngine.playerOne.token) vs \(gameEngine.playerTwo.token)")
         if statusLabel != nil {

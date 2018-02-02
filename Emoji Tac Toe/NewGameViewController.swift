@@ -27,26 +27,26 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     var player2Data = [String]()
     
     @IBAction func mysteryModeAction(_ sender: AnyObject) {
-        mysteryMode = !mysteryMode
-        UserDefaults.standard.set(mysteryMode, forKey: "savedMysteryMode")
+        gameEngine.cheatingEnabled = !gameEngine.cheatingEnabled
+        UserDefaults.standard.set(gameEngine.cheatingEnabled, forKey: "savedMysteryMode")
     }
     
     @IBAction func aiAction(_ sender: AnyObject) {
-        useAI = !useAI
-        UserDefaults.standard.set(useAI, forKey: "savedUseAI")
+        gameEngine.aiEnabled = !gameEngine.aiEnabled
+        UserDefaults.standard.set(gameEngine.aiEnabled, forKey: "savedUseAI")
         
-        let player1Label = useAI ? "Player \(noughtMark)" : "Player 1 \(noughtMark)"
+        let player1Label = gameEngine.aiEnabled ? "Player \(gameEngine.playerOne.token)" : "Player 1 \(gameEngine.playerOne.token)"
         player1Button.setTitle(player1Label, for: .normal)
         
-        let player2Label = useAI ? "AI \(crossMark)" : "Player 2 \(crossMark)"
+        let player2Label = gameEngine.aiEnabled ? "AI \(gameEngine.playerTwo.token)" : "Player 2 \(gameEngine.playerTwo.token)"
         player2Button.setTitle(player2Label, for: .normal)
         
         resetScorePrefs()
     }
     
     @IBAction func soundAction(_ sender: AnyObject) {
-        useSound = !useSound
-        UserDefaults.standard.set(useSound, forKey: "savedUseSound")
+        gameEngine.soundEnabled = !gameEngine.soundEnabled
+        UserDefaults.standard.set(gameEngine.soundEnabled, forKey: "savedUseSound")
     }
     
     @IBAction func player1Action(_ sender: Any) {
@@ -58,7 +58,7 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     func jumpPicker(component: Int) {
-        let currentRow = (component == 0) ? player1Row : player2Row
+        let currentRow = (component == 0) ? gameEngine.playerOneRow : gameEngine.playerTwoRow
         var jumpRow = 0
         
         // emojiSections = [0, 171, 389, 654, 844] defined in EmojiTicTacToe.swift
@@ -75,24 +75,11 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             jumpRow = emojiSections[1]
         }
         
-        // TODO: This is wet code! Dry it by creating a function for it!
         let uniqueRow = ensureRowsAreUnique(component: component, row: jumpRow)
         if component == 0 {
-            player1Row = uniqueRow
-            noughtMark = player1Data[uniqueRow]
-            UserDefaults.standard.set(player1Row, forKey: "savedPlayer1Row")
-            UserDefaults.standard.set(noughtMark, forKey: "savedNoughtMark")
-            let player1Label = useAI ? "Player \(noughtMark)" : "Player 1 \(noughtMark)"
-            player1Button.setTitle(player1Label, for: .normal)
-            emojiGame.noughtMark = noughtMark
+            updatePlayerOne(uniqueRow)
         } else {
-            player2Row = uniqueRow
-            crossMark = player2Data[uniqueRow]
-            UserDefaults.standard.set(player2Row, forKey: "savedPlayer2Row")
-            UserDefaults.standard.set(crossMark, forKey: "savedCrossMark")
-            let player2Label = useAI ? "AI \(crossMark)" : "Player 2 \(crossMark)"
-            player2Button.setTitle(player2Label, for: .normal)
-            emojiGame.crossMark = crossMark
+            updatePlayerTwo(uniqueRow)
         }
         resetScorePrefs()
         player1Picker.selectRow(uniqueRow, inComponent: component, animated: true)
@@ -100,7 +87,6 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         // print("component \(component), currentRow \(currentRow), jumpRow \(jumpRow)")
         
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,17 +96,17 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         player1Data = emojis
         player2Data = emojis
         
-        let player1Label = useAI ? "Player \(noughtMark)" : "Player 1 \(noughtMark)"
+        let player1Label = gameEngine.aiEnabled ? "Player \(gameEngine.playerOne.token)" : "Player 1 \(gameEngine.playerOne.token)"
         player1Button.setTitle(player1Label, for: .normal)
-        player1Picker.selectRow(player1Row, inComponent: 0, animated: true)
+        player1Picker.selectRow(gameEngine.playerOneRow, inComponent: 0, animated: true)
 
-        let player2Label = useAI ? "AI \(crossMark)" : "Player 2 \(crossMark)"
+        let player2Label = gameEngine.aiEnabled ? "AI \(gameEngine.playerTwo.token)" : "Player 2 \(gameEngine.playerTwo.token)"
         player2Button.setTitle(player2Label, for: .normal)
-        player1Picker.selectRow(player2Row, inComponent: 1, animated: true)
+        player1Picker.selectRow(gameEngine.playerTwoRow, inComponent: 1, animated: true)
         
-        mysteryModeSwitch.setOn(mysteryMode, animated: true)
-        aiSwitch.setOn(useAI, animated: true)
-        soundSwitch.setOn(useSound, animated: true)
+        mysteryModeSwitch.setOn(gameEngine.cheatingEnabled, animated: true)
+        aiSwitch.setOn(gameEngine.aiEnabled, animated: true)
+        soundSwitch.setOn(gameEngine.soundEnabled, animated: true)
         
     }
 
@@ -152,10 +138,10 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     // HINT: Make all emojis available to both players
     func ensureRowsAreUnique(component: Int, row: Int) -> Int {
         var possibleRow = row
-        var comparisonRow = player2Row
+        var comparisonRow = gameEngine.playerOneRow
 
         if component == 1 {
-            comparisonRow = player1Row
+            comparisonRow = gameEngine.playerOneRow
         }
         
         if possibleRow == comparisonRow {
@@ -172,37 +158,41 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // TODO: This is wet code! Dry it by creating a function for it!
         let uniqueRow = ensureRowsAreUnique(component: component, row: row)
         if component == 0 {
-            player1Row = uniqueRow
-            noughtMark = player1Data[uniqueRow]
-            UserDefaults.standard.set(player1Row, forKey: "savedPlayer1Row")
-            UserDefaults.standard.set(noughtMark, forKey: "savedNoughtMark")
-            let player1Label = useAI ? "Player \(noughtMark)" : "Player 1 \(noughtMark)"
-            player1Button.setTitle(player1Label, for: .normal)
-            emojiGame.noughtMark = noughtMark
+            updatePlayerOne(uniqueRow)
         } else {
-            // HINT: Make all emojis available to both players
-            player2Row = uniqueRow
-            crossMark = player2Data[uniqueRow]
-            UserDefaults.standard.set(player2Row, forKey: "savedPlayer2Row")
-            UserDefaults.standard.set(crossMark, forKey: "savedCrossMark")
-            let player2Label = useAI ? "AI \(crossMark)" : "Player 2 \(crossMark)"
-            player2Button.setTitle(player2Label, for: .normal)
-            emojiGame.crossMark = crossMark
+            updatePlayerTwo(uniqueRow)
         }
         resetScorePrefs()
     }
     
+    fileprivate func updatePlayerOne(_ uniqueRow: Int) {
+        gameEngine.playerOneRow = uniqueRow
+        gameEngine.playerOne.token = player1Data[uniqueRow]
+        UserDefaults.standard.set(gameEngine.playerOneRow, forKey: "savedPlayer1Row")
+        UserDefaults.standard.set(gameEngine.playerOne.token, forKey: "savedNoughtMark")
+        let player1Label = gameEngine.aiEnabled ? "Player \(gameEngine.playerOne.token)" : "Player 1 \(gameEngine.playerOne.token)"
+        player1Button.setTitle(player1Label, for: .normal)
+    }
+    
+    fileprivate func updatePlayerTwo(_ uniqueRow: Int) {
+        gameEngine.playerTwoRow = uniqueRow
+        gameEngine.playerTwo.token = player2Data[uniqueRow]
+        UserDefaults.standard.set(gameEngine.playerTwoRow, forKey: "savedPlayer2Row")
+        UserDefaults.standard.set(gameEngine.playerTwo.token, forKey: "savedCrossMark")
+        let player2Label = gameEngine.aiEnabled ? "AI \(gameEngine.playerTwo.token)" : "Player 2 \(gameEngine.playerTwo.token)"
+        player2Button.setTitle(player2Label, for: .normal)
+    }
+    
     func resetScorePrefs() {
-        noughtWins = 0
-        crossWins = 0
-        draws = 0
+        gameEngine.score.playerOneWins = 0
+        gameEngine.score.playerTwoWins = 0
+        gameEngine.score.draws = 0
         
-        UserDefaults.standard.set(noughtWins, forKey: "savedNoughtWins")
-        UserDefaults.standard.set(crossWins, forKey: "savedCrossWins")
-        UserDefaults.standard.set(draws, forKey: "savedDraws")
+        UserDefaults.standard.set(gameEngine.score.playerOneWins, forKey: "savedNoughtWins")
+        UserDefaults.standard.set(gameEngine.score.playerTwoWins, forKey: "savedCrossWins")
+        UserDefaults.standard.set(gameEngine.score.draws, forKey: "savedDraws")
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {

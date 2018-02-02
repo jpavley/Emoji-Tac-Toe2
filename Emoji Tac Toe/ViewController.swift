@@ -12,30 +12,7 @@ import AVFoundation
 
 // HINT: Global variables shared by all ViewControlers in this project
 
-// HINT: User prefs
-// TODO: Save as user prefs
-
-enum GameStatus {
-    case notStarted, starting, inProgress, playerPlaying, aiPlaying, win, tie
-}
-
-// TODO: Emliminate the need for these globals shared between the two VCs
-
-var noughtMark = "⭕️"
-var crossMark = "❌"
-var untouchedMark = "⬜️"
-
-// HINT: Make all emojis available to both players
-var player1Row = 0
-var player2Row = 1
-
-var useAI = true
-var useSound = true
-var mysteryMode = false
-
-var noughtWins = 0
-var crossWins = 0
-var draws = 0
+var gameEngine = GameEngine(noughtToken: "⭕️", crossToken: "❌", untouchedToken: "⬜️")
 
 var winLooseAVPlayer = AVAudioPlayer()
 var noughtAVPlayer = AVAudioPlayer()
@@ -45,7 +22,6 @@ var battleAVPlayer = AVAudioPlayer()
 
 class ViewController: UIViewController {
         
-    var gameEngine = GameEngine()
     var battleModeAttackName = ""
         
     @IBOutlet weak var titleLabel: UILabel!
@@ -94,12 +70,12 @@ class ViewController: UIViewController {
                 let velocity = pgr.velocity(in: view)
 
                 if velocity.y > 0 {
-                    useSound = false
+                    gameEngine.soundEnabled = false
                 } else {
-                    useSound = true
+                    gameEngine.soundEnabled = true
                 }
                 
-                UserDefaults.standard.set(useSound, forKey: "savedUseSound")
+                UserDefaults.standard.set(gameEngine.soundEnabled, forKey: "savedUseSound")
             }
         }
     }
@@ -136,18 +112,18 @@ class ViewController: UIViewController {
         print(attackName)
         updateGameView()
         
-        completeThisTurn()
+        gameEngine.checkForWinOrDraw()
         setupNextTurn()
     }
     
     fileprivate func setupThisTurn() {
         playSoundForPlayer()
         neutralizeGameboard()
-        updateStatus(.inProgress)
+        updateStatus()
     }
     
     fileprivate func getActivePlayerMark() -> String {
-        return activePlayer == .nought ? noughtMark : crossMark
+        return gameEngine.activePlayerToken
     }
     
     fileprivate func playSoundForPlayer() {
@@ -172,30 +148,23 @@ class ViewController: UIViewController {
                 button.setTitle("", for: UIControlState())
                 
             case .nought:
-                button.setTitle(noughtMark, for: UIControlState())
+                button.setTitle(gameEngine.playerOne.token, for: UIControlState())
                 
             case .cross:
-                button.setTitle(crossMark, for: UIControlState())
+                button.setTitle(gameEngine.playerTwo.token, for: UIControlState())
             }
         }
     }
     
     fileprivate func setupNextTurn() {
-        if useAI && activePlayer == .cross && playing {
-            activePlayer = getOpponent()
-            aiIsPlaying = true
+        gameEngine.nextRound()
+        if gameEngine.aiEnabled {
             perform(#selector(self.aiClassicTakeTurn), with: nil, afterDelay: 1)
         }
     }
     
     fileprivate func getOpponent()  -> PlayerRole {
-        return activePlayer == .nought ? .cross : .nought
-    }
-    
-    fileprivate func completeThisTurn() {
-        if !checkForWinner() {
-            checkForDraw()
-        }
+        return gameEngine.activePlayerRole == .nought ? .cross : .nought
     }
     
     func playerTurn() {
@@ -214,26 +183,22 @@ class ViewController: UIViewController {
         
         neutralizeGameboard()
         
-        updateStatus(.inProgress)
+        updateStatus()
         
         // HINT: Update the screen
+        currentButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
         
         // TODO: replace with creative commons sound effects
-        
-        if activePlayer == .nought {
-            playerMark = noughtMark
-            currentButton.setTitle(playerMark, for: UIControlState())
+        if gameEngine.state == .playerOnePlaying  {
             
-            if useSound {
+            if gameEngine.soundEnabled {
 //                noughtAVPlayer.currentTime = 0
 //                noughtAVPlayer.play()
             }
             
         } else {
-            playerMark = crossMark
-            currentButton.setTitle(playerMark, for: UIControlState())
             
-            if useSound {
+            if gameEngine.soundEnabled {
 //                crossAVPlayer.currentTime = 0
 //                crossAVPlayer.play()
             }
@@ -241,64 +206,49 @@ class ViewController: UIViewController {
         
         // HINT: Update the game board
         let location = currentButton.tag - 1
-        if playerMark == noughtMark {
-            gameboard[location] = .nought
-        } else {
-            gameboard[location] = .cross
+        gameEngine.gameboard[location] = gameEngine.activePlayerRole
+        
+        gameEngine.checkForWinOrDraw()
+        
+        if gameEngine.isGameOver() {
+            handleWinOrDraw()
         }
         
-        if !checkForWinner() {
-            checkForDraw()
-        }
-        
-        activePlayer = getOpponent()
-        
-        if useAI && activePlayer == .cross && playing {
-            aiIsPlaying = true
+        if gameEngine.aiEnabled {
+            gameEngine.nextRound()
             perform(#selector(self.aiClassicTakeTurn), with: nil, afterDelay: 1)
         }
 
     }
     
     @objc func aiClassicTakeTurn() {
-        if let aiCell = aiChoose(gameboard, unpredicible: true) {
+        if let aiCell = aiChoose(gameEngine.gameboard, unpredicible: true) {
             neutralizeGameboard()
-            updateStatus(.inProgress)
-            playerMark = crossMark
+            updateStatus()
             let tag = aiCell + 1
             let aiButton = view.viewWithTag(tag) as! UIButton
-            aiButton.setTitle(playerMark, for: UIControlState())
-            gameboard[aiCell] = .cross
+            aiButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
+            gameEngine.gameboard[aiCell] = .cross
             
             // TODO: replace with creative commons sound effect
             
-            if useSound {
+            if gameEngine.soundEnabled {
 //                crossAVPlayer.currentTime = 0
 //                crossAVPlayer.play()
             }
-                        
-            if !checkForWinner() {
-                checkForDraw()
-            }
             
-            aiIsPlaying = false
-            activePlayer = .nought
+            gameEngine.checkForWinOrDraw()
             
-            let openCells = calcOpenCells(gameboard)
-            if openCells.count == 1 {
-                if !isThereAFinalWinningMove(gameboard, for: .nought) {
-                    // HINT: No way for .nought to win
-                    gameOverDraw()
-                }
+            if gameEngine.isGameOver() {
+                handleWinOrDraw()
             }
         }
     }
     
     func gameOverDraw() {
-        draws += 1
         updateTitle()
-        updateStatus(.tie)
-        UserDefaults.standard.set(draws, forKey: "savedDraws")
+        updateStatus()
+        UserDefaults.standard.set(gameEngine.score.draws, forKey: "savedDraws")
         presentGameOverAlert("Oops!")
     }
     
@@ -308,7 +258,7 @@ class ViewController: UIViewController {
             button = view.viewWithTag(tag) as! UIButton
             button.backgroundColor = getNormalButtonColor()
             let location = tag - 1
-            if gameboard[location] == .untouched {
+            if gameEngine.gameboard[location] == .untouched {
                 button.setTitle("", for: UIControlState())
             }
         }
@@ -319,47 +269,39 @@ class ViewController: UIViewController {
         return UIColor(red: normalColorValue, green: normalColorValue, blue: normalColorValue, alpha: 1.0)
     }
     
-    func checkForWinner() -> Bool {
-        if let winningVector = searchForWin(gameboard) {
-            playing = false
-            winner = gameboard[winningVector[0]]
-            
-            if winner == .cross {
-                crossWins += 1
-            } else {
-                noughtWins += 1
-            }
-            
+    func handleWinOrDraw() {
+        
+        gameEngine.checkForWinOrDraw()
+        
+        if gameEngine.isGameOver() {
             updateTitle()
-            updateStatus(.win)
+            updateStatus()
             
-            UserDefaults.standard.set(noughtWins, forKey: "savedNoughtWins")
-            UserDefaults.standard.set(crossWins, forKey: "savedCrossWins")
+            UserDefaults.standard.set(gameEngine.score.playerOneWins, forKey: "savedNoughtWins")
+            UserDefaults.standard.set(gameEngine.score.playerTwoWins, forKey: "savedCrossWins")
             
-            var winningButton:UIButton
-            var tag:Int
-            for i in winningVector {
-                tag = i + 1
-                winningButton = view.viewWithTag(tag) as! UIButton
-                winningButton.backgroundColor = UIColor.yellow
+            if let winningVector = searchForWin(gameEngine.gameboard) {
+                var winningButton:UIButton
+                var tag:Int
+                for i in winningVector {
+                    tag = i + 1
+                    winningButton = view.viewWithTag(tag) as! UIButton
+                    winningButton.backgroundColor = UIColor.yellow
+                }
             }
             
             var alertTitle = "Congrats!"
-            if winner == .cross && useAI {
+            if gameEngine.state == .playerTwoWin && gameEngine.aiEnabled {
                 alertTitle = "Sorry!"
             }
             
-            if useSound {
+            if gameEngine.soundEnabled {
                 winLooseAVPlayer.currentTime = 0
                 winLooseAVPlayer.play()
             }
             
             presentGameOverAlert(alertTitle)
-            
-            return true
-            
-        } else {
-            return false
+
         }
     }
     
@@ -387,163 +329,127 @@ class ViewController: UIViewController {
 
     }
     
-    func checkForDraw() {
-        
-        if playing {
-            playing = checkForUntouchedCells(gameboard)
-            if !playing {
-                // HINT: Game over!
-                gameOverDraw()
-            }
-        }
-    }
-        
-        
     func resetGame() {
-        playing = true
-        winner = PlayerRole.untouched
-        activePlayer = .nought
-                
-        updateTitle()
-        updateStatus(.starting)
         
-        for i in 0..<gameboard.count {
-            gameboard[i] = .untouched
-        }
-
+        gameEngine.nextGame()
+        
+        updateTitle()
+        updateStatus()
+        
         var button:UIButton
         for tag in 1...9 {
             button = view.viewWithTag(tag) as! UIButton
             button.backgroundColor = getNormalButtonColor()
             button.setTitle("", for: UIControlState())
         }
-        
-        emojiGame = TicTacToeGame(gameboard: gameboard,
-                                  noughtMark: noughtMark,
-                                  crossMark: crossMark,
-                                  untouchedMark: untouchedMark,
-                                  gameOver: false)
     }
     
     func updateTitle() {
-        titleLabel.text =  "\(noughtMark) vs \(crossMark)  \(noughtWins):\(crossWins):\(draws)"
+        let playerOneToken = gameEngine.playerOne.token
+        let playerTwoToken = gameEngine.playerTwo.token
+        let playerOneWins = gameEngine.score.playerOneWins
+        let playerTwoWins = gameEngine.score.playerTwoWins
+        let draws = gameEngine.score.draws
+        
+        titleLabel.text =  "\(playerOneToken) vs \(playerTwoToken)  \(playerOneWins):\(playerTwoWins):\(draws)"
     }
     
-    func updateStatus(_ mode:GameStatus) {
-        var result = ""
-        switch mode {
-        case .starting:
-            // HINT: turn = current player
-            if activePlayer == .nought {
-                result = useAI ? "Player \(noughtMark)'s turn" : "Player 1 \(noughtMark)'s turn"
-            } else {
-                result = useAI ? "AI \(crossMark)'s turn" : "Player 2 \(crossMark)'s turn"
-            }
-            
-            cheatButton.isEnabled = !useAI || activePlayer == .cross
-            
-        case .inProgress:
-            // HINT: turn = next player
-            if activePlayer == .nought {
-                result = useAI ? "AI \(crossMark)'s turn" : "Player 2 \(crossMark)'s turn"
-            } else {
-                result = useAI ? "Player \(noughtMark)'s turn" : "Player 1 \(noughtMark)'s turn"
-            }
-            
-            cheatButton.isEnabled = !useAI || activePlayer == .cross
-            
-        case .win:
-            // TODO: This seems revered! If activePlayer is nought
-            if activePlayer == .cross {
-                result = useAI ? "AI \(crossMark) Wins" : "Player 2 \(crossMark)Wins"
-            } else {
-                result = useAI ? "Player \(noughtMark) Wins" : "Player 1 \(noughtMark) Wins"
-            }
-            if mysteryMode {
-                result = result + " with\(battleModeAttackName)"
-            } else {
-                result = result + "!"
-            }
-            
-            cheatButton.isEnabled = false
-
-        case .tie:
-            result = "no winner 😔"
-            cheatButton.isEnabled = false
-
-        case .notStarted:
-            print(mode)
-            cheatButton.isEnabled = false
-
-        case .playerPlaying:
-            print(mode)
-            cheatButton.isEnabled = false
-
-        case .aiPlaying:
-            print(mode)
-            cheatButton.isEnabled = false
-
+    func updateStatus() {
+        var playerOneName = ""
+        var playerTwoName = ""
+        
+        if gameEngine.aiEnabled {
+            playerOneName = "Player"
+            playerTwoName = "AI"
+        } else {
+            playerOneName = "Player 1"
+            playerTwoName = "Player 2"
         }
         
-        statusLabel.text = result
+        let playerOneToken = gameEngine.playerOne.token
+        let playerTwoToken = gameEngine.playerTwo.token
         
+        var status = ""
+        switch gameEngine.state {
+            
+        case .draw:
+            status = "no winner 😔"
+            
+        case .playerTwoWin:
+                status = "\(playerTwoName) \(playerTwoToken) Wins"
+            
+        case .playerTwoPlaying:
+                status = "\(playerTwoName) \(playerTwoToken)'s turn"
+            
+        case .playerOneWin:
+                status = "\(playerOneName) \(playerOneToken) Wins"
+            
+        case .playerOnePlaying:
+                status = "\(playerOneName) \(playerOneToken)'s turn"
+        }
+        
+        if gameEngine.cheatingEnabled {
+            status += " with\(battleModeAttackName)"
+        }
+        
+        statusLabel.text = status
     }
     
     /// Load user prefs from phone storage:
-    /// - noughtMark:String
-    /// - crossMark:String
-    /// - player1Row:Int
-    /// - player2Row:Int
-    /// - useAI:Bool
-    /// - useSound:Bool
-    /// - mysteryMode:Bool
-    /// - noughtWins:Int
-    /// - crossWins:Int
-    /// - draws:Int
+    /// var noughtMark: String
+    /// var crossMark: String
+    /// var player1Row: Int
+    /// var player2Row: Int
+    /// var useAI: Bool
+    /// var useSound: Bool
+    /// var mysteryMode: Bool
+    /// var noughtWins: Int
+    /// var crossWins: Int
+    /// var draws: Int
     func restoreUserPrefs() {
         
+        
         if let savedNoughtMark = UserDefaults.standard.object(forKey: "savedNoughtMark") {
-            noughtMark = savedNoughtMark as! String
+            gameEngine.playerOne.token = savedNoughtMark as! String
         }
         
         if let savedCrossMark = UserDefaults.standard.object(forKey: "savedCrossMark") {
-            crossMark = savedCrossMark as! String
+            gameEngine.playerTwo.token = savedCrossMark as! String
         }
         
         if let savedPlayer1Row = UserDefaults.standard.object(forKey: "savedPlayer1Row") {
-            player1Row = savedPlayer1Row as! Int
+            gameEngine.playerOneRow = savedPlayer1Row as! Int
         }
 
         if let savedPlayer2Row = UserDefaults.standard.object(forKey: "savedPlayer2Row") {
-            player2Row = savedPlayer2Row as! Int
+            gameEngine.playerTwoRow = savedPlayer2Row as! Int
         }
 
         if let savedUseAI = UserDefaults.standard.object(forKey: "savedUseAI") {
-            useAI = savedUseAI as! Bool
+            gameEngine.aiEnabled = savedUseAI as! Bool
         }
         
         if let savedUseSound = UserDefaults.standard.object(forKey: "savedUseSound") {
-            useSound = savedUseSound as! Bool
+            gameEngine.soundEnabled = savedUseSound as! Bool
         }
         
         if let savedMysteryMode = UserDefaults.standard.object(forKey: "savedMysteryMode") {
-            mysteryMode = savedMysteryMode as! Bool
+            gameEngine.cheatingEnabled = savedMysteryMode as! Bool
         }
         
         if let savedNoughtWins = UserDefaults.standard.object(forKey: "savedNoughtWins") {
-            noughtWins = savedNoughtWins as! Int
+            gameEngine.score.playerOneWins = savedNoughtWins as! Int
         }
         
         if let savedCrossWins = UserDefaults.standard.object(forKey: "savedCrossWins") {
-            crossWins = savedCrossWins as! Int
+            gameEngine.score.playerTwoWins = savedCrossWins as! Int
         }
         
         if let savedDraws = UserDefaults.standard.object(forKey: "savedDraws") {
-            draws = savedDraws as! Int
+            gameEngine.score.draws = savedDraws as! Int
         }
         
-        emojiGame.crossMark = crossMark
-        emojiGame.noughtMark = noughtMark
+        // TODO: gameEngine.instantEnabled = useInstant
     }
     
     /// Returns an empty AVAudioPlayer if one can't be created from a file
@@ -603,24 +509,26 @@ class ViewController: UIViewController {
             }
         }
         
-        noughtMark = emojis[e1]
-        crossMark = emojis[e2]
-        player1Row = e1
-        player2Row = e2
+        // TODO: Refactor into new game code
         
-        UserDefaults.standard.set(player1Row, forKey: "savedPlayer1Row")
-        UserDefaults.standard.set(noughtMark, forKey: "savedNoughtMark")
-        UserDefaults.standard.set(player2Row, forKey: "savedPlayer2Row")
-        UserDefaults.standard.set(crossMark, forKey: "savedCrossMark")
+        gameEngine.playerOne.token = emojis[e1]
+        gameEngine.playerTwo.token = emojis[e2]
+        gameEngine.playerOneRow = e1
+        gameEngine.playerTwoRow = e2
+        
+        UserDefaults.standard.set(gameEngine.playerOneRow, forKey: "savedPlayer1Row")
+        UserDefaults.standard.set(gameEngine.playerOne.token, forKey: "savedNoughtMark")
+        UserDefaults.standard.set(gameEngine.playerTwoRow, forKey: "savedPlayer2Row")
+        UserDefaults.standard.set(gameEngine.playerTwo.token, forKey: "savedCrossMark")
         
         // reset score
-        noughtWins = 0
-        crossWins = 0
-        draws = 0
+        gameEngine.score.playerOneWins = 0
+        gameEngine.score.playerTwoWins = 0
+        gameEngine.score.draws = 0
         
-        UserDefaults.standard.set(noughtWins, forKey: "savedNoughtWins")
-        UserDefaults.standard.set(crossWins, forKey: "savedCrossWins")
-        UserDefaults.standard.set(draws, forKey: "savedDraws")
+        UserDefaults.standard.set(gameEngine.score.playerOneWins, forKey: "savedNoughtWins")
+        UserDefaults.standard.set(gameEngine.score.playerTwoWins, forKey: "savedCrossWins")
+        UserDefaults.standard.set(gameEngine.score.draws, forKey: "savedDraws")
 
 
         resetGame()
