@@ -80,14 +80,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard = UIStoryboard(name: mainStoryboardID, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: gameBoardViewControllerID) as! ViewController
         makeWindowVisible(with: vc)
-        useAI = true
+        gameEngine.aiEnabled = true
     }
     
     fileprivate func twoPlayer() {
         let storyboard = UIStoryboard(name: mainStoryboardID, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: gameBoardViewControllerID) as! ViewController
         makeWindowVisible(with: vc)
-        useAI = false
+        gameEngine.aiEnabled = false
     }
     
     fileprivate func makeWindowVisible(with vc: UIViewController) {
