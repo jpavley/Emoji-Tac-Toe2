@@ -52,7 +52,15 @@ class ViewController: UIViewController {
     
     /// Initiate a normal turn.
     @IBAction func gameButtonAction(_ sender: AnyObject) {
-        playerTurn(currentButton: sender as! UIButton)
+        
+        let currentButton = sender as! UIButton
+        
+        if dontRespond(currentButton.tag - 1) {
+            // it's not the player's turn!
+            return
+        }
+        
+        playerTurn(currentButton: currentButton)
     }
     
     /// Initiate a BattleMode turn.
@@ -82,54 +90,54 @@ class ViewController: UIViewController {
     
     func playerTurn(currentButton: UIButton) {
         
-        if dontRespond(currentButton.tag - 1) {
-            // it's not the player's turn!
-            return
-        }
-        
-        playSoundForPlayer()
-        updateStatus()
-        
-        currentButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
-        
+        // update the gameboard
         let location = currentButton.tag - 1
         gameEngine.gameboard[location] = gameEngine.activePlayerRole
         
-        handleWinOrDraw()
-        setupNextTurn()
-        
-    }
-    
-    func battleModeTurn(_ currentButton: UIButton) {
+        // update the view
+        currentButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
         
         playSoundForPlayer()
         updateStatus()
+        handleWinOrDraw()
+        setupNextTurn()
+    }
+    
+    func battleModeTurn(_ currentButton: UIButton) {
         
         // do the attack
         let battleMode = BattleMode(activePlayer: .cross, currentGameboard: gameEngine.gameboard)
         let (updatedGameboard, attackName) = battleMode.attack()
         
-        // update gameboard and view with the results
+        // update gameboard
         gameEngine.gameboard = updatedGameboard
         battleModeAttackName = attackName
         print(attackName)
+        
+        // update the view
         updateGameView()
         
+        playSoundForPlayer()
+        updateStatus()
         handleWinOrDraw()
         setupNextTurn()
     }
     
     @objc func aiTurn() {
+        
+        // do the attack
         if let aiCell = aiChoose(gameEngine.gameboard, unpredicible: true) {
             
-            playSoundForPlayer()
-            updateStatus()
+            // update gameboard
+            gameEngine.gameboard[aiCell] = gameEngine.activePlayerRole
             
+            // update the view
             let tag = aiCell + 1
             let aiButton = view.viewWithTag(tag) as! UIButton
             aiButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
-            gameEngine.gameboard[aiCell] = gameEngine.activePlayerRole
             
+            playSoundForPlayer()
+            updateStatus()
             handleWinOrDraw()
             if !gameEngine.isGameOver() {
                 gameEngine.nextRound()
