@@ -132,7 +132,7 @@ class GameEngine {
             score.rounds += 1
             ticTacToeGame.gameOver = true
             
-        } else if checkForUntouchedCells(ticTacToeGame.gameboard) {
+        } else if !checkForUntouchedCells(ticTacToeGame.gameboard) {
             score.rounds += 1
             state = .draw
             ticTacToeGame.gameOver = true

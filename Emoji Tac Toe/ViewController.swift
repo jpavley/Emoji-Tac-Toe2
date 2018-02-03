@@ -87,7 +87,7 @@ class ViewController: UIViewController {
             result = true
         }
         
-        if gameEngine.aiEnabled {
+        if gameEngine.aiEnabled && gameEngine.round == .playerTwoRound {
             result = true
         }
         
@@ -181,8 +181,6 @@ class ViewController: UIViewController {
             return
         }
         
-        neutralizeGameboard()
-        
         updateStatus()
         
         // HINT: Update the screen
@@ -209,7 +207,6 @@ class ViewController: UIViewController {
         gameEngine.gameboard[location] = gameEngine.activePlayerRole
         
         gameEngine.checkForWinOrDraw()
-        
         if gameEngine.isGameOver() {
             handleWinOrDraw()
         }
@@ -223,12 +220,11 @@ class ViewController: UIViewController {
     
     @objc func aiClassicTakeTurn() {
         if let aiCell = aiChoose(gameEngine.gameboard, unpredicible: true) {
-            neutralizeGameboard()
             updateStatus()
             let tag = aiCell + 1
             let aiButton = view.viewWithTag(tag) as! UIButton
             aiButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
-            gameEngine.gameboard[aiCell] = .cross
+            gameEngine.gameboard[aiCell] = gameEngine.activePlayerRole
             
             // TODO: replace with creative commons sound effect
             
@@ -238,10 +234,11 @@ class ViewController: UIViewController {
             }
             
             gameEngine.checkForWinOrDraw()
-            
             if gameEngine.isGameOver() {
                 handleWinOrDraw()
             }
+            
+            gameEngine.nextRound()
         }
     }
     
