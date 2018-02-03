@@ -243,14 +243,7 @@ class ViewController: UIViewController {
             gameEngine.nextRound()
         }
     }
-    
-    func gameOverDraw() {
-        updateTitle()
-        updateStatus()
-        UserDefaults.standard.set(gameEngine.score.draws, forKey: "savedDraws")
-        presentGameOverAlert("Oops!")
-    }
-    
+        
     func neutralizeGameboard() {
         var button:UIButton
         for tag in 1...9 {
@@ -273,34 +266,64 @@ class ViewController: UIViewController {
         gameEngine.checkForWinOrDraw()
         
         if gameEngine.isGameOver() {
+            
             updateTitle()
             updateStatus()
             
             UserDefaults.standard.set(gameEngine.score.playerOneWins, forKey: "savedNoughtWins")
             UserDefaults.standard.set(gameEngine.score.playerTwoWins, forKey: "savedCrossWins")
             
-            if let winningVector = searchForWin(gameEngine.gameboard) {
-                var winningButton:UIButton
-                var tag:Int
-                for i in winningVector {
-                    tag = i + 1
-                    winningButton = view.viewWithTag(tag) as! UIButton
-                    winningButton.backgroundColor = UIColor.yellow
-                }
-            }
-            
-            var alertTitle = "Congrats!"
-            if gameEngine.state == .playerTwoWin && gameEngine.aiEnabled {
-                alertTitle = "Sorry!"
-            }
-            
             if gameEngine.soundEnabled {
                 winLooseAVPlayer.currentTime = 0
                 winLooseAVPlayer.play()
             }
             
+            let alertTitle = getAlertTitleForWin()
             presentGameOverAlert(alertTitle)
 
+        }
+    }
+    
+    fileprivate func getAlertTitleForWin() -> String {
+        var alertTitle = ""
+        
+        switch gameEngine.state {
+            
+        case .playerOneWin:
+            
+            alertTitle = "Congrats!"
+            hilightWinningVector()
+            
+        case .playerTwoWin:
+            
+            if gameEngine.aiEnabled {
+                alertTitle = "Sorry!"
+            } else {
+                alertTitle = "Congrats!"
+            }
+            
+            hilightWinningVector()
+            
+        case .draw:
+            alertTitle = "Opps!"
+            
+        default:
+            // TODO: can't possibly ever get here which means game state has too many states!
+            ()
+        }
+        
+        return alertTitle
+    }
+    
+    fileprivate func hilightWinningVector() {
+        if let winningVector = searchForWin(gameEngine.gameboard) {
+            var winningButton:UIButton
+            var tag:Int
+            for i in winningVector {
+                tag = i + 1
+                winningButton = view.viewWithTag(tag) as! UIButton
+                winningButton.backgroundColor = UIColor.yellow
+            }
         }
     }
     
