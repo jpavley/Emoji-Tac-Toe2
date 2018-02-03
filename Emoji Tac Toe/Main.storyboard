@@ -290,7 +290,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Y0v-zt-Oew">
-                                <rect key="frame" x="0.0" y="73.5" width="320" height="421"/>
+                                <rect key="frame" x="0.0" y="77" width="320" height="414"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="OT5-XN-yGU">
                                         <rect key="frame" x="66" y="0.0" width="188" height="24"/>
@@ -328,12 +328,12 @@
                                         </connections>
                                     </pickerView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xah-6u-xf8">
-                                        <rect key="frame" x="53.5" y="260" width="213" height="113"/>
+                                        <rect key="frame" x="53.5" y="260" width="213" height="154"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="0vT-bc-Qs6">
                                                 <rect key="frame" x="0.0" y="0.0" width="213" height="31"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Battle Mode" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbO-rw-Av7">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cheating" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbO-rw-Av7">
                                                         <rect key="frame" x="0.0" y="0.0" width="150" height="31"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="31" id="Xry-cG-rWl"/>
@@ -380,8 +380,33 @@
                                                     </switch>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="PaL-N4-pDX">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="vXw-8S-NLb">
                                                 <rect key="frame" x="0.0" y="82" width="213" height="31"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instant Game" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpL-b2-d0r" userLabel="Sound">
+                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="31"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="31" id="350-5x-Axd"/>
+                                                            <constraint firstAttribute="width" constant="150" id="dat-Rk-Ca1"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iZY-cq-lsg">
+                                                        <rect key="frame" x="164" y="0.0" width="51" height="31"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="31" id="kE8-e6-RQu"/>
+                                                            <constraint firstAttribute="width" constant="49" id="omj-EB-djl"/>
+                                                        </constraints>
+                                                        <connections>
+                                                            <action selector="soundAction:" destination="2J5-AT-VT3" eventType="valueChanged" id="eXn-gX-xcU"/>
+                                                        </connections>
+                                                    </switch>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="PaL-N4-pDX">
+                                                <rect key="frame" x="0.0" y="123" width="213" height="31"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sound" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QS2-TN-O2w" userLabel="Sound">
                                                         <rect key="frame" x="0.0" y="0.0" width="150" height="31"/>
@@ -407,40 +432,36 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hg3-da-iMJ">
-                                        <rect key="frame" x="138.5" y="381" width="43" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="T5z-rL-55C"/>
-                                            <constraint firstAttribute="width" constant="43" id="b1f-9q-Xek"/>
-                                            <constraint firstAttribute="height" constant="36" id="bQ9-B7-7Uq"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="43" id="uYl-ke-Dmc"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
-                                        <state key="normal" title="Start"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="b1f-9q-Xek"/>
-                                                <exclude reference="bQ9-B7-7Uq"/>
-                                            </mask>
-                                        </variation>
-                                        <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="p15-9u-4vt"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="MYS-iA-YWW"/>
                                 </constraints>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fBa-8E-h6J">
+                                <rect key="frame" x="139" y="508" width="42" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hg3-da-iMJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="42" height="40"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
+                                        <state key="normal" title="Start"/>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="p15-9u-4vt"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Y0v-zt-Oew" firstAttribute="centerX" secondItem="r74-61-rGl" secondAttribute="centerX" id="Hwq-DG-TFz"/>
+                            <constraint firstItem="fBa-8E-h6J" firstAttribute="centerX" secondItem="r74-61-rGl" secondAttribute="centerX" id="bcj-uP-r4W"/>
                             <constraint firstItem="Y0v-zt-Oew" firstAttribute="centerY" secondItem="r74-61-rGl" secondAttribute="centerY" id="w8P-9W-Ebo"/>
+                            <constraint firstItem="fBa-8E-h6J" firstAttribute="top" secondItem="Y0v-zt-Oew" secondAttribute="bottom" constant="17" id="wKE-fl-G67"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="aiSwitch" destination="zfR-PK-QGl" id="2Os-vJ-jai"/>
+                        <outlet property="instantGameSwitch" destination="iZY-cq-lsg" id="AmI-3f-MI7"/>
                         <outlet property="mysteryModeSwitch" destination="LAN-8L-LpX" id="I5O-eA-Duj"/>
                         <outlet property="player1Button" destination="xWw-oi-KE4" id="sIv-75-gKU"/>
                         <outlet property="player1Picker" destination="mqK-E7-bfP" id="j45-uK-5uV"/>

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		487F29D4202157C8008F8DBC /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C3918920212CB4009A536D /* GameEngine.swift */; };
+		48C3918A20212CB4009A536D /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C3918920212CB4009A536D /* GameEngine.swift */; };
+		48C3918C20213C46009A536D /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C3918B20213C46009A536D /* GameEngineTests.swift */; };
+		48C3918D20213CA4009A536D /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C3918920212CB4009A536D /* GameEngine.swift */; };
 		48D29FCF201941A600659AEA /* BattleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D29FCE201941A600659AEA /* BattleMode.swift */; };
 		48D29FD1201AB92300659AEA /* BattleModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D29FD0201AB92300659AEA /* BattleModeTests.swift */; };
 		48D29FD2201AB93C00659AEA /* BattleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D29FCE201941A600659AEA /* BattleMode.swift */; };
@@ -94,6 +98,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		48C3918920212CB4009A536D /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
+		48C3918B20213C46009A536D /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		48D29FCE201941A600659AEA /* BattleMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleMode.swift; sourceTree = "<group>"; };
 		48D29FD0201AB92300659AEA /* BattleModeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleModeTests.swift; sourceTree = "<group>"; };
 		5A3834A81EF6DC4B00891224 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -178,6 +184,7 @@
 		5AC9466F1EF8B3D100137DBF /* Emoji Tac Toe Tests */ = {
 			isa = PBXGroup;
 			children = (
+				48C3918B20213C46009A536D /* GameEngineTests.swift */,
 				48D29FD0201AB92300659AEA /* BattleModeTests.swift */,
 				5AC946701EF8B3D100137DBF /* Emoji_Tac_Toe_Tests.swift */,
 				5AC946721EF8B3D100137DBF /* Info.plist */,
@@ -267,6 +274,7 @@
 			children = (
 				5AD4079C1D4ED94F00FBBA62 /* EmojiTicTacToe.swift */,
 				48D29FCE201941A600659AEA /* BattleMode.swift */,
+				48C3918920212CB4009A536D /* GameEngine.swift */,
 				5ACDE3881DA350820067FBFE /* emoji-ordering.txt */,
 			);
 			name = Shared;
@@ -495,6 +503,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48C3918C20213C46009A536D /* GameEngineTests.swift in Sources */,
+				48C3918D20213CA4009A536D /* GameEngine.swift in Sources */,
 				48D29FD2201AB93C00659AEA /* BattleMode.swift in Sources */,
 				5AC946711EF8B3D100137DBF /* Emoji_Tac_Toe_Tests.swift in Sources */,
 				5A69712E2014E508009C80AC /* EmojiTicTacToe.swift in Sources */,
@@ -507,6 +517,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AD4079F1D4ED9EA00FBBA62 /* AppDelegate.swift in Sources */,
+				48C3918A20212CB4009A536D /* GameEngine.swift in Sources */,
 				5AD4079D1D4ED94F00FBBA62 /* EmojiTicTacToe.swift in Sources */,
 				5AD407991D4ED93700FBBA62 /* ViewController.swift in Sources */,
 				5AD4079B1D4ED94500FBBA62 /* NewGameViewController.swift in Sources */,
@@ -519,6 +530,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B904F3C41D4F715200CA2D75 /* NotificationController.swift in Sources */,
+				487F29D4202157C8008F8DBC /* GameEngine.swift in Sources */,
 				B904F3C21D4F715200CA2D75 /* ExtensionDelegate.swift in Sources */,
 				B904F3C01D4F715200CA2D75 /* InterfaceController.swift in Sources */,
 				B904F3D41D4F7B2F00CA2D75 /* EmojiTicTacToe.swift in Sources */,
@@ -718,7 +730,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
