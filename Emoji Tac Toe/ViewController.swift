@@ -52,7 +52,7 @@ class ViewController: UIViewController {
     
     /// Initiate a normal turn.
     @IBAction func gameButtonAction(_ sender: AnyObject) {
-        classicTTTButtonTouch(sender as! UIButton)
+        playerTurn(currentButton: sender as! UIButton)
     }
     
     /// Initiate a BattleMode turn.
@@ -112,8 +112,10 @@ class ViewController: UIViewController {
         print(attackName)
         updateGameView()
         
-        gameEngine.checkForWinOrDraw()
-        setupNextTurn()
+        handleWinOrDraw()
+        if !gameEngine.isGameOver() {
+            setupNextTurn()
+        }
     }
     
     fileprivate func setupThisTurn() {
@@ -159,7 +161,7 @@ class ViewController: UIViewController {
     fileprivate func setupNextTurn() {
         gameEngine.nextRound()
         if gameEngine.aiEnabled {
-            perform(#selector(self.aiClassicTakeTurn), with: nil, afterDelay: 1)
+            perform(#selector(self.aiTurn), with: nil, afterDelay: 1)
         }
     }
     
@@ -167,16 +169,7 @@ class ViewController: UIViewController {
         return gameEngine.activePlayerRole == .nought ? .cross : .nought
     }
     
-    func playerTurn() {
-        // TODO: Rewrite classicTTTButtonTouch
-    }
-    
-    func aiTurn() {
-        // TODO: Rewrite aiClassicTakeTurn
-    }
-    
-    func classicTTTButtonTouch(_ currentButton: UIButton) {
-        
+    func playerTurn(currentButton: UIButton) {
         if dontRespond(currentButton.tag - 1) {
             return
         }
@@ -190,15 +183,15 @@ class ViewController: UIViewController {
         if gameEngine.state == .playerOnePlaying  {
             
             if gameEngine.soundEnabled {
-//                noughtAVPlayer.currentTime = 0
-//                noughtAVPlayer.play()
+                //                noughtAVPlayer.currentTime = 0
+                //                noughtAVPlayer.play()
             }
             
         } else {
             
             if gameEngine.soundEnabled {
-//                crossAVPlayer.currentTime = 0
-//                crossAVPlayer.play()
+                //                crossAVPlayer.currentTime = 0
+                //                crossAVPlayer.play()
             }
         }
         
@@ -208,18 +201,15 @@ class ViewController: UIViewController {
         
         handleWinOrDraw()
         
-        if gameEngine.isGameOver() {
-            return
+        if !gameEngine.isGameOver() {
+            if gameEngine.aiEnabled {
+                gameEngine.nextRound()
+                perform(#selector(self.aiTurn), with: nil, afterDelay: 1)
+            }
         }
-        
-        if gameEngine.aiEnabled {
-            gameEngine.nextRound()
-            perform(#selector(self.aiClassicTakeTurn), with: nil, afterDelay: 1)
-        }
-
     }
     
-    @objc func aiClassicTakeTurn() {
+    @objc func aiTurn() {
         if let aiCell = aiChoose(gameEngine.gameboard, unpredicible: true) {
             updateStatus()
             let tag = aiCell + 1
@@ -230,20 +220,17 @@ class ViewController: UIViewController {
             // TODO: replace with creative commons sound effect
             
             if gameEngine.soundEnabled {
-//                crossAVPlayer.currentTime = 0
-//                crossAVPlayer.play()
+                //                crossAVPlayer.currentTime = 0
+                //                crossAVPlayer.play()
             }
             
             handleWinOrDraw()
-            
-            if gameEngine.isGameOver() {
-                return
+            if !gameEngine.isGameOver() {
+                gameEngine.nextRound()
             }
-            
-            gameEngine.nextRound()
         }
     }
-        
+    
     func neutralizeGameboard() {
         var button:UIButton
         for tag in 1...9 {
