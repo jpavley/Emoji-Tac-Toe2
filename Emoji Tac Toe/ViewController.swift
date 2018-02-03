@@ -100,8 +100,9 @@ class ViewController: UIViewController {
     
     func battleModeTurn(_ currentButton: UIButton) {
         
-        setupThisTurn()
-        
+        playSoundForPlayer()
+        updateStatus()
+
         // do the attack
         let battleMode = BattleMode(activePlayer: .cross, currentGameboard: gameEngine.gameboard)
         let (updatedGameboard, attackName) = battleMode.attack()
@@ -116,15 +117,6 @@ class ViewController: UIViewController {
         if !gameEngine.isGameOver() {
             setupNextTurn()
         }
-    }
-    
-    fileprivate func setupThisTurn() {
-        playSoundForPlayer()
-        updateStatus()
-    }
-    
-    fileprivate func getActivePlayerMark() -> String {
-        return gameEngine.activePlayerToken
     }
     
     fileprivate func playSoundForPlayer() {
