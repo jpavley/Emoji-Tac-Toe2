@@ -206,9 +206,10 @@ class ViewController: UIViewController {
         let location = currentButton.tag - 1
         gameEngine.gameboard[location] = gameEngine.activePlayerRole
         
-        gameEngine.checkForWinOrDraw()
+        handleWinOrDraw()
+        
         if gameEngine.isGameOver() {
-            handleWinOrDraw()
+            return
         }
         
         if gameEngine.aiEnabled {
@@ -233,9 +234,10 @@ class ViewController: UIViewController {
 //                crossAVPlayer.play()
             }
             
-            gameEngine.checkForWinOrDraw()
+            handleWinOrDraw()
+            
             if gameEngine.isGameOver() {
-                handleWinOrDraw()
+                return
             }
             
             gameEngine.nextRound()
