@@ -100,24 +100,6 @@ class ViewController: UIViewController {
         
     }
     
-    @objc func aiTurn() {
-        if let aiCell = aiChoose(gameEngine.gameboard, unpredicible: true) {
-            
-            playSoundForPlayer()
-            updateStatus()
-            
-            let tag = aiCell + 1
-            let aiButton = view.viewWithTag(tag) as! UIButton
-            aiButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
-            gameEngine.gameboard[aiCell] = gameEngine.activePlayerRole
-            
-            handleWinOrDraw()
-            if !gameEngine.isGameOver() {
-                gameEngine.nextRound()
-            }
-        }
-    }
-    
     func battleModeTurn(_ currentButton: UIButton) {
         
         playSoundForPlayer()
@@ -135,6 +117,24 @@ class ViewController: UIViewController {
         
         handleWinOrDraw()
         setupNextTurn()
+    }
+    
+    @objc func aiTurn() {
+        if let aiCell = aiChoose(gameEngine.gameboard, unpredicible: true) {
+            
+            playSoundForPlayer()
+            updateStatus()
+            
+            let tag = aiCell + 1
+            let aiButton = view.viewWithTag(tag) as! UIButton
+            aiButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
+            gameEngine.gameboard[aiCell] = gameEngine.activePlayerRole
+            
+            handleWinOrDraw()
+            if !gameEngine.isGameOver() {
+                gameEngine.nextRound()
+            }
+        }
     }
     
     fileprivate func dontRespond(_ location: Int) -> Bool {
