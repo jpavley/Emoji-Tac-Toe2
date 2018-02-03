@@ -528,6 +528,13 @@ func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
             if result != nil { print("randomCell \(result!) threshold 30") }
         }
         
+        // 10. Winning Move
+        // Search for winning move
+        if result == nil {
+            result = searchForWinningMove(gameboard, for: .cross)
+            if result != nil { print("searchForWinningMove \(result!)") }
+        }
+        
         // 3. Blocking move
         // Search for blocking move
         if result == nil {
@@ -577,14 +584,6 @@ func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
             result = searchForCornerOppositeOpponent(gameboard, for: .cross)
             if result != nil { print("searchForCornerOppositeOpponent \(result!)") }
         }
-        
-        // 10. Winning Move
-        // Search for winning move
-         if result == nil {
-            result = searchForWinningMove(gameboard, for: .cross)
-            if result != nil { print("searchForWinningMove \(result!)") }
-         }
-        
         
         // 11. Any corner
         // Search for a corner
