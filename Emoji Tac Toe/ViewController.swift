@@ -80,7 +80,64 @@ class ViewController: UIViewController {
         }
     }
     
-    func dontRespond(_ location: Int) -> Bool {
+    func playerTurn(currentButton: UIButton) {
+        
+        if dontRespond(currentButton.tag - 1) {
+            // it's not the player's turn!
+            return
+        }
+        
+        playSoundForPlayer()
+        updateStatus()
+        
+        currentButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
+        
+        let location = currentButton.tag - 1
+        gameEngine.gameboard[location] = gameEngine.activePlayerRole
+        
+        handleWinOrDraw()
+        setupNextTurn()
+        
+    }
+    
+    @objc func aiTurn() {
+        if let aiCell = aiChoose(gameEngine.gameboard, unpredicible: true) {
+            
+            playSoundForPlayer()
+            updateStatus()
+            
+            let tag = aiCell + 1
+            let aiButton = view.viewWithTag(tag) as! UIButton
+            aiButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
+            gameEngine.gameboard[aiCell] = gameEngine.activePlayerRole
+            
+            handleWinOrDraw()
+            if !gameEngine.isGameOver() {
+                gameEngine.nextRound()
+            }
+        }
+    }
+    
+    func battleModeTurn(_ currentButton: UIButton) {
+        
+        playSoundForPlayer()
+        updateStatus()
+        
+        // do the attack
+        let battleMode = BattleMode(activePlayer: .cross, currentGameboard: gameEngine.gameboard)
+        let (updatedGameboard, attackName) = battleMode.attack()
+        
+        // update gameboard and view with the results
+        gameEngine.gameboard = updatedGameboard
+        battleModeAttackName = attackName
+        print(attackName)
+        updateGameView()
+        
+        handleWinOrDraw()
+        setupNextTurn()
+    }
+    
+    fileprivate func dontRespond(_ location: Int) -> Bool {
         var result = false
         
         if gameEngine.isGameOver() {
@@ -98,30 +155,28 @@ class ViewController: UIViewController {
         return result
     }
     
-    func battleModeTurn(_ currentButton: UIButton) {
-        
-        playSoundForPlayer()
-        updateStatus()
-
-        // do the attack
-        let battleMode = BattleMode(activePlayer: .cross, currentGameboard: gameEngine.gameboard)
-        let (updatedGameboard, attackName) = battleMode.attack()
-        
-        // update gameboard and view with the results
-        gameEngine.gameboard = updatedGameboard
-        battleModeAttackName = attackName
-        print(attackName)
-        updateGameView()
-        
-        handleWinOrDraw()
-        if !gameEngine.isGameOver() {
-            setupNextTurn()
-        }
-    }
-    
     fileprivate func playSoundForPlayer() {
-//        battleAVPlayer.currentTime = 0
-//        battleAVPlayer.play()
+        
+        if !gameEngine.soundEnabled {
+            return
+        }
+        
+        if gameEngine.cheatingEnabled {
+            
+            // battleAVPlayer.currentTime = 0
+            // battleAVPlayer.play()
+            
+        } else if gameEngine.state == .playerOnePlaying  {
+            
+            // noughtAVPlayer.currentTime = 0
+            // noughtAVPlayer.play()
+            
+        } else if gameEngine.state == .playerTwoPlaying{
+            
+            // crossAVPlayer.currentTime = 0
+            // crossAVPlayer.play()
+        }
+
     }
     
     fileprivate func updateGameView() {
@@ -150,79 +205,17 @@ class ViewController: UIViewController {
     }
     
     fileprivate func setupNextTurn() {
-        gameEngine.nextRound()
-        if gameEngine.aiEnabled {
-            perform(#selector(self.aiTurn), with: nil, afterDelay: 1)
-        }
-    }
-    
-    fileprivate func getOpponent()  -> PlayerRole {
-        return gameEngine.activePlayerRole == .nought ? .cross : .nought
-    }
-    
-    func playerTurn(currentButton: UIButton) {
-        if dontRespond(currentButton.tag - 1) {
-            return
-        }
-        
-        updateStatus()
-        
-        // HINT: Update the screen
-        currentButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
-        
-        // TODO: replace with creative commons sound effects
-        if gameEngine.state == .playerOnePlaying  {
-            
-            if gameEngine.soundEnabled {
-                //                noughtAVPlayer.currentTime = 0
-                //                noughtAVPlayer.play()
-            }
-            
-        } else {
-            
-            if gameEngine.soundEnabled {
-                //                crossAVPlayer.currentTime = 0
-                //                crossAVPlayer.play()
-            }
-        }
-        
-        // HINT: Update the game board
-        let location = currentButton.tag - 1
-        gameEngine.gameboard[location] = gameEngine.activePlayerRole
-        
-        handleWinOrDraw()
         
         if !gameEngine.isGameOver() {
+            gameEngine.nextRound()
+
             if gameEngine.aiEnabled {
-                gameEngine.nextRound()
                 perform(#selector(self.aiTurn), with: nil, afterDelay: 1)
             }
         }
     }
     
-    @objc func aiTurn() {
-        if let aiCell = aiChoose(gameEngine.gameboard, unpredicible: true) {
-            updateStatus()
-            let tag = aiCell + 1
-            let aiButton = view.viewWithTag(tag) as! UIButton
-            aiButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
-            gameEngine.gameboard[aiCell] = gameEngine.activePlayerRole
-            
-            // TODO: replace with creative commons sound effect
-            
-            if gameEngine.soundEnabled {
-                //                crossAVPlayer.currentTime = 0
-                //                crossAVPlayer.play()
-            }
-            
-            handleWinOrDraw()
-            if !gameEngine.isGameOver() {
-                gameEngine.nextRound()
-            }
-        }
-    }
-    
-    func neutralizeGameboard() {
+    fileprivate func neutralizeGameboard() {
         var button:UIButton
         for tag in 1...9 {
             button = view.viewWithTag(tag) as! UIButton
