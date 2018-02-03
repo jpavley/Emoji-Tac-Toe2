@@ -139,9 +139,7 @@ class ViewController: UIViewController {
             playSoundForPlayer()
             updateStatus()
             handleWinOrDraw()
-            if !gameEngine.isGameOver() {
-                gameEngine.nextRound()
-            }
+            gameEngine.nextRound()
         }
     }
     
@@ -217,7 +215,7 @@ class ViewController: UIViewController {
         if !gameEngine.isGameOver() {
             gameEngine.nextRound()
 
-            if gameEngine.aiEnabled {
+            if gameEngine.round == .playerTwoRound && gameEngine.aiEnabled {
                 perform(#selector(self.aiTurn), with: nil, afterDelay: 1)
             }
         }
