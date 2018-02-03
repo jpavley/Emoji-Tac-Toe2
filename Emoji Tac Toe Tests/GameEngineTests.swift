@@ -21,7 +21,7 @@ class GameEngineTests: XCTestCase {
     }
     
     func testInitGameEngine() {
-        let gameEngine = GameEngine()
+        let gameEngine = GameEngine(noughtToken: "⭕️", crossToken: "❌", untouchedToken: "⬜️")
         
         XCTAssertNotNil(gameEngine)
         XCTAssertEqual(gameEngine.aiEnabled, true)
@@ -29,10 +29,10 @@ class GameEngineTests: XCTestCase {
         XCTAssertEqual(gameEngine.instantEnabled, false)
         
         XCTAssertEqual(gameEngine.playerOne.kind, .human)
-        XCTAssertEqual(gameEngine.playerOne.mark, .nought)
+        XCTAssertEqual(gameEngine.playerOne.role, .nought)
         
         XCTAssertEqual(gameEngine.playerTwo.kind, .ai)
-        XCTAssertEqual(gameEngine.playerTwo.mark, .cross)
+        XCTAssertEqual(gameEngine.playerTwo.role, .cross)
         
         XCTAssertEqual(gameEngine.round, .playerOneRound)
         
@@ -47,7 +47,7 @@ class GameEngineTests: XCTestCase {
     }
     
     func testWinningStateAndIsGameOverPlayerOne() {
-        let gameEngine = GameEngine()
+        let gameEngine = GameEngine(noughtToken: "⭕️", crossToken: "❌", untouchedToken: "⬜️")
         gameEngine.ticTacToeGame.gameboard = transformTextIntoGameboard(textRepresentation: "ooooooooo")!
         gameEngine.checkForWinOrDraw()
         XCTAssertTrue(gameEngine.isGameOver())
@@ -57,7 +57,7 @@ class GameEngineTests: XCTestCase {
     }
     
     func testWinningStateAndIsGameOverPlayerTwo() {
-        let gameEngine = GameEngine()
+        let gameEngine = GameEngine(noughtToken: "⭕️", crossToken: "❌", untouchedToken: "⬜️")
         gameEngine.ticTacToeGame.gameboard = transformTextIntoGameboard(textRepresentation: "xxxxxxxxx")!
         gameEngine.checkForWinOrDraw()
         XCTAssertTrue(gameEngine.isGameOver())
@@ -67,11 +67,10 @@ class GameEngineTests: XCTestCase {
     }
     
     func testNextRound() {
-        let gameEngine = GameEngine()
+        let gameEngine = GameEngine(noughtToken: "⭕️", crossToken: "❌", untouchedToken: "⬜️")
         gameEngine.nextRound()
         
         XCTAssertFalse(gameEngine.isGameOver())
-        XCTAssertEqual(gameEngine.state, .aiPlaying)
         XCTAssertEqual(gameEngine.round, .playerTwoRound)
         XCTAssertEqual(gameEngine.ticTacToeGame.gameOver, false)
         
@@ -96,7 +95,7 @@ class GameEngineTests: XCTestCase {
     }
     
     func testNextGame() {
-        let gameEngine = GameEngine()
+        let gameEngine = GameEngine(noughtToken: "⭕️", crossToken: "❌", untouchedToken: "⬜️")
         gameEngine.nextGame()
         
         XCTAssertFalse(gameEngine.isGameOver())
