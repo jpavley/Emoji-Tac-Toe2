@@ -132,10 +132,11 @@ class GameEngine {
             score.rounds += 1
             ticTacToeGame.gameOver = true
             
-        } else if !checkForUntouchedCells(ticTacToeGame.gameboard) {
+        } else if calcOpenCells(ticTacToeGame.gameboard).count == 0 {
             score.rounds += 1
             state = .draw
             ticTacToeGame.gameOver = true
+
 
         } else if isThereAFinalWinningMove(ticTacToeGame.gameboard, for: playerOne.role) ||
                   isThereAFinalWinningMove(ticTacToeGame.gameboard, for: playerTwo.role) {
