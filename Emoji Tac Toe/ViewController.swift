@@ -96,11 +96,9 @@ class ViewController: UIViewController {
         
         // update the view
         currentButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
+        //updateGameView()
         
-        playSoundForPlayer()
-        updateStatus()
-        handleWinOrDraw()
-        setupNextTurn()
+        completeTurn()
     }
     
     func battleModeTurn(_ currentButton: UIButton) {
@@ -117,10 +115,7 @@ class ViewController: UIViewController {
         // update the view
         updateGameView()
         
-        playSoundForPlayer()
-        updateStatus()
-        handleWinOrDraw()
-        setupNextTurn()
+        completeTurn()
     }
     
     @objc func aiTurn() {
@@ -136,11 +131,15 @@ class ViewController: UIViewController {
             let aiButton = view.viewWithTag(tag) as! UIButton
             aiButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
             
-            playSoundForPlayer()
-            updateStatus()
-            handleWinOrDraw()
-            gameEngine.nextRound()
+            completeTurn()
         }
+    }
+    
+    fileprivate func completeTurn() {
+        playSoundForPlayer()
+        updateStatus()
+        handleWinOrDraw()
+        setupNextTurn()
     }
     
     fileprivate func dontRespond(_ location: Int) -> Bool {
@@ -187,13 +186,9 @@ class ViewController: UIViewController {
     
     fileprivate func updateGameView() {
         
-        // TODO: Somehow with BattleMode.attack() the player marks are reversed
-        
-        var button:UIButton
-        
         for tag in 1...9 {
             
-            button = view.viewWithTag(tag) as! UIButton
+            let button = view.viewWithTag(tag) as! UIButton
             let location = tag - 1
             
             switch gameEngine.gameboard[location] {
@@ -249,8 +244,9 @@ class ViewController: UIViewController {
             
             UserDefaults.standard.set(gameEngine.score.playerOneWins, forKey: "savedNoughtWins")
             UserDefaults.standard.set(gameEngine.score.playerTwoWins, forKey: "savedCrossWins")
+                
             
-            if gameEngine.soundEnabled {
+            if gameEngine.soundEnabled && !(gameEngine.state == .draw) {
                 winLooseAVPlayer.currentTime = 0
                 winLooseAVPlayer.play()
             }
