@@ -133,19 +133,25 @@ class GameEngine {
             ticTacToeGame.gameOver = true
             
         } else if calcOpenCells(ticTacToeGame.gameboard).count == 0 {
-            score.rounds += 1
-            state = .draw
-            ticTacToeGame.gameOver = true
+            
+            endGameInDraw()
 
-
-        } else if isThereAFinalWinningMove(ticTacToeGame.gameboard, for: playerOne.role) ||
-                  isThereAFinalWinningMove(ticTacToeGame.gameboard, for: playerTwo.role) {
-            score.draws += 1
-            state = .draw
-            ticTacToeGame.gameOver = true
+        } else if state == .playerOnePlaying && !isThereAFinalWinningMove(ticTacToeGame.gameboard, for: playerOne.role) {
+            
+            endGameInDraw()
+            
+        } else if state == .playerTwoPlaying && !isThereAFinalWinningMove(ticTacToeGame.gameboard, for: playerTwo.role) {
+            
+            endGameInDraw()
         }
+
+    }
+    
+    fileprivate func endGameInDraw() {
         
-        
+        state = .draw
+        score.rounds += 1
+        ticTacToeGame.gameOver = true
     }
     
     func nextRound() {
