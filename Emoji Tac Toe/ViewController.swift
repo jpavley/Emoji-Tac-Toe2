@@ -120,7 +120,6 @@ class ViewController: UIViewController {
     
     fileprivate func setupThisTurn() {
         playSoundForPlayer()
-        neutralizeGameboard()
         updateStatus()
     }
     
