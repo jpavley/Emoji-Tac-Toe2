@@ -90,6 +90,8 @@ class ViewController: UIViewController {
     
     func playerTurn(currentButton: UIButton) {
         
+        // TODO: At the start of a turn is it possible to win the game?
+        
         // update the gameboard
         let location = currentButton.tag - 1
         gameEngine.gameboard[location] = gameEngine.activePlayerRole
@@ -120,6 +122,8 @@ class ViewController: UIViewController {
     
     @objc func aiTurn() {
         
+        // TODO: At the start of a turn is it possible to win the game?
+        
         // do the attack
         if let aiCell = aiChoose(gameEngine.gameboard, unpredicible: true) {
             
@@ -137,9 +141,9 @@ class ViewController: UIViewController {
     
     fileprivate func completeTurn() {
         playSoundForPlayer()
-        updateStatus()
         handleWinOrDraw()
         setupNextTurn()
+        updateStatus()
     }
     
     fileprivate func dontRespond(_ location: Int) -> Bool {

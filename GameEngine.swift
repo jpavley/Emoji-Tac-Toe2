@@ -91,7 +91,6 @@ class GameEngine {
             }
         }
     }
-
         
     init(noughtToken: String, crossToken: String, untouchedToken: String) {
         ticTacToeGame = TicTacToeGame(from: "_________")
@@ -135,26 +134,27 @@ class GameEngine {
         } else if calcOpenCells(ticTacToeGame.gameboard).count == 0 {
             
             endGameInDraw()
-
-        } else if state == .playerOnePlaying && !isThereAFinalWinningMove(ticTacToeGame.gameboard, for: playerOne.role) {
             
-            endGameInDraw()
-            
-        } else if state == .playerTwoPlaying && !isThereAFinalWinningMove(ticTacToeGame.gameboard, for: playerTwo.role) {
-            
-            endGameInDraw()
         }
-
     }
-    
+        
     fileprivate func endGameInDraw() {
         
         state = .draw
         score.rounds += 1
+        score.draws += 1
         ticTacToeGame.gameOver = true
     }
     
     func nextRound() {
+        
+        
+        // DEBUG
+        let oldRound = round
+        let oldState = state
+        let oldToken = activePlayerToken
+        print("=== nextRound() ===")
+        
         switch round {
             
         case .playerOneRound:
@@ -165,6 +165,10 @@ class GameEngine {
             round = .playerOneRound
             state = .playerOnePlaying
         }
+        
+        // DBUG
+        print("=== old \(oldState),\(oldRound), \(oldToken)")
+        print("=== new \(state), \(round), \(activePlayerToken)")
     }
     
     func nextGame() {

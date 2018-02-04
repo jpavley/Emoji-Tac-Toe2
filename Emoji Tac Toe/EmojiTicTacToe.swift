@@ -316,8 +316,10 @@ func getRandomCell(_ gameboard: Gameboard, threshold: Int) -> Int? {
 /// ❓⭕️⭕️
 func isThereAFinalWinningMove(_ gameboard: Gameboard, for mark: PlayerRole) -> Bool {
     let openCells = calcOpenCells(gameboard)
-    let winningMove = searchForWinningMove(gameboard, for: mark)
-    return openCells.count == 1 && winningMove != nil
+    if openCells.count == 1 {
+        return searchForWinningMove(gameboard, for: mark) != nil
+    }
+    return false
 }
 
 /// Returns a winning move for the player or nil
@@ -325,18 +327,22 @@ func isThereAFinalWinningMove(_ gameboard: Gameboard, for mark: PlayerRole) -> B
 /// ⬜️❌⬜️
 /// ⬜️❌⬜️
 func searchForWinningMove(_ gameboard: Gameboard, for player: PlayerRole) -> Int? {
-    var result:Int?
     let openCells = calcOpenCells(gameboard)
+    
+    // DBUG
+    if openCells.count == 1 {
+        print("DEBUG")
+    }
     
     for cell in openCells {
         var testGameboard = gameboard
         testGameboard[cell] = player
         
         if seachForWinForPlayer(testGameboard, player: player) {
-            result = cell
+            return cell
         }
     }
-    return result
+    return nil
 }
 
 /// Returns a block moving for specificed player, one that would pervent opponent

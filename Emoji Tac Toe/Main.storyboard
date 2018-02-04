@@ -243,7 +243,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B49-t2-TBg">
-                                <rect key="frame" x="140" y="505" width="41" height="30"/>
+                                <rect key="frame" x="139.5" y="505" width="41" height="30"/>
                                 <state key="normal" title="Cheat"/>
                                 <connections>
                                     <action selector="cheatButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6xN-AR-V8s"/>
