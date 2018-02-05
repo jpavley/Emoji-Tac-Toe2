@@ -328,12 +328,7 @@ func isThereAFinalWinningMove(_ gameboard: Gameboard, for mark: PlayerRole) -> B
 /// ⬜️❌⬜️
 func searchForWinningMove(_ gameboard: Gameboard, for player: PlayerRole) -> Int? {
     let openCells = calcOpenCells(gameboard)
-    
-    // DBUG
-    if openCells.count == 1 {
-        print("DEBUG")
-    }
-    
+        
     for cell in openCells {
         var testGameboard = gameboard
         testGameboard[cell] = player

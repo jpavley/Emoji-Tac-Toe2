@@ -90,8 +90,6 @@ class ViewController: UIViewController {
     
     func playerTurn(currentButton: UIButton) {
         
-        // TODO: At the start of a turn is it possible to win the game?
-        
         // update the gameboard
         let location = currentButton.tag - 1
         gameEngine.gameboard[location] = gameEngine.activePlayerRole
@@ -121,8 +119,6 @@ class ViewController: UIViewController {
     }
     
     @objc func aiTurn() {
-        
-        // TODO: At the start of a turn is it possible to win the game?
         
         // do the attack
         if let aiCell = aiChoose(gameEngine.gameboard, unpredicible: true) {
@@ -242,23 +238,26 @@ class ViewController: UIViewController {
         gameEngine.checkForWinOrDraw()
         
         if gameEngine.isGameOver() {
-            
-            updateTitle()
-            updateStatus()
-            
-            UserDefaults.standard.set(gameEngine.score.playerOneWins, forKey: "savedNoughtWins")
-            UserDefaults.standard.set(gameEngine.score.playerTwoWins, forKey: "savedCrossWins")
-                
-            
-            if gameEngine.soundEnabled && !(gameEngine.state == .draw) {
-                winLooseAVPlayer.currentTime = 0
-                winLooseAVPlayer.play()
-            }
-            
-            let alertTitle = getAlertTitleForWin()
-            presentGameOverAlert(alertTitle)
-
+            handleGameOver()
         }
+    }
+    
+    fileprivate func handleGameOver() {
+        updateTitle()
+        updateStatus()
+        
+        UserDefaults.standard.set(gameEngine.score.playerOneWins, forKey: "savedNoughtWins")
+        UserDefaults.standard.set(gameEngine.score.playerTwoWins, forKey: "savedCrossWins")
+        
+        
+        if gameEngine.soundEnabled && !(gameEngine.state == .draw) {
+            winLooseAVPlayer.currentTime = 0
+            winLooseAVPlayer.play()
+        }
+        
+        let alertTitle = getAlertTitleForWin()
+        presentGameOverAlert(alertTitle)
+
     }
     
     fileprivate func getAlertTitleForWin() -> String {

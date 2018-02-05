@@ -115,6 +115,7 @@ class GameEngine {
         return state == .playerOneWin || state == .playerTwoWin || state == .draw
     }
     
+    /// Call at the end of a turn. Looks for a win or a draw.
     func checkForWinOrDraw() {
         
         if let winningVector = searchForWin(ticTacToeGame.gameboard) {
@@ -135,7 +136,31 @@ class GameEngine {
             
             endGameInDraw()
             
+        } else if !checkWinningIsPossible() {
+            
+            endGameInDraw()
+
         }
+    }
+    
+    /// Call at the beginning of a turn. Makes sure the current player
+    /// has the possibility of winning the game. If not the game is ended
+    /// in a draw.
+    func checkWinningIsPossible() -> Bool {
+        
+        if calcOpenCells(ticTacToeGame.gameboard).count > 1 {
+            return true
+        }
+        
+        var possibility = seachForWinForPlayer(ticTacToeGame.gameboard, player: activePlayerRole)
+
+        
+        if activePlayerRole == .cross {
+            possibility = seachForWinForPlayer(ticTacToeGame.gameboard, player: .nought)
+        }
+        
+        return possibility
+        
     }
         
     fileprivate func endGameInDraw() {
@@ -148,13 +173,6 @@ class GameEngine {
     
     func nextRound() {
         
-        
-        // DEBUG
-        let oldRound = round
-        let oldState = state
-        let oldToken = activePlayerToken
-        print("=== nextRound() ===")
-        
         switch round {
             
         case .playerOneRound:
@@ -165,10 +183,6 @@ class GameEngine {
             round = .playerOneRound
             state = .playerOnePlaying
         }
-        
-        // DBUG
-        print("=== old \(oldState),\(oldRound), \(oldToken)")
-        print("=== new \(state), \(round), \(activePlayerToken)")
     }
     
     func nextGame() {
