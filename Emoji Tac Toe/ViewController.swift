@@ -23,6 +23,9 @@ var battleAVPlayer = AVAudioPlayer()
 class ViewController: UIViewController {
         
     var battleModeAttackName = ""
+    var playerOneCheatCount = 0
+    var playerTwoCheatCount = 0
+    let maxCheats = 1
         
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
@@ -65,6 +68,13 @@ class ViewController: UIViewController {
     
     /// Initiate a BattleMode turn.
     @IBAction func cheatButtonAction(_ sender: Any) {
+        
+        if gameEngine.state == .playerOnePlaying {
+            playerOneCheatCount += 1
+        } else if gameEngine.state == .playerTwoPlaying {
+            playerTwoCheatCount += 1
+        }
+        
         battleModeTurn(sender as! UIButton)
     }
     
@@ -139,6 +149,7 @@ class ViewController: UIViewController {
         playSoundForPlayer()
         handleWinOrDraw()
         setupNextTurn()
+        handleCheatButton()
         updateStatus()
     }
     
@@ -212,6 +223,40 @@ class ViewController: UIViewController {
 
             if gameEngine.round == .playerTwoRound && gameEngine.aiEnabled {
                 perform(#selector(self.aiTurn), with: nil, afterDelay: 1)
+            }
+        }
+    }
+    
+    fileprivate func handleCheatButton() {
+        
+        switch gameEngine.state {
+            
+        case .draw, .playerOneWin, .playerTwoWin:
+            
+            cheatButton.isEnabled = false
+            playerOneCheatCount = 0
+            playerTwoCheatCount = 0
+            
+        case .playerOnePlaying:
+            
+            if playerOneCheatCount < maxCheats {
+                cheatButton.isEnabled = true
+            } else {
+                cheatButton.isEnabled = false
+            }
+            
+        case .playerTwoPlaying:
+            
+            if gameEngine.aiEnabled {
+                cheatButton.isEnabled = false
+                
+            } else {
+                
+                if playerTwoCheatCount < maxCheats {
+                    cheatButton.isEnabled = true
+                } else {
+                    cheatButton.isEnabled = false
+                }
             }
         }
     }
@@ -333,6 +378,8 @@ class ViewController: UIViewController {
         
         updateTitle()
         updateStatus()
+        
+        handleCheatButton()
         
         var button:UIButton
         for tag in 1...9 {
