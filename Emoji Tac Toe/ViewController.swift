@@ -30,6 +30,7 @@ class ViewController: UIViewController {
         
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var cheatButton: UIButton!
     
     /// Share the current game as text.
