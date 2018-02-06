@@ -293,7 +293,7 @@ class ViewController: UIViewController {
         
         UserDefaults.standard.set(gameEngine.score.playerOneWins, forKey: "savedNoughtWins")
         UserDefaults.standard.set(gameEngine.score.playerTwoWins, forKey: "savedCrossWins")
-        
+        UserDefaults.standard.set(gameEngine.score.draws, forKey: "savedDraws")
         
         if gameEngine.soundEnabled && !(gameEngine.state == .draw) {
             winLooseAVPlayer.currentTime = 0
