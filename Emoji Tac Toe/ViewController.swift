@@ -421,20 +421,27 @@ class ViewController: UIViewController {
             status = "no winner 😔"
             
         case .playerTwoWin:
-                status = "\(playerTwoName) \(playerTwoToken) Wins"
+            
+            status = "\(playerTwoName) \(playerTwoToken) Wins"
+            if gameEngine.cheatingEnabled {
+                status += " with \(battleModeAttackName)"
+            }
             
         case .playerTwoPlaying:
-                status = "\(playerTwoName) \(playerTwoToken)'s turn"
+            
+            status = "\(playerTwoName) \(playerTwoToken)'s turn"
             
         case .playerOneWin:
-                status = "\(playerOneName) \(playerOneToken) Wins"
+            
+            status = "\(playerOneName) \(playerOneToken) Wins"
+            if gameEngine.cheatingEnabled {
+                status += " with \(battleModeAttackName)"
+            }
             
         case .playerOnePlaying:
-                status = "\(playerOneName) \(playerOneToken)'s turn"
-        }
-        
-        if gameEngine.cheatingEnabled {
-            status += " with\(battleModeAttackName)"
+            
+            status = "\(playerOneName) \(playerOneToken)'s turn"
+            
         }
         
         statusLabel.text = status
