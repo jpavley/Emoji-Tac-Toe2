@@ -17,7 +17,7 @@ var gameEngine = GameEngine(noughtToken: "⭕️", crossToken: "❌", untouchedT
 class ViewController: UIViewController {
     
     // TODO: Should be a struct
-    var battleModeAttackName = ""
+    var CheatModeAttackName = ""
     var playerOneCheatCount = 0
     var playerTwoCheatCount = 0
     let maxCheats = 1
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
             playerTwoCheatCount += 1
         }
         
-        battleModeTurn(sender as! UIButton)
+        CheaterTurn(sender as! UIButton)
     }
     
     /// Pan up: Sound on.
@@ -112,17 +112,17 @@ class ViewController: UIViewController {
         completeTurn()
     }
     
-    func battleModeTurn(_ currentButton: UIButton) {
+    func CheaterTurn(_ currentButton: UIButton) {
         
         // do the attack
-        let battleMode = BattleMode(activePlayer: gameEngine.activePlayerRole,
+        let cheatMode = BattleMode(activePlayer: gameEngine.activePlayerRole,
                                     currentGameboard: gameEngine.gameboard)
         
-        let (updatedGameboard, attackName) = battleMode.attack()
+        let (updatedGameboard, attackName) = cheatMode.attack()
         
         // update gameboard
         gameEngine.gameboard = updatedGameboard
-        battleModeAttackName = attackName
+        CheatModeAttackName = attackName
         print(attackName)
         
         // update the view
@@ -427,7 +427,7 @@ class ViewController: UIViewController {
             
             status = "\(playerTwoName) \(playerTwoToken) Wins"
             if gameEngine.cheatingEnabled {
-                status += " with \(battleModeAttackName)"
+                status += " with \(CheatModeAttackName)"
             }
             
         case .playerTwoPlaying:
@@ -438,7 +438,7 @@ class ViewController: UIViewController {
             
             status = "\(playerOneName) \(playerOneToken) Wins"
             if gameEngine.cheatingEnabled {
-                status += " with \(battleModeAttackName)"
+                status += " with \(CheatModeAttackName)"
             }
             
         case .playerOnePlaying:
