@@ -14,18 +14,19 @@ import AVFoundation
 
 var gameEngine = GameEngine(noughtToken: "⭕️", crossToken: "❌", untouchedToken: "⬜️")
 
-var winLooseAVPlayer = AVAudioPlayer()
-var noughtAVPlayer = AVAudioPlayer()
-var crossAVPlayer = AVAudioPlayer()
-var battleAVPlayer = AVAudioPlayer()
-
-
 class ViewController: UIViewController {
-        
+    
+    // TODO: Should be a struct
     var battleModeAttackName = ""
     var playerOneCheatCount = 0
     var playerTwoCheatCount = 0
     let maxCheats = 1
+    
+    // TODO: Should be a struct
+    var winLooseAVPlayer = AVAudioPlayer()
+    var noughtAVPlayer = AVAudioPlayer()
+    var crossAVPlayer = AVAudioPlayer()
+    var battleAVPlayer = AVAudioPlayer()
         
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
@@ -352,11 +353,11 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: title, message: statusLabel.text, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: {
             (alert: UIAlertAction) in
-            winLooseAVPlayer.stop()
+            self.winLooseAVPlayer.stop()
         }))
         alert.addAction(UIAlertAction(title: "Play Again", style: .default, handler: {
             (alert: UIAlertAction!) in
-            winLooseAVPlayer.stop()
+            self.winLooseAVPlayer.stop()
             self.resetGame()
         }))
         
