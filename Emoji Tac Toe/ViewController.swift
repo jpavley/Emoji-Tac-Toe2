@@ -115,7 +115,9 @@ class ViewController: UIViewController {
     func battleModeTurn(_ currentButton: UIButton) {
         
         // do the attack
-        let battleMode = BattleMode(activePlayer: .cross, currentGameboard: gameEngine.gameboard)
+        let battleMode = BattleMode(activePlayer: gameEngine.activePlayerRole,
+                                    currentGameboard: gameEngine.gameboard)
+        
         let (updatedGameboard, attackName) = battleMode.attack()
         
         // update gameboard
