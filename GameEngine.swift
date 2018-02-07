@@ -136,10 +136,13 @@ class GameEngine {
             
             endGameInDraw()
             
-        } else if !checkWinningIsPossible() {
+            // TODO: checkWinningIsPossible() is not working. If player 1 has a winning
+            //       move the function should return true.
             
-            endGameInDraw()
-
+//        } else if !checkWinningIsPossible() {
+//
+//            endGameInDraw()
+//
         }
     }
     
