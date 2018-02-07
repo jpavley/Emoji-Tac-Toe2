@@ -28,8 +28,8 @@ class BattleMode {
     }
     
     struct attackNames {
-        static let meWin = "Me Win"
-        static let youWin = " You Win"
+        static let meWin = "Untouched Is Mine"
+        static let youWin = "Untouched Is Yours"
         static let takeAllCorners = "Take All Corners"
         static let takeAllMiddles = "Take All Middles"
         static let switchLocations = "Swap Places"
