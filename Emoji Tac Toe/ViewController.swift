@@ -17,7 +17,6 @@ var gameEngine = GameEngine(noughtToken: "⭕️", crossToken: "❌", untouchedT
 class ViewController: UIViewController {
     
     // TODO: Should be a struct
-    var CheatModeAttackName = ""
     var playerOneCheatCount = 0
     var playerTwoCheatCount = 0
     let maxCheats = 1
@@ -108,7 +107,7 @@ class ViewController: UIViewController {
         
         // update the view
         currentButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
-        //updateGameView()
+        infoLabel.text = ""
         
         completeTurn()
     }
@@ -123,8 +122,7 @@ class ViewController: UIViewController {
         
         // update gameboard
         gameEngine.gameboard = updatedGameboard
-        CheatModeAttackName = attackName
-        print(attackName)
+        infoLabel.text = attackName
         
         // update the view
         updateGameView()
@@ -135,18 +133,18 @@ class ViewController: UIViewController {
     @objc func aiTurn() {
         
         // do the attack
-        if let aiCell = aiChoose(gameEngine.gameboard, unpredicible: true) {
+        let (aiCell, moveName) = aiChoose(gameEngine.gameboard, unpredicible: true)
             
-            // update gameboard
-            gameEngine.gameboard[aiCell] = gameEngine.activePlayerRole
-            
-            // update the view
-            let tag = aiCell + 1
-            let aiButton = view.viewWithTag(tag) as! UIButton
-            aiButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
-            
-            completeTurn()
-        }
+        // update gameboard
+        gameEngine.gameboard[aiCell] = gameEngine.activePlayerRole
+        
+        // update the view
+        let tag = aiCell + 1
+        let aiButton = view.viewWithTag(tag) as! UIButton
+        aiButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
+        infoLabel.text = moveName
+        
+        completeTurn()
     }
     
     fileprivate func completeTurn() {
@@ -427,9 +425,6 @@ class ViewController: UIViewController {
         case .playerTwoWin:
             
             status = "\(playerTwoName) \(playerTwoToken) Wins"
-            if gameEngine.cheatingEnabled {
-                status += " with \(CheatModeAttackName)"
-            }
             
         case .playerTwoPlaying:
             
@@ -438,9 +433,6 @@ class ViewController: UIViewController {
         case .playerOneWin:
             
             status = "\(playerOneName) \(playerOneToken) Wins"
-            if gameEngine.cheatingEnabled {
-                status += " with \(CheatModeAttackName)"
-            }
             
         case .playerOnePlaying:
             

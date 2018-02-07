@@ -224,13 +224,13 @@ class InterfaceController: WKInterfaceController {
     }
     
     @objc func aiTakeTurn() {
-        if let aiCell = aiChoose(gameEngine.gameboard, unpredicible: true) {
-            if let aiButton = buttonForIndex(aiCell) {
-                aiButton.setTitle(gameEngine.playerTwo.token)
-                gameEngine.gameboard[aiCell] = .cross
-                gameEngine.nextRound()
-                checkForEndGame()
-            }
+        let (aiCell, _) = aiChoose(gameEngine.gameboard, unpredicible: true)
+        
+        if let aiButton = buttonForIndex(aiCell) {
+            aiButton.setTitle(gameEngine.playerTwo.token)
+            gameEngine.gameboard[aiCell] = .cross
+            gameEngine.nextRound()
+            checkForEndGame()
         }
     }
 

@@ -514,9 +514,10 @@ func searchForAnyOpenCorner(_ gameboard: Gameboard, for player: PlayerRole) -> I
 /// and works its way to the end of the function. If, at anytime, result
 /// != nil no other functions are called and the the result (the move)
 /// is returned. Oney one result (move) can be returned.
-func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
+func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> (Int, String) {
     
-    var result:Int?
+    var cellChosen: Int?
+    var moveChosen = ""
     let openCells = calcOpenCells(gameboard)
 
     // 1. Zero open cells
@@ -524,89 +525,86 @@ func aiChoose(_ gameboard:Gameboard, unpredicible: Bool) -> Int? {
         
         // 2. Unpredicible (need to turn this off to do a true test!)
         // x% of the time be unpredictible
-        if result == nil && unpredicible {
-            result = getRandomCell(gameboard, threshold: 30)
-            if result != nil { print("randomCell \(result!) threshold 30") }
+        if cellChosen == nil && unpredicible {
+            cellChosen = getRandomCell(gameboard, threshold: 30)
+            if cellChosen != nil { moveChosen = "Any Move" }
         }
         
         // 10. Winning Move
         // Search for winning move
-        if result == nil {
-            result = searchForWinningMove(gameboard, for: .cross)
-            if result != nil { print("searchForWinningMove \(result!)") }
+        if cellChosen == nil {
+            cellChosen = searchForWinningMove(gameboard, for: .cross)
+            if cellChosen != nil { moveChosen = "Winning Move" }
         }
         
         // 3. Blocking move
         // Search for blocking move
-        if result == nil {
-            result = searchForBlockingMove(gameboard, for: .cross)
-            if result != nil { print("searchForBlockingMove \(result!)") }
+        if cellChosen == nil {
+            cellChosen = searchForBlockingMove(gameboard, for: .cross)
+            if cellChosen != nil { moveChosen = "Blocking Move" }
         }
         
         // 4. Take another corner
         // If player has middle and corner and AI has oposite corner take another corner
-        if result == nil {
-            result = searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameboard, for: .cross)
-            if result != nil { print("searchForAnotherCornerIfOpponentHasMiddleAndCorner \(result!)") }
+        if cellChosen == nil {
+            cellChosen = searchForAnotherCornerIfOpponentHasMiddleAndCorner(gameboard, for: .cross)
+            if cellChosen != nil { moveChosen = "Take Another Corner" }
         }
         
         // 5. Grab a middle
         // AI has a corner grab a middle
-        if result == nil {
-            result = searchForMiddleIfCorner(gameboard, for: .cross)
-            if result != nil { print("searchForMiddleIfCorner \(result!)") }
+        if cellChosen == nil {
+            cellChosen = searchForMiddleIfCorner(gameboard, for: .cross)
+            if cellChosen != nil { moveChosen = "Grab A Middle If Corner" }
         }
         
         // 6. Grab a corner
         // Player has a middle grab a corner
-        if result == nil {
-            result = searchForCornerIfOpponentHasMiddle(gameboard, for: .cross)
-            if result != nil { print("have middle grab corner \(result!)") }
+        if cellChosen == nil {
+            cellChosen = searchForCornerIfOpponentHasMiddle(gameboard, for: .cross)
+            if cellChosen != nil { moveChosen = "Grab A Corner" }
         }
         
         // 7. Grab the center
         // Grab the center if it's open
-        if result == nil {
-            result = searchForCenterIfOpen(gameboard, for: .cross)
-            if result != nil { print("grab center if open \(result!)") }
+        if cellChosen == nil {
+            cellChosen = searchForCenterIfOpen(gameboard, for: .cross)
+            if cellChosen != nil { moveChosen = "Grab The Center" }
 
         }
         
         // 8. Grab a middle position
         // if AI has the center grab middle position
-        if result == nil {
-            result = searchForMiddleIfCenter(gameboard, for: .cross)
-            if result != nil { print("searchForMiddleIfCenter \(result!)") }
+        if cellChosen == nil {
+            cellChosen = searchForMiddleIfCenter(gameboard, for: .cross)
+            if cellChosen != nil { moveChosen = "Grab A Middle If Center" }
         }
         
         // 9. Grab corner opposite opponent
         // Search for a corner opposite the opponent
-        if result == nil {
-            result = searchForCornerOppositeOpponent(gameboard, for: .cross)
-            if result != nil { print("searchForCornerOppositeOpponent \(result!)") }
+        if cellChosen == nil {
+            cellChosen = searchForCornerOppositeOpponent(gameboard, for: .cross)
+            if cellChosen != nil { moveChosen = "Corner Opposite Opponent" }
         }
         
         // 11. Any corner
         // Search for a corner
-        if result == nil {
-            result = searchForAnyOpenCorner(gameboard, for: .cross)
-            if result != nil { print("searchForAnyOpenCorner \(result!)") }
+        if cellChosen == nil {
+            cellChosen = searchForAnyOpenCorner(gameboard, for: .cross)
+            if cellChosen != nil { moveChosen = "Any Corner" }
         }
         
         // 12. Random move
         // Search for random moves
-        if result == nil {
-            result = getRandomCell(gameboard, threshold: 100)
-            if result != nil { print("randomCell \(result!) threshold 100") }
+        if cellChosen == nil {
+            cellChosen = getRandomCell(gameboard, threshold: 100)
+            if cellChosen != nil { moveChosen = "Any Move Any How" }
 
         }
-    } else {
-        
-        result = nil
     }
     
-    if result != nil { print("result choosen \(result!)") }
-    return result
+    if cellChosen != nil { print("moveChosen \(moveChosen), cellChosen \(cellChosen!)") }
+    return (cellChosen!, moveChosen)
 }
 
 /// Returns a random Int between 0 and chances
