@@ -380,6 +380,7 @@ class ViewController: UIViewController {
         
         updateTitle()
         updateStatus()
+        infoLabel.text = ""
         
         handleCheatButton()
         
