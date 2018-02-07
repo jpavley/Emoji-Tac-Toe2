@@ -24,27 +24,47 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LYX-aQ-cCD" userLabel="Container">
                                 <rect key="frame" x="0.0" y="29" width="320" height="510"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cL-dE-XJ1">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cL-dE-XJ1">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="33"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="b2e-FL-ZSa"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hf5-Cg-1I6">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hf5-Cg-1I6">
                                         <rect key="frame" x="0.0" y="41" width="100" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="hqt-Hn-8TC"/>
+                                            <constraint firstAttribute="height" constant="30" id="yNl-9z-rf1"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                         <state key="normal" title="New Game"/>
                                         <connections>
                                             <segue destination="2J5-AT-VT3" kind="show" id="m1P-Ki-uvV"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A52-NJ-T6q" userLabel="Cell 1">
-                                        <rect key="frame" x="0.0" y="97" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XU5-1w-Bzv">
+                                        <rect key="frame" x="250" y="41" width="70" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="rfN-8Q-85A"/>
+                                            <constraint firstAttribute="width" constant="70" id="tbp-yo-Zg2"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                        <state key="normal" title="Share"/>
+                                        <connections>
+                                            <action selector="share:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Kj-7V-I0P"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A52-NJ-T6q" userLabel="Cell 1">
+                                        <rect key="frame" x="0.0" y="79" width="100" height="100"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="5It-AW-IjH"/>
+                                            <constraint firstAttribute="height" constant="100" id="RaX-eK-bXD"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="70"/>
                                         <state key="normal" title="1️⃣">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -53,11 +73,14 @@
                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YnI-Gf-0DN"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUF-ZW-2y2" userLabel="Cell 2">
-                                        <rect key="frame" x="108" y="97" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EUF-ZW-2y2" userLabel="Cell 2">
+                                        <rect key="frame" x="110" y="79" width="100" height="100"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="RYZ-yu-4BG"/>
+                                            <constraint firstAttribute="height" constant="100" id="wpy-47-HN5"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="70"/>
                                         <state key="normal" title="2️⃣">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -66,11 +89,14 @@
                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OFn-2v-cJu"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lsu-Fa-PWf" userLabel="Cell 3">
-                                        <rect key="frame" x="220" y="97" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lsu-Fa-PWf" userLabel="Cell 3">
+                                        <rect key="frame" x="220" y="79" width="100" height="100"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="QuM-PH-J2v"/>
+                                            <constraint firstAttribute="height" constant="100" id="t5m-5H-O25"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="70"/>
                                         <state key="normal" title="3️⃣">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -79,11 +105,14 @@
                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cxy-Uz-Q70"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o6H-1T-hkg" userLabel="Cell 4">
-                                        <rect key="frame" x="0.0" y="205" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o6H-1T-hkg" userLabel="Cell 4">
+                                        <rect key="frame" x="0.0" y="187" width="100" height="100"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="AXI-gm-EZY"/>
+                                            <constraint firstAttribute="height" constant="100" id="Ulw-xP-tdg"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="70"/>
                                         <state key="normal" title="4️⃣">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -92,11 +121,14 @@
                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nn8-nm-yqU"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ze-t6-dK2" userLabel="Cell 5">
-                                        <rect key="frame" x="108" y="205" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ze-t6-dK2" userLabel="Cell 5">
+                                        <rect key="frame" x="110" y="187" width="100" height="100"/>
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="3Vw-Aj-6D3"/>
+                                            <constraint firstAttribute="width" constant="100" id="bhO-85-VEF"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="70"/>
                                         <state key="normal" title="5️⃣">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -105,11 +137,14 @@
                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="978-rq-rRX"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gVX-7o-lV0" userLabel="Cell 6">
-                                        <rect key="frame" x="220" y="205" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gVX-7o-lV0" userLabel="Cell 6">
+                                        <rect key="frame" x="220" y="187" width="100" height="100"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="6ZH-7u-KE3"/>
+                                            <constraint firstAttribute="width" constant="100" id="DMo-Rz-nNi"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="70"/>
                                         <state key="normal" title="6️⃣">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -118,11 +153,14 @@
                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9V5-sL-6oe"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X97-SF-w0L" userLabel="Cell 7">
-                                        <rect key="frame" x="0.0" y="313" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X97-SF-w0L" userLabel="Cell 7">
+                                        <rect key="frame" x="0.0" y="295" width="100" height="100"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="HsV-vp-SUn"/>
+                                            <constraint firstAttribute="width" constant="100" id="plj-Jv-zex"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="70"/>
                                         <state key="normal" title="7️⃣">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -131,24 +169,14 @@
                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qvh-xI-iCe"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="8" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sd-gU-qzz" userLabel="Cell 8">
-                                        <rect key="frame" x="109" y="313" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6XM-W9-fPm" userLabel="Cell 9">
+                                        <rect key="frame" x="220" y="295" width="100" height="100"/>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
-                                        <state key="normal" title="8️⃣">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yxi-dm-7tB"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="9" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6XM-W9-fPm" userLabel="Cell 9">
-                                        <rect key="frame" x="220" y="313" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="RmU-VP-4Xf"/>
+                                            <constraint firstAttribute="height" constant="100" id="l66-rv-STy"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="70"/>
                                         <state key="normal" title="9️⃣">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -157,45 +185,94 @@
                                             <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wNx-Gf-XJ5"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Info Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I7m-ul-pUy">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I7m-ul-pUy">
                                         <rect key="frame" x="0.0" y="488" width="320" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="q4J-Yl-lK4"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.70443600171232879" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XU5-1w-Bzv">
-                                        <rect key="frame" x="250" y="41" width="70" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJX-cK-mVK">
+                                        <rect key="frame" x="0.0" y="403" width="320" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="gyO-Uj-PqT"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
-                                        <state key="normal" title="Share"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B49-t2-TBg">
+                                        <rect key="frame" x="125" y="450" width="70" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="LVH-2W-pWQ"/>
+                                            <constraint firstAttribute="height" constant="30" id="TZk-gj-ioF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Cheat"/>
                                         <connections>
-                                            <action selector="share:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Kj-7V-I0P"/>
+                                            <action selector="cheatButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6xN-AR-V8s"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sd-gU-qzz" userLabel="Cell 8">
+                                        <rect key="frame" x="110" y="295" width="100" height="100"/>
+                                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="F7n-Yl-Mgd"/>
+                                            <constraint firstAttribute="height" constant="100" id="wG1-Lo-hBs"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                        <state key="normal" title="8️⃣">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="gameButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yxi-dm-7tB"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.93937134570000003" blue="0.80949601199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="gVX-7o-lV0" firstAttribute="top" secondItem="Lsu-Fa-PWf" secondAttribute="bottom" constant="8" id="32x-fz-gmM"/>
                                     <constraint firstAttribute="height" constant="510" id="5cQ-zM-GIu"/>
+                                    <constraint firstItem="6XM-W9-fPm" firstAttribute="top" secondItem="gVX-7o-lV0" secondAttribute="bottom" constant="8" id="5lO-fU-fzi"/>
+                                    <constraint firstAttribute="trailing" secondItem="XU5-1w-Bzv" secondAttribute="trailing" id="77U-hj-D8V"/>
+                                    <constraint firstItem="o6H-1T-hkg" firstAttribute="leading" secondItem="LYX-aQ-cCD" secondAttribute="leading" id="A5V-lA-wBu"/>
+                                    <constraint firstItem="hf5-Cg-1I6" firstAttribute="leading" secondItem="LYX-aQ-cCD" secondAttribute="leading" id="C86-k0-aMZ"/>
+                                    <constraint firstItem="EUF-ZW-2y2" firstAttribute="top" secondItem="0cL-dE-XJ1" secondAttribute="bottom" constant="46" id="EnL-sd-hKr"/>
+                                    <constraint firstItem="Lsu-Fa-PWf" firstAttribute="top" secondItem="XU5-1w-Bzv" secondAttribute="bottom" constant="8" id="HDY-Di-O9Q"/>
+                                    <constraint firstItem="gVX-7o-lV0" firstAttribute="leading" secondItem="9ze-t6-dK2" secondAttribute="trailing" constant="10" id="HIb-IS-4aG"/>
+                                    <constraint firstItem="X97-SF-w0L" firstAttribute="leading" secondItem="LYX-aQ-cCD" secondAttribute="leading" id="JIQ-UV-85c"/>
+                                    <constraint firstItem="9ze-t6-dK2" firstAttribute="top" secondItem="EUF-ZW-2y2" secondAttribute="bottom" constant="8" id="LK1-yF-yrT"/>
+                                    <constraint firstAttribute="trailing" secondItem="I7m-ul-pUy" secondAttribute="trailing" id="LPu-EE-3n6"/>
+                                    <constraint firstAttribute="trailing" secondItem="Lsu-Fa-PWf" secondAttribute="trailing" id="MLZ-vt-QVm"/>
+                                    <constraint firstAttribute="trailing" secondItem="0cL-dE-XJ1" secondAttribute="trailing" id="Nc5-Ha-p2C"/>
+                                    <constraint firstItem="9ze-t6-dK2" firstAttribute="leading" secondItem="o6H-1T-hkg" secondAttribute="trailing" constant="10" id="Pds-AQ-OGk"/>
+                                    <constraint firstItem="0cL-dE-XJ1" firstAttribute="top" secondItem="LYX-aQ-cCD" secondAttribute="top" id="QC9-cl-gnj"/>
+                                    <constraint firstItem="EUF-ZW-2y2" firstAttribute="leading" secondItem="A52-NJ-T6q" secondAttribute="trailing" constant="10" id="QMW-hq-jjA"/>
+                                    <constraint firstItem="I7m-ul-pUy" firstAttribute="top" secondItem="B49-t2-TBg" secondAttribute="bottom" constant="8" id="R9a-wb-pbB"/>
+                                    <constraint firstItem="A52-NJ-T6q" firstAttribute="leading" secondItem="LYX-aQ-cCD" secondAttribute="leading" id="aKI-Jv-JEK"/>
+                                    <constraint firstItem="Lsu-Fa-PWf" firstAttribute="leading" secondItem="EUF-ZW-2y2" secondAttribute="trailing" constant="10" id="db0-bi-EXh"/>
+                                    <constraint firstItem="I7m-ul-pUy" firstAttribute="leading" secondItem="LYX-aQ-cCD" secondAttribute="leading" id="dsJ-sa-X4a"/>
+                                    <constraint firstItem="A52-NJ-T6q" firstAttribute="top" secondItem="hf5-Cg-1I6" secondAttribute="bottom" constant="8" id="fSL-lT-fbm"/>
+                                    <constraint firstItem="X97-SF-w0L" firstAttribute="top" secondItem="o6H-1T-hkg" secondAttribute="bottom" constant="8" id="isJ-L4-9Vk"/>
+                                    <constraint firstAttribute="trailing" secondItem="YJX-cK-mVK" secondAttribute="trailing" id="izc-Py-OsL"/>
+                                    <constraint firstItem="YJX-cK-mVK" firstAttribute="leading" secondItem="LYX-aQ-cCD" secondAttribute="leading" id="jhm-Yk-dfc"/>
+                                    <constraint firstAttribute="trailing" secondItem="6XM-W9-fPm" secondAttribute="trailing" id="jlk-Rh-szj"/>
+                                    <constraint firstItem="0cL-dE-XJ1" firstAttribute="leading" secondItem="LYX-aQ-cCD" secondAttribute="leading" id="lSm-AC-Gwx"/>
+                                    <constraint firstItem="8sd-gU-qzz" firstAttribute="top" secondItem="9ze-t6-dK2" secondAttribute="bottom" constant="8" id="mME-CU-tnf"/>
+                                    <constraint firstItem="o6H-1T-hkg" firstAttribute="top" secondItem="A52-NJ-T6q" secondAttribute="bottom" constant="8" id="ncJ-7O-T9x"/>
+                                    <constraint firstItem="XU5-1w-Bzv" firstAttribute="top" secondItem="0cL-dE-XJ1" secondAttribute="bottom" constant="8" id="rEp-A8-nXd"/>
+                                    <constraint firstItem="YJX-cK-mVK" firstAttribute="top" secondItem="X97-SF-w0L" secondAttribute="bottom" constant="8" id="tCR-Ug-D3N"/>
                                     <constraint firstAttribute="width" constant="320" id="tSC-Va-qKQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="gVX-7o-lV0" secondAttribute="trailing" id="uXB-OB-ctL"/>
+                                    <constraint firstItem="hf5-Cg-1I6" firstAttribute="top" secondItem="0cL-dE-XJ1" secondAttribute="bottom" constant="8" id="v2i-F4-TeF"/>
+                                    <constraint firstAttribute="bottom" secondItem="I7m-ul-pUy" secondAttribute="bottom" id="vtv-Ia-DhX"/>
+                                    <constraint firstItem="B49-t2-TBg" firstAttribute="centerX" secondItem="LYX-aQ-cCD" secondAttribute="centerX" id="wTL-l2-C6x"/>
+                                    <constraint firstItem="6XM-W9-fPm" firstAttribute="leading" secondItem="8sd-gU-qzz" secondAttribute="trailing" constant="10" id="wub-kx-u4F"/>
+                                    <constraint firstItem="8sd-gU-qzz" firstAttribute="leading" secondItem="X97-SF-w0L" secondAttribute="trailing" constant="10" id="xwV-Cc-XGr"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B49-t2-TBg">
-                                <rect key="frame" x="124" y="477" width="70" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Cheat"/>
-                                <connections>
-                                    <action selector="cheatButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6xN-AR-V8s"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJX-cK-mVK">
-                                <rect key="frame" x="0.0" y="444" width="320" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
