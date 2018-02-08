@@ -158,19 +158,22 @@ struct TicTacToeGame {
 /// .nought    .untouched .nought
 /// .untouched .cross      .untouched
 /// .untouched .cross      .untouched
-func transformGameIntoText(game g: TicTacToeGame) -> String {
+func transformGameIntoText(_ g: Gameboard,
+                           noughtMark: String = "o",
+                           crossMark: String = "x",
+                           untouchedMark: String = "_") -> String {
 
     var result = ""
     
-    for (index, cell) in g.gameboard.enumerated() {
+    for (index, cell) in g.enumerated() {
         
         switch cell {
         case .untouched:
-            result += "\(g.untouchedMark) "
+            result += "\(untouchedMark) "
         case .nought:
-            result += "\(g.noughtMark) "
+            result += "\(noughtMark) "
         case .cross:
-            result += "\(g.crossMark) "
+            result += "\(crossMark) "
         }
         
         if index == 2 || index == 5 || index == 8 {
