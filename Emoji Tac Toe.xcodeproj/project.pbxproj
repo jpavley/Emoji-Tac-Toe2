@@ -212,6 +212,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48F1DF40202D2409000952F2 /* Emoji Spy */ = {
+			isa = PBXGroup;
+			children = (
+				48F1DF42202D2450000952F2 /* Classes */,
+				48F1DF41202D2443000952F2 /* Data */,
+			);
+			name = "Emoji Spy";
+			sourceTree = "<group>";
+		};
+		48F1DF41202D2443000952F2 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				48F1DF18202D2335000952F2 /* emoji-test-5.0.txt */,
+				48F1DF1B202D235B000952F2 /* EmojiStems.txt */,
+				48F1DF19202D235B000952F2 /* EmojiSynonyms.txt */,
+				48F1DF1A202D235B000952F2 /* CustomTags.txt */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		48F1DF42202D2450000952F2 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				48F1DF1D202D23C3000952F2 /* EmojiCollection.swift */,
+				48F1DF22202D23C4000952F2 /* EmojiGlyph.swift */,
+				48F1DF20202D23C4000952F2 /* EmojiImageFinder.swift */,
+				48F1DF1E202D23C4000952F2 /* EmojiSearch.swift */,
+				48F1DF1C202D23C3000952F2 /* EmojiTools.swift */,
+				48F1DF24202D23C4000952F2 /* SimpleStemmer.swift */,
+				48F1DF1F202D23C4000952F2 /* SimpleSubstituter.swift */,
+				48F1DF21202D23C4000952F2 /* SimpleSynonymmer.swift */,
+				48F1DF23202D23C4000952F2 /* SimpleTagger.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 		5A6840951D6DF27500FA995F /* Audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,19 +348,7 @@
 		B904F3D31D4F7B1D00CA2D75 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				48F1DF1D202D23C3000952F2 /* EmojiCollection.swift */,
-				48F1DF22202D23C4000952F2 /* EmojiGlyph.swift */,
-				48F1DF20202D23C4000952F2 /* EmojiImageFinder.swift */,
-				48F1DF1E202D23C4000952F2 /* EmojiSearch.swift */,
-				48F1DF1C202D23C3000952F2 /* EmojiTools.swift */,
-				48F1DF24202D23C4000952F2 /* SimpleStemmer.swift */,
-				48F1DF1F202D23C4000952F2 /* SimpleSubstituter.swift */,
-				48F1DF21202D23C4000952F2 /* SimpleSynonymmer.swift */,
-				48F1DF23202D23C4000952F2 /* SimpleTagger.swift */,
-				48F1DF18202D2335000952F2 /* emoji-test-5.0.txt */,
-				48F1DF1B202D235B000952F2 /* EmojiStems.txt */,
-				48F1DF19202D235B000952F2 /* EmojiSynonyms.txt */,
-				48F1DF1A202D235B000952F2 /* CustomTags.txt */,
+				48F1DF40202D2409000952F2 /* Emoji Spy */,
 				5AD4079C1D4ED94F00FBBA62 /* EmojiTicTacToe.swift */,
 				48D29FCE201941A600659AEA /* BattleMode.swift */,
 				48C3918920212CB4009A536D /* GameEngine.swift */,
