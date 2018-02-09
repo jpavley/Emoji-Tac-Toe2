@@ -15,6 +15,33 @@
 		48D29FD1201AB92300659AEA /* BattleModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D29FD0201AB92300659AEA /* BattleModeTests.swift */; };
 		48D29FD2201AB93C00659AEA /* BattleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D29FCE201941A600659AEA /* BattleMode.swift */; };
 		48D29FD3201BF0B000659AEA /* BattleMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D29FCE201941A600659AEA /* BattleMode.swift */; };
+		48F1DF25202D23C4000952F2 /* EmojiTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF1C202D23C3000952F2 /* EmojiTools.swift */; };
+		48F1DF26202D23C5000952F2 /* EmojiTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF1C202D23C3000952F2 /* EmojiTools.swift */; };
+		48F1DF27202D23C5000952F2 /* EmojiTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF1C202D23C3000952F2 /* EmojiTools.swift */; };
+		48F1DF28202D23C5000952F2 /* EmojiCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF1D202D23C3000952F2 /* EmojiCollection.swift */; };
+		48F1DF29202D23C5000952F2 /* EmojiCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF1D202D23C3000952F2 /* EmojiCollection.swift */; };
+		48F1DF2A202D23C5000952F2 /* EmojiCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF1D202D23C3000952F2 /* EmojiCollection.swift */; };
+		48F1DF2B202D23C5000952F2 /* EmojiSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF1E202D23C4000952F2 /* EmojiSearch.swift */; };
+		48F1DF2C202D23C5000952F2 /* EmojiSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF1E202D23C4000952F2 /* EmojiSearch.swift */; };
+		48F1DF2D202D23C5000952F2 /* EmojiSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF1E202D23C4000952F2 /* EmojiSearch.swift */; };
+		48F1DF2E202D23C5000952F2 /* SimpleSubstituter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF1F202D23C4000952F2 /* SimpleSubstituter.swift */; };
+		48F1DF2F202D23C5000952F2 /* SimpleSubstituter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF1F202D23C4000952F2 /* SimpleSubstituter.swift */; };
+		48F1DF30202D23C5000952F2 /* SimpleSubstituter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF1F202D23C4000952F2 /* SimpleSubstituter.swift */; };
+		48F1DF31202D23C5000952F2 /* EmojiImageFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF20202D23C4000952F2 /* EmojiImageFinder.swift */; };
+		48F1DF32202D23C5000952F2 /* EmojiImageFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF20202D23C4000952F2 /* EmojiImageFinder.swift */; };
+		48F1DF33202D23C5000952F2 /* EmojiImageFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF20202D23C4000952F2 /* EmojiImageFinder.swift */; };
+		48F1DF34202D23C5000952F2 /* SimpleSynonymmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF21202D23C4000952F2 /* SimpleSynonymmer.swift */; };
+		48F1DF35202D23C5000952F2 /* SimpleSynonymmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF21202D23C4000952F2 /* SimpleSynonymmer.swift */; };
+		48F1DF36202D23C5000952F2 /* SimpleSynonymmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF21202D23C4000952F2 /* SimpleSynonymmer.swift */; };
+		48F1DF37202D23C5000952F2 /* EmojiGlyph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF22202D23C4000952F2 /* EmojiGlyph.swift */; };
+		48F1DF38202D23C5000952F2 /* EmojiGlyph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF22202D23C4000952F2 /* EmojiGlyph.swift */; };
+		48F1DF39202D23C5000952F2 /* EmojiGlyph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF22202D23C4000952F2 /* EmojiGlyph.swift */; };
+		48F1DF3A202D23C5000952F2 /* SimpleTagger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF23202D23C4000952F2 /* SimpleTagger.swift */; };
+		48F1DF3B202D23C5000952F2 /* SimpleTagger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF23202D23C4000952F2 /* SimpleTagger.swift */; };
+		48F1DF3C202D23C5000952F2 /* SimpleTagger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF23202D23C4000952F2 /* SimpleTagger.swift */; };
+		48F1DF3D202D23C5000952F2 /* SimpleStemmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF24202D23C4000952F2 /* SimpleStemmer.swift */; };
+		48F1DF3E202D23C5000952F2 /* SimpleStemmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF24202D23C4000952F2 /* SimpleStemmer.swift */; };
+		48F1DF3F202D23C5000952F2 /* SimpleStemmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F1DF24202D23C4000952F2 /* SimpleStemmer.swift */; };
 		5A3834A91EF6DC4B00891224 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5A3834A81EF6DC4B00891224 /* .gitignore */; };
 		5A3834AB1EF6E25A00891224 /* License in Resources */ = {isa = PBXBuildFile; fileRef = 5A3834AA1EF6E25A00891224 /* License */; };
 		5A4AB2331D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */; };
@@ -106,6 +133,15 @@
 		48F1DF19202D235B000952F2 /* EmojiSynonyms.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = EmojiSynonyms.txt; sourceTree = "<group>"; };
 		48F1DF1A202D235B000952F2 /* CustomTags.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CustomTags.txt; sourceTree = "<group>"; };
 		48F1DF1B202D235B000952F2 /* EmojiStems.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = EmojiStems.txt; sourceTree = "<group>"; };
+		48F1DF1C202D23C3000952F2 /* EmojiTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTools.swift; sourceTree = "<group>"; };
+		48F1DF1D202D23C3000952F2 /* EmojiCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollection.swift; sourceTree = "<group>"; };
+		48F1DF1E202D23C4000952F2 /* EmojiSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSearch.swift; sourceTree = "<group>"; };
+		48F1DF1F202D23C4000952F2 /* SimpleSubstituter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSubstituter.swift; sourceTree = "<group>"; };
+		48F1DF20202D23C4000952F2 /* EmojiImageFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiImageFinder.swift; sourceTree = "<group>"; };
+		48F1DF21202D23C4000952F2 /* SimpleSynonymmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSynonymmer.swift; sourceTree = "<group>"; };
+		48F1DF22202D23C4000952F2 /* EmojiGlyph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiGlyph.swift; sourceTree = "<group>"; };
+		48F1DF23202D23C4000952F2 /* SimpleTagger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTagger.swift; sourceTree = "<group>"; };
+		48F1DF24202D23C4000952F2 /* SimpleStemmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleStemmer.swift; sourceTree = "<group>"; };
 		5A3834A81EF6DC4B00891224 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5A3834AA1EF6E25A00891224 /* License */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License; sourceTree = "<group>"; };
 		5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Emoji Tac Toe Theme3.mp3"; sourceTree = "<group>"; };
@@ -276,6 +312,15 @@
 		B904F3D31D4F7B1D00CA2D75 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				48F1DF1D202D23C3000952F2 /* EmojiCollection.swift */,
+				48F1DF22202D23C4000952F2 /* EmojiGlyph.swift */,
+				48F1DF20202D23C4000952F2 /* EmojiImageFinder.swift */,
+				48F1DF1E202D23C4000952F2 /* EmojiSearch.swift */,
+				48F1DF1C202D23C3000952F2 /* EmojiTools.swift */,
+				48F1DF24202D23C4000952F2 /* SimpleStemmer.swift */,
+				48F1DF1F202D23C4000952F2 /* SimpleSubstituter.swift */,
+				48F1DF21202D23C4000952F2 /* SimpleSynonymmer.swift */,
+				48F1DF23202D23C4000952F2 /* SimpleTagger.swift */,
 				48F1DF18202D2335000952F2 /* emoji-test-5.0.txt */,
 				48F1DF1B202D235B000952F2 /* EmojiStems.txt */,
 				48F1DF19202D235B000952F2 /* EmojiSynonyms.txt */,
@@ -511,12 +556,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48F1DF34202D23C5000952F2 /* SimpleSynonymmer.swift in Sources */,
+				48F1DF28202D23C5000952F2 /* EmojiCollection.swift in Sources */,
+				48F1DF31202D23C5000952F2 /* EmojiImageFinder.swift in Sources */,
+				48F1DF2B202D23C5000952F2 /* EmojiSearch.swift in Sources */,
+				48F1DF2E202D23C5000952F2 /* SimpleSubstituter.swift in Sources */,
+				48F1DF37202D23C5000952F2 /* EmojiGlyph.swift in Sources */,
 				48C3918C20213C46009A536D /* GameEngineTests.swift in Sources */,
+				48F1DF25202D23C4000952F2 /* EmojiTools.swift in Sources */,
+				48F1DF3D202D23C5000952F2 /* SimpleStemmer.swift in Sources */,
 				48C3918D20213CA4009A536D /* GameEngine.swift in Sources */,
 				48D29FD2201AB93C00659AEA /* BattleMode.swift in Sources */,
 				5AC946711EF8B3D100137DBF /* Emoji_Tac_Toe_Tests.swift in Sources */,
 				5A69712E2014E508009C80AC /* EmojiTicTacToe.swift in Sources */,
 				48D29FD1201AB92300659AEA /* BattleModeTests.swift in Sources */,
+				48F1DF3A202D23C5000952F2 /* SimpleTagger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,12 +578,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48F1DF35202D23C5000952F2 /* SimpleSynonymmer.swift in Sources */,
+				48F1DF29202D23C5000952F2 /* EmojiCollection.swift in Sources */,
+				48F1DF32202D23C5000952F2 /* EmojiImageFinder.swift in Sources */,
+				48F1DF2C202D23C5000952F2 /* EmojiSearch.swift in Sources */,
+				48F1DF2F202D23C5000952F2 /* SimpleSubstituter.swift in Sources */,
+				48F1DF38202D23C5000952F2 /* EmojiGlyph.swift in Sources */,
 				5AD4079F1D4ED9EA00FBBA62 /* AppDelegate.swift in Sources */,
+				48F1DF26202D23C5000952F2 /* EmojiTools.swift in Sources */,
+				48F1DF3E202D23C5000952F2 /* SimpleStemmer.swift in Sources */,
 				48C3918A20212CB4009A536D /* GameEngine.swift in Sources */,
 				5AD4079D1D4ED94F00FBBA62 /* EmojiTicTacToe.swift in Sources */,
 				5AD407991D4ED93700FBBA62 /* ViewController.swift in Sources */,
 				5AD4079B1D4ED94500FBBA62 /* NewGameViewController.swift in Sources */,
 				48D29FCF201941A600659AEA /* BattleMode.swift in Sources */,
+				48F1DF3B202D23C5000952F2 /* SimpleTagger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,12 +600,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48F1DF36202D23C5000952F2 /* SimpleSynonymmer.swift in Sources */,
+				48F1DF2A202D23C5000952F2 /* EmojiCollection.swift in Sources */,
+				48F1DF33202D23C5000952F2 /* EmojiImageFinder.swift in Sources */,
+				48F1DF2D202D23C5000952F2 /* EmojiSearch.swift in Sources */,
+				48F1DF30202D23C5000952F2 /* SimpleSubstituter.swift in Sources */,
+				48F1DF39202D23C5000952F2 /* EmojiGlyph.swift in Sources */,
 				B904F3C41D4F715200CA2D75 /* NotificationController.swift in Sources */,
+				48F1DF27202D23C5000952F2 /* EmojiTools.swift in Sources */,
+				48F1DF3F202D23C5000952F2 /* SimpleStemmer.swift in Sources */,
 				487F29D4202157C8008F8DBC /* GameEngine.swift in Sources */,
 				B904F3C21D4F715200CA2D75 /* ExtensionDelegate.swift in Sources */,
 				B904F3C01D4F715200CA2D75 /* InterfaceController.swift in Sources */,
 				B904F3D41D4F7B2F00CA2D75 /* EmojiTicTacToe.swift in Sources */,
 				48D29FD3201BF0B000659AEA /* BattleMode.swift in Sources */,
+				48F1DF3C202D23C5000952F2 /* SimpleTagger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
