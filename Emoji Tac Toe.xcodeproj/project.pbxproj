@@ -102,6 +102,10 @@
 		48C3918B20213C46009A536D /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		48D29FCE201941A600659AEA /* BattleMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleMode.swift; sourceTree = "<group>"; };
 		48D29FD0201AB92300659AEA /* BattleModeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleModeTests.swift; sourceTree = "<group>"; };
+		48F1DF18202D2335000952F2 /* emoji-test-5.0.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "emoji-test-5.0.txt"; sourceTree = "<group>"; };
+		48F1DF19202D235B000952F2 /* EmojiSynonyms.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = EmojiSynonyms.txt; sourceTree = "<group>"; };
+		48F1DF1A202D235B000952F2 /* CustomTags.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CustomTags.txt; sourceTree = "<group>"; };
+		48F1DF1B202D235B000952F2 /* EmojiStems.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = EmojiStems.txt; sourceTree = "<group>"; };
 		5A3834A81EF6DC4B00891224 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5A3834AA1EF6E25A00891224 /* License */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License; sourceTree = "<group>"; };
 		5A4AB2321D6CCDBF00DEAAEB /* Emoji Tac Toe Theme3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Emoji Tac Toe Theme3.mp3"; sourceTree = "<group>"; };
@@ -272,6 +276,10 @@
 		B904F3D31D4F7B1D00CA2D75 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				48F1DF18202D2335000952F2 /* emoji-test-5.0.txt */,
+				48F1DF1B202D235B000952F2 /* EmojiStems.txt */,
+				48F1DF19202D235B000952F2 /* EmojiSynonyms.txt */,
+				48F1DF1A202D235B000952F2 /* CustomTags.txt */,
 				5AD4079C1D4ED94F00FBBA62 /* EmojiTicTacToe.swift */,
 				48D29FCE201941A600659AEA /* BattleMode.swift */,
 				48C3918920212CB4009A536D /* GameEngine.swift */,
