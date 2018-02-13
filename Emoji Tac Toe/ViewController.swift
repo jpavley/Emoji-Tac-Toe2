@@ -601,6 +601,17 @@ class ViewController: UIViewController {
 //            
 //        }
         
+        if emojis.count == 0 {
+            let ec = EmojiCollection(sourceFileName: "emoji-test-5.0")
+            
+            emojis = [String]()
+            for g in ec!.emojiGlyphs {
+                emojis.append(g.glyph)
+            }
+            
+            print(emojis.count)
+        }
+        
         restoreUserPrefs()
         
         resetGame()
