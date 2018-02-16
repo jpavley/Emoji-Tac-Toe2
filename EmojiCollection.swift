@@ -33,6 +33,7 @@ class EmojiCollection {
     var filteredSearchSuggestions: TagAndCountsList
     var glyphsIDsInSections: [GlyphIDList]
     var sectionNames: [String]
+    var sectionStartIndexes: [Int]
     
     var stemmer: SimpleStemmer
     var synonymmer: SimpleSynonymmer
@@ -81,6 +82,7 @@ class EmojiCollection {
         filteredSearchSuggestions = TagAndCountsList()
         glyphsIDsInSections = [[Int]]()
         sectionNames = [String]()
+        sectionStartIndexes = [Int]()
         
         stemmer = SimpleStemmer()!
         synonymmer = SimpleSynonymmer()!
@@ -122,16 +124,17 @@ class EmojiCollection {
                     
                     let sectionName = "\(group): \(subgroup)"
                     
-                    if !sectionNames.contains(sectionName) {
-                        sectionNames.append(sectionName)
-                    }
-                    
                     if var emojiGlyph = EmojiGlyph(textLine: String(line), index: 0, group: group, subgroup: subgroup) {
                         // print(emojiGlyph)
                         emojiIndex += 1
                         emojiGlyph.index = emojiIndex
                         emojiGlyph.tags = createMetadata(glyph: emojiGlyph, stemmer: stemmer, synonymmer: synonymmer, tagger: tagger)
                         emojiGlyphs.append(emojiGlyph)
+                    }
+                    
+                    if !sectionNames.contains(sectionName) {
+                        sectionNames.append(sectionName)
+                        sectionStartIndexes.append(emojiIndex)
                     }
                 }
             } catch {
