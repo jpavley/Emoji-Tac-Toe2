@@ -35,8 +35,7 @@ let cellBottomleftCorner = cellCorners[2]
 let cellBottomRightCorner = cellCorners[3]
 let cells = [0,1,2,3,4,5,6,7,8]
 
-let emojiSections = [0, 171, 389, 654, 843]
-
+var emojiSections = [Int]()
 var emojis = [String]()
 
 let winningVectors = [
