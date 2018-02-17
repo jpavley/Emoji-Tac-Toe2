@@ -601,15 +601,18 @@ class ViewController: UIViewController {
 //            
 //        }
         
-        if emojis.count == 0 {
+        if emojis.count == 0 || emojiSections.count == 0 {
             let ec = EmojiCollection(sourceFileName: "emoji-test-5.0")
             
             emojis = [String]()
+            emojiSections = ec!.sectionStartIndexes
+            
             for g in ec!.emojiGlyphs {
                 emojis.append(g.glyph)
             }
             
             print(emojis.count)
+            print(emojiSections)
         }
         
         restoreUserPrefs()
