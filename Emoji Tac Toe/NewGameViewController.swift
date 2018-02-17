@@ -57,35 +57,16 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         jumpPicker(component: 1)
     }
     
+    /// There are over 80 sections.
+    /// When the user touches the player1 or player 2 button
+    /// we want to jump to the next section based on the index
+    /// of the current row. Also we want to cycle through all
+    /// the sections in order with each button press.
     func jumpPicker(component: Int) {
         
         let isPlayerOnePlayer = component == 0
         let currentRow = isPlayerOnePlayer ? gameEngine.playerOneRow : gameEngine.playerTwoRow
-        
-        // There are over 80 sections.
-        // When the user touches the player1 or player 2 button
-        // we want to jump to the next section based on the index
-        // of the current row. Also we want to cycle through all
-        // the sections in order with each button press.
-        
-        // find next section based on current row
-        
-        var jumpRow = currentRow
-        
-        for section in emojiSections {
-            if section > currentRow {
-                jumpRow = section
-                break
-            }
-        }
-        
-        // jumpRow was not set by the loop
-        if jumpRow == currentRow {
-            jumpRow = 0
-        }
-        
-        // ensure rows are unique
-        
+        let jumpRow = findNextSection(currentRow)
         let uniqueRow = ensureRowsAreUnique(component: component, row: jumpRow)
         
         if isPlayerOnePlayer {
@@ -99,6 +80,25 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         // print("component \(component), currentRow \(currentRow), jumpRow \(jumpRow)")
         
+    }
+    
+    func findNextSection(_ currentRow: Int) -> Int {
+        
+        var nextRow = currentRow
+        
+        for section in emojiSections {
+            if section > currentRow {
+                nextRow = section
+                break
+            }
+        }
+        
+        // nextRow was not set by the loop
+        if nextRow == currentRow {
+            nextRow = 0
+        }
+        
+        return nextRow
     }
     
     override func viewDidLoad() {
