@@ -58,29 +58,42 @@ class NewGameViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     func jumpPicker(component: Int) {
-        let currentRow = (component == 0) ? gameEngine.playerOneRow : gameEngine.playerTwoRow
-        var jumpRow = 0
         
-        // emojiSections = [0, 171, 389, 654, 844] defined in EmojiTicTacToe.swift
+        let isPlayerOnePlayer = component == 0
+        let currentRow = isPlayerOnePlayer ? gameEngine.playerOneRow : gameEngine.playerTwoRow
         
-        if currentRow >= emojiSections[4] {
-            jumpRow = emojiSections[0]
-        } else if currentRow >= emojiSections[3] {
-            jumpRow = emojiSections[4]
-        } else if currentRow >= emojiSections[2] {
-            jumpRow = emojiSections[3]
-        } else if currentRow >= emojiSections[1] {
-            jumpRow = emojiSections[2]
-        } else if currentRow >= emojiSections[0] {
-            jumpRow = emojiSections[1]
+        // There are over 80 sections.
+        // When the user touches the player1 or player 2 button
+        // we want to jump to the next section based on the index
+        // of the current row. Also we want to cycle through all
+        // the sections in order with each button press.
+        
+        // find next section based on current row
+        
+        var jumpRow = currentRow
+        
+        for section in emojiSections {
+            if section > currentRow {
+                jumpRow = section
+                break
+            }
         }
         
+        // jumpRow was not set by the loop
+        if jumpRow == currentRow {
+            jumpRow = 0
+        }
+        
+        // ensure rows are unique
+        
         let uniqueRow = ensureRowsAreUnique(component: component, row: jumpRow)
-        if component == 0 {
+        
+        if isPlayerOnePlayer {
             updatePlayerOne(uniqueRow)
         } else {
             updatePlayerTwo(uniqueRow)
         }
+        
         resetScorePrefs()
         player1Picker.selectRow(uniqueRow, inComponent: component, animated: true)
         
