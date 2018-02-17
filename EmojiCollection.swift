@@ -137,6 +137,12 @@ class EmojiCollection {
                         sectionStartIndexes.append(emojiIndex)
                     }
                 }
+                
+                // dedupe the section start indexs
+                let sectionStartIndexesSet: Set = Set(sectionStartIndexes)
+                sectionStartIndexes = Array(sectionStartIndexesSet)
+                sectionStartIndexes = sectionStartIndexes.sorted()
+                
             } catch {
                 
                 print("emoji-test.txt file not found")
