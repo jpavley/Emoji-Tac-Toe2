@@ -299,10 +299,10 @@
 			children = (
 				5AD4079E1D4ED9EA00FBBA62 /* AppDelegate.swift */,
 				5AD407961D4ED91600FBBA62 /* Main.storyboard */,
+				5AD407941D4ED8E800FBBA62 /* LaunchScreen.storyboard */,
 				5AD407981D4ED93700FBBA62 /* ViewController.swift */,
 				5AD4079A1D4ED94500FBBA62 /* NewGameViewController.swift */,
 				5AD407891D4ED69B00FBBA62 /* Assets.xcassets */,
-				5AD407941D4ED8E800FBBA62 /* LaunchScreen.storyboard */,
 				5AD4078E1D4ED69B00FBBA62 /* Info.plist */,
 			);
 			name = iOS;
