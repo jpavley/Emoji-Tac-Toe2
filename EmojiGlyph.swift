@@ -40,9 +40,9 @@ struct EmojiGlyph {
             return nil
         }
         
-        if let poundIndex = textLine.index(of: poundChar) {
+        if let poundIndex = textLine.firstIndex(of: poundChar) {
             
-            if poundIndex != poundStr.index(of: poundChar) {
+            if poundIndex != poundStr.firstIndex(of: poundChar) {
                 glyph = String(textLine[textLine.index(poundIndex, offsetBy: glyphOffset)])
                 description = String(textLine[textLine.index(poundIndex, offsetBy: descriptionOffset)...])
                 self.index = index

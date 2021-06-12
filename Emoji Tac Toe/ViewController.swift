@@ -110,7 +110,7 @@ class ViewController: UIViewController {
         gameEngine.gameboard[location] = gameEngine.activePlayerRole
         
         // update the view
-        currentButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
+        currentButton.setTitle(gameEngine.activePlayerToken, for: UIControl.State())
         infoLabel.text = ""
         
         completeTurn()
@@ -145,7 +145,7 @@ class ViewController: UIViewController {
         // update the view
         let tag = aiCell + 1
         let aiButton = view.viewWithTag(tag) as! UIButton
-        aiButton.setTitle(gameEngine.activePlayerToken, for: UIControlState())
+        aiButton.setTitle(gameEngine.activePlayerToken, for: UIControl.State())
         infoLabel.text = moveName
         
         completeTurn()
@@ -211,13 +211,13 @@ class ViewController: UIViewController {
             switch gameEngine.gameboard[location] {
                 
             case .untouched:
-                button.setTitle("", for: UIControlState())
+                button.setTitle("", for: UIControl.State())
                 
             case .nought:
-                button.setTitle(gameEngine.playerOne.token, for: UIControlState())
+                button.setTitle(gameEngine.playerOne.token, for: UIControl.State())
                 
             case .cross:
-                button.setTitle(gameEngine.playerTwo.token, for: UIControlState())
+                button.setTitle(gameEngine.playerTwo.token, for: UIControl.State())
             }
         }
     }
@@ -274,7 +274,7 @@ class ViewController: UIViewController {
             button.backgroundColor = getNormalButtonColor()
             let location = tag - 1
             if gameEngine.gameboard[location] == .untouched {
-                button.setTitle("", for: UIControlState())
+                button.setTitle("", for: UIControl.State())
             }
         }
     }
@@ -355,7 +355,7 @@ class ViewController: UIViewController {
     }
     
     func presentGameOverAlert(_ title: String) {
-        let alert = UIAlertController(title: title, message: statusLabel.text, preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: title, message: statusLabel.text, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: {
             (alert: UIAlertAction) in
             self.winLooseAVPlayer.stop()
@@ -392,7 +392,7 @@ class ViewController: UIViewController {
         for tag in 1...9 {
             button = view.viewWithTag(tag) as! UIButton
             button.backgroundColor = getNormalButtonColor()
-            button.setTitle("", for: UIControlState())
+            button.setTitle("", for: UIControl.State())
         }
     }
     
@@ -546,7 +546,7 @@ class ViewController: UIViewController {
         return true
     }
     
-    override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         
         // HINT: Pick a random pair of emojis
         // HINT: Make all emojis available to both players
